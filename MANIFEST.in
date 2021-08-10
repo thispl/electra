@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include electra *.css
+recursive-include electra *.csv
+recursive-include electra *.html
+recursive-include electra *.ico
+recursive-include electra *.js
+recursive-include electra *.json
+recursive-include electra *.md
+recursive-include electra *.png
+recursive-include electra *.py
+recursive-include electra *.svg
+recursive-include electra *.txt
+recursive-exclude electra *.pyc
