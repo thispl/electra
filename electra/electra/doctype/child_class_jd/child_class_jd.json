@@ -1,0 +1,44 @@
+{
+ "actions": [],
+ "creation": "2021-08-17 12:54:20.257304",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "minimum_education",
+  "minimum_experience",
+  "skill_sets"
+ ],
+ "fields": [
+  {
+   "fieldname": "minimum_education",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Minimum Education"
+  },
+  {
+   "fieldname": "minimum_experience",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Minimum Experience"
+  },
+  {
+   "fieldname": "skill_sets",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Skill Sets"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2021-08-17 13:08:53.202191",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "Child Class JD",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

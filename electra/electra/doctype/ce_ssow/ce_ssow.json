@@ -1,0 +1,458 @@
+{
+ "actions": [],
+ "allow_copy": 1,
+ "autoname": "CESSOW.####",
+ "creation": "2022-01-25 14:40:36.892003",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "cost_estimation",
+  "company",
+  "ce_msow_id",
+  "column_break_2",
+  "msow",
+  "ssow",
+  "ssow_desc",
+  "applicable_sections",
+  "a_design",
+  "b_materials",
+  "c_finishing_work",
+  "d_accessories",
+  "column_break_10",
+  "e_installation",
+  "f_manpower",
+  "g_tools__equipment__transport",
+  "h_others",
+  "section_break_4",
+  "design",
+  "design_cost",
+  "materials_section",
+  "materials",
+  "materials_cost",
+  "finishing_work_section",
+  "finishing_work",
+  "finishing_work_cost",
+  "accessories_section",
+  "bolts_accessories",
+  "accessories_cost",
+  "installation_section",
+  "installation",
+  "installation_cost",
+  "manpower_section",
+  "manpower",
+  "manpower_cost",
+  "heavy_equipments_section",
+  "heavy_equipments",
+  "heavy_equipments_cost",
+  "others_section",
+  "others",
+  "others_cost",
+  "cost_section",
+  "total_overhead",
+  "total_amount_as_overhead",
+  "column_break_44",
+  "total_profit",
+  "total_amount_of_profit",
+  "column_break_46",
+  "contigency_percent",
+  "contigency",
+  "column_break_48",
+  "engineering_overhead",
+  "total_amount_as_engineering_overhead",
+  "section_break_53",
+  "total_cost",
+  "column_break_55",
+  "total_overheads",
+  "column_break_57",
+  "business_promotion",
+  "column_break_59",
+  "total_bidding_price"
+ ],
+ "fields": [
+  {
+   "fieldname": "cost_estimation",
+   "fieldtype": "Link",
+   "label": "Cost Estimation",
+   "options": "Cost Estimation",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "ssow",
+   "fieldtype": "Link",
+   "label": "SSOW ID",
+   "options": "Sub Scope of Work",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "ssow.desc",
+   "fieldname": "ssow_desc",
+   "fieldtype": "Read Only",
+   "label": "SSOW Desc"
+  },
+  {
+   "fieldname": "applicable_sections",
+   "fieldtype": "Section Break",
+   "label": "Applicable Sections"
+  },
+  {
+   "default": "0",
+   "fieldname": "a_design",
+   "fieldtype": "Check",
+   "label": "DESIGN"
+  },
+  {
+   "default": "0",
+   "fieldname": "b_materials",
+   "fieldtype": "Check",
+   "label": "MATERIALS"
+  },
+  {
+   "default": "0",
+   "fieldname": "c_finishing_work",
+   "fieldtype": "Check",
+   "label": "FINISHING WORK"
+  },
+  {
+   "default": "0",
+   "fieldname": "d_accessories",
+   "fieldtype": "Check",
+   "label": "ACCESSORIES"
+  },
+  {
+   "fieldname": "column_break_10",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "e_installation",
+   "fieldtype": "Check",
+   "label": "INSTALLATION"
+  },
+  {
+   "default": "0",
+   "fieldname": "f_manpower",
+   "fieldtype": "Check",
+   "label": "MANPOWER"
+  },
+  {
+   "default": "0",
+   "fieldname": "g_tools__equipment__transport",
+   "fieldtype": "Check",
+   "label": "TOOLS / EQUIPMENT / TRANSPORT"
+  },
+  {
+   "default": "0",
+   "fieldname": "h_others",
+   "fieldtype": "Check",
+   "label": "OTHERS"
+  },
+  {
+   "collapsible": 1,
+   "depends_on": "a_design",
+   "fieldname": "section_break_4",
+   "fieldtype": "Section Break",
+   "label": "DESIGN"
+  },
+  {
+   "fieldname": "design",
+   "fieldtype": "Table",
+   "label": "DESIGN",
+   "options": "CE Items"
+  },
+  {
+   "fieldname": "design_cost",
+   "fieldtype": "Float",
+   "label": "Design Cost"
+  },
+  {
+   "collapsible": 1,
+   "depends_on": "b_materials",
+   "fieldname": "materials_section",
+   "fieldtype": "Section Break",
+   "label": "MATERIALS"
+  },
+  {
+   "fieldname": "materials",
+   "fieldtype": "Table",
+   "label": "MATERIALS",
+   "options": "CE Items"
+  },
+  {
+   "fieldname": "materials_cost",
+   "fieldtype": "Float",
+   "label": "Materials Cost"
+  },
+  {
+   "collapsible": 1,
+   "depends_on": "c_finishing_work",
+   "fieldname": "finishing_work_section",
+   "fieldtype": "Section Break",
+   "label": "FINISHING WORK"
+  },
+  {
+   "fieldname": "finishing_work",
+   "fieldtype": "Table",
+   "label": "FINISHING WORK",
+   "options": "CE Items"
+  },
+  {
+   "fieldname": "finishing_work_cost",
+   "fieldtype": "Float",
+   "label": "Finishing Work Cost"
+  },
+  {
+   "collapsible": 1,
+   "depends_on": "d_accessories",
+   "fieldname": "accessories_section",
+   "fieldtype": "Section Break",
+   "label": "ACCESSORIES"
+  },
+  {
+   "fieldname": "bolts_accessories",
+   "fieldtype": "Table",
+   "label": "ACCESSORIES",
+   "options": "CE Items"
+  },
+  {
+   "fieldname": "accessories_cost",
+   "fieldtype": "Float",
+   "label": "Accessories Cost",
+   "read_only": 1
+  },
+  {
+   "collapsible": 1,
+   "depends_on": "e_installation",
+   "fieldname": "installation_section",
+   "fieldtype": "Section Break",
+   "label": "INSTALLATION"
+  },
+  {
+   "fieldname": "installation",
+   "fieldtype": "Table",
+   "label": "INSTALLATION",
+   "options": "CE Items"
+  },
+  {
+   "fieldname": "installation_cost",
+   "fieldtype": "Float",
+   "label": "Installation Cost",
+   "read_only": 1
+  },
+  {
+   "collapsible": 1,
+   "depends_on": "f_manpower",
+   "fieldname": "manpower_section",
+   "fieldtype": "Section Break",
+   "label": "MANPOWER"
+  },
+  {
+   "fieldname": "manpower",
+   "fieldtype": "Table",
+   "label": "MANPOWER",
+   "options": "CE Items Manpower"
+  },
+  {
+   "fieldname": "manpower_cost",
+   "fieldtype": "Float",
+   "label": "Manpower Cost",
+   "read_only": 1
+  },
+  {
+   "collapsible": 1,
+   "depends_on": "g_tools__equipment__transport",
+   "fieldname": "heavy_equipments_section",
+   "fieldtype": "Section Break",
+   "label": "HEAVY EQUIPMENTS"
+  },
+  {
+   "fieldname": "heavy_equipments",
+   "fieldtype": "Table",
+   "label": "HEAVY EQUIPMENTS",
+   "options": "CE Items"
+  },
+  {
+   "fieldname": "heavy_equipments_cost",
+   "fieldtype": "Float",
+   "label": "Heavy Equipments Cost",
+   "read_only": 1
+  },
+  {
+   "collapsible": 1,
+   "depends_on": "h_others",
+   "fieldname": "others_section",
+   "fieldtype": "Section Break",
+   "label": "OTHERS"
+  },
+  {
+   "fieldname": "others",
+   "fieldtype": "Table",
+   "label": "OTHERS",
+   "options": "CE Items"
+  },
+  {
+   "fieldname": "others_cost",
+   "fieldtype": "Float",
+   "label": "Others Cost",
+   "read_only": 1
+  },
+  {
+   "fieldname": "cost_section",
+   "fieldtype": "Section Break",
+   "label": "Total Costs"
+  },
+  {
+   "default": "0",
+   "fieldname": "total_overhead",
+   "fieldtype": "Percent",
+   "label": "Overhead %"
+  },
+  {
+   "default": "0",
+   "fieldname": "total_amount_as_overhead",
+   "fieldtype": "Currency",
+   "label": "Total Overhead",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_44",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "total_profit",
+   "fieldtype": "Percent",
+   "label": "Profit %"
+  },
+  {
+   "default": "0",
+   "fieldname": "total_amount_of_profit",
+   "fieldtype": "Currency",
+   "label": "Total Profit",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_46",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "contigency_percent",
+   "fieldtype": "Percent",
+   "label": "Contigency %"
+  },
+  {
+   "default": "0",
+   "fieldname": "contigency",
+   "fieldtype": "Currency",
+   "label": "Total Contigency",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_48",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "engineering_overhead",
+   "fieldtype": "Percent",
+   "label": "Engineering Overhead %"
+  },
+  {
+   "default": "0",
+   "fieldname": "total_amount_as_engineering_overhead",
+   "fieldtype": "Currency",
+   "label": "Total Engineering Overhead",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_53",
+   "fieldtype": "Section Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "total_cost",
+   "fieldtype": "Currency",
+   "label": "Total Cost of SSoW",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_55",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "total_bidding_price",
+   "fieldtype": "Currency",
+   "label": "Total Bidding Price",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_57",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "ce_msow_id",
+   "fieldtype": "Link",
+   "label": "CE MSOW ID",
+   "options": "CE SOW",
+   "read_only": 1
+  },
+  {
+   "fieldname": "msow",
+   "fieldtype": "Link",
+   "label": "MSOW ID",
+   "options": "Master Scope of Work",
+   "read_only": 1
+  },
+  {
+   "fieldname": "business_promotion",
+   "fieldtype": "Currency",
+   "label": "Business Promotion"
+  },
+  {
+   "fieldname": "total_overheads",
+   "fieldtype": "Currency",
+   "label": "Total Overheads",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_59",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "read_only": 1
+  }
+ ],
+ "hide_toolbar": 1,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2022-04-06 09:16:33.343262",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "CE SSOW",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

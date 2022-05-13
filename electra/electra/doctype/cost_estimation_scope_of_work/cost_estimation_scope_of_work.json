@@ -1,0 +1,63 @@
+{
+ "actions": [],
+ "creation": "2021-12-28 17:54:39.035129",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "msow",
+  "msow_desc",
+  "ssow",
+  "ssow_desc"
+ ],
+ "fields": [
+  {
+   "columns": 1,
+   "fetch_from": "master_sow.short_code",
+   "fieldname": "msow",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "MSoW ID",
+   "options": "Scope of Work"
+  },
+  {
+   "columns": 1,
+   "fetch_from": "sub_sow.short_code",
+   "fieldname": "ssow",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "SSoW ID",
+   "options": "Scope of Work"
+  },
+  {
+   "columns": 4,
+   "fetch_from": "msow.desc",
+   "fetch_if_empty": 1,
+   "fieldname": "msow_desc",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "label": "Master Scope of Work"
+  },
+  {
+   "columns": 4,
+   "fetch_from": "ssow.desc",
+   "fetch_if_empty": 1,
+   "fieldname": "ssow_desc",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "label": "Sub Scope of Work"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2022-01-01 20:36:55.731299",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "Cost Estimation Scope Of Work",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

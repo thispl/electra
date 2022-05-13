@@ -1,0 +1,244 @@
+{
+ "actions": [],
+ "autoname": "field:emp_name",
+ "creation": "2021-08-13 15:19:37.544283",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "column_break_2",
+  "status",
+  "employee_details_section",
+  "emp_id",
+  "emp_name",
+  "job__title",
+  "dept",
+  "column_break_5",
+  "resident_id_number",
+  "date_of_join",
+  "company__division",
+  "request",
+  "please_provide",
+  "bed",
+  "bedsheet",
+  "matress",
+  "pillow",
+  "blanket",
+  "column_break_19",
+  "others",
+  "date",
+  "for_hr__admin_use_only_section",
+  "alloted_room_details_section",
+  "accomodation_eligibility",
+  "attach",
+  "room_no",
+  "location",
+  "authorisation_of_dept_div_head",
+  "column_break_27",
+  "hr",
+  "managing_director"
+ ],
+ "fields": [
+  {
+   "fetch_from": "emp_id.designation",
+   "fieldname": "job__title",
+   "fieldtype": "Read Only",
+   "in_list_view": 1,
+   "label": "Designation"
+  },
+  {
+   "fetch_from": "emp_id.department",
+   "fieldname": "dept",
+   "fieldtype": "Read Only",
+   "in_list_view": 1,
+   "label": "Department"
+  },
+  {
+   "fieldname": "date",
+   "fieldtype": "Read Only",
+   "in_list_view": 1,
+   "label": "Date"
+  },
+  {
+   "fieldname": "emp_id",
+   "fieldtype": "Link",
+   "label": "Employee ID",
+   "options": "Employee"
+  },
+  {
+   "fetch_from": "emp_id.scheduled_confirmation_date",
+   "fieldname": "date_of_join",
+   "fieldtype": "Read Only",
+   "label": "Date of Joining"
+  },
+  {
+   "fieldname": "column_break_5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "description": "Comments",
+   "fieldname": "authorisation_of_dept_div_head",
+   "fieldtype": "Small Text",
+   "label": "Authorisation of Dept./ Div. Head"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "for_hr__admin_use_only_section",
+   "fieldtype": "Section Break",
+   "label": "For Office Use"
+  },
+  {
+   "fieldname": "accomodation_eligibility",
+   "fieldtype": "Select",
+   "label": "Accommodation Eligibility",
+   "options": "\nYes\nNo\nSpecial Approval (Doc Enclosed)"
+  },
+  {
+   "fieldname": "alloted_room_details_section",
+   "fieldtype": "Heading",
+   "label": "Alloted Room Details"
+  },
+  {
+   "fieldname": "location",
+   "fieldtype": "Data",
+   "label": "Location"
+  },
+  {
+   "fieldname": "room_no",
+   "fieldtype": "Int",
+   "label": "Room No"
+  },
+  {
+   "fetch_from": "emp_id.first_name",
+   "fieldname": "emp_name",
+   "fieldtype": "Read Only",
+   "in_list_view": 1,
+   "label": "Employee Name",
+   "options": "Name",
+   "unique": 1
+  },
+  {
+   "fieldname": "please_provide",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "bed",
+   "fieldtype": "Check",
+   "label": "Bed"
+  },
+  {
+   "default": "0",
+   "fieldname": "bedsheet",
+   "fieldtype": "Check",
+   "label": "Bedsheet"
+  },
+  {
+   "default": "0",
+   "fieldname": "pillow",
+   "fieldtype": "Check",
+   "label": "Pillow & Cover"
+  },
+  {
+   "default": "0",
+   "fieldname": "blanket",
+   "fieldtype": "Check",
+   "label": "Blanket"
+  },
+  {
+   "default": "0",
+   "fieldname": "matress",
+   "fieldtype": "Check",
+   "label": "Matress"
+  },
+  {
+   "fieldname": "others",
+   "fieldtype": "Small Text",
+   "label": "Others"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "employee_details_section",
+   "fieldtype": "Section Break",
+   "label": "Employee Details "
+  },
+  {
+   "fieldname": "column_break_27",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Requested",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "\nRequested\nInitiated\nCompleted\nHold"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "request",
+   "fieldtype": "Section Break",
+   "label": "Requested Details"
+  },
+  {
+   "fieldname": "column_break_19",
+   "fieldtype": "Column Break"
+  },
+  {
+   "description": "Comments",
+   "fieldname": "hr",
+   "fieldtype": "Small Text",
+   "label": "HR & Administration"
+  },
+  {
+   "description": "Comments",
+   "fieldname": "managing_director",
+   "fieldtype": "Small Text",
+   "label": "Managing Director"
+  },
+  {
+   "depends_on": "eval:doc.accomodation_eligibility == \"Special Approval (Doc Enclosed)\"",
+   "fieldname": "attach",
+   "fieldtype": "Attach"
+  },
+  {
+   "fetch_from": "emp_id.resident_id_no",
+   "fieldname": "resident_id_number",
+   "fieldtype": "Read Only",
+   "label": "Resident iD Number(QID)"
+  },
+  {
+   "fetch_from": "emp_id.company",
+   "fieldname": "company__division",
+   "fieldtype": "Read Only",
+   "label": "Company / Division"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2021-10-05 09:51:36.810702",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "Accommodation Material",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

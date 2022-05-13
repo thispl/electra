@@ -1,0 +1,172 @@
+{
+ "actions": [],
+ "autoname": "field:employee_name",
+ "creation": "2021-08-17 10:06:37.926788",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_1",
+  "workflow",
+  "column_break_3",
+  "status",
+  "section_break_3",
+  "emp_id",
+  "employee_name",
+  "job_title",
+  "dept",
+  "column_break_8",
+  "resident_id_number",
+  "doj",
+  "date_of_evaluation",
+  "skill_sets_section",
+  "table_14",
+  "total_score",
+  "line_manager_remarks_section",
+  "small_text_30",
+  "section_break_32",
+  "department_head",
+  "column_break_18",
+  "hr_manager"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_3",
+   "fieldtype": "Section Break",
+   "label": "Employee Details"
+  },
+  {
+   "fetch_from": "emp_id.designation",
+   "fieldname": "job_title",
+   "fieldtype": "Read Only",
+   "label": "Designation"
+  },
+  {
+   "fetch_from": "emp_id.department",
+   "fieldname": "dept",
+   "fieldtype": "Read Only",
+   "label": "Department"
+  },
+  {
+   "fieldname": "column_break_8",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "emp_id",
+   "fieldtype": "Link",
+   "label": "Employee ID",
+   "options": "Employee"
+  },
+  {
+   "fetch_from": "emp_id.date_of_joining",
+   "fieldname": "doj",
+   "fieldtype": "Date",
+   "label": "Date of Joining"
+  },
+  {
+   "fieldname": "date_of_evaluation",
+   "fieldtype": "Date",
+   "label": "Date of Evaluation"
+  },
+  {
+   "fieldname": "skill_sets_section",
+   "fieldtype": "Section Break",
+   "label": "Skill Sets"
+  },
+  {
+   "fieldname": "total_score",
+   "fieldtype": "Read Only",
+   "label": "Total Score"
+  },
+  {
+   "fieldname": "line_manager_remarks_section",
+   "fieldtype": "Section Break",
+   "label": "For Office Use"
+  },
+  {
+   "fieldname": "small_text_30",
+   "fieldtype": "Small Text",
+   "label": "Line Manager's Comments/Remarks"
+  },
+  {
+   "fieldname": "section_break_32",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "table_14",
+   "fieldtype": "Table",
+   "options": "Skill Data"
+  },
+  {
+   "fetch_from": "emp_id.employee_name",
+   "fieldname": "employee_name",
+   "fieldtype": "Read Only",
+   "label": "Employee Name",
+   "unique": 1
+  },
+  {
+   "fieldname": "section_break_1",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "workflow",
+   "fieldtype": "Read Only",
+   "label": "Workflow"
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Requested",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "\nRequested\nInitiated\nCompleted\nHold"
+  },
+  {
+   "fieldname": "department_head",
+   "fieldtype": "Small Text",
+   "label": "Department Head(Comments)"
+  },
+  {
+   "fieldname": "column_break_18",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "hr_manager",
+   "fieldtype": "Small Text",
+   "label": "HR Manager(Comments)"
+  },
+  {
+   "fetch_from": "emp_id.resident_id_no",
+   "fieldname": "resident_id_number",
+   "fieldtype": "Read Only",
+   "label": "Resident ID Number(QID)"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2021-10-04 08:53:35.699980",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "Staff Skill Mapping Form",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

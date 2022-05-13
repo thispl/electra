@@ -1,0 +1,51 @@
+{
+ "actions": [],
+ "creation": "2021-11-23 08:36:28.743448",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "employee",
+  "document",
+  "visa_status",
+  "visa_expiry"
+ ],
+ "fields": [
+  {
+   "fieldname": "employee",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Employee"
+  },
+  {
+   "fieldname": "document",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Document"
+  },
+  {
+   "fieldname": "visa_status",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Visa Status"
+  },
+  {
+   "fieldname": "visa_expiry",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Visa Expiry"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2021-11-23 08:38:11.698057",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "Employee Visa Status",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

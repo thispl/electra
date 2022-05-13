@@ -1,0 +1,227 @@
+{
+ "actions": [],
+ "autoname": "VAR-.####",
+ "creation": "2021-08-13 10:34:45.172608",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "employee_information_section",
+  "emp_id",
+  "name1",
+  "dept",
+  "column_break_5",
+  "designation",
+  "date",
+  "qid_no",
+  "vehicle_information",
+  "plate_no",
+  "type_of_vehicle",
+  "make",
+  "column_break_13",
+  "istimara_expiry",
+  "current_responsibility",
+  "division_of_vehicle",
+  "vehicle_accident_information_section",
+  "date_of_accident",
+  "kilometer",
+  "time",
+  "place_of_accident",
+  "column_break_20",
+  "accident_regisration",
+  "accident_report_date",
+  "date_of_registration",
+  "traffic_report",
+  "attach",
+  "for_office_use",
+  "small_text_27",
+  "html_38"
+ ],
+ "fields": [
+  {
+   "fieldname": "employee_information_section",
+   "fieldtype": "Section Break",
+   "label": "Employee Details"
+  },
+  {
+   "fetch_from": "emp_id.employee_name",
+   "fieldname": "name1",
+   "fieldtype": "Read Only",
+   "label": "Employee Name"
+  },
+  {
+   "fetch_from": "emp_id.department",
+   "fieldname": "dept",
+   "fieldtype": "Data",
+   "label": "Depatment"
+  },
+  {
+   "fetch_from": "emp_id.designation",
+   "fieldname": "designation",
+   "fieldtype": "Data",
+   "label": "Designation"
+  },
+  {
+   "fieldname": "column_break_5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "label": "Date "
+  },
+  {
+   "fieldname": "emp_id",
+   "fieldtype": "Link",
+   "label": "Employee ID",
+   "options": "Employee"
+  },
+  {
+   "fetch_from": "emp_id.qid_id_",
+   "fieldname": "qid_no",
+   "fieldtype": "Int",
+   "label": "QID No"
+  },
+  {
+   "fieldname": "vehicle_information",
+   "fieldtype": "Section Break",
+   "label": "Vehicle Details"
+  },
+  {
+   "fetch_from": "plate_no.vehicle_type",
+   "fieldname": "type_of_vehicle",
+   "fieldtype": "Select",
+   "label": "Type of vehicle",
+   "options": "\nTransport\nPrivate"
+  },
+  {
+   "fieldname": "plate_no",
+   "fieldtype": "Link",
+   "label": "Plate No",
+   "options": "Vehicle"
+  },
+  {
+   "fetch_from": "plate_no.make",
+   "fieldname": "make",
+   "fieldtype": "Data",
+   "label": "Make"
+  },
+  {
+   "fetch_from": "plate_no.expiry_of_istimara",
+   "fieldname": "istimara_expiry",
+   "fieldtype": "Data",
+   "label": "Istimara expiry"
+  },
+  {
+   "fetch_from": "emp_id.employee_name",
+   "fieldname": "current_responsibility",
+   "fieldtype": "Data",
+   "label": "Current responsibility"
+  },
+  {
+   "fieldname": "vehicle_accident_information_section",
+   "fieldtype": "Section Break",
+   "label": "Request"
+  },
+  {
+   "fieldname": "date_of_accident",
+   "fieldtype": "Date",
+   "label": "Date of accident"
+  },
+  {
+   "fieldname": "kilometer",
+   "fieldtype": "Int",
+   "label": "Kilometer"
+  },
+  {
+   "fieldname": "time",
+   "fieldtype": "Datetime",
+   "label": "Date & Time"
+  },
+  {
+   "fieldname": "place_of_accident",
+   "fieldtype": "Data",
+   "label": "Place of accident"
+  },
+  {
+   "fieldname": "column_break_20",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "accident_regisration",
+   "fieldtype": "Select",
+   "label": "Accident regisration(Metarsh)",
+   "options": "\nYes\nNo"
+  },
+  {
+   "fieldname": "accident_report_date",
+   "fieldtype": "Date",
+   "label": "Accident report date"
+  },
+  {
+   "fieldname": "date_of_registration",
+   "fieldtype": "Date",
+   "label": "Date of registration"
+  },
+  {
+   "fieldname": "traffic_report",
+   "fieldtype": "Select",
+   "label": "Traffic report(*Please attach the police report with accident photos)",
+   "options": "\nYes\nNo"
+  },
+  {
+   "depends_on": "eval:doc.traffic_report == 'Yes'",
+   "fieldname": "attach",
+   "fieldtype": "Attach Image"
+  },
+  {
+   "fieldname": "small_text_27",
+   "fieldtype": "Small Text",
+   "label": "Description of the vehicle accident"
+  },
+  {
+   "fieldname": "column_break_13",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "html_38",
+   "fieldtype": "HTML",
+   "options": "Note: The condition of the vehicle needs to be checked by the Auto technician and Admin Dept. shall do receive and handover function only.\n\n"
+  },
+  {
+   "fetch_from": "plate_no.vehicle_division",
+   "fieldname": "division_of_vehicle",
+   "fieldtype": "Data",
+   "label": "Division of Vehicle"
+  },
+  {
+   "fieldname": "for_office_use",
+   "fieldtype": "Section Break",
+   "label": "For Office Use"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2021-08-20 14:21:40.261762",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "Vehicle Accident Report",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

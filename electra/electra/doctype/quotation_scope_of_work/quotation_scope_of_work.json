@@ -1,0 +1,135 @@
+{
+ "actions": [],
+ "creation": "2021-11-17 21:36:44.833487",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "msow",
+  "msow_desc",
+  "details",
+  "delivery",
+  "brand",
+  "qty",
+  "unit",
+  "unit_price",
+  "total_cost",
+  "total_overheads",
+  "total_business_promotion",
+  "total_bidding_price",
+  "optional",
+  "print_work_titles",
+  "print_items"
+ ],
+ "fields": [
+  {
+   "columns": 3,
+   "fieldname": "msow_desc",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "label": "Master Scope of Work"
+  },
+  {
+   "columns": 1,
+   "fieldname": "msow",
+   "fieldtype": "Link",
+   "label": "MSoW ID",
+   "options": "Master Scope of Work"
+  },
+  {
+   "columns": 2,
+   "fieldname": "total_bidding_price",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Total Bidding Price",
+   "read_only": 1
+  },
+  {
+   "columns": 1,
+   "fieldname": "details",
+   "fieldtype": "Button",
+   "in_list_view": 1,
+   "label": "Details"
+  },
+  {
+   "default": "0",
+   "fieldname": "optional",
+   "fieldtype": "Check",
+   "label": "Is Optional ?"
+  },
+  {
+   "default": "0",
+   "fieldname": "print_work_titles",
+   "fieldtype": "Check",
+   "label": "Print Work Titles ?"
+  },
+  {
+   "default": "0",
+   "fieldname": "print_items",
+   "fieldtype": "Check",
+   "label": "Print Items ?"
+  },
+  {
+   "columns": 1,
+   "fieldname": "qty",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Qty"
+  },
+  {
+   "columns": 1,
+   "fieldname": "unit",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Unit",
+   "options": "UOM"
+  },
+  {
+   "columns": 1,
+   "fieldname": "unit_price",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Unit Price"
+  },
+  {
+   "fieldname": "total_cost",
+   "fieldtype": "Currency",
+   "label": "Total Cost",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_overheads",
+   "fieldtype": "Currency",
+   "label": "Total Overheads",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_business_promotion",
+   "fieldtype": "Currency",
+   "label": "Total Business Promotion",
+   "read_only": 1
+  },
+  {
+   "fieldname": "delivery",
+   "fieldtype": "Link",
+   "label": "Delivery",
+   "options": "Delivery Terms"
+  },
+  {
+   "fieldname": "brand",
+   "fieldtype": "Data",
+   "label": "Brand"
+  }
+ ],
+ "istable": 1,
+ "links": [],
+ "modified": "2022-03-29 10:38:37.012071",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "Quotation Scope of Work",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

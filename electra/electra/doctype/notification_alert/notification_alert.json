@@ -1,0 +1,41 @@
+{
+ "actions": [],
+ "creation": "2022-04-03 19:23:00.953372",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "notification_table"
+ ],
+ "fields": [
+  {
+   "fieldname": "notification_table",
+   "fieldtype": "Table",
+   "label": "Notification Table",
+   "options": "Notification Child"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2022-04-03 19:23:00.953372",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "Notification Alert",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

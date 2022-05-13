@@ -1,0 +1,113 @@
+{
+ "actions": [],
+ "autoname": "JD.####",
+ "creation": "2021-08-17 12:48:36.599876",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "job_title",
+  "reporting_to",
+  "deputy",
+  "section_break_4",
+  "edu_exp",
+  "section_break_6",
+  "job_description",
+  "authority",
+  "div_dept_head",
+  "column_break_8",
+  "responsibilities",
+  "dept_div",
+  "employee_name"
+ ],
+ "fields": [
+  {
+   "fieldname": "job_title",
+   "fieldtype": "Data",
+   "label": "Job TItle"
+  },
+  {
+   "fieldname": "reporting_to",
+   "fieldtype": "Data",
+   "label": "Reporting To"
+  },
+  {
+   "fieldname": "deputy",
+   "fieldtype": "Data",
+   "label": "Deputy"
+  },
+  {
+   "fieldname": "section_break_4",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "job_description",
+   "fieldtype": "Small Text",
+   "label": "Job Description"
+  },
+  {
+   "fieldname": "responsibilities",
+   "fieldtype": "Small Text",
+   "label": "Responsibilities"
+  },
+  {
+   "fieldname": "authority",
+   "fieldtype": "Data",
+   "label": "Authority"
+  },
+  {
+   "fieldname": "div_dept_head",
+   "fieldtype": "Data",
+   "label": "Div./ Dept. Head"
+  },
+  {
+   "fieldname": "dept_div",
+   "fieldtype": "Data",
+   "label": "Dept./ Div"
+  },
+  {
+   "description": "I acknowledge the receipt of this Job responsibility and authorities and I understand and will try to fulfill responsibility. ",
+   "fieldname": "employee_name",
+   "fieldtype": "Data",
+   "label": "Employee Name"
+  },
+  {
+   "fieldname": "column_break_8",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "edu_exp",
+   "fieldtype": "Table",
+   "label": "Education, Experience and Skills",
+   "options": "Child Class JD"
+  },
+  {
+   "fieldname": "section_break_6",
+   "fieldtype": "Section Break"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2021-08-17 13:09:39.623865",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "Staff Job Description",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

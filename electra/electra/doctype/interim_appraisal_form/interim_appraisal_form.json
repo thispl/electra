@@ -1,0 +1,179 @@
+{
+ "actions": [],
+ "creation": "2021-08-17 10:33:46.682651",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_1",
+  "date",
+  "section_break_3",
+  "emp_id",
+  "job_title",
+  "dept_column",
+  "column_break_7",
+  "name1",
+  "qid_no",
+  "doj",
+  "section_break_9",
+  "name_of_appraiser",
+  "column_break_11",
+  "job_title2",
+  "section_break_13",
+  "html_14",
+  "section_break_23",
+  "appraisal_rating",
+  "total_score",
+  "salary_increment_recommmendation_section",
+  "increment_amount",
+  "column_break_22",
+  "effective_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "label": "Date"
+  },
+  {
+   "fetch_from": "emp_id.employee_name",
+   "fieldname": "name1",
+   "fieldtype": "Data",
+   "label": "Name",
+   "options": "Name"
+  },
+  {
+   "fetch_from": "emp_id.designation",
+   "fieldname": "job_title",
+   "fieldtype": "Data",
+   "label": "Job Title"
+  },
+  {
+   "fetch_from": "emp_id.department",
+   "fieldname": "dept_column",
+   "fieldtype": "Data",
+   "label": "Dept"
+  },
+  {
+   "fieldname": "emp_id",
+   "fieldtype": "Link",
+   "label": "Emp ID",
+   "length": 7,
+   "options": "Employee"
+  },
+  {
+   "fetch_from": "emp_id.qid_id_",
+   "fieldname": "qid_no",
+   "fieldtype": "Data",
+   "label": "QID No",
+   "length": 7,
+   "options": "Phone"
+  },
+  {
+   "fetch_from": "emp_id.date_of_joining",
+   "fieldname": "doj",
+   "fieldtype": "Date",
+   "label": "DOJ"
+  },
+  {
+   "fieldname": "section_break_9",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "name_of_appraiser",
+   "fieldtype": "Link",
+   "label": "Name of Appraiser",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "column_break_11",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "name_of_appraiser.designation",
+   "fieldname": "job_title2",
+   "fieldtype": "Data",
+   "label": "Job Title"
+  },
+  {
+   "fieldname": "section_break_13",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "html_14",
+   "fieldtype": "HTML",
+   "options": "<h4>Instructions: </h4>\nThe appraiser should name 5 jobs assigned to the applicant in brief and rate his/ her performance to justifying a salary increment<br>.\n1: POOR/ 2: OK/ 3: GOOD/ 4: EXCELLENT/ 5: BEST\n"
+  },
+  {
+   "fieldname": "section_break_3",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_7",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_23",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "appraisal_rating",
+   "fieldtype": "Table",
+   "label": "Appraisal rating ",
+   "options": "Appraisal Rating Table"
+  },
+  {
+   "fieldname": "total_score",
+   "fieldtype": "Data",
+   "label": "Total Score"
+  },
+  {
+   "fieldname": "salary_increment_recommmendation_section",
+   "fieldtype": "Section Break",
+   "label": "Salary Increment Recommmendation"
+  },
+  {
+   "fieldname": "increment_amount",
+   "fieldtype": "Data",
+   "label": "Increment Amount ",
+   "options": "Phone"
+  },
+  {
+   "fieldname": "effective_from",
+   "fieldtype": "Data",
+   "label": "Effective From"
+  },
+  {
+   "fieldname": "column_break_22",
+   "fieldtype": "Column Break"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2021-08-20 07:43:41.565117",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "Interim Appraisal Form",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

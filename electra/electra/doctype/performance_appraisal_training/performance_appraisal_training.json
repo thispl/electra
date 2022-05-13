@@ -1,0 +1,54 @@
+{
+ "actions": [],
+ "creation": "2021-08-25 13:02:29.579069",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "areas_to_be_developed",
+  "training_recommendation",
+  "training_resource",
+  "priority"
+ ],
+ "fields": [
+  {
+   "fieldname": "areas_to_be_developed",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Areas to be Developed",
+   "options": "Skill Set"
+  },
+  {
+   "fieldname": "training_recommendation",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Training Recommendation"
+  },
+  {
+   "fieldname": "training_resource",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Training Resource",
+   "options": "\nIn-House\nExternal Trainer"
+  },
+  {
+   "fieldname": "priority",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Priority",
+   "options": "\nHigh\nMedium\nLow"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2021-08-25 13:05:28.474449",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "Performance Appraisal Training",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

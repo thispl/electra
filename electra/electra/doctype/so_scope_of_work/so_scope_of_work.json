@@ -1,0 +1,72 @@
+{
+ "actions": [],
+ "creation": "2021-11-17 23:06:22.133735",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "msow",
+  "msow_desc",
+  "qty",
+  "unit",
+  "unit_price",
+  "total_bidding_price"
+ ],
+ "fields": [
+  {
+   "columns": 3,
+   "fieldname": "msow_desc",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "label": "Master Scope of Work"
+  },
+  {
+   "columns": 1,
+   "fieldname": "msow",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "MSoW ID",
+   "options": "Master Scope of Work"
+  },
+  {
+   "columns": 1,
+   "fieldname": "qty",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Qty"
+  },
+  {
+   "columns": 1,
+   "fieldname": "unit",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Unit",
+   "options": "UOM"
+  },
+  {
+   "columns": 1,
+   "fieldname": "unit_price",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Unit Price"
+  },
+  {
+   "columns": 2,
+   "fieldname": "total_bidding_price",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Total Bidding Price"
+  }
+ ],
+ "istable": 1,
+ "links": [],
+ "modified": "2022-02-23 17:19:24.206253",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "SO Scope of Work",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

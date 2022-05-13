@@ -1,0 +1,133 @@
+{
+ "actions": [],
+ "allow_copy": 1,
+ "creation": "2022-01-15 14:28:54.125014",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "cost_estimation",
+  "column_break_2",
+  "msow",
+  "ssow",
+  "section_break_4",
+  "design",
+  "materials",
+  "finishing_work",
+  "bolts_accessories",
+  "installation",
+  "manpower",
+  "heavy_equipments",
+  "others",
+  "submit"
+ ],
+ "fields": [
+  {
+   "fieldname": "materials",
+   "fieldtype": "Table",
+   "label": "MATERIALS",
+   "options": "CE Items"
+  },
+  {
+   "fieldname": "finishing_work",
+   "fieldtype": "Table",
+   "label": "FINISHING WORK",
+   "options": "CE Items"
+  },
+  {
+   "fieldname": "submit",
+   "fieldtype": "Button",
+   "label": "Submit",
+   "options": "CE Items"
+  },
+  {
+   "fieldname": "msow",
+   "fieldtype": "Link",
+   "label": "Master Scope of Work",
+   "options": "Master Scope of Work",
+   "read_only": 1
+  },
+  {
+   "fieldname": "cost_estimation",
+   "fieldtype": "Link",
+   "label": "Cost Estimation",
+   "options": "Cost Estimation",
+   "read_only": 1
+  },
+  {
+   "fieldname": "design",
+   "fieldtype": "Table",
+   "label": "DESIGN",
+   "options": "CE Items"
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_4",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "ssow",
+   "fieldtype": "Link",
+   "label": "Sub Scope of Work",
+   "options": "Sub Scope of Work",
+   "read_only": 1
+  },
+  {
+   "fieldname": "bolts_accessories",
+   "fieldtype": "Table",
+   "label": "BOLTS ACCESSORIES",
+   "options": "CE Items"
+  },
+  {
+   "fieldname": "installation",
+   "fieldtype": "Table",
+   "label": "INSTALLATION",
+   "options": "CE Items"
+  },
+  {
+   "fieldname": "manpower",
+   "fieldtype": "Table",
+   "label": "MANPOWER",
+   "options": "CE Items Manpower"
+  },
+  {
+   "fieldname": "heavy_equipments",
+   "fieldtype": "Table",
+   "label": "HEAVY EQUIPMENTS",
+   "options": "CE Items"
+  },
+  {
+   "fieldname": "others",
+   "fieldtype": "Table",
+   "label": "OTHERS",
+   "options": "CE Items"
+  }
+ ],
+ "hide_toolbar": 1,
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2022-01-16 06:42:54.051456",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "CE Item Page",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

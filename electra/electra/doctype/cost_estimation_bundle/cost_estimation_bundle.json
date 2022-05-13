@@ -1,0 +1,38 @@
+{
+ "actions": [],
+ "creation": "2021-10-30 17:08:41.035067",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "product_bundle",
+  "price"
+ ],
+ "fields": [
+  {
+   "fieldname": "price",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Price",
+   "read_only": 1
+  },
+  {
+   "fieldname": "product_bundle",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Product Bundle"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2021-10-31 11:45:43.167187",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "Cost Estimation Bundle",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

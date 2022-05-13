@@ -1,0 +1,338 @@
+{
+ "actions": [],
+ "autoname": "field:candidate_name",
+ "creation": "2021-08-17 09:49:56.841092",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "candidate_name",
+  "position_applied",
+  "department_1",
+  "column_break_4",
+  "interview_date",
+  "interview_type",
+  "source_ref",
+  "ratings_section",
+  "child_table",
+  "total_score",
+  "column_break_31",
+  "remarks_1",
+  "name1",
+  "select_1",
+  "reject_1",
+  "column_break_35",
+  "remarks_2",
+  "name2",
+  "select_2",
+  "reject_2",
+  "hr_use",
+  "job_title",
+  "employment_type",
+  "probation_period",
+  "basic",
+  "housing_allow",
+  "transport_allow",
+  "other_allow",
+  "gross_monthly_salary_qatari_riyals",
+  "column_break_48",
+  "joining_ticket",
+  "by_electra",
+  "not_applicable",
+  "vacation_ticket",
+  "after_1_year",
+  "after_2year",
+  "visa_visa_transfer_status",
+  "new_covisa",
+  "visa_transfer",
+  "secondement",
+  "dependant_visa",
+  "reporting_to",
+  "assigned_work_location",
+  "other_special_terms_benefits"
+ ],
+ "fields": [
+  {
+   "fetch_from": "candidate_name.applicant_name",
+   "fieldname": "candidate_name",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Candidate Name",
+   "options": "Job Applicant",
+   "unique": 1
+  },
+  {
+   "fetch_from": "candidate_name.position_applied",
+   "fieldname": "position_applied",
+   "fieldtype": "Read Only",
+   "in_list_view": 1,
+   "label": "Position Applied"
+  },
+  {
+   "fetch_from": "candidate_name.department",
+   "fieldname": "department_1",
+   "fieldtype": "Read Only",
+   "in_list_view": 1,
+   "label": "Department"
+  },
+  {
+   "fieldname": "column_break_4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "candidate_name.interview_type",
+   "fieldname": "interview_type",
+   "fieldtype": "Read Only",
+   "in_list_view": 1,
+   "label": "Interview Type ",
+   "options": "\nPhone\nPersonal"
+  },
+  {
+   "fetch_from": "candidate_name.source",
+   "fieldname": "source_ref",
+   "fieldtype": "Read Only",
+   "label": "Source/ Ref"
+  },
+  {
+   "description": "5 - Excellent, 4 - Above Average, 3 - Average, 2-Satisfactory, 1 - Poor ",
+   "fieldname": "ratings_section",
+   "fieldtype": "Section Break",
+   "label": "Ratings",
+   "options": "\nExcellent\nAbove Average\nAverage\nSatisfactory\nPoor"
+  },
+  {
+   "fieldname": "total_score",
+   "fieldtype": "Data",
+   "label": "Total Score"
+  },
+  {
+   "fieldname": "remarks_1",
+   "fieldtype": "Heading",
+   "label": "Interviewer -1  Remarks"
+  },
+  {
+   "fieldname": "name1",
+   "fieldtype": "Data",
+   "label": "Name"
+  },
+  {
+   "default": "0",
+   "fieldname": "select_1",
+   "fieldtype": "Check",
+   "label": "Selected",
+   "read_only_depends_on": "eval:doc.reject_1"
+  },
+  {
+   "default": "0",
+   "fieldname": "reject_1",
+   "fieldtype": "Check",
+   "label": "Rejected",
+   "read_only_depends_on": "eval:doc.select_1"
+  },
+  {
+   "fieldname": "remarks_2",
+   "fieldtype": "Heading",
+   "label": "Interviewer-2-HOD Remarks"
+  },
+  {
+   "fieldname": "name2",
+   "fieldtype": "Data",
+   "label": "Name"
+  },
+  {
+   "default": "0",
+   "fieldname": "select_2",
+   "fieldtype": "Check",
+   "label": "Selected",
+   "read_only_depends_on": "eval:doc.reject_2"
+  },
+  {
+   "default": "0",
+   "fieldname": "reject_2",
+   "fieldtype": "Check",
+   "label": "Rejected",
+   "read_only_depends_on": "eval:doc.select_2"
+  },
+  {
+   "fieldname": "hr_use",
+   "fieldtype": "Section Break",
+   "label": "HR USE ONLY - Salary Recommendations & Approvals"
+  },
+  {
+   "fieldname": "job_title",
+   "fieldtype": "Link",
+   "label": "Designation",
+   "options": "Designation"
+  },
+  {
+   "fieldname": "employment_type",
+   "fieldtype": "Link",
+   "label": "Employment Type",
+   "options": "Employment Type"
+  },
+  {
+   "fieldname": "probation_period",
+   "fieldtype": "Data",
+   "label": "Probation Period"
+  },
+  {
+   "fieldname": "basic",
+   "fieldtype": "Data",
+   "label": "Basic"
+  },
+  {
+   "fieldname": "housing_allow",
+   "fieldtype": "Int",
+   "label": "Housing Allowowance"
+  },
+  {
+   "fieldname": "transport_allow",
+   "fieldtype": "Int",
+   "label": "Transport Allowance"
+  },
+  {
+   "fieldname": "other_allow",
+   "fieldtype": "Int",
+   "label": "Other Allowance"
+  },
+  {
+   "fieldname": "gross_monthly_salary_qatari_riyals",
+   "fieldtype": "Int",
+   "label": "Gross Monthly Salary (Qatari Riyals)"
+  },
+  {
+   "fieldname": "joining_ticket",
+   "fieldtype": "Heading",
+   "label": "Joining Ticket"
+  },
+  {
+   "default": "0",
+   "fieldname": "by_electra",
+   "fieldtype": "Check",
+   "label": "By Electra",
+   "read_only_depends_on": "eval:doc.not_applicable"
+  },
+  {
+   "default": "0",
+   "fieldname": "not_applicable",
+   "fieldtype": "Check",
+   "label": "Not Applicable",
+   "read_only_depends_on": "eval:doc.by_electra"
+  },
+  {
+   "fieldname": "column_break_48",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "vacation_ticket",
+   "fieldtype": "Heading",
+   "label": "Vacation Ticket"
+  },
+  {
+   "default": "0",
+   "fieldname": "after_1_year",
+   "fieldtype": "Check",
+   "label": "After 1 Year",
+   "read_only_depends_on": "eval:doc.after_2year"
+  },
+  {
+   "default": "0",
+   "fieldname": "after_2year",
+   "fieldtype": "Check",
+   "label": "After 2 Years",
+   "read_only_depends_on": "eval:doc.after_1_year"
+  },
+  {
+   "fieldname": "visa_visa_transfer_status",
+   "fieldtype": "Heading",
+   "label": "Visa/ Visa Transfer Status"
+  },
+  {
+   "default": "0",
+   "fieldname": "new_covisa",
+   "fieldtype": "Check",
+   "label": "New Company Visa",
+   "read_only_depends_on": "eval:doc.visa_transfer || doc.secondement || doc.dependant_visa\n"
+  },
+  {
+   "default": "0",
+   "fieldname": "visa_transfer",
+   "fieldtype": "Check",
+   "label": "Visa Transfer",
+   "read_only_depends_on": "eval:doc.new_covisa || doc.secondement || doc.dependant_visa"
+  },
+  {
+   "default": "0",
+   "fieldname": "secondement",
+   "fieldtype": "Check",
+   "label": "Secondement",
+   "read_only_depends_on": "eval:doc.new_covisa || doc.visa_transfer || doc.dependant_visa"
+  },
+  {
+   "default": "0",
+   "fieldname": "dependant_visa",
+   "fieldtype": "Check",
+   "label": "Dependant Visa",
+   "read_only_depends_on": "eval:doc.new_covisa || doc.secondement || doc.visa_transfer"
+  },
+  {
+   "fieldname": "reporting_to",
+   "fieldtype": "Link",
+   "label": "Reporting to",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "assigned_work_location",
+   "fieldtype": "Data",
+   "label": "Assigned Work Location"
+  },
+  {
+   "fieldname": "other_special_terms_benefits",
+   "fieldtype": "Data",
+   "label": "Other Special Terms/ Benefits"
+  },
+  {
+   "fieldname": "column_break_35",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_31",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "child_table",
+   "fieldtype": "Table",
+   "options": "Child Table Iv"
+  },
+  {
+   "fetch_from": "candidate_name.interview_date",
+   "fieldname": "interview_date",
+   "fieldtype": "Read Only",
+   "label": "Interview Date"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2021-09-18 14:18:49.966588",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "Interview Evaluation Form",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

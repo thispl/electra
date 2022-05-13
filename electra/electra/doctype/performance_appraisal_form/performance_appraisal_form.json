@@ -1,0 +1,196 @@
+{
+ "actions": [],
+ "creation": "2021-08-25 11:35:38.550636",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_1",
+  "workflow",
+  "column_break_3",
+  "status",
+  "employee_details_section",
+  "employee_id",
+  "employee_name",
+  "division",
+  "designation",
+  "column_break_6",
+  "department",
+  "qid_no",
+  "date_of_joining",
+  "company",
+  "performance_appraisal_skill_mapping_section",
+  "skill_mapping",
+  "performance_appraisal_training_section",
+  "training_needs_assessment",
+  "section_break_5",
+  "employee",
+  "for_office_use_section",
+  "appraiser",
+  "column_break_8",
+  "hr_department",
+  "column_break_10",
+  "managing_director"
+ ],
+ "fields": [
+  {
+   "fieldname": "performance_appraisal_skill_mapping_section",
+   "fieldtype": "Section Break",
+   "label": "Performance Appraisal Skill Mapping"
+  },
+  {
+   "fieldname": "skill_mapping",
+   "fieldtype": "Table",
+   "label": "Skill Mapping",
+   "options": "Performance Appraisal Skill Mapping"
+  },
+  {
+   "fieldname": "performance_appraisal_training_section",
+   "fieldtype": "Section Break",
+   "label": " Performance Appraisal Training"
+  },
+  {
+   "fieldname": "training_needs_assessment",
+   "fieldtype": "Table",
+   "label": "Training Needs Assessment",
+   "options": "Performance Appraisal Training"
+  },
+  {
+   "fieldname": "employee",
+   "fieldtype": "Small Text",
+   "label": "Employee(Comments)"
+  },
+  {
+   "fieldname": "for_office_use_section",
+   "fieldtype": "Section Break",
+   "label": "For Office Use"
+  },
+  {
+   "fieldname": "appraiser",
+   "fieldtype": "Small Text",
+   "label": "Appraiser(Comments)"
+  },
+  {
+   "fieldname": "column_break_8",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "hr_department",
+   "fieldtype": "Small Text",
+   "label": "HR Department(Comments)"
+  },
+  {
+   "fieldname": "column_break_10",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "managing_director",
+   "fieldtype": "Small Text",
+   "label": "Managing Director(Comments)"
+  },
+  {
+   "fieldname": "section_break_5",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "employee_details_section",
+   "fieldtype": "Section Break",
+   "label": "Employee Details"
+  },
+  {
+   "fieldname": "employee_id",
+   "fieldtype": "Link",
+   "label": "Employee ID",
+   "options": "Employee"
+  },
+  {
+   "fetch_from": "employee_id.employee_name",
+   "fieldname": "employee_name",
+   "fieldtype": "Read Only",
+   "label": "Employee Name"
+  },
+  {
+   "fetch_from": "employee_id.division",
+   "fieldname": "division",
+   "fieldtype": "Read Only",
+   "label": "Division"
+  },
+  {
+   "fetch_from": "employee_id.designation",
+   "fieldname": "designation",
+   "fieldtype": "Read Only",
+   "label": "Designation"
+  },
+  {
+   "fieldname": "column_break_6",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "employee_id.department",
+   "fieldname": "department",
+   "fieldtype": "Read Only",
+   "label": "Department"
+  },
+  {
+   "fetch_from": "employee_id.qid_id_",
+   "fieldname": "qid_no",
+   "fieldtype": "Read Only",
+   "label": "QID No"
+  },
+  {
+   "fetch_from": "employee_id.date_of_joining",
+   "fieldname": "date_of_joining",
+   "fieldtype": "Read Only",
+   "label": "Date of Joining"
+  },
+  {
+   "fetch_from": "employee_id.company",
+   "fieldname": "company",
+   "fieldtype": "Read Only",
+   "label": "Company"
+  },
+  {
+   "fieldname": "section_break_1",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "workflow",
+   "fieldtype": "Read Only",
+   "label": "Workflow"
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "\nRequested\nInitiated\nCompleted\nHold"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2021-08-25 13:58:18.773052",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "Performance Appraisal Form",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

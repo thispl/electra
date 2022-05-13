@@ -1,0 +1,166 @@
+{
+ "actions": [],
+ "autoname": "ELE/PSD/.###",
+ "creation": "2021-11-11 10:24:50.835742",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "external_provider",
+  "products__service",
+  "column_break_3",
+  "approval_status",
+  "date_of_evaluation",
+  "ratings_section",
+  "evaluation_ratings",
+  "other_credentials",
+  "section_break_8",
+  "actual_score",
+  "maximum_score",
+  "acceptance_criteria",
+  "column_break_12",
+  "approved_by",
+  "approved_date",
+  "reevaluation_date",
+  "re_evaluation_date",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "products__service",
+   "fieldtype": "Data",
+   "label": "Products / Service"
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "approval_status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Approval Status",
+   "options": "\nApproved\nRejected\nHold",
+   "reqd": 1
+  },
+  {
+   "fieldname": "date_of_evaluation",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Date of Evaluation",
+   "reqd": 1
+  },
+  {
+   "fieldname": "ratings_section",
+   "fieldtype": "Section Break",
+   "label": "Ratings"
+  },
+  {
+   "fieldname": "evaluation_ratings",
+   "fieldtype": "Table",
+   "label": "Evaluation Ratings",
+   "options": "External Provider Evaluation Rating"
+  },
+  {
+   "fieldname": "section_break_8",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "actual_score",
+   "fieldtype": "Float",
+   "label": "Actual Score"
+  },
+  {
+   "default": "65",
+   "fieldname": "maximum_score",
+   "fieldtype": "Float",
+   "label": "Maximum Score",
+   "read_only": 1
+  },
+  {
+   "default": "70",
+   "fieldname": "acceptance_criteria",
+   "fieldtype": "Percent",
+   "label": "Acceptance Criteria",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_12",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "approved_by",
+   "fieldtype": "Link",
+   "label": "Approved By",
+   "options": "User"
+  },
+  {
+   "fieldname": "approved_date",
+   "fieldtype": "Date",
+   "label": "Approved Date"
+  },
+  {
+   "fieldname": "reevaluation_date",
+   "fieldtype": "Date",
+   "label": "Evaluation Date"
+  },
+  {
+   "fieldname": "other_credentials",
+   "fieldtype": "Small Text",
+   "label": "Other Credentials"
+  },
+  {
+   "fieldname": "external_provider",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "External Provider Name",
+   "options": "Supplier",
+   "reqd": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "External Provider Evaluation Form",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "re_evaluation_date",
+   "fieldtype": "Date",
+   "label": "Re evaluation Date",
+   "reqd": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2022-01-10 11:10:41.934050",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "External Provider Evaluation Form",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "external_provider",
+ "track_changes": 1
+}

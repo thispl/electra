@@ -1,0 +1,44 @@
+{
+ "actions": [],
+ "creation": "2021-08-17 11:20:51.750256",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "skill_sets",
+  "line_manager",
+  "dept__div_head"
+ ],
+ "fields": [
+  {
+   "fieldname": "skill_sets",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Skill Sets"
+  },
+  {
+   "fieldname": "line_manager",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Line Manager"
+  },
+  {
+   "fieldname": "dept__div_head",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Dept. / Div. Head"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2021-08-17 11:20:51.750256",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "Child Table SPE",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

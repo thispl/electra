@@ -1,0 +1,228 @@
+{
+ "actions": [],
+ "autoname": "field:employee_name",
+ "creation": "2021-08-12 10:49:02.517381",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "employee_details_section",
+  "employee_id",
+  "employee_name",
+  "designation",
+  "department",
+  "column_break_6",
+  "resident_id_number",
+  "date_of_joining",
+  "company",
+  "details_of_injured_person_section",
+  "details_of_injured_person",
+  "head",
+  "location",
+  "date",
+  "day",
+  "break_3",
+  "time",
+  "description",
+  "column_break_16",
+  "person_involved",
+  "witness",
+  "column_break_19",
+  "sickness",
+  "probable_duration_of_disablement",
+  "medical_treatment",
+  "doctor_address",
+  "held_date",
+  "breal_4",
+  "address_of_the_doctor_by_whom_treatment_was_given",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "location",
+   "fieldtype": "Data",
+   "label": "Place"
+  },
+  {
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "label": "Date"
+  },
+  {
+   "fieldname": "day",
+   "fieldtype": "Data",
+   "label": "Day"
+  },
+  {
+   "fieldname": "time",
+   "fieldtype": "Time",
+   "label": "Time"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "label": "Circumstance and Description of the accident"
+  },
+  {
+   "fieldname": "person_involved",
+   "fieldtype": "Small Text",
+   "label": "Name and Address of the persons involved in the accident"
+  },
+  {
+   "fieldname": "witness",
+   "fieldtype": "Small Text",
+   "label": "Name and Address of the witnesses"
+  },
+  {
+   "fieldname": "sickness",
+   "fieldtype": "Small Text",
+   "label": "Nature & Extent of Injury(Or sickness)"
+  },
+  {
+   "fieldname": "probable_duration_of_disablement",
+   "fieldtype": "Time",
+   "label": "Probable duration of disablement"
+  },
+  {
+   "fieldname": "medical_treatment",
+   "fieldtype": "Section Break",
+   "label": "MEDICAL TREATMENT"
+  },
+  {
+   "fieldname": "doctor_address",
+   "fieldtype": "Data",
+   "label": "Name of Doctor",
+   "options": "Name"
+  },
+  {
+   "fieldname": "held_date",
+   "fieldtype": "Date",
+   "label": "Date"
+  },
+  {
+   "fieldname": "head",
+   "fieldtype": "Section Break",
+   "label": "DETAILS OF THE ACCIDENT"
+  },
+  {
+   "fieldname": "break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "breal_4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_16",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_19",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "address_of_the_doctor_by_whom_treatment_was_given",
+   "fieldtype": "Small Text",
+   "label": "Address of the Doctor By whom Treatment was given"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Accident Declaration Form",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "employee_details_section",
+   "fieldtype": "Section Break",
+   "label": "Employee Details"
+  },
+  {
+   "fetch_from": "employee_id.employee_name",
+   "fieldname": "employee_name",
+   "fieldtype": "Data",
+   "label": "Employee Name",
+   "unique": 1
+  },
+  {
+   "fetch_from": "employee_number.employee_id",
+   "fieldname": "employee_id",
+   "fieldtype": "Link",
+   "label": "Employee ID",
+   "options": "Employee"
+  },
+  {
+   "fetch_from": "employee_id.department",
+   "fieldname": "department",
+   "fieldtype": "Data",
+   "label": "Department"
+  },
+  {
+   "fetch_from": "employee_id.date_of_joining",
+   "fieldname": "date_of_joining",
+   "fieldtype": "Data",
+   "label": "Date of Joining"
+  },
+  {
+   "fetch_from": "employee_id.designation",
+   "fieldname": "designation",
+   "fieldtype": "Data",
+   "label": "Designation"
+  },
+  {
+   "fetch_from": "employee_id.company",
+   "fieldname": "company",
+   "fieldtype": "Data",
+   "label": "Company"
+  },
+  {
+   "fieldname": "column_break_6",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "details_of_injured_person",
+   "fieldtype": "Table",
+   "label": "Details",
+   "options": "Accident Declaration Child"
+  },
+  {
+   "fieldname": "details_of_injured_person_section",
+   "fieldtype": "Section Break",
+   "label": "Details of Injured Person"
+  },
+  {
+   "fetch_from": "employee_id.resident_id_no",
+   "fieldname": "resident_id_number",
+   "fieldtype": "Read Only",
+   "label": "Resident ID Number(QID)"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2021-10-04 08:57:45.456784",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "Accident Declaration Form",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

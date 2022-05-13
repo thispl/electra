@@ -13,7 +13,7 @@ app_license = "MIT"
 # ------------------
 
 # include js, css files in header of desk.html
-# app_include_css = "/assets/electra/css/electra.css"
+app_include_css = "/assets/electra/css/electra.css"
 # app_include_js = "/assets/electra/js/electra.js"
 
 # include js, css files in header of web template
@@ -31,8 +31,8 @@ app_license = "MIT"
 # page_js = {"page" : "public/js/file.js"}
 
 # include js in doctype views
-# doctype_js = {"doctype" : "public/js/doctype.js"}
-# doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
+# doctype_js = {"doctype" : "public/js/quotation.js"}
+doctype_list_js = {"Lead" : "public/js/lead_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
 
@@ -89,21 +89,62 @@ app_license = "MIT"
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-#	}
-# }
+doc_events = {
+	"Employee": {
+		"on_trash": "electra.utils.manpower_avg_cost_calculation",
+		"after_insert": [
+			"electra.custom.visa_creation",
+			"electra.utils.manpower_avg_cost_calculation",
+			],
+	},
+	"Landed Cost Voucher": {
+		"on_submit": "electra.custom.create_lcv_je",
+		"on_cancel": "electra.custom.cancel_lcv_je",
+	},
+	"Leave Application": {
+		"after_insert": "electra.custom.rejoin_form_creation",
+	},
+	"Project":{
+		"on_update" : "electra.custom.create_tasks",
+		"after_insert" : "electra.utils.create_project_warehouse"
+	},
+    "Leave Application":{
+		"after_insert" : "electra.custom.alert_to_substitute"
+	},
+	"Opportunity":{
+		"validate":"electra.utils.validate_opportunity_sow"
+	},
+	# "Quotation":{
+	# 	"validate":"electra.utils.validate_sow"
+	# },
+	"Sales Order":{
+		"validate":"electra.utils.validate_sow",
+		"on_submit": "electra.utils.create_project_from_so"
+	},
+	"Item":{
+		"after_insert":"electra.utils.item_default_wh"
+	},
+	"Sales Invoice":{
+		"on_update_after_submit":"electra.custom.get_dn_list_sales_invoice",
+		# "onload":"electra.custom.get_due_date"
+	}
+	
+}
+
+
 
 # Scheduled Tasks
 # ---------------
 
-# scheduler_events = {
-# 	"all": [
-# 		"electra.tasks.all"
-# 	],
+scheduler_events = {
+	"cron": {
+		"0/15 * * * *": [
+			"electra.utils.cron_test"
+		]
+	},
+	"daily": [
+		"electra.alerts.update_lcm_due_status"
+	],
 # 	"daily": [
 # 		"electra.tasks.daily"
 # 	],
@@ -116,7 +157,7 @@ app_license = "MIT"
 # 	"monthly": [
 # 		"electra.tasks.monthly"
 # 	]
-# }
+}
 
 # Testing
 # -------
@@ -173,3 +214,4 @@ user_data_fields = [
 # 	"electra.auth.validate"
 # ]
 
+fixtures = ['Custom Field','Client Script','Workspace','User Permission']

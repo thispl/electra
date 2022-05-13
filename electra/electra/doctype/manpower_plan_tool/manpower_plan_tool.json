@@ -1,0 +1,165 @@
+{
+ "actions": [],
+ "creation": "2021-09-21 09:00:55.979446",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "company",
+  "division1",
+  "division2",
+  "division3",
+  "department",
+  "date",
+  "year",
+  "column_break_4",
+  "month",
+  "designation",
+  "available_manpower",
+  "additional_manpower_requirement_for__6_months_section",
+  "month_1",
+  "month_2",
+  "month_3",
+  "column_break_12",
+  "month_4",
+  "month_5",
+  "month_6",
+  "submit"
+ ],
+ "fields": [
+  {
+   "fieldname": "department",
+   "fieldtype": "Link",
+   "label": "Department",
+   "options": "Department"
+  },
+  {
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "label": "Date"
+  },
+  {
+   "fieldname": "year",
+   "fieldtype": "Link",
+   "label": "Year",
+   "options": "Years"
+  },
+  {
+   "fieldname": "month",
+   "fieldtype": "Select",
+   "label": "Month",
+   "options": "\nJanuary\nFebruary\nMarch\nApril\nMay\nJune\nJuly\nAugust\nSeptember\nOctober\nNovember\nDecember"
+  },
+  {
+   "fieldname": "designation",
+   "fieldtype": "Link",
+   "label": "Designation",
+   "options": "Designation"
+  },
+  {
+   "fieldname": "available_manpower",
+   "fieldtype": "Data",
+   "label": "Available Manpower"
+  },
+  {
+   "fieldname": "month_1",
+   "fieldtype": "Int",
+   "label": "Month 1"
+  },
+  {
+   "fieldname": "month_2",
+   "fieldtype": "Int",
+   "label": "Month 2"
+  },
+  {
+   "fieldname": "month_3",
+   "fieldtype": "Int",
+   "label": "Month 3"
+  },
+  {
+   "fieldname": "month_4",
+   "fieldtype": "Int",
+   "label": "Month 4"
+  },
+  {
+   "fieldname": "month_5",
+   "fieldtype": "Int",
+   "label": "Month 5"
+  },
+  {
+   "fieldname": "month_6",
+   "fieldtype": "Int",
+   "label": "Month 6"
+  },
+  {
+   "depends_on": "eval:doc.month!=false",
+   "fieldname": "additional_manpower_requirement_for__6_months_section",
+   "fieldtype": "Section Break",
+   "label": "Additional Manpower Requirement for  6 Months"
+  },
+  {
+   "fieldname": "column_break_4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_12",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "submit",
+   "fieldtype": "Button",
+   "label": "Submit"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Select",
+   "label": "Company",
+   "options": "Al - Shaghairi Trading and Contracting Company W.L.L (ELECTRA)\nKINGMARAZEEM SECURITY SERVICES\nFISHER TRADING AND CONTRACTING COMPANY"
+  },
+  {
+   "depends_on": "eval:doc.company==\"Al - Shaghairi Trading and Contracting Company W.L.L (ELECTRA)\"",
+   "fieldname": "division1",
+   "fieldtype": "Select",
+   "label": "Division",
+   "options": "ELECTRA - NAJMA SHOWROOM\nELECTRA - BARWA SHOWROOM\nELECTRA - BINOMRAN SHOWROOM\nELECTRICAL DIVISION - ELECTRA\nENGINEERING DIVISION - ELECTRA\nINTERIOR DIVISION - ELECTRA\nMEP DIVISION - ELECTRA\nSTEEL DIVISION - ELECTRA\nTRADING DIVISION - ELECTRA"
+  },
+  {
+   "depends_on": "eval:doc.company==\"KINGMARAZEEM SECURITY SERVICES\"",
+   "fieldname": "division2",
+   "fieldtype": "Select",
+   "label": "Division",
+   "options": "KINGFISHER - SHOWROOM\nKINGFISHER - TRANSPORTATION"
+  },
+  {
+   "depends_on": "eval:doc.company==\"FISHER TRADING AND CONTRACTING COMPANY\"",
+   "fieldname": "division3",
+   "fieldtype": "Select",
+   "label": "Division",
+   "options": "MARAZEEM SECURITY SERVICES - HO\nMARAZEEM SECURITY SERVICES - SHOWROOM"
+  }
+ ],
+ "hide_toolbar": 1,
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2021-10-23 14:49:33.332356",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "Manpower plan Tool",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

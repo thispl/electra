@@ -1,0 +1,258 @@
+{
+ "actions": [],
+ "autoname": "field:employee_name",
+ "creation": "2021-08-14 11:15:12.819271",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "column_break_32",
+  "status",
+  "employee_details_section",
+  "emp_id",
+  "employee_name",
+  "job_title",
+  "dept",
+  "column_break_5",
+  "resident_id_no",
+  "date_of_join",
+  "email_id",
+  "section_break_9",
+  "html_12",
+  "section_break_14",
+  "data_11",
+  "from_date",
+  "to_date",
+  "days",
+  "column_break_19",
+  "reason",
+  "for_hr_use_only_section",
+  "deduction_details",
+  "casual_leave",
+  "sick_leave",
+  "annual_leave",
+  "authorisation_of_dept_div_head",
+  "head_of_the_department",
+  "column_break_20",
+  "hr",
+  "managing_director",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fetch_from": "emp_id.employee_name",
+   "fieldname": "employee_name",
+   "fieldtype": "Read Only",
+   "in_list_view": 1,
+   "label": "Employee Name",
+   "options": "Name",
+   "unique": 1
+  },
+  {
+   "fetch_from": "emp_id.designation",
+   "fieldname": "job_title",
+   "fieldtype": "Read Only",
+   "in_list_view": 1,
+   "label": "Designation"
+  },
+  {
+   "fetch_from": "emp_id.department",
+   "fieldname": "dept",
+   "fieldtype": "Read Only",
+   "in_list_view": 1,
+   "label": "Department"
+  },
+  {
+   "fetch_from": "emp_id.employee_number",
+   "fieldname": "emp_id",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Employee ID",
+   "options": "Employee"
+  },
+  {
+   "fetch_from": "emp_id.scheduled_confirmation_date",
+   "fieldname": "date_of_join",
+   "fieldtype": "Read Only",
+   "label": "Date of Joining"
+  },
+  {
+   "fieldname": "column_break_5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "data_11",
+   "fieldtype": "Select",
+   "label": "Type",
+   "options": "\nSick\nPermission\nTardy\nAbsent"
+  },
+  {
+   "fieldname": "reason",
+   "fieldtype": "Small Text",
+   "label": "Reason"
+  },
+  {
+   "description": "Comments",
+   "fieldname": "authorisation_of_dept_div_head",
+   "fieldtype": "Small Text",
+   "label": "Authorisation of Dept./ Div. Head"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "for_hr_use_only_section",
+   "fieldtype": "Section Break",
+   "label": "For Office Use"
+  },
+  {
+   "fieldname": "deduction_details",
+   "fieldtype": "Heading",
+   "label": "Deduction Details",
+   "options": "\n"
+  },
+  {
+   "fieldname": "section_break_9",
+   "fieldtype": "Section Break",
+   "label": "Tardy/Absent Form"
+  },
+  {
+   "fieldname": "days",
+   "fieldtype": "Read Only",
+   "label": "Number of Days"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Staff Permission Tardy Absent Form",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "casual_leave",
+   "fieldtype": "Check",
+   "label": "Casual Leave",
+   "read_only_depends_on": "eval:doc.sick_leave || doc.annual_leave"
+  },
+  {
+   "default": "0",
+   "fieldname": "sick_leave",
+   "fieldtype": "Check",
+   "label": "Sick Leave",
+   "read_only_depends_on": "eval:doc.annual_leave || doc.casual_leave"
+  },
+  {
+   "default": "0",
+   "fieldname": "annual_leave",
+   "fieldtype": "Check",
+   "label": "Annual Leave",
+   "read_only_depends_on": "eval:doc.casual_leave || doc.sick_leave"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "employee_details_section",
+   "fieldtype": "Section Break",
+   "label": "Employee Details "
+  },
+  {
+   "fieldname": "column_break_20",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "html_12",
+   "fieldtype": "HTML",
+   "options": "<b>LATE :</b> If the employee report to duty BETWEEN  \u2013 8.10 AM &amp; 8.30 AM shall be marked as LATE and maximum 2 LATEs\u2019 are allowed per month for each employee<br>\n<b>TARDY:</b> If the employee reports to duty after 8.30 AM and before 9.00 AM shall be considered as TARDY and marked as PERMISSION  and later on, it will be marked as Half Day Leave, same will be deducted from Casual leave (if available) or from the Annual Leave (if Leave balance is available).<br>\n<b>PERMISSION:</b> If the employee informs his/ her immediate supervisor &amp; HR, with 1 day prior notice that, the employee is going to attend the duty late or leaving the work place early (before the office closing time).  Then he/ she is eligible to take PERMISSION for duration of not more than 2 hours and same can be availed 2 times per month.<br>\n<b>Sick Leave:</b> If the employee is sick, he/she should inform his immediate superior and HR through mail and provide Medical Certificate upon rejoining.<br>\n"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "section_break_14",
+   "fieldtype": "Section Break",
+   "label": "Request Details"
+  },
+  {
+   "fieldname": "column_break_19",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_32",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Requested",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "\nRequested\nInitiated\nCompleted\nHold"
+  },
+  {
+   "fetch_from": "emp_id.company",
+   "fieldname": "email_id",
+   "fieldtype": "Read Only",
+   "label": "Company / Division"
+  },
+  {
+   "fieldname": "from_date",
+   "fieldtype": "Date",
+   "label": "From"
+  },
+  {
+   "fieldname": "to_date",
+   "fieldtype": "Date",
+   "label": "To"
+  },
+  {
+   "description": "Comments",
+   "fieldname": "head_of_the_department",
+   "fieldtype": "Small Text",
+   "label": "Head of the Department"
+  },
+  {
+   "description": "Comments",
+   "fieldname": "hr",
+   "fieldtype": "Small Text",
+   "label": "HR & Administration"
+  },
+  {
+   "description": "Comments",
+   "fieldname": "managing_director",
+   "fieldtype": "Small Text",
+   "label": "Managing Director"
+  },
+  {
+   "fetch_from": "emp_id.resident_id_no",
+   "fieldname": "resident_id_no",
+   "fieldtype": "Read Only",
+   "label": "Resident ID Number(QID)"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2021-10-05 10:06:48.984116",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "Staff Permission Tardy Absent Form",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "emp_id",
+ "track_changes": 1
+}

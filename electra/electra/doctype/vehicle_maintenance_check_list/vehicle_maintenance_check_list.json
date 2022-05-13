@@ -1,0 +1,306 @@
+{
+ "actions": [],
+ "autoname": "field:register_no",
+ "creation": "2021-08-14 14:36:19.876883",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "log",
+  "section_break_1",
+  "work_flow",
+  "column_break_3",
+  "status",
+  "vehicle_details",
+  "register_no",
+  "make",
+  "vehicle_name",
+  "model",
+  "type_of_vehicle",
+  "column_break_6",
+  "expiry_date",
+  "driver",
+  "last_kilometer",
+  "present_kilometer",
+  "last_service_date",
+  "employee_details",
+  "employee_id",
+  "driver_name",
+  "designation",
+  "department",
+  "column_break_13",
+  "resident_id_number",
+  "date_of_joining",
+  "company",
+  "email",
+  "section_break_10",
+  "complaint",
+  "garage_name",
+  "supplier_type",
+  "registered",
+  "one_time",
+  "approximate_exp",
+  "column_break_23",
+  "actual_exp",
+  "time_to_finish_work",
+  "work_finished_date",
+  "vehicle_handover_date",
+  "for_office_use",
+  "hr_manager"
+ ],
+ "fields": [
+  {
+   "fetch_from": "register_no.name_of_vehicle",
+   "fieldname": "vehicle_name",
+   "fieldtype": "Read Only",
+   "label": "Vehicle Name"
+  },
+  {
+   "fieldname": "register_no",
+   "fieldtype": "Link",
+   "label": "Register No",
+   "options": "Vehicle",
+   "unique": 1
+  },
+  {
+   "fetch_from": "register_no.expiry_of_istimara",
+   "fieldname": "expiry_date",
+   "fieldtype": "Date",
+   "label": "Istimara Expiry"
+  },
+  {
+   "fieldname": "last_service_date",
+   "fieldtype": "Date",
+   "label": "Last Service Date"
+  },
+  {
+   "fieldname": "present_kilometer",
+   "fieldtype": "Data",
+   "label": "Present kilometer"
+  },
+  {
+   "fieldname": "complaint",
+   "fieldtype": "Data",
+   "label": "Complaint"
+  },
+  {
+   "fieldname": "garage_name",
+   "fieldtype": "Data",
+   "label": "Garage Name"
+  },
+  {
+   "fieldname": "approximate_exp",
+   "fieldtype": "Data",
+   "label": "Approximate Expense"
+  },
+  {
+   "fieldname": "time_to_finish_work",
+   "fieldtype": "Int",
+   "label": "Time to Finish work(Days)"
+  },
+  {
+   "fieldname": "actual_exp",
+   "fieldtype": "Data",
+   "label": "Actual Expense"
+  },
+  {
+   "fieldname": "work_finished_date",
+   "fieldtype": "Date",
+   "label": "Work Finished Date"
+  },
+  {
+   "fieldname": "vehicle_handover_date",
+   "fieldtype": "Date",
+   "label": "Vehicle Handover Date"
+  },
+  {
+   "fetch_from": "employee_id.employee_name",
+   "fieldname": "driver_name",
+   "fieldtype": "Read Only",
+   "label": "Emloyee Name"
+  },
+  {
+   "fetch_from": "register_no.model",
+   "fieldname": "model",
+   "fieldtype": "Read Only",
+   "label": "Model"
+  },
+  {
+   "fieldname": "section_break_10",
+   "fieldtype": "Section Break",
+   "label": "Required details"
+  },
+  {
+   "fieldname": "column_break_6",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "register_no.last_odometer",
+   "fieldname": "last_kilometer",
+   "fieldtype": "Read Only",
+   "label": "Last Kilometer"
+  },
+  {
+   "fieldname": "vehicle_details",
+   "fieldtype": "Section Break",
+   "label": "Vehicle Details"
+  },
+  {
+   "fetch_from": "driver_name.employee_number",
+   "fieldname": "employee_id",
+   "fieldtype": "Link",
+   "label": "Employee ID",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "employee_details",
+   "fieldtype": "Section Break",
+   "label": "Employee Details"
+  },
+  {
+   "fieldname": "column_break_13",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "for_office_use",
+   "fieldtype": "Section Break",
+   "label": "For Office Use"
+  },
+  {
+   "fieldname": "column_break_23",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "register_no.employee",
+   "fieldname": "driver",
+   "fieldtype": "Read Only",
+   "label": "Employee"
+  },
+  {
+   "fieldname": "section_break_1",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "work_flow",
+   "fieldtype": "Read Only",
+   "label": "Work Flow"
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Requested",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "\nRequested\nInitiated\nCompleted\nHold"
+  },
+  {
+   "fieldname": "log",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "log",
+   "options": "Vehicle Log"
+  },
+  {
+   "fetch_from": "employee_id.designation",
+   "fieldname": "designation",
+   "fieldtype": "Read Only",
+   "label": "Designation"
+  },
+  {
+   "fetch_from": "employee_id.designation",
+   "fieldname": "department",
+   "fieldtype": "Read Only",
+   "label": "Department"
+  },
+  {
+   "fetch_from": "employee_id.date_of_joining",
+   "fieldname": "date_of_joining",
+   "fieldtype": "Read Only",
+   "label": "Date of Joining"
+  },
+  {
+   "fetch_from": "employee_id.company",
+   "fieldname": "company",
+   "fieldtype": "Read Only",
+   "label": "Company"
+  },
+  {
+   "fetch_from": "register_no.make",
+   "fieldname": "make",
+   "fieldtype": "Read Only",
+   "label": "Make"
+  },
+  {
+   "fetch_from": "register_no.type_of_vehicle",
+   "fieldname": "type_of_vehicle",
+   "fieldtype": "Read Only",
+   "label": "Type of vehicle"
+  },
+  {
+   "fetch_from": "employee_id.resident_id_no",
+   "fieldname": "resident_id_number",
+   "fieldtype": "Read Only",
+   "label": "Resident ID Number(QID)"
+  },
+  {
+   "fetch_from": "employee_id.company_email",
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "email",
+   "options": "Email"
+  },
+  {
+   "fieldname": "supplier_type",
+   "fieldtype": "Select",
+   "label": "Supplier Type",
+   "options": "Registered\nOne Time"
+  },
+  {
+   "depends_on": "eval:doc.supplier_type == \"Registered\"",
+   "fieldname": "registered",
+   "fieldtype": "Link",
+   "label": "Registered",
+   "options": "Supplier"
+  },
+  {
+   "depends_on": "eval:doc.supplier_type == \"One Time\"",
+   "fieldname": "one_time",
+   "fieldtype": "Data",
+   "label": "One Time"
+  },
+  {
+   "description": "Comments",
+   "fieldname": "hr_manager",
+   "fieldtype": "Small Text",
+   "label": "HR Manager"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2021-10-13 14:37:54.944560",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "Vehicle Maintenance Check List",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

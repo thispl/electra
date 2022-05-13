@@ -1,0 +1,120 @@
+{
+ "actions": [],
+ "autoname": "Visa Approval Monitor-.###",
+ "creation": "2021-08-11 13:11:07.937514",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "visa_details_section",
+  "visa_application_no",
+  "application_no",
+  "visa_expiry_date",
+  "visa_status",
+  "company",
+  "column_break_6",
+  "visa_designation",
+  "nationality",
+  "allocated_number",
+  "used_visa",
+  "balance",
+  "availability_status"
+ ],
+ "fields": [
+  {
+   "fieldname": "visa_application_no",
+   "fieldtype": "Data",
+   "label": "Visa Application No"
+  },
+  {
+   "fieldname": "application_no",
+   "fieldtype": "Data",
+   "label": "Application No",
+   "unique": 1
+  },
+  {
+   "fieldname": "visa_expiry_date",
+   "fieldtype": "Date",
+   "label": "Visa Expiry Date"
+  },
+  {
+   "fieldname": "visa_status",
+   "fieldtype": "Select",
+   "label": "Visa Status",
+   "options": "Valid\nInvalid"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Sponsor Company",
+   "options": "Sponsor Company"
+  },
+  {
+   "fieldname": "visa_designation",
+   "fieldtype": "Link",
+   "label": "Visa Profession",
+   "options": "Visa Designation"
+  },
+  {
+   "fieldname": "nationality",
+   "fieldtype": "Link",
+   "label": "Nationality",
+   "options": "Country"
+  },
+  {
+   "fieldname": "allocated_number",
+   "fieldtype": "Int",
+   "label": "Allocated Number"
+  },
+  {
+   "fieldname": "used_visa",
+   "fieldtype": "Int",
+   "label": "Used Visa"
+  },
+  {
+   "default": "0",
+   "fieldname": "balance",
+   "fieldtype": "Int",
+   "label": "Balance"
+  },
+  {
+   "fieldname": "availability_status",
+   "fieldtype": "Read Only",
+   "label": "Availability Status",
+   "options": "\nCompleted\nAvailable\nInvalid"
+  },
+  {
+   "fieldname": "column_break_6",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "visa_details_section",
+   "fieldtype": "Section Break",
+   "label": "Visa Details"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2021-11-09 12:47:06.553822",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "Visa Approval Monitor",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

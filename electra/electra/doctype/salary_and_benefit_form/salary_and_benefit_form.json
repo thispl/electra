@@ -1,0 +1,333 @@
+{
+ "actions": [],
+ "autoname": "field_employee_name",
+ "creation": "2021-08-17 12:48:09.370160",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_1",
+  "workflow",
+  "column_break_3",
+  "status",
+  "section_break_3",
+  "emp_id",
+  "employee_name",
+  "job_title",
+  "dept",
+  "column_break_7",
+  "resident_id_numberqid",
+  "doj",
+  "company",
+  "s_section",
+  "name_of_appraiser",
+  "column_break1",
+  "job_title_1",
+  "section_break_15",
+  "appraisal_rating",
+  "total_score",
+  "salary_increment_section",
+  "select_23",
+  "section_break_9",
+  "data_10",
+  "section_break_23",
+  "data_12",
+  "current_salary",
+  "column_break_19",
+  "new_job_title",
+  "revised_salary",
+  "total_salary_increment",
+  "effective_from",
+  "additional_benefits_and_perks_section",
+  "yes",
+  "small_text_25",
+  "no",
+  "for_office_use_section",
+  "hod",
+  "column_break_37",
+  "hr",
+  "column_break_39",
+  "managing_director",
+  "for_office_use1_section",
+  "department_manager",
+  "column_break_43",
+  "hr_manager",
+  "column_break_45",
+  "managing_director_1"
+ ],
+ "fields": [
+  {
+   "fetch_from": "emp_id.designation",
+   "fieldname": "job_title",
+   "fieldtype": "Read Only",
+   "label": "Designation"
+  },
+  {
+   "fetch_from": "emp_id.department",
+   "fieldname": "dept",
+   "fieldtype": "Read Only",
+   "label": "Department"
+  },
+  {
+   "fieldname": "emp_id",
+   "fieldtype": "Link",
+   "label": "Employee ID",
+   "options": "Employee"
+  },
+  {
+   "fetch_from": "emp_id.date_of_joining",
+   "fieldname": "doj",
+   "fieldtype": "Read Only",
+   "label": "Date of Joining"
+  },
+  {
+   "depends_on": "eval:doc.select_23 == \"Yes\"",
+   "fieldname": "section_break_9",
+   "fieldtype": "Section Break",
+   "label": "Justification for Salary Adjustment and Job Title Change"
+  },
+  {
+   "collapsible_depends_on": "eval:doc.yess == 1",
+   "fieldname": "data_10",
+   "fieldtype": "Small Text"
+  },
+  {
+   "fieldname": "data_12",
+   "fieldtype": "Data",
+   "label": "Current Designation"
+  },
+  {
+   "fieldname": "new_job_title",
+   "fieldtype": "Data",
+   "label": "New Designation"
+  },
+  {
+   "fieldname": "section_break_3",
+   "fieldtype": "Section Break",
+   "label": "Employee Details"
+  },
+  {
+   "fieldname": "column_break_7",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "current_salary",
+   "fieldtype": "Table",
+   "label": "Current Salary(QR)",
+   "options": "Current Salary Table"
+  },
+  {
+   "fieldname": "column_break_19",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "revised_salary",
+   "fieldtype": "Table",
+   "label": "Revised Salary(QR)",
+   "options": "Revised Salary Table"
+  },
+  {
+   "depends_on": "eval:doc.select_23 == \"Yes\"",
+   "fieldname": "additional_benefits_and_perks_section",
+   "fieldtype": "Section Break",
+   "label": "Additional Benefits and Perks "
+  },
+  {
+   "default": "0",
+   "fieldname": "yes",
+   "fieldtype": "Check",
+   "label": "Yes"
+  },
+  {
+   "default": "0",
+   "fieldname": "no",
+   "fieldtype": "Check",
+   "label": "Not Applicable"
+  },
+  {
+   "depends_on": "eval:doc.yes == 1",
+   "fieldname": "small_text_25",
+   "fieldtype": "Small Text"
+  },
+  {
+   "fieldname": "name_of_appraiser",
+   "fieldtype": "Link",
+   "label": "Name of Appraiser",
+   "options": "Employee"
+  },
+  {
+   "fetch_from": "name_of_appraiser.designation",
+   "fieldname": "job_title_1",
+   "fieldtype": "Read Only",
+   "label": "Designation"
+  },
+  {
+   "fieldname": "s_section",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "appraisal_rating",
+   "fieldtype": "Table",
+   "label": "Appraisal rating ",
+   "options": "Appraisal Rating Table"
+  },
+  {
+   "fieldname": "total_score",
+   "fieldtype": "Data",
+   "label": "Total Score"
+  },
+  {
+   "fieldname": "column_break1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_15",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fetch_from": "emp_id.employee_name",
+   "fieldname": "employee_name",
+   "fieldtype": "Read Only",
+   "label": "Employee Name"
+  },
+  {
+   "fetch_from": "emp_id.company",
+   "fieldname": "company",
+   "fieldtype": "Read Only",
+   "label": "Company"
+  },
+  {
+   "fieldname": "total_salary_increment",
+   "fieldtype": "Int",
+   "label": "Total Salary Increment(QR)"
+  },
+  {
+   "fieldname": "effective_from",
+   "fieldtype": "Date",
+   "label": "Effective From"
+  },
+  {
+   "fieldname": "salary_increment_section",
+   "fieldtype": "Section Break",
+   "label": "Salary Increment"
+  },
+  {
+   "depends_on": "eval:doc.select_23 == \"Yes\"",
+   "fieldname": "section_break_23",
+   "fieldtype": "Section Break"
+  },
+  {
+   "depends_on": "eval:doc.select_23 == \"No\"",
+   "fieldname": "for_office_use_section",
+   "fieldtype": "Section Break",
+   "label": "For office Use"
+  },
+  {
+   "fieldname": "hod",
+   "fieldtype": "Small Text",
+   "label": "HOD (Comments)"
+  },
+  {
+   "fieldname": "column_break_37",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "hr",
+   "fieldtype": "Small Text",
+   "label": "HR (Comments)"
+  },
+  {
+   "fieldname": "column_break_39",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "managing_director",
+   "fieldtype": "Small Text",
+   "label": "Managing Director (Comments)"
+  },
+  {
+   "depends_on": "eval:doc.select_23 == \"Yes\"",
+   "fieldname": "for_office_use1_section",
+   "fieldtype": "Section Break",
+   "label": "For office Use"
+  },
+  {
+   "fieldname": "department_manager",
+   "fieldtype": "Small Text",
+   "label": "Department Manager (Comments)"
+  },
+  {
+   "fieldname": "column_break_43",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "hr_manager",
+   "fieldtype": "Small Text",
+   "label": "HR Manager (Comments)"
+  },
+  {
+   "fieldname": "column_break_45",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "managing_director_1",
+   "fieldtype": "Small Text",
+   "label": "Managing Director  (Comments)"
+  },
+  {
+   "fieldname": "section_break_1",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "workflow",
+   "fieldtype": "Read Only",
+   "label": "Workflow"
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Requested",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "\nRequested\nInitiated\nCompleted\nHold"
+  },
+  {
+   "fieldname": "select_23",
+   "fieldtype": "Select",
+   "options": "Yes\nNo"
+  },
+  {
+   "fetch_from": "emp_id.resident_id_no",
+   "fieldname": "resident_id_numberqid",
+   "fieldtype": "Read Only",
+   "label": "Resident ID Number(QID)"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2021-10-21 07:22:38.580180",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "Salary and Benefit Form",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

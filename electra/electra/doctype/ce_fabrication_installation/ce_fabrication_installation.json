@@ -1,0 +1,126 @@
+{
+ "actions": [],
+ "creation": "2021-11-10 11:20:34.765334",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "msow",
+  "ssow",
+  "item",
+  "item_name",
+  "item_group",
+  "description",
+  "unit",
+  "qty",
+  "unit_price",
+  "rate_with_overheads",
+  "amount",
+  "amount_with_overheads"
+ ],
+ "fields": [
+  {
+   "columns": 1,
+   "fieldname": "item",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Item Code",
+   "options": "Item"
+  },
+  {
+   "columns": 2,
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "label": "Description"
+  },
+  {
+   "columns": 1,
+   "fetch_from": "item.stock_uom",
+   "fetch_if_empty": 1,
+   "fieldname": "unit",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Unit",
+   "options": "UOM"
+  },
+  {
+   "columns": 1,
+   "fieldname": "qty",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Qty"
+  },
+  {
+   "columns": 1,
+   "fieldname": "unit_price",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Rate"
+  },
+  {
+   "columns": 1,
+   "fieldname": "amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Amount"
+  },
+  {
+   "columns": 1,
+   "fetch_from": "item.item_group",
+   "fieldname": "item_group",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Item Group",
+   "options": "Item Group",
+   "read_only": 1
+  },
+  {
+   "columns": 2,
+   "fetch_from": "item.item_name",
+   "fieldname": "item_name",
+   "fieldtype": "Read Only",
+   "in_list_view": 1,
+   "label": "Item Name"
+  },
+  {
+   "columns": 1,
+   "fieldname": "msow",
+   "fieldtype": "Link",
+   "label": "MSOW",
+   "options": "Master Scope of Work"
+  },
+  {
+   "columns": 1,
+   "fieldname": "ssow",
+   "fieldtype": "Link",
+   "label": "SSOW",
+   "options": "Sub Scope of Work"
+  },
+  {
+   "fieldname": "rate_with_overheads",
+   "fieldtype": "Currency",
+   "label": "Selling Price",
+   "read_only": 1
+  },
+  {
+   "columns": 1,
+   "fieldname": "amount_with_overheads",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "SP Amount",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2022-04-18 12:50:45.906350",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "CE FABRICATION INSTALLATION",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

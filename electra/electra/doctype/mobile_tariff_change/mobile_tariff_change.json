@@ -1,0 +1,301 @@
+{
+ "actions": [],
+ "autoname": "field:employee_name",
+ "creation": "2021-08-14 13:37:55.945773",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "column_break_2",
+  "status",
+  "employee_details",
+  "emp_id",
+  "employee_name",
+  "job_title",
+  "dept",
+  "column_break_5",
+  "resident_id_number",
+  "date_of_join",
+  "company",
+  "request_section",
+  "date",
+  "service_provider",
+  "service_no",
+  "current_plan",
+  "amount_2",
+  "column_break_15",
+  "benefits",
+  "benefits_1",
+  "amount_3",
+  "benefits_3",
+  "section_break_19",
+  "section_break_25",
+  "plan_name",
+  "column_break_27",
+  "plan_amount",
+  "column_break_29",
+  "plan_benefits",
+  "column_break_31",
+  "plan_activation_date",
+  "section_break_33",
+  "comments",
+  "for_office_use_section",
+  "authorisation_of_dept_div_head",
+  "section_break_34",
+  "admin_manager",
+  "column_break_26",
+  "it_administrator",
+  "column_break_38",
+  "managing_director",
+  "section"
+ ],
+ "fields": [
+  {
+   "fetch_from": "emp_id.employee_name",
+   "fieldname": "employee_name",
+   "fieldtype": "Read Only",
+   "in_list_view": 1,
+   "label": "Employee Name",
+   "options": "Name",
+   "unique": 1
+  },
+  {
+   "fetch_from": "emp_id.designation",
+   "fieldname": "job_title",
+   "fieldtype": "Read Only",
+   "in_list_view": 1,
+   "label": "Designation"
+  },
+  {
+   "fetch_from": "emp_id.department",
+   "fieldname": "dept",
+   "fieldtype": "Read Only",
+   "in_list_view": 1,
+   "label": "Department"
+  },
+  {
+   "fetch_from": "emp_id.employee_number",
+   "fieldname": "emp_id",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Employee ID",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "column_break_5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Today",
+   "fetch_from": "emp_id.date",
+   "fieldname": "date",
+   "fieldtype": "Read Only",
+   "label": "Date"
+  },
+  {
+   "fetch_from": "emp_id.scheduled_confirmation_date",
+   "fieldname": "date_of_join",
+   "fieldtype": "Read Only",
+   "label": "Date of Joining"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "request_section",
+   "fieldtype": "Section Break",
+   "label": "Request Details"
+  },
+  {
+   "fieldname": "service_provider",
+   "fieldtype": "Data",
+   "label": "Service provider "
+  },
+  {
+   "fieldname": "service_no",
+   "fieldtype": "Int",
+   "label": "Service Number",
+   "options": "Phone"
+  },
+  {
+   "fieldname": "current_plan",
+   "fieldtype": "Data",
+   "label": "Current Plan"
+  },
+  {
+   "fieldname": "benefits_1",
+   "fieldtype": "Int",
+   "label": "Proposed Plan"
+  },
+  {
+   "fieldname": "benefits",
+   "fieldtype": "Data",
+   "label": "Current Benefits"
+  },
+  {
+   "fieldname": "section_break_19",
+   "fieldtype": "Section Break",
+   "label": "For Office Use"
+  },
+  {
+   "description": "Comments",
+   "fieldname": "authorisation_of_dept_div_head",
+   "fieldtype": "Small Text",
+   "label": "Authorisation of Dept./ Div. Head"
+  },
+  {
+   "fieldname": "plan_name",
+   "fieldtype": "Data",
+   "label": "Plan Name"
+  },
+  {
+   "fieldname": "amount_3",
+   "fieldtype": "Int",
+   "label": "Proposed Amount"
+  },
+  {
+   "fieldname": "benefits_3",
+   "fieldtype": "Data",
+   "label": "Proposed Benefits"
+  },
+  {
+   "fieldname": "plan_activation_date",
+   "fieldtype": "Date",
+   "label": "Plan Activation Date"
+  },
+  {
+   "fieldname": "comments",
+   "fieldtype": "Small Text",
+   "label": "Comments"
+  },
+  {
+   "fieldname": "column_break_26",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "amount_2",
+   "fieldtype": "Data",
+   "label": "Current Amount"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "employee_details",
+   "fieldtype": "Section Break",
+   "label": "Employee Details"
+  },
+  {
+   "fieldname": "column_break_15",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Requested",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "\nRequested\nInitiated\nCompleted\nHold"
+  },
+  {
+   "description": "Comments",
+   "fieldname": "it_administrator",
+   "fieldtype": "Small Text",
+   "label": "IT Administrator"
+  },
+  {
+   "description": "Comments",
+   "fieldname": "managing_director",
+   "fieldtype": "Small Text",
+   "label": "Managing Director"
+  },
+  {
+   "description": "Comments",
+   "fieldname": "admin_manager",
+   "fieldtype": "Small Text",
+   "label": "Admin Manager"
+  },
+  {
+   "fetch_from": "emp_id.company",
+   "fieldname": "company",
+   "fieldtype": "Read Only",
+   "label": "Company / Division"
+  },
+  {
+   "fetch_from": "emp_id.resident_id_no",
+   "fieldname": "resident_id_number",
+   "fieldtype": "Read Only",
+   "label": "Resident ID Number(QID)"
+  },
+  {
+   "fieldname": "plan_amount",
+   "fieldtype": "Data",
+   "label": "Plan Amount"
+  },
+  {
+   "fieldname": "plan_benefits",
+   "fieldtype": "Data",
+   "label": "Plan Benefits"
+  },
+  {
+   "fieldname": "section_break_25",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_27",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_29",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_31",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_33",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_38",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_34",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "for_office_use_section",
+   "fieldtype": "Section Break",
+   "label": "For Office Use"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2021-10-07 09:42:30.352633",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "Mobile Tariff Change",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

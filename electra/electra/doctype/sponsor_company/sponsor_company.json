@@ -1,0 +1,240 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:company_name",
+ "creation": "2021-08-10 15:12:25.939219",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "company_name",
+  "column_break_2",
+  "sponsor_company_name",
+  "cr_details_section",
+  "cr_number",
+  "computer_card_number",
+  "trade_license_number",
+  "sponsor_number",
+  "civil_defense_id",
+  "tax_number",
+  "column_break_4",
+  "cr_issue_date",
+  "computer_card_issue_date",
+  "baldia_issue_date",
+  "sponsor_issue_date",
+  "civil_defense_issued_date",
+  "tax_number_issued_date",
+  "column_break_5",
+  "cr_expiry_date",
+  "computer_card_expiry_date",
+  "baldia_expiry_date",
+  "sponsor_expiry_date",
+  "civil_defense_expiry_date",
+  "tax_number_attachment",
+  "column_break_8",
+  "cr_attachment",
+  "computer_card_attachment",
+  "baldia_attachment",
+  "sponsor_attachment",
+  "civil_defense_attachment",
+  "section_break_29",
+  "latitude",
+  "column_break_31",
+  "longitude"
+ ],
+ "fields": [
+  {
+   "fieldname": "company_name",
+   "fieldtype": "Data",
+   "label": "Sponsor Company Name",
+   "unique": 1
+  },
+  {
+   "fieldname": "cr_details_section",
+   "fieldtype": "Section Break",
+   "label": "Sponsor Details"
+  },
+  {
+   "fieldname": "cr_number",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "CR Number"
+  },
+  {
+   "fieldname": "cr_issue_date",
+   "fieldtype": "Date",
+   "label": "CR Issue Date"
+  },
+  {
+   "fieldname": "column_break_5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "cr_expiry_date",
+   "fieldtype": "Date",
+   "label": "CR Expiry Date"
+  },
+  {
+   "fieldname": "cr_attachment",
+   "fieldtype": "Attach",
+   "label": "CR Attachment"
+  },
+  {
+   "fieldname": "computer_card_number",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Computer Card Number"
+  },
+  {
+   "fieldname": "computer_card_issue_date",
+   "fieldtype": "Date",
+   "label": "Computer Card Issue Date"
+  },
+  {
+   "fieldname": "computer_card_expiry_date",
+   "fieldtype": "Date",
+   "label": "Computer Card Expiry Date"
+  },
+  {
+   "fieldname": "computer_card_attachment",
+   "fieldtype": "Attach",
+   "label": "Computer Card Attachment"
+  },
+  {
+   "fieldname": "trade_license_number",
+   "fieldtype": "Data",
+   "label": "Trade License Number"
+  },
+  {
+   "fieldname": "baldia_issue_date",
+   "fieldtype": "Date",
+   "label": "Baldia Issue Date"
+  },
+  {
+   "fieldname": "baldia_expiry_date",
+   "fieldtype": "Date",
+   "label": "Baldia Expiry Date"
+  },
+  {
+   "fieldname": "baldia_attachment",
+   "fieldtype": "Attach",
+   "label": "Baldia Attachment"
+  },
+  {
+   "fieldname": "sponsor_number",
+   "fieldtype": "Data",
+   "label": "Sponsor ID"
+  },
+  {
+   "fieldname": "sponsor_issue_date",
+   "fieldtype": "Date",
+   "label": "Sponsor ID Issue Date"
+  },
+  {
+   "fieldname": "sponsor_expiry_date",
+   "fieldtype": "Date",
+   "label": "Sponsor ID Expiry Date"
+  },
+  {
+   "fieldname": "sponsor_attachment",
+   "fieldtype": "Attach",
+   "label": "Sponsor ID Attachment"
+  },
+  {
+   "fieldname": "tax_number",
+   "fieldtype": "Data",
+   "label": "Tax ID"
+  },
+  {
+   "fieldname": "tax_number_issued_date",
+   "fieldtype": "Date",
+   "label": "Tax ID Issued Date"
+  },
+  {
+   "fieldname": "column_break_4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_8",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "tax_number_attachment",
+   "fieldtype": "Attach",
+   "label": "Tax ID Attachment"
+  },
+  {
+   "fieldname": "civil_defense_expiry_date",
+   "fieldtype": "Date",
+   "label": "Civil Defense Expiry Date"
+  },
+  {
+   "fieldname": "civil_defense_id",
+   "fieldtype": "Data",
+   "label": "Civil Defense ID"
+  },
+  {
+   "fieldname": "civil_defense_issued_date",
+   "fieldtype": "Date",
+   "label": "Civil Defense Issued Date"
+  },
+  {
+   "fieldname": "civil_defense_attachment",
+   "fieldtype": "Attach",
+   "label": "civil Defense Attachment"
+  },
+  {
+   "fieldname": "section_break_29",
+   "fieldtype": "Section Break",
+   "hidden": 1
+  },
+  {
+   "fieldname": "latitude",
+   "fieldtype": "Data",
+   "label": "Latitude"
+  },
+  {
+   "fieldname": "column_break_31",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "longitude",
+   "fieldtype": "Data",
+   "label": "Longitude"
+  },
+  {
+   "fieldname": "sponsor_company_name",
+   "fieldtype": "Link",
+   "label": "Sponsor Company Title",
+   "options": "Company"
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2022-04-10 10:25:41.197329",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "Sponsor Company",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

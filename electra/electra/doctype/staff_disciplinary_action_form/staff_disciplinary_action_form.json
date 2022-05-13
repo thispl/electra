@@ -1,0 +1,301 @@
+{
+ "actions": [],
+ "autoname": "field:name1",
+ "creation": "2021-08-12 11:34:46.018472",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_1",
+  "column_break_3",
+  "status",
+  "section_break_4",
+  "initiating_depatment",
+  "department_supervisor_",
+  "column_break_6",
+  "date",
+  "employee_details_section",
+  "emp_no",
+  "name1",
+  "job_title",
+  "initiating_dept",
+  "column_break_4",
+  "resident_id_number",
+  "date_of_join",
+  "company",
+  "column_break_9",
+  "date_of_incident",
+  "column_break_12",
+  "time",
+  "section_break_14",
+  "brief_description_of_incident",
+  "section_break_12",
+  "section_break_18",
+  "any_previous_disciplinary_action",
+  "data_18",
+  "data_19",
+  "column_break_22",
+  "data_20",
+  "penalty_type",
+  "data_23",
+  "suspended_from_service_for",
+  "column_break_25",
+  "department_supervisor",
+  "column_break_28",
+  "deptartment_manager",
+  "column_break_30",
+  "hr_assistant",
+  "column_break_31",
+  "hr_manager",
+  "section_break_34",
+  "html_22"
+ ],
+ "fields": [
+  {
+   "fetch_from": "emp_no.department",
+   "fieldname": "initiating_dept",
+   "fieldtype": "Read Only",
+   "label": "Department"
+  },
+  {
+   "fetch_from": "emp_no.employee_name",
+   "fieldname": "name1",
+   "fieldtype": "Read Only",
+   "in_list_view": 1,
+   "label": "Employee Name ",
+   "unique": 1
+  },
+  {
+   "fetch_from": "emp_no.designation",
+   "fieldname": "job_title",
+   "fieldtype": "Read Only",
+   "in_list_view": 1,
+   "label": "Designation"
+  },
+  {
+   "fieldname": "emp_no",
+   "fieldtype": "Link",
+   "label": "Employee ID",
+   "length": 10,
+   "options": "Employee"
+  },
+  {
+   "fetch_from": "emp_no.date_of_joining",
+   "fieldname": "date_of_join",
+   "fieldtype": "Read Only",
+   "label": "Date of Joining"
+  },
+  {
+   "fieldname": "date_of_incident",
+   "fieldtype": "Date",
+   "label": "Date of incident "
+  },
+  {
+   "fieldname": "brief_description_of_incident",
+   "fieldtype": "Small Text",
+   "label": "Brief description of incident "
+  },
+  {
+   "fieldname": "any_previous_disciplinary_action",
+   "fieldtype": "Select",
+   "label": "Any Previous Disciplinary Action",
+   "options": "Yes\nNo"
+  },
+  {
+   "depends_on": "eval:doc.any_previous_disciplinary_action == \"Yes\"",
+   "fieldname": "data_18",
+   "fieldtype": "Data",
+   "label": "Previous Offense Info"
+  },
+  {
+   "depends_on": "eval:doc.any_previous_disciplinary_action == \"Yes\"",
+   "fieldname": "data_19",
+   "fieldtype": "Date",
+   "label": "Date of Offense"
+  },
+  {
+   "fieldname": "data_20",
+   "fieldtype": "Select",
+   "label": "Type of Action ",
+   "options": "Issue warning letter\nconduct a detailed investigation"
+  },
+  {
+   "depends_on": "eval:doc.penalty_type == \"Salary Deduction\"",
+   "fieldname": "data_23",
+   "fieldtype": "Int",
+   "label": "Salary Deduction for(days)"
+  },
+  {
+   "depends_on": "eval:doc.penalty_type == \"Suspended from service\"",
+   "fieldname": "suspended_from_service_for",
+   "fieldtype": "Int",
+   "label": "Suspended from service for(Days)"
+  },
+  {
+   "fieldname": "column_break_4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_9",
+   "fieldtype": "Section Break",
+   "label": "Required Details"
+  },
+  {
+   "fieldname": "section_break_12",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "section_break_18",
+   "fieldtype": "Section Break",
+   "label": "For Office Use"
+  },
+  {
+   "fieldname": "column_break_25",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_22",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "html_22",
+   "fieldtype": "HTML",
+   "options": "Note:Submit the form with supporting documents /  statements from witnesses, wherever required, to HR Dept., to process  the disciplinary proceedings"
+  },
+  {
+   "fetch_from": "emp_no.company",
+   "fieldname": "company",
+   "fieldtype": "Read Only",
+   "label": "Company"
+  },
+  {
+   "fieldname": "column_break_12",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "time",
+   "fieldtype": "Time",
+   "label": "Time"
+  },
+  {
+   "fieldname": "section_break_14",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "penalty_type",
+   "fieldtype": "Select",
+   "label": "Type of Penalty",
+   "options": "Salary Deduction\nSuspended from service"
+  },
+  {
+   "fieldname": "section_break_1",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Requested",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "\nRequested\nInitiated\nCompleted\nHold"
+  },
+  {
+   "fieldname": "section_break_4",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "initiating_depatment",
+   "fieldtype": "Link",
+   "label": "Initiating Department",
+   "options": "Department"
+  },
+  {
+   "fieldname": "department_supervisor_",
+   "fieldtype": "Link",
+   "label": "Department Supervisor",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "column_break_6",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "label": "Date of Evaluation"
+  },
+  {
+   "fieldname": "employee_details_section",
+   "fieldtype": "Section Break",
+   "label": "Employee Details"
+  },
+  {
+   "fetch_from": "emp_no.resident_id_no",
+   "fieldname": "resident_id_number",
+   "fieldtype": "Read Only",
+   "label": "Resident ID Number(QID)"
+  },
+  {
+   "fieldname": "department_supervisor",
+   "fieldtype": "Small Text",
+   "label": "Department Supervisor(Comments)"
+  },
+  {
+   "fieldname": "column_break_28",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "deptartment_manager",
+   "fieldtype": "Small Text",
+   "label": "Deptartment Manager(Comments)"
+  },
+  {
+   "fieldname": "column_break_30",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "hr_assistant",
+   "fieldtype": "Small Text",
+   "label": "HR & Admin Assistant(Comments)"
+  },
+  {
+   "fieldname": "column_break_31",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "hr_manager",
+   "fieldtype": "Small Text",
+   "label": "HR & Admin Manager(Comments)"
+  },
+  {
+   "fieldname": "section_break_34",
+   "fieldtype": "Section Break"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2021-10-04 08:51:19.153679",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "Staff Disciplinary Action Form",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC"
+}

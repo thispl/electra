@@ -1,0 +1,63 @@
+{
+ "actions": [],
+ "creation": "2021-12-10 08:14:09.995895",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "leave_type",
+  "from_date",
+  "to_date",
+  "air_ticket",
+  "from",
+  "to"
+ ],
+ "fields": [
+  {
+   "fieldname": "leave_type",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Leave Type"
+  },
+  {
+   "fieldname": "from_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "From date"
+  },
+  {
+   "fieldname": "to_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "To date"
+  },
+  {
+   "fieldname": "air_ticket",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Air Ticket"
+  },
+  {
+   "fieldname": "from",
+   "fieldtype": "Date",
+   "label": "From"
+  },
+  {
+   "fieldname": "to",
+   "fieldtype": "Date",
+   "label": "To"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2021-12-10 13:32:00.599136",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "Leave Tracker",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

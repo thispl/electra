@@ -1,0 +1,76 @@
+{
+ "actions": [],
+ "creation": "2021-11-23 08:55:06.056694",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "legal_compliance",
+  "visa_renewal",
+  "vehicle_renewal",
+  "staff_arrival",
+  "staff_vacation",
+  "employee_visa_status"
+ ],
+ "fields": [
+  {
+   "fieldname": "legal_compliance",
+   "fieldtype": "Table",
+   "label": "Legal Compliance",
+   "options": "Legal Compliance"
+  },
+  {
+   "fieldname": "visa_renewal",
+   "fieldtype": "Table",
+   "label": "Visa Renewal",
+   "options": "Visa Renewal"
+  },
+  {
+   "fieldname": "vehicle_renewal",
+   "fieldtype": "Table",
+   "label": "Vehicle Renewal",
+   "options": "Vehicle Renewal"
+  },
+  {
+   "fieldname": "staff_arrival",
+   "fieldtype": "Table",
+   "label": "Staff Arrival",
+   "options": "Staff Arrival"
+  },
+  {
+   "fieldname": "staff_vacation",
+   "fieldtype": "Table",
+   "label": "Staff Vacation",
+   "options": "Staff Vacation"
+  },
+  {
+   "fieldname": "employee_visa_status",
+   "fieldtype": "Table",
+   "label": "Employee Visa Status",
+   "options": "Employee Visa Status"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2021-11-23 09:06:25.513608",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "HR Dashboard",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

@@ -1,0 +1,279 @@
+{
+ "actions": [],
+ "creation": "2021-08-13 16:21:57.165276",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "assets",
+  "brand",
+  "type_of_vehicle",
+  "vehicle_name",
+  "column_break_5",
+  "division",
+  "vehicle",
+  "vehicle_no",
+  "vehicle_model",
+  "responsibility",
+  "vehicle_istimara_section",
+  "date_of_issue",
+  "istimara_expiry",
+  "insurance_expiry",
+  "istimara_no_of_days",
+  "column_break_15",
+  "istimara_status",
+  "monthly_fuel_quota",
+  "istimara_remarks",
+  "vehicle_loan_section",
+  "loan_number",
+  "amount",
+  "loan_start_date",
+  "column_break_21",
+  "loan_end_date",
+  "loan_status",
+  "sticker_section",
+  "sticker_required",
+  "sticker_approval",
+  "sticker_no_of_days",
+  "column_break_27",
+  "sticker_status",
+  "tracking_system_section",
+  "device_status",
+  "gps_sim_no",
+  "data_33",
+  "disposal_permit_required",
+  "disposal_permit_expiry"
+ ],
+ "fields": [
+  {
+   "fetch_from": "vehicle.asset_",
+   "fieldname": "assets",
+   "fieldtype": "Select",
+   "label": "Asset",
+   "options": "\nElectra\nPersonal"
+  },
+  {
+   "fetch_from": "vehicle.make",
+   "fieldname": "brand",
+   "fieldtype": "Data",
+   "label": "Brand"
+  },
+  {
+   "fetch_from": "vehicle.vehicle_type",
+   "fieldname": "type_of_vehicle",
+   "fieldtype": "Select",
+   "label": "Type of vehicle",
+   "options": "\nPrivate\nTransport"
+  },
+  {
+   "fetch_from": "vehicle.name_of_vehicle",
+   "fieldname": "vehicle_name",
+   "fieldtype": "Data",
+   "label": "Vehicle name"
+  },
+  {
+   "fetch_from": "vehicle.vehicle_division",
+   "fieldname": "division",
+   "fieldtype": "Data",
+   "label": "Division"
+  },
+  {
+   "fetch_from": "vehicle.vehicle_number",
+   "fieldname": "vehicle_no",
+   "fieldtype": "Data",
+   "label": "Vehicle no",
+   "read_only": 1
+  },
+  {
+   "fieldname": "responsibility",
+   "fieldtype": "Data",
+   "label": "Responsibility"
+  },
+  {
+   "fieldname": "istimara_expiry",
+   "fieldtype": "Date",
+   "label": "Istimara expiry"
+  },
+  {
+   "fieldname": "insurance_expiry",
+   "fieldtype": "Date",
+   "label": "Insurance expiry"
+  },
+  {
+   "fieldname": "istimara_no_of_days",
+   "fieldtype": "Int",
+   "label": "No of days",
+   "options": "Phone"
+  },
+  {
+   "fieldname": "istimara_status",
+   "fieldtype": "Select",
+   "label": " Status",
+   "options": "\ncleared\nok"
+  },
+  {
+   "fieldname": "istimara_remarks",
+   "fieldtype": "Select",
+   "label": "Remarks",
+   "options": "\nOk\nDisposed\nGoing to expiry"
+  },
+  {
+   "fieldname": "loan_number",
+   "fieldtype": "Data",
+   "label": "Loan number"
+  },
+  {
+   "fieldname": "amount",
+   "fieldtype": "Data",
+   "label": "Amount"
+  },
+  {
+   "fieldname": "loan_start_date",
+   "fieldtype": "Date",
+   "label": "Start date"
+  },
+  {
+   "fieldname": "loan_end_date",
+   "fieldtype": "Date",
+   "label": "End date"
+  },
+  {
+   "fieldname": "loan_status",
+   "fieldtype": "Select",
+   "label": "Loan status",
+   "options": "Live\nCompleted\nSold"
+  },
+  {
+   "fieldname": "sticker_approval",
+   "fieldtype": "Date",
+   "label": "Sticker approval"
+  },
+  {
+   "fieldname": "sticker_no_of_days",
+   "fieldtype": "Data",
+   "label": "No of days"
+  },
+  {
+   "fieldname": "sticker_status",
+   "fieldtype": "Select",
+   "label": "Sticker status",
+   "options": "\nGoing to expire\nExpired"
+  },
+  {
+   "fieldname": "device_status",
+   "fieldtype": "Select",
+   "label": "Device status",
+   "options": "\nEnabled\nNot\nProposed"
+  },
+  {
+   "fieldname": "vehicle_istimara_section",
+   "fieldtype": "Section Break",
+   "label": "VEHICLE ISTIMARA"
+  },
+  {
+   "fieldname": "vehicle_loan_section",
+   "fieldtype": "Section Break",
+   "label": "VEHICLE LOAN"
+  },
+  {
+   "fieldname": "sticker_section",
+   "fieldtype": "Section Break",
+   "label": "STICKER"
+  },
+  {
+   "fieldname": "tracking_system_section",
+   "fieldtype": "Section Break",
+   "label": "TRACKING SYSTEM"
+  },
+  {
+   "fieldname": "column_break_5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_21",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_27",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "date_of_issue",
+   "fieldtype": "Data",
+   "label": "Date of issue"
+  },
+  {
+   "fieldname": "gps_sim_no",
+   "fieldtype": "Data",
+   "label": "GPS SIM NO",
+   "options": "Phone"
+  },
+  {
+   "fieldname": "data_33",
+   "fieldtype": "Section Break",
+   "label": "Waste disposal permit "
+  },
+  {
+   "fieldname": "monthly_fuel_quota",
+   "fieldtype": "Int",
+   "label": "Monthly fuel quota"
+  },
+  {
+   "fieldname": "column_break_15",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "sticker_required",
+   "fieldtype": "Select",
+   "label": "Sticker required",
+   "options": "\nYes\nNo"
+  },
+  {
+   "fieldname": "disposal_permit_required",
+   "fieldtype": "Select",
+   "label": "Disposal Permit required",
+   "options": "Yes\nNo"
+  },
+  {
+   "fieldname": "disposal_permit_expiry",
+   "fieldtype": "Date",
+   "label": "Disposal permit expiry"
+  },
+  {
+   "fieldname": "vehicle",
+   "fieldtype": "Link",
+   "label": "Vehicle",
+   "options": "Vehicle"
+  },
+  {
+   "fetch_from": "vehicle.model",
+   "fieldname": "vehicle_model",
+   "fieldtype": "Data",
+   "label": "Model"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2021-08-19 09:44:45.623947",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "Vehicle Records",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

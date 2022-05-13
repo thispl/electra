@@ -1,0 +1,49 @@
+{
+ "actions": [],
+ "allow_copy": 1,
+ "creation": "2022-01-02 04:44:39.529584",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "series_settings_section",
+  "company_series"
+ ],
+ "fields": [
+  {
+   "fieldname": "series_settings_section",
+   "fieldtype": "Section Break",
+   "label": "Series Settings"
+  },
+  {
+   "fieldname": "company_series",
+   "fieldtype": "Table",
+   "label": "Company Series",
+   "options": "Company Series"
+  }
+ ],
+ "hide_toolbar": 1,
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2022-01-02 04:50:41.516786",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "General Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

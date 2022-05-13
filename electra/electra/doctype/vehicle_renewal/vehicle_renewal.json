@@ -1,0 +1,44 @@
+{
+ "actions": [],
+ "creation": "2021-11-23 08:09:11.398102",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "vehicle",
+  "employee",
+  "istimara_expiry"
+ ],
+ "fields": [
+  {
+   "fieldname": "vehicle",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Vehicle No"
+  },
+  {
+   "fieldname": "employee",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Employee"
+  },
+  {
+   "fieldname": "istimara_expiry",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Istimara Expiry"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2021-11-23 16:25:17.225296",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "Vehicle Renewal",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

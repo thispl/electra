@@ -1,0 +1,106 @@
+{
+ "actions": [],
+ "creation": "2021-11-14 01:35:10.034484",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "msow",
+  "ssow",
+  "worker",
+  "total_workers",
+  "unit_price",
+  "rate_with_overheads",
+  "working_hours",
+  "days",
+  "amount",
+  "amount_with_overheads"
+ ],
+ "fields": [
+  {
+   "columns": 1,
+   "fieldname": "worker",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Worker",
+   "options": "Designation"
+  },
+  {
+   "columns": 1,
+   "fieldname": "total_workers",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Total Workers"
+  },
+  {
+   "columns": 1,
+   "fieldname": "unit_price",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Rate/Hour"
+  },
+  {
+   "columns": 1,
+   "fieldname": "working_hours",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Working Hours"
+  },
+  {
+   "columns": 1,
+   "fieldname": "days",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Days"
+  },
+  {
+   "columns": 2,
+   "fieldname": "amount",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Amount"
+  },
+  {
+   "columns": 1,
+   "fieldname": "msow",
+   "fieldtype": "Link",
+   "label": "MSoW",
+   "options": "Master Scope of Work"
+  },
+  {
+   "columns": 1,
+   "fieldname": "ssow",
+   "fieldtype": "Link",
+   "label": "SSoW",
+   "options": "Sub Scope of Work"
+  },
+  {
+   "columns": 1,
+   "fieldname": "rate_with_overheads",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Selling Price",
+   "read_only": 1
+  },
+  {
+   "columns": 1,
+   "fieldname": "amount_with_overheads",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Selling Amount",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2022-04-18 12:49:55.723358",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "CE INSTALLATION MANPOWER",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

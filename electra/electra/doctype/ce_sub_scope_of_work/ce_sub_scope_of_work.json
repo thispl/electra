@@ -1,0 +1,156 @@
+{
+ "actions": [],
+ "creation": "2022-01-02 07:05:29.214909",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "msow",
+  "ssow",
+  "ssow_desc",
+  "estimate",
+  "section_break_5",
+  "total_overhead",
+  "total_amount_as_overhead",
+  "column_break_8",
+  "total_profit",
+  "total_amount_of_profit",
+  "column_break_11",
+  "contigency_percent",
+  "contigency",
+  "column_break_14",
+  "engineering_overhead",
+  "total_amount_as_engineering_overhead",
+  "section_break_17",
+  "total_cost",
+  "column_break_19",
+  "total_bidding_price",
+  "column_break_21"
+ ],
+ "fields": [
+  {
+   "columns": 1,
+   "fetch_from": "master_sow.short_code",
+   "fieldname": "ssow",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "SSoW ID",
+   "options": "Sub Scope of Work"
+  },
+  {
+   "columns": 4,
+   "fetch_from": "ssow.desc",
+   "fetch_if_empty": 1,
+   "fieldname": "ssow_desc",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "label": "Sub Scope of Work"
+  },
+  {
+   "columns": 1,
+   "fieldname": "msow",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "MSoW ID",
+   "options": "Master Scope of Work",
+   "read_only": 1
+  },
+  {
+   "fieldname": "estimate",
+   "fieldtype": "Button",
+   "in_list_view": 1,
+   "label": "Estimate"
+  },
+  {
+   "fieldname": "section_break_5",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "total_overhead",
+   "fieldtype": "Read Only",
+   "label": "Overhead %"
+  },
+  {
+   "fieldname": "total_amount_as_overhead",
+   "fieldtype": "Read Only",
+   "label": "Total Overhead"
+  },
+  {
+   "fieldname": "column_break_8",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_profit",
+   "fieldtype": "Read Only",
+   "label": "Profit %"
+  },
+  {
+   "fieldname": "total_amount_of_profit",
+   "fieldtype": "Read Only",
+   "label": "Total Profit"
+  },
+  {
+   "fieldname": "column_break_11",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "contigency_percent",
+   "fieldtype": "Read Only",
+   "label": "Contigency %"
+  },
+  {
+   "fieldname": "contigency",
+   "fieldtype": "Read Only",
+   "label": "Total Contigency"
+  },
+  {
+   "fieldname": "column_break_14",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "engineering_overhead",
+   "fieldtype": "Read Only",
+   "label": "Engineering Overhead %"
+  },
+  {
+   "fieldname": "total_amount_as_engineering_overhead",
+   "fieldtype": "Read Only",
+   "label": "Total Engineering Overhead"
+  },
+  {
+   "fieldname": "total_cost",
+   "fieldtype": "Read Only",
+   "label": "Total Cost of SoW"
+  },
+  {
+   "fieldname": "column_break_19",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_bidding_price",
+   "fieldtype": "Read Only",
+   "in_list_view": 1,
+   "label": "Total Bidding Price"
+  },
+  {
+   "fieldname": "column_break_21",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_17",
+   "fieldtype": "Section Break"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2022-01-25 14:13:03.469695",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "CE Sub Scope of Work",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

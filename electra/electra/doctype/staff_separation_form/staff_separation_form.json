@@ -1,0 +1,276 @@
+{
+ "actions": [],
+ "autoname": "SSF.####",
+ "creation": "2021-08-17 13:48:56.063921",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "employee_name",
+  "emp_no",
+  "job_title",
+  "dept",
+  "column_break_5",
+  "date",
+  "ppqid_no",
+  "date_of_join",
+  "type_of_seperation_tick_appropriate_box_section",
+  "resignation_to_be_filled_by_the_applicant",
+  "reasons_for_resignation",
+  "last_working_day",
+  "column_break_12",
+  "employee_sign",
+  "authorized_by",
+  "termination_to_be_filled_by_the_dept_section",
+  "termination_to_be_filled_by_the_dept",
+  "non_performance",
+  "medically_unfit",
+  "disciplinary_action",
+  "other_reasons",
+  "attach",
+  "column_break_18",
+  "last_working_days",
+  "authorized_by_1",
+  "hr_use_only_section",
+  "legal_entitlements",
+  "due_salary",
+  "leave_salary",
+  "repatriation_ticket",
+  "notice_period_pay",
+  "service",
+  "visa_cancel",
+  "column_break_33",
+  "employment_status",
+  "under_probation",
+  "confirmed_employee",
+  "column_break_26"
+ ],
+ "fields": [
+  {
+   "fieldname": "employee_name",
+   "fieldtype": "Data",
+   "label": "Employee Name"
+  },
+  {
+   "fieldname": "emp_no",
+   "fieldtype": "Data",
+   "label": "Emp No"
+  },
+  {
+   "fieldname": "job_title",
+   "fieldtype": "Data",
+   "label": "Job Title"
+  },
+  {
+   "fieldname": "dept",
+   "fieldtype": "Data",
+   "label": "Dept"
+  },
+  {
+   "fieldname": "date",
+   "fieldtype": "Data",
+   "label": "Date"
+  },
+  {
+   "fieldname": "ppqid_no",
+   "fieldtype": "Data",
+   "label": "PP/QID No"
+  },
+  {
+   "fieldname": "date_of_join",
+   "fieldtype": "Data",
+   "label": "Date of Join"
+  },
+  {
+   "fieldname": "type_of_seperation_tick_appropriate_box_section",
+   "fieldtype": "Section Break",
+   "label": "Type of Seperation (Tick Appropriate Box)"
+  },
+  {
+   "default": "0",
+   "fieldname": "resignation_to_be_filled_by_the_applicant",
+   "fieldtype": "Check",
+   "label": "Resignation (to be filled by the Applicant)"
+  },
+  {
+   "fieldname": "reasons_for_resignation",
+   "fieldtype": "Small Text",
+   "label": "Reasons for Resignation"
+  },
+  {
+   "fieldname": "last_working_day",
+   "fieldtype": "Date",
+   "label": "Last Working Day"
+  },
+  {
+   "description": "I understand that, according to Article (49) of Qatar Labour Law, the worker intent to resign should provide a notification, not less than one month prior to his last working day, if the duration of service is less than 5 years/ not less than 2 months, if the duration is more than 5 years",
+   "fieldname": "employee_sign",
+   "fieldtype": "Data",
+   "label": "Employee Name"
+  },
+  {
+   "description": "Signature of Dept./ Div. Manager",
+   "fieldname": "authorized_by",
+   "fieldtype": "Data",
+   "label": "Authorized by"
+  },
+  {
+   "fieldname": "termination_to_be_filled_by_the_dept_section",
+   "fieldtype": "Section Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "non_performance",
+   "fieldtype": "Check",
+   "label": "Non-performance"
+  },
+  {
+   "default": "0",
+   "fieldname": "medically_unfit",
+   "fieldtype": "Check",
+   "label": "Medically UNFIT"
+  },
+  {
+   "default": "0",
+   "fieldname": "disciplinary_action",
+   "fieldtype": "Check",
+   "label": "Disciplinary Action"
+  },
+  {
+   "default": "0",
+   "fieldname": "other_reasons",
+   "fieldtype": "Check",
+   "label": "Other Reasons(Enclose documents)"
+  },
+  {
+   "fieldname": "last_working_days",
+   "fieldtype": "Data",
+   "label": "Last Working Day"
+  },
+  {
+   "description": "Dept./ Div. Manager",
+   "fieldname": "authorized_by_1",
+   "fieldtype": "Data",
+   "label": "Authorized by"
+  },
+  {
+   "fieldname": "hr_use_only_section",
+   "fieldtype": "Section Break",
+   "label": "HR USE ONLY "
+  },
+  {
+   "fieldname": "employment_status",
+   "fieldtype": "Heading",
+   "label": "Employment Status"
+  },
+  {
+   "default": "0",
+   "fieldname": "under_probation",
+   "fieldtype": "Check",
+   "label": "Under Probation"
+  },
+  {
+   "default": "0",
+   "fieldname": "confirmed_employee",
+   "fieldtype": "Check",
+   "label": "Confirmed Employee"
+  },
+  {
+   "description": "(Tick Appropriate Boxes, as per eligibility)",
+   "fieldname": "legal_entitlements",
+   "fieldtype": "Heading",
+   "label": "Legal Entitlements "
+  },
+  {
+   "default": "0",
+   "fieldname": "due_salary",
+   "fieldtype": "Check",
+   "label": "Due Salary"
+  },
+  {
+   "default": "0",
+   "fieldname": "leave_salary",
+   "fieldtype": "Check",
+   "label": "Leave Salary"
+  },
+  {
+   "default": "0",
+   "fieldname": "repatriation_ticket",
+   "fieldtype": "Check",
+   "label": "Repatriation Ticket"
+  },
+  {
+   "default": "0",
+   "fieldname": "notice_period_pay",
+   "fieldtype": "Check",
+   "label": "Notice Period Pay"
+  },
+  {
+   "default": "0",
+   "fieldname": "service",
+   "fieldtype": "Check",
+   "label": "End-of-Service"
+  },
+  {
+   "default": "0",
+   "fieldname": "visa_cancel",
+   "fieldtype": "Check",
+   "label": "VISA Cancel"
+  },
+  {
+   "fieldname": "column_break_26",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_18",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_12",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_33",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "termination_to_be_filled_by_the_dept",
+   "fieldtype": "Data",
+   "label": "Termination (to be filled by the Dept.)"
+  },
+  {
+   "depends_on": "eval:doc.other_reasons == 1",
+   "fieldname": "attach",
+   "fieldtype": "Attach"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2021-09-08 07:33:10.332071",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "Staff Separation Form",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

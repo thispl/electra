@@ -1,0 +1,192 @@
+{
+ "actions": [],
+ "autoname": "HR-REQ.####",
+ "creation": "2021-08-16 08:50:15.944931",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "workflow",
+  "column_break_2",
+  "status_section",
+  "requested_date",
+  "employee_details_section",
+  "emp_id",
+  "emp_name",
+  "job__title",
+  "dept",
+  "column_break_5",
+  "resident_id_number",
+  "date_of_join",
+  "date_of_birth",
+  "request_details_section",
+  "table_34",
+  "remarks",
+  "section_break_25",
+  "div__dept_head",
+  "admin",
+  "column_break_40",
+  "managing_director",
+  "data_30",
+  "html_31"
+ ],
+ "fields": [
+  {
+   "fetch_from": "emp_id.designation",
+   "fieldname": "job__title",
+   "fieldtype": "Read Only",
+   "label": "Designation"
+  },
+  {
+   "fetch_from": "emp_id.department",
+   "fieldname": "dept",
+   "fieldtype": "Read Only",
+   "in_list_view": 1,
+   "label": "Department"
+  },
+  {
+   "fieldname": "column_break_5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "emp_id.employee_number",
+   "fieldname": "emp_id",
+   "fieldtype": "Link",
+   "label": "Employee ID",
+   "options": "Employee",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "emp_id.scheduled_confirmation_date",
+   "fieldname": "date_of_join",
+   "fieldtype": "Read Only",
+   "label": "Date of Joining"
+  },
+  {
+   "fieldname": "request_details_section",
+   "fieldtype": "Section Break",
+   "label": "Request Details"
+  },
+  {
+   "fieldname": "section_break_25",
+   "fieldtype": "Section Break",
+   "label": "For Office Use"
+  },
+  {
+   "fetch_from": "emp_id.employee_name",
+   "fieldname": "emp_name",
+   "fieldtype": "Read Only",
+   "label": "Employee Name",
+   "options": "Name"
+  },
+  {
+   "fieldname": "data_30",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "html_31",
+   "fieldtype": "HTML",
+   "options": "Note: Save and attach supporting documents, as per the requirements, along with this form. "
+  },
+  {
+   "fieldname": "employee_details_section",
+   "fieldtype": "Section Break",
+   "label": "Employee Details"
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "workflow",
+   "fieldtype": "Read Only",
+   "label": "Workflow"
+  },
+  {
+   "default": "Requested",
+   "fieldname": "status_section",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "\nRequested\nInitiated\nCompleted\nHold"
+  },
+  {
+   "description": "Comments",
+   "fieldname": "div__dept_head",
+   "fieldtype": "Small Text",
+   "label": "Div. / Dept. Head"
+  },
+  {
+   "description": "Comments",
+   "fieldname": "managing_director",
+   "fieldtype": "Small Text",
+   "label": "Managing Director"
+  },
+  {
+   "fieldname": "column_break_40",
+   "fieldtype": "Column Break"
+  },
+  {
+   "description": "Comments",
+   "fieldname": "admin",
+   "fieldtype": "Small Text",
+   "label": "Admin Manager"
+  },
+  {
+   "fetch_from": "emp_id.resident_id_no",
+   "fieldname": "resident_id_number",
+   "fieldtype": "Read Only",
+   "label": "Resident ID Number(QID)"
+  },
+  {
+   "fetch_from": "emp_id.date_of_birth",
+   "fieldname": "date_of_birth",
+   "fieldtype": "Read Only",
+   "label": "Date of Birth"
+  },
+  {
+   "fieldname": "table_34",
+   "fieldtype": "Table",
+   "label": "HR Forms",
+   "options": "HR Request child Table"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks",
+   "reqd": 1
+  },
+  {
+   "fieldname": "requested_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Requested Date",
+   "reqd": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2022-03-31 15:10:56.686149",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "HR Request",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "emp_name",
+ "track_changes": 1
+}

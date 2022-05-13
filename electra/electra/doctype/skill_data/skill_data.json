@@ -1,0 +1,38 @@
+{
+ "actions": [],
+ "creation": "2021-08-17 11:31:34.882922",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "skill_sets",
+  "rating"
+ ],
+ "fields": [
+  {
+   "fieldname": "skill_sets",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Skill Sets",
+   "options": "Skill Set"
+  },
+  {
+   "fieldname": "rating",
+   "fieldtype": "Rating",
+   "in_list_view": 1,
+   "label": "Rating"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2021-08-24 11:07:12.351861",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "Skill Data",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

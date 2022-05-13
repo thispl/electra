@@ -1,0 +1,36 @@
+{
+ "add_total_row": 1,
+ "columns": [],
+ "creation": "2022-05-11 10:40:15.317616",
+ "disable_prepared_report": 0,
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [],
+ "idx": 0,
+ "is_standard": "Yes",
+ "letter_head": "Al - Shaghairi Trading and Contracting Company W.L.L (ELECTRA)",
+ "modified": "2022-05-11 10:41:33.882095",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "Supplier Ledger",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "ref_doctype": "Purchase Receipt",
+ "report_name": "Supplier Ledger",
+ "report_type": "Script Report",
+ "roles": [
+  {
+   "role": "Stock Manager"
+  },
+  {
+   "role": "Stock User"
+  },
+  {
+   "role": "Purchase User"
+  },
+  {
+   "role": "Accounts User"
+  }
+ ]
+}

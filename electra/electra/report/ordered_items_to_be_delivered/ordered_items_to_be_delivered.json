@@ -1,0 +1,64 @@
+{
+ "add_total_row": 0,
+ "columns": [],
+ "creation": "2022-03-29 21:13:13.744552",
+ "disable_prepared_report": 0,
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [],
+ "idx": 0,
+ "is_standard": "Yes",
+ "letter_head": "Al - Shaghairi Trading and Contracting Company W.L.L (ELECTRA)",
+ "modified": "2022-03-29 21:21:02.489125",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "Ordered Items to be Delivered",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "query": "select\n`tabSales Order`.`name` as \"Sales Order:Link/Sales Order:120\", \n`tabSales Order`.`status` as \"Status:Data:120\", `tabSales Order`.`customer` as \"Customer:Link/Customer:120\", \n`tabSales Order`.`customer_name` as \"Customer Name::150\", \n`tabSales Order`.`transaction_date` as \"Date:Date\", \n`tabSales Order`.`project` as \"Project:Link/Project:120\", \n`tabSales Order Item`.item_code as \"Item:Link/Item:120\", \n`tabSales Order Item`.qty as \"Qty:Float:140\", \n`tabSales Order Item`.delivered_qty as \"Delivered Qty:Float:140\", \n(`tabSales Order Item`.qty - ifnull(`tabSales Order Item`.delivered_qty, 0)) as \"Qty to Deliver:Float:140\", \n`tabSales Order Item`.base_rate as \"Rate:Float:140\", `tabSales Order Item`.base_amount as \"Amount:Float:140\", \n((`tabSales Order Item`.qty - ifnull(`tabSales Order Item`.delivered_qty, 0))*`tabSales Order Item`.base_rate) as \"Amount to Deliver:Float:140\", \n`tabBin`.actual_qty as \"Available Qty:Float:120\", \n`tabBin`.projected_qty as \"Projected Qty:Float:120\", \n`tabSales Order Item`.`delivery_date` as \"Item Delivery Date:Date:120\",  \nDATEDIFF(CURDATE(),`tabSales Order Item`.`delivery_date`) as \"Delay Days:Int:120\", \n`tabSales Order Item`.item_name as \"Item Name::150\", \n`tabSales Order Item`.description as \"Description::200\", \n`tabSales Order Item`.item_group as \"Item Group:Link/Item Group:120\", \n`tabSales Order Item`.warehouse as \"Warehouse:Link/Warehouse:200\" \nfrom \n`tabSales Order` \nJOIN `tabSales Order Item`  LEFT JOIN `tabBin` ON (`tabBin`.item_code = `tabSales Order Item`.item_code and `tabBin`.warehouse = `tabSales Order Item`.warehouse) \nwhere \n`tabSales Order Item`.`parent` = `tabSales Order`.`name` \nand \n`tabSales Order`.docstatus = 1 \nand \n`tabSales Order`.status not in (\"Stopped\", \"Closed\") \nand ifnull(`tabSales Order Item`.delivered_qty,0) < ifnull(`tabSales Order Item`.qty,0)order by `tabSales Order`.transaction_date\nasc",
+ "ref_doctype": "Sales Order",
+ "report_name": "Ordered Items to be Delivered",
+ "report_type": "Query Report",
+ "roles": [
+  {
+   "role": "Stock User"
+  },
+  {
+   "role": "Maintenance User"
+  },
+  {
+   "role": "Sales Manager"
+  },
+  {
+   "role": "Sales User"
+  },
+  {
+   "role": "Accounts User"
+  },
+  {
+   "role": "Sales Coordinator"
+  },
+  {
+   "role": "Sales Executive - TRD"
+  },
+  {
+   "role": "Sales Coordinator MEP Division"
+  },
+  {
+   "role": "Sales Executive - MEP"
+  },
+  {
+   "role": "Sales Executive - Electrical"
+  },
+  {
+   "role": "Sales Coordinator - Electrical"
+  },
+  {
+   "role": "Sales Executive - KINGFISHER"
+  },
+  {
+   "role": "Sales Coordinator - KINGFISHER"
+  }
+ ]
+}

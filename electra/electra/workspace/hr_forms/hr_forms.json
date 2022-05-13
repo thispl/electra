@@ -1,0 +1,241 @@
+{
+ "category": "Modules",
+ "charts": [],
+ "creation": "2021-08-17 17:05:41.285761",
+ "developer_mode_only": 0,
+ "disable_user_customization": 1,
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "extends_another_page": 0,
+ "hide_custom": 0,
+ "idx": 0,
+ "is_default": 0,
+ "is_standard": 1,
+ "label": "HR Forms",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "(Annexure 16-A)Manpower Planning",
+   "link_to": "Manpower planning",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "(Annexure 11-B)Staff Skill Mapping Form",
+   "link_to": "Staff Skill Mapping Form",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "(Annexure 15-A)Interim Appraisal Form",
+   "link_to": "Interim Appraisal Form",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "(Annexure 15-B)Salary and Benefits Adjustment Form",
+   "link_to": "Appraisal Form",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "(Annexure 18-C)Weekly Vehicle Utilization Report",
+   "link_to": "Weekly Vehicle Utilization Report",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "(Annexure 18-A)Vehicle Accident Report",
+   "link_to": "Vehicle Accident Report",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "(Annexure 19-A)VEHICLE POSSESSION AND SURRENDER FORM",
+   "link_to": "Vehicle Possession and Surrender Form",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "(Annexure 17-A & 17-B)Vehicle Records",
+   "link_to": "Vehicle Records",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "(Annexure 14)Staff Disciplinary Action Form",
+   "link_to": "Staff Disciplinary Action Form",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "(Annexure 19-B)Vehicle Maintenance Check list",
+   "link_to": "Vehicle Maintenance Check List",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "(Annexure 8)Vacation Final Exit Form",
+   "link_to": "Vacation Final Exit Form",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "(Annexure 7-A)Business Card Requisition Form",
+   "link_to": "Business Card",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "(Annexure 7 B)Staff Permission Tardy Absent Form",
+   "link_to": "Staff Permission Tardy Absent Form",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "(Annexure 7-C)Staff Accomodation Form",
+   "link_to": "Accommodation Material",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "(Annexure 7-D)Employee Grievance",
+   "link_to": "Grievance",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "(Annexure 7-E)Self Declaration Form",
+   "link_to": "Vacating Accommodation Declaration",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "(Annexure 7-F)Company Mobile Tariff Change",
+   "link_to": "Mobile Tariff Change",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "(Annexure 7-G)Employee Rejoin Report",
+   "link_to": "Re Joining From Leave",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "(Annexure 7-H)HR Request Form",
+   "link_to": "HR Request",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "(Annexure 9) Accident Declaration Form",
+   "link_to": "Accident Declaration Form",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "(Annexure 10)Interview Evaluation Form",
+   "link_to": "Interview Evaluation Form",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "(Annexure 11-A)Probation Evaluation Form",
+   "link_to": "Staff Probation Evaluation Form",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "(Annexure 12)Separation Form",
+   "link_to": "Staff Separation Form",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "(Annexure 13) Staff Job Description Form",
+   "link_to": "Staff Job Description",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  }
+ ],
+ "modified": "2021-11-15 19:13:04.066868",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "HR Forms",
+ "owner": "Administrator",
+ "pin_to_bottom": 0,
+ "pin_to_top": 0,
+ "shortcuts": []
+}

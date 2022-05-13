@@ -1,0 +1,776 @@
+{
+ "actions": [],
+ "autoname": "naming_series:",
+ "creation": "2021-10-30 17:06:54.578016",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_1",
+  "naming_series",
+  "cost_estimation",
+  "project_details_section",
+  "cost_estimation_for",
+  "lead_customer",
+  "lead_customer_name",
+  "column_break_8",
+  "date_of_estimation",
+  "company",
+  "project_name",
+  "ce_scope_of_work_section",
+  "master_scope_of_work",
+  "section_break_26",
+  "total_cost_of_the_project",
+  "column_break_25",
+  "total_bidding_price",
+  "column_break_28",
+  "total_profit_amount",
+  "total_business_promotion",
+  "column_break_30",
+  "total_profit_percent",
+  "total_overheads",
+  "total_cost_section",
+  "total_overhead",
+  "engineering_overhead",
+  "total_profit",
+  "contigency_percent",
+  "column_break_21",
+  "total_amount_as_overhead",
+  "total_amount_as_engineering_overhead",
+  "total_amount_of_profit",
+  "contigency",
+  "applicable_sections_section",
+  "a_design",
+  "b_materials",
+  "c_finishing_work",
+  "d_accessories",
+  "column_break_22",
+  "e_installationmanpower",
+  "i_manpower",
+  "f_tools__equipment__transport",
+  "g_others",
+  "design_calculation_section",
+  "design_calculation",
+  "design_cost",
+  "design_amount",
+  "design_amount_with_overheads",
+  "design_profit",
+  "materials_section",
+  "materials",
+  "materials_cost",
+  "materials_amount",
+  "materials_amount_with_overheads",
+  "materials_profit",
+  "finishing_work_section",
+  "finishing_work",
+  "finishing_work_cost",
+  "finishing_work_amount",
+  "finishing_work_amount_with_overheads",
+  "finishing_work_profit",
+  "bolts_accessories_section",
+  "bolts_accessories",
+  "accessories_cost",
+  "accessories_amount",
+  "accessories_amount_with_overheads",
+  "accessories_profit",
+  "fabrication_installation_section",
+  "installation",
+  "installation_cost",
+  "installation_amount",
+  "installation_amount_with_overheads",
+  "installation_profit",
+  "manpower_section",
+  "manpower",
+  "manpower_cost",
+  "manpower_amount",
+  "manpower_amount_with_overheads",
+  "manpower_profit",
+  "heavy_equipments_section",
+  "heavy_equipments",
+  "heavy_equipments_cost",
+  "heavy_equipments_amount",
+  "heavy_equipments_amount_with_overheads",
+  "heavy_equipments_profit",
+  "manpower_subcontract_section",
+  "manpower_subcontract",
+  "others_cost",
+  "others_amount",
+  "others_amount_with_overheads",
+  "others_profit",
+  "opportunity",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "cost_estimation",
+   "fieldtype": "Table",
+   "label": "Cost Estimation ",
+   "options": "Cost Estimation Bundle"
+  },
+  {
+   "fieldname": "section_break_1",
+   "fieldtype": "Section Break",
+   "hidden": 1
+  },
+  {
+   "fieldname": "project_details_section",
+   "fieldtype": "Section Break",
+   "label": "Project Details"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Company",
+   "options": "Company"
+  },
+  {
+   "fieldname": "column_break_8",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "date_of_estimation",
+   "fieldtype": "Date",
+   "label": "Date of Estimation"
+  },
+  {
+   "fieldname": "project_name",
+   "fieldtype": "Data",
+   "label": "Title of Project",
+   "reqd": 1
+  },
+  {
+   "collapsible": 1,
+   "depends_on": "eval:doc.__islocal != 1",
+   "fieldname": "design_calculation_section",
+   "fieldtype": "Section Break",
+   "label": "DESIGN"
+  },
+  {
+   "fieldname": "design_calculation",
+   "fieldtype": "Table",
+   "options": "CE DESIGN CALCULATION",
+   "read_only": 1
+  },
+  {
+   "collapsible": 1,
+   "depends_on": "eval:doc.__islocal != 1",
+   "fieldname": "materials_section",
+   "fieldtype": "Section Break",
+   "label": "MATERIALS"
+  },
+  {
+   "fieldname": "materials",
+   "fieldtype": "Table",
+   "options": "CE MATERIALS",
+   "read_only": 1
+  },
+  {
+   "collapsible": 1,
+   "depends_on": "eval:doc.__islocal != 1",
+   "fieldname": "finishing_work_section",
+   "fieldtype": "Section Break",
+   "label": "FINISHING WORK"
+  },
+  {
+   "fieldname": "finishing_work",
+   "fieldtype": "Table",
+   "options": "CE FINISHING WORK",
+   "read_only": 1
+  },
+  {
+   "collapsible": 1,
+   "depends_on": "eval:doc.__islocal != 1",
+   "fieldname": "bolts_accessories_section",
+   "fieldtype": "Section Break",
+   "label": "ACCESSORIES"
+  },
+  {
+   "fieldname": "bolts_accessories",
+   "fieldtype": "Table",
+   "options": "CE BOLTS ACCESSORIES",
+   "read_only": 1
+  },
+  {
+   "collapsible": 1,
+   "depends_on": "eval:doc.__islocal != 1",
+   "fieldname": "fabrication_installation_section",
+   "fieldtype": "Section Break",
+   "label": "INSTALLATION"
+  },
+  {
+   "collapsible": 1,
+   "depends_on": "eval:doc.__islocal != 1",
+   "fieldname": "heavy_equipments_section",
+   "fieldtype": "Section Break",
+   "label": "TOOLS / EQUIPMENT / TRANSPORT"
+  },
+  {
+   "fieldname": "heavy_equipments",
+   "fieldtype": "Table",
+   "options": "CE HEAVY EQUIPMENTS",
+   "read_only": 1
+  },
+  {
+   "collapsible": 1,
+   "depends_on": "eval:doc.__islocal != 1",
+   "fieldname": "manpower_subcontract_section",
+   "fieldtype": "Section Break",
+   "label": "OTHERS"
+  },
+  {
+   "fieldname": "manpower_subcontract",
+   "fieldtype": "Table",
+   "options": "CE MANPOWER SUBCONTRACT",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.__islocal != 1",
+   "fieldname": "section_break_26",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "cost_estimation_for",
+   "fieldtype": "Select",
+   "label": "Cost Estimation For",
+   "options": "\nLead\nCustomer"
+  },
+  {
+   "fieldname": "lead_customer",
+   "fieldtype": "Dynamic Link",
+   "in_standard_filter": 1,
+   "label": "Lead Customer",
+   "options": "cost_estimation_for"
+  },
+  {
+   "fieldname": "opportunity",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Opportunity",
+   "options": "Opportunity"
+  },
+  {
+   "depends_on": "eval:doc.__islocal != 1",
+   "fieldname": "ce_scope_of_work_section",
+   "fieldtype": "Section Break",
+   "label": "Scope of Work (SoW)"
+  },
+  {
+   "depends_on": "eval:doc.__islocal != 1",
+   "fieldname": "applicable_sections_section",
+   "fieldtype": "Section Break",
+   "hidden": 1,
+   "label": "Applicable Sections"
+  },
+  {
+   "default": "0",
+   "fieldname": "a_design",
+   "fieldtype": "Check",
+   "label": "DESIGN"
+  },
+  {
+   "default": "0",
+   "fieldname": "b_materials",
+   "fieldtype": "Check",
+   "label": "MATERIALS"
+  },
+  {
+   "default": "0",
+   "fieldname": "c_finishing_work",
+   "fieldtype": "Check",
+   "label": "FINISHING WORK"
+  },
+  {
+   "default": "0",
+   "fieldname": "d_accessories",
+   "fieldtype": "Check",
+   "label": "ACCESSORIES"
+  },
+  {
+   "fieldname": "column_break_22",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "e_installationmanpower",
+   "fieldtype": "Check",
+   "label": "INSTALLATION"
+  },
+  {
+   "default": "0",
+   "fieldname": "f_tools__equipment__transport",
+   "fieldtype": "Check",
+   "label": "TOOLS / EQUIPMENT / TRANSPORT"
+  },
+  {
+   "default": "0",
+   "fieldname": "g_others",
+   "fieldtype": "Check",
+   "label": "OTHERS"
+  },
+  {
+   "depends_on": "eval:doc.__islocal != 1",
+   "fieldname": "total_cost_section",
+   "fieldtype": "Section Break",
+   "label": "TOTAL COST"
+  },
+  {
+   "fieldname": "manpower_cost",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Manpower Cost",
+   "read_only": 1
+  },
+  {
+   "fieldname": "installation_cost",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Installation Cost",
+   "read_only": 1
+  },
+  {
+   "fieldname": "master_scope_of_work",
+   "fieldtype": "Table",
+   "label": "Master Scope of Work",
+   "options": "CE Master Scope of Work"
+  },
+  {
+   "default": "0",
+   "fieldname": "i_manpower",
+   "fieldtype": "Check",
+   "label": "MANPOWER"
+  },
+  {
+   "collapsible": 1,
+   "depends_on": "eval:doc.__islocal != 1",
+   "fieldname": "manpower_section",
+   "fieldtype": "Section Break",
+   "label": "MANPOWER"
+  },
+  {
+   "fieldname": "total_overhead",
+   "fieldtype": "Percent",
+   "label": "OVERHEAD %",
+   "read_only": 1
+  },
+  {
+   "fieldname": "engineering_overhead",
+   "fieldtype": "Percent",
+   "label": "ENGINEERING OVERHEAD %",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_profit",
+   "fieldtype": "Percent",
+   "in_list_view": 1,
+   "label": "PROFIT %",
+   "read_only": 1
+  },
+  {
+   "fieldname": "contigency_percent",
+   "fieldtype": "Percent",
+   "label": "CONTIGENCY %",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_21",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_amount_as_overhead",
+   "fieldtype": "Currency",
+   "label": "TOTAL AMOUNT AS OVERHEAD",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_amount_as_engineering_overhead",
+   "fieldtype": "Currency",
+   "label": "TOTAL AMOUNT AS ENGINEERING OVERHEAD",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_amount_of_profit",
+   "fieldtype": "Currency",
+   "label": "TOTAL AMOUNT OF PROFIT",
+   "read_only": 1
+  },
+  {
+   "fieldname": "contigency",
+   "fieldtype": "Currency",
+   "label": "Contigency",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_cost_of_the_project",
+   "fieldtype": "Currency",
+   "label": "TOTAL COST OF THE PROJECT",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_28",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_overheads",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Total Overheads",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_bidding_price",
+   "fieldtype": "Currency",
+   "label": "TOTAL BIDDING PRICE",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_business_promotion",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Total Business Promotion",
+   "read_only": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Cost Estimation",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_profit_amount",
+   "fieldtype": "Currency",
+   "label": "Total Profit Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_profit_percent",
+   "fieldtype": "Percent",
+   "label": "Total Profit Percent",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_30",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_25",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "design_cost",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Design Cost",
+   "read_only": 1
+  },
+  {
+   "fieldname": "design_amount",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Design Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "design_amount_with_overheads",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Design Amount with Overheads",
+   "read_only": 1
+  },
+  {
+   "fieldname": "design_profit",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Design Profit",
+   "read_only": 1
+  },
+  {
+   "fieldname": "materials_cost",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Materials Cost",
+   "read_only": 1
+  },
+  {
+   "fieldname": "materials_amount",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Materials Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "materials_amount_with_overheads",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Materials Amount with overheads",
+   "read_only": 1
+  },
+  {
+   "fieldname": "materials_profit",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Materials Profit",
+   "read_only": 1
+  },
+  {
+   "fieldname": "finishing_work_cost",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Finishing Work Cost",
+   "read_only": 1
+  },
+  {
+   "fieldname": "finishing_work_amount",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Finishing Work Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "finishing_work_amount_with_overheads",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Finishing Work Amount with Overheads",
+   "read_only": 1
+  },
+  {
+   "fieldname": "finishing_work_profit",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Finishing Work Profit",
+   "read_only": 1
+  },
+  {
+   "fieldname": "accessories_cost",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Accessories Cost",
+   "read_only": 1
+  },
+  {
+   "fieldname": "accessories_amount",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Accessories Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "accessories_amount_with_overheads",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Accessories Amount with Overheads",
+   "read_only": 1
+  },
+  {
+   "fieldname": "accessories_profit",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Accessories Profit",
+   "read_only": 1
+  },
+  {
+   "fieldname": "installation",
+   "fieldtype": "Table",
+   "options": "CE FABRICATION INSTALLATION",
+   "read_only": 1
+  },
+  {
+   "fieldname": "installation_amount",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Installation Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "installation_amount_with_overheads",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Installation Amount with Overheads",
+   "read_only": 1
+  },
+  {
+   "fieldname": "installation_profit",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Installation Profit",
+   "read_only": 1
+  },
+  {
+   "fieldname": "manpower",
+   "fieldtype": "Table",
+   "options": "CE INSTALLATION MANPOWER",
+   "read_only": 1
+  },
+  {
+   "fieldname": "manpower_amount",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Manpower Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "manpower_amount_with_overheads",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Manpower Amount with Overheads",
+   "read_only": 1
+  },
+  {
+   "fieldname": "manpower_profit",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Manpower Profit",
+   "read_only": 1
+  },
+  {
+   "fieldname": "heavy_equipments_cost",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Heavy Equipments Cost",
+   "read_only": 1
+  },
+  {
+   "fieldname": "heavy_equipments_amount",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Heavy Equipments Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "heavy_equipments_amount_with_overheads",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Heavy Equipments Amount with Overheads",
+   "read_only": 1
+  },
+  {
+   "fieldname": "heavy_equipments_profit",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Heavy Equipments Profit",
+   "read_only": 1
+  },
+  {
+   "fieldname": "others_cost",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Others Cost",
+   "read_only": 1
+  },
+  {
+   "fieldname": "others_amount",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Others Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "others_amount_with_overheads",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Others Amount with Overheads",
+   "read_only": 1
+  },
+  {
+   "fieldname": "others_profit",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Others Profit",
+   "read_only": 1
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Naming Series",
+   "options": "\nASTCC-CE-.YYYY.-\nSHNA-CE-.YYYY.-\nSHBW-CE-.YYYY.-\nSHBO-CE-.YYYY.-\nELE-CE-.YYYY.-\nENG-CE-.YYYY.-\nINT-CE-.YYYY.-\nSHKF-CE-.YYYY.-\nKTRA-CE-.YYYY.-\nKFTC-CE-.YYYY.-\nMSS-CE-.YYYY.-\nMSHO-CE-.YYYY.-\nSHMS-CE-.YYYY.-\nMEP-CE-.YYYY.-\nESD-CE-.YYYY.-\nTRD-CE-.YYYY.-",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "lead_customer_name",
+   "fieldtype": "Data",
+   "label": "Lead Customer Name"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [
+  {
+   "link_doctype": "Quotation",
+   "link_fieldname": "cost_estimation"
+  }
+ ],
+ "modified": "2022-04-18 13:16:29.610788",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "Cost Estimation",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Projects User",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Projects Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Project Head",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

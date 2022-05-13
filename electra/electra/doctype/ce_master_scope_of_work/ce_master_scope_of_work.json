@@ -1,0 +1,229 @@
+{
+ "actions": [],
+ "creation": "2022-01-02 07:02:47.630000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "msow",
+  "view",
+  "column_break_3",
+  "msow_desc",
+  "section_break_5",
+  "total_overhead",
+  "total_amount_as_overhead",
+  "column_break_8",
+  "total_profit",
+  "total_amount_of_profit",
+  "column_break_11",
+  "contigency_percent",
+  "contigency",
+  "column_break_14",
+  "engineering_overhead",
+  "total_amount_as_engineering_overhead",
+  "section_break_17",
+  "total_cost",
+  "total_overheads",
+  "total_business_promotion",
+  "total_profit_amount",
+  "total_profit_percent",
+  "estimate",
+  "unit",
+  "qty",
+  "unit_price",
+  "total_bidding_price",
+  "column_break_19",
+  "optional"
+ ],
+ "fields": [
+  {
+   "columns": 1,
+   "fetch_from": "master_sow.short_code",
+   "fieldname": "msow",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "MSoW ID",
+   "options": "Master Scope of Work"
+  },
+  {
+   "columns": 3,
+   "fetch_from": "msow.desc",
+   "fetch_if_empty": 1,
+   "fieldname": "msow_desc",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "label": "Master Scope of Work"
+  },
+  {
+   "allow_on_submit": 1,
+   "columns": 1,
+   "fieldname": "estimate",
+   "fieldtype": "Button",
+   "in_list_view": 1,
+   "label": "Estimate"
+  },
+  {
+   "fieldname": "section_break_5",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "total_overhead",
+   "fieldtype": "Percent",
+   "label": "Overhead %"
+  },
+  {
+   "fieldname": "total_amount_as_overhead",
+   "fieldtype": "Currency",
+   "label": "Total Overhead",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_8",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_profit",
+   "fieldtype": "Percent",
+   "label": "Profit %",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_amount_of_profit",
+   "fieldtype": "Currency",
+   "label": "Total Profit",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_11",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "contigency_percent",
+   "fieldtype": "Percent",
+   "label": "Contigency %",
+   "read_only": 1
+  },
+  {
+   "fieldname": "contigency",
+   "fieldtype": "Currency",
+   "label": "Total Contigency",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_14",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "engineering_overhead",
+   "fieldtype": "Percent",
+   "label": "Engineering Overhead %",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_amount_as_engineering_overhead",
+   "fieldtype": "Currency",
+   "label": "Total Engineering Overhead",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_17",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "total_cost",
+   "fieldtype": "Currency",
+   "label": "Total Cost of SoW",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_19",
+   "fieldtype": "Column Break"
+  },
+  {
+   "columns": 2,
+   "fieldname": "total_bidding_price",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Total Bidding Price",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_overheads",
+   "fieldtype": "Currency",
+   "label": "Total Overheads",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_business_promotion",
+   "fieldtype": "Currency",
+   "label": "Total Business Promotion",
+   "read_only": 1
+  },
+  {
+   "columns": 1,
+   "fieldname": "qty",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Qty",
+   "read_only": 1
+  },
+  {
+   "columns": 1,
+   "fieldname": "unit",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "UOM",
+   "options": "UOM",
+   "read_only": 1
+  },
+  {
+   "columns": 1,
+   "fieldname": "unit_price",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Unit Price",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "optional",
+   "fieldtype": "Check",
+   "in_standard_filter": 1,
+   "label": "Optional"
+  },
+  {
+   "depends_on": "eval:doc.docstatus == 1",
+   "fieldname": "view",
+   "fieldtype": "Button",
+   "label": "View"
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_profit_amount",
+   "fieldtype": "Currency",
+   "label": "Total Profit Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_profit_percent",
+   "fieldtype": "Percent",
+   "label": "Total Profit %",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2022-04-18 09:11:16.878094",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "CE Master Scope of Work",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

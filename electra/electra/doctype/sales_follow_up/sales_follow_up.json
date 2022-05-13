@@ -1,0 +1,180 @@
+{
+ "actions": [],
+ "autoname": "SF.####",
+ "creation": "2021-11-02 15:08:43.137411",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "follow_up_for",
+  "lead_customer",
+  "column_break_3",
+  "status",
+  "account_manager",
+  "section_break_5",
+  "customer_info",
+  "basic_details_section",
+  "organization_name",
+  "person_name",
+  "email_address",
+  "industry",
+  "column_break_11",
+  "territory",
+  "custom_group",
+  "billing_currency",
+  "market_segment",
+  "follow_up_details_section",
+  "next_contact_date",
+  "next_contact_by",
+  "column_break_20",
+  "to_discuss"
+ ],
+ "fields": [
+  {
+   "fieldname": "follow_up_for",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Follow up For",
+   "options": "\nLead\nCustomer"
+  },
+  {
+   "fieldname": "lead_customer",
+   "fieldtype": "Dynamic Link",
+   "label": "Lead / Customer",
+   "options": "follow_up_for"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Lead\nOpen\nReplied\nOpportunity\nQuotation\nLost Quotation\nInterested\nConverted\nDo Not Contact"
+  },
+  {
+   "fieldname": "basic_details_section",
+   "fieldtype": "Section Break",
+   "label": "Basic Details"
+  },
+  {
+   "fieldname": "organization_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Organization Name"
+  },
+  {
+   "fieldname": "person_name",
+   "fieldtype": "Data",
+   "label": "Person Name"
+  },
+  {
+   "fetch_from": "lead_customer.email_id",
+   "fieldname": "email_address",
+   "fieldtype": "Data",
+   "label": "Email Address"
+  },
+  {
+   "fetch_from": "lead_customer.industry",
+   "fieldname": "industry",
+   "fieldtype": "Data",
+   "label": "Industry"
+  },
+  {
+   "fieldname": "territory",
+   "fieldtype": "Link",
+   "label": "Territory",
+   "options": "Territory"
+  },
+  {
+   "fieldname": "custom_group",
+   "fieldtype": "Link",
+   "label": "Custom Group",
+   "options": "Customer Group"
+  },
+  {
+   "fieldname": "billing_currency",
+   "fieldtype": "Link",
+   "label": "Billing Currency",
+   "options": "Currency"
+  },
+  {
+   "fetch_from": "lead_customer.market_segment",
+   "fieldname": "market_segment",
+   "fieldtype": "Data",
+   "label": "Market Segment"
+  },
+  {
+   "fieldname": "follow_up_details_section",
+   "fieldtype": "Section Break",
+   "label": "Follow Up "
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_11",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "account_manager",
+   "fieldtype": "Link",
+   "label": "Account Manager",
+   "options": "User"
+  },
+  {
+   "fieldname": "next_contact_date",
+   "fieldtype": "Date",
+   "label": "Next Contact Date"
+  },
+  {
+   "fieldname": "next_contact_by",
+   "fieldtype": "Link",
+   "label": "Next Contact By",
+   "options": "User"
+  },
+  {
+   "fieldname": "column_break_20",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.status != 'Converted'",
+   "fieldname": "customer_info",
+   "fieldtype": "HTML",
+   "label": "Customer Info"
+  },
+  {
+   "fieldname": "section_break_5",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "to_discuss",
+   "fieldtype": "Small Text",
+   "label": "To Discuss"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2021-11-16 15:21:00.687173",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "Sales Follow UP",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "organization_name",
+ "track_changes": 1
+}

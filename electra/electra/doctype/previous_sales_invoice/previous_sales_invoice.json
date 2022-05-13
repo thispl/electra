@@ -1,0 +1,51 @@
+{
+ "actions": [],
+ "creation": "2022-01-12 09:02:43.515794",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "invoice_no",
+  "pending",
+  "outstanding",
+  "other"
+ ],
+ "fields": [
+  {
+   "fieldname": "invoice_no",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Invoice No"
+  },
+  {
+   "fieldname": "pending",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Pending"
+  },
+  {
+   "fieldname": "outstanding",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Outstanding"
+  },
+  {
+   "fieldname": "other",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Other"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2022-01-12 09:02:43.515794",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "Previous Sales Invoice",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

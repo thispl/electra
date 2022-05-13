@@ -1,0 +1,91 @@
+{
+ "actions": [],
+ "creation": "2022-04-09 19:13:19.464729",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "msow",
+  "ssow",
+  "item_name",
+  "description",
+  "unit",
+  "column_break_4",
+  "quantity",
+  "estimated_amount",
+  "budgeted_amount",
+  "remark"
+ ],
+ "fields": [
+  {
+   "fieldname": "msow",
+   "fieldtype": "Link",
+   "label": "MSOW ID",
+   "options": "Master Scope of Work"
+  },
+  {
+   "fieldname": "ssow",
+   "fieldtype": "Link",
+   "label": "SSOW ID",
+   "options": "Sub Scope of Work"
+  },
+  {
+   "fieldname": "item_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Item Name"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Data",
+   "label": "Description"
+  },
+  {
+   "fieldname": "unit",
+   "fieldtype": "Link",
+   "label": "Unit",
+   "options": "UOM"
+  },
+  {
+   "fieldname": "column_break_4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "quantity",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Qty"
+  },
+  {
+   "fieldname": "remark",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Remark"
+  },
+  {
+   "fieldname": "estimated_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Estimated Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "budgeted_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Budgeted Amount"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2022-04-16 13:13:55.176043",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "Project Budget Work Title Item",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

@@ -1,0 +1,51 @@
+{
+ "actions": [],
+ "creation": "2021-12-10 11:21:24.826449",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "property",
+  "current",
+  "new",
+  "transfer_date"
+ ],
+ "fields": [
+  {
+   "fieldname": "transfer_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Transfer Date"
+  },
+  {
+   "fieldname": "property",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Property"
+  },
+  {
+   "fieldname": "current",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Current"
+  },
+  {
+   "fieldname": "new",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "New"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2021-12-11 10:18:35.679500",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "Transfer",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

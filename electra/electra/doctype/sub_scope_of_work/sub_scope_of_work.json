@@ -1,0 +1,62 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:sub_scope_of_work",
+ "creation": "2022-01-02 06:51:28.684153",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "sub_scope_of_work",
+  "desc",
+  "master_scope_of_work"
+ ],
+ "fields": [
+  {
+   "fieldname": "sub_scope_of_work",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Sub Scope of Work",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "desc",
+   "fieldtype": "Small Text",
+   "label": "Desc"
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "fieldname": "master_scope_of_work",
+   "fieldtype": "Link",
+   "label": "Master Scope of Work",
+   "options": "Master Scope of Work"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2022-01-02 07:19:35.229981",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "Sub Scope of Work",
+ "nsm_parent_field": "parent_scope_of_work",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

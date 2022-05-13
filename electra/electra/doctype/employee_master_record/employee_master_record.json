@@ -1,0 +1,163 @@
+{
+ "actions": [],
+ "creation": "2021-12-10 07:49:34.583939",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "employee_id",
+  "employee_name",
+  "designation",
+  "department",
+  "company",
+  "sponsor_compnay",
+  "status",
+  "column_break_8",
+  "gender",
+  "date_of_birth",
+  "date_of_joining",
+  "age",
+  "grade",
+  "resident_id_number",
+  "leave_tracker_section",
+  "leave_tracker",
+  "employee_transfer",
+  "employee_increment",
+  "warning_letter"
+ ],
+ "fields": [
+  {
+   "fieldname": "employee_id",
+   "fieldtype": "Link",
+   "label": "Employee ID",
+   "options": "Employee"
+  },
+  {
+   "fetch_from": "employee_id.designation",
+   "fieldname": "designation",
+   "fieldtype": "Data",
+   "label": "Designation"
+  },
+  {
+   "fetch_from": "employee_id.department",
+   "fieldname": "department",
+   "fieldtype": "Data",
+   "label": "Department"
+  },
+  {
+   "fetch_from": "employee_id.company",
+   "fieldname": "company",
+   "fieldtype": "Data",
+   "label": "Company"
+  },
+  {
+   "fetch_from": "employee_id.sponsor_company",
+   "fieldname": "sponsor_compnay",
+   "fieldtype": "Data",
+   "label": "Sponsor Compnay"
+  },
+  {
+   "fetch_from": "employee_id.status",
+   "fieldname": "status",
+   "fieldtype": "Data",
+   "label": "Status"
+  },
+  {
+   "fetch_from": "employee_id.gender",
+   "fieldname": "gender",
+   "fieldtype": "Data",
+   "label": "Gender"
+  },
+  {
+   "fetch_from": "employee_id.date_of_birth",
+   "fieldname": "date_of_birth",
+   "fieldtype": "Data",
+   "label": "Date of Birth"
+  },
+  {
+   "fetch_from": "employee_id.date_of_joining",
+   "fieldname": "date_of_joining",
+   "fieldtype": "Data",
+   "label": "Date of Joining"
+  },
+  {
+   "fetch_from": "employee_id.age",
+   "fieldname": "age",
+   "fieldtype": "Data",
+   "label": "Age"
+  },
+  {
+   "fetch_from": "employee_id.grade",
+   "fieldname": "grade",
+   "fieldtype": "Data",
+   "label": "Grade"
+  },
+  {
+   "fetch_from": "employee_id.resident_id_no",
+   "fieldname": "resident_id_number",
+   "fieldtype": "Data",
+   "label": "Resident ID Number"
+  },
+  {
+   "fetch_from": "employee_id.employee_name",
+   "fieldname": "employee_name",
+   "fieldtype": "Data",
+   "label": "Employee_name"
+  },
+  {
+   "fieldname": "column_break_8",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "leave_tracker_section",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "leave_tracker",
+   "fieldtype": "Table",
+   "label": "Leave Tracker",
+   "options": "Leave Tracker"
+  },
+  {
+   "fieldname": "employee_transfer",
+   "fieldtype": "Table",
+   "label": "Employee Transfer",
+   "options": "Transfer"
+  },
+  {
+   "fieldname": "employee_increment",
+   "fieldtype": "Table",
+   "label": "Employee Increment",
+   "options": "Employee Increment"
+  },
+  {
+   "fieldname": "warning_letter",
+   "fieldtype": "Table",
+   "label": "Warning Letter",
+   "options": "Warning"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2021-12-11 07:50:39.296977",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "Employee Master Record",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

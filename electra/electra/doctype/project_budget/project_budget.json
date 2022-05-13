@@ -1,0 +1,461 @@
+{
+ "actions": [],
+ "autoname": "naming_series:",
+ "creation": "2022-02-02 19:01:31.452263",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "project_details_section",
+  "naming_series",
+  "cost_estimation",
+  "quotation",
+  "sales_order",
+  "column_break_8",
+  "date_of_budget",
+  "company",
+  "customer",
+  "lead_customer_name",
+  "project_name",
+  "ce_scope_of_work_section",
+  "master_scope_of_work",
+  "total_cost_section",
+  "total_overhead",
+  "engineering_overhead",
+  "total_profit",
+  "contigency_percent",
+  "column_break_21",
+  "total_amount_as_overhead",
+  "total_amount_as_engineering_overhead",
+  "total_amount_of_profit",
+  "contigency",
+  "section_break_26",
+  "total_cost_of_the_project",
+  "column_break_28",
+  "total_bidding_price",
+  "column_break_30",
+  "total_profit_amount",
+  "column_break_32",
+  "total_profit_percent",
+  "applicable_sections_section",
+  "a_design",
+  "b_materials",
+  "c_finishing_work",
+  "d_accessories",
+  "column_break_22",
+  "e_installationmanpower",
+  "i_manpower",
+  "f_tools__equipment__transport",
+  "g_others",
+  "design_calculation_section",
+  "design",
+  "materials_section",
+  "materials",
+  "finishing_work_section",
+  "finishing_work",
+  "bolts_accessories_section",
+  "bolts_accessories",
+  "fabrication_installation_section",
+  "installation",
+  "manpower_section",
+  "manpower",
+  "heavy_equipments_section",
+  "heavy_equipments",
+  "others_section",
+  "others",
+  "opportunity",
+  "work_titles_section",
+  "project_budget_work_title_item",
+  "section_break_65",
+  "items",
+  "section_break_69",
+  "total_estimated_amount",
+  "column_break_71",
+  "total_budgeted_amount"
+ ],
+ "fields": [
+  {
+   "fieldname": "project_details_section",
+   "fieldtype": "Section Break",
+   "label": "Project Details"
+  },
+  {
+   "fetch_from": "cost_estimation.lead_customer_name",
+   "fieldname": "lead_customer_name",
+   "fieldtype": "Read Only",
+   "in_list_view": 1,
+   "label": "Customer Name"
+  },
+  {
+   "fieldname": "column_break_8",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "cost_estimation",
+   "fetch_from": "cost_estimation.company",
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "read_only": 1
+  },
+  {
+   "fieldname": "project_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Title of Project",
+   "read_only": 1
+  },
+  {
+   "fieldname": "ce_scope_of_work_section",
+   "fieldtype": "Section Break",
+   "label": "Scope of Work (SoW)"
+  },
+  {
+   "fieldname": "master_scope_of_work",
+   "fieldtype": "Table",
+   "label": "Scope of Work",
+   "options": "Budget Scope of Work"
+  },
+  {
+   "fieldname": "total_cost_section",
+   "fieldtype": "Section Break",
+   "label": "TOTAL COST"
+  },
+  {
+   "fieldname": "total_overhead",
+   "fieldtype": "Percent",
+   "label": "OVERHEAD %"
+  },
+  {
+   "fieldname": "engineering_overhead",
+   "fieldtype": "Percent",
+   "label": "ENGINEERING OVERHEAD %"
+  },
+  {
+   "fieldname": "total_profit",
+   "fieldtype": "Percent",
+   "label": "PROFIT %"
+  },
+  {
+   "fieldname": "contigency_percent",
+   "fieldtype": "Percent",
+   "label": "CONTIGENCY %"
+  },
+  {
+   "fieldname": "column_break_21",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_amount_as_overhead",
+   "fieldtype": "Currency",
+   "label": "TOTAL AMOUNT AS OVERHEAD"
+  },
+  {
+   "fieldname": "total_amount_as_engineering_overhead",
+   "fieldtype": "Currency",
+   "label": "TOTAL AMOUNT AS ENGINEERING OVERHEAD"
+  },
+  {
+   "fieldname": "total_amount_of_profit",
+   "fieldtype": "Currency",
+   "label": "TOTAL AMOUNT OF PROFIT"
+  },
+  {
+   "fieldname": "contigency",
+   "fieldtype": "Currency",
+   "label": "Contigency"
+  },
+  {
+   "fieldname": "section_break_26",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "total_cost_of_the_project",
+   "fieldtype": "Currency",
+   "label": "TOTAL COST OF THE PROJECT"
+  },
+  {
+   "fieldname": "column_break_28",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_30",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_32",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_bidding_price",
+   "fieldtype": "Currency",
+   "label": "TOTAL BIDDING PRICE"
+  },
+  {
+   "depends_on": "eval:doc.__islocal != 1",
+   "fieldname": "applicable_sections_section",
+   "fieldtype": "Section Break",
+   "hidden": 1,
+   "label": "Applicable Sections"
+  },
+  {
+   "default": "0",
+   "fieldname": "a_design",
+   "fieldtype": "Check",
+   "label": "DESIGN"
+  },
+  {
+   "default": "0",
+   "fieldname": "b_materials",
+   "fieldtype": "Check",
+   "label": "MATERIALS"
+  },
+  {
+   "default": "0",
+   "fieldname": "c_finishing_work",
+   "fieldtype": "Check",
+   "label": "FINISHING WORK"
+  },
+  {
+   "default": "0",
+   "fieldname": "d_accessories",
+   "fieldtype": "Check",
+   "label": "ACCESSORIES"
+  },
+  {
+   "fieldname": "column_break_22",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "e_installationmanpower",
+   "fieldtype": "Check",
+   "label": "INSTALLATION"
+  },
+  {
+   "default": "0",
+   "fieldname": "i_manpower",
+   "fieldtype": "Check",
+   "label": "MANPOWER"
+  },
+  {
+   "default": "0",
+   "fieldname": "f_tools__equipment__transport",
+   "fieldtype": "Check",
+   "label": "TOOLS / EQUIPMENT / TRANSPORT"
+  },
+  {
+   "default": "0",
+   "fieldname": "g_others",
+   "fieldtype": "Check",
+   "label": "OTHERS"
+  },
+  {
+   "fieldname": "design_calculation_section",
+   "fieldtype": "Section Break",
+   "label": "DESIGN"
+  },
+  {
+   "fieldname": "materials_section",
+   "fieldtype": "Section Break",
+   "label": "MATERIALS"
+  },
+  {
+   "fieldname": "materials",
+   "fieldtype": "Table",
+   "options": "PB Items"
+  },
+  {
+   "fieldname": "finishing_work_section",
+   "fieldtype": "Section Break",
+   "label": "FINISHING WORK"
+  },
+  {
+   "fieldname": "finishing_work",
+   "fieldtype": "Table",
+   "options": "PB Items"
+  },
+  {
+   "fieldname": "bolts_accessories_section",
+   "fieldtype": "Section Break",
+   "label": "ACCESSORIES"
+  },
+  {
+   "fieldname": "bolts_accessories",
+   "fieldtype": "Table",
+   "options": "PB Items"
+  },
+  {
+   "fieldname": "fabrication_installation_section",
+   "fieldtype": "Section Break",
+   "label": "INSTALLATION"
+  },
+  {
+   "fieldname": "manpower_section",
+   "fieldtype": "Section Break",
+   "label": "MANPOWER"
+  },
+  {
+   "fieldname": "heavy_equipments_section",
+   "fieldtype": "Section Break",
+   "label": "TOOLS / EQUIPMENT / TRANSPORT"
+  },
+  {
+   "fieldname": "heavy_equipments",
+   "fieldtype": "Table",
+   "options": "PB Items"
+  },
+  {
+   "fieldname": "opportunity",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Opportunity",
+   "options": "Opportunity"
+  },
+  {
+   "fieldname": "cost_estimation",
+   "fieldtype": "Link",
+   "label": "Cost Estimation",
+   "options": "Cost Estimation"
+  },
+  {
+   "fieldname": "date_of_budget",
+   "fieldtype": "Date",
+   "label": "Date of Budget"
+  },
+  {
+   "fieldname": "sales_order",
+   "fieldtype": "Link",
+   "label": "Sales Order",
+   "options": "Sales Order",
+   "read_only": 1
+  },
+  {
+   "fieldname": "quotation",
+   "fieldtype": "Link",
+   "label": "Quotation",
+   "options": "Quotation",
+   "read_only": 1
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "section_break_65",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "label": "Items",
+   "options": "Project Budget Item"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "work_titles_section",
+   "fieldtype": "Section Break",
+   "label": "Work Titles"
+  },
+  {
+   "fieldname": "project_budget_work_title_item",
+   "fieldtype": "Table",
+   "options": "Project Budget Work Title Item"
+  },
+  {
+   "fieldname": "section_break_69",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_71",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_estimated_amount",
+   "fieldtype": "Currency",
+   "label": "Total Estimated Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_budgeted_amount",
+   "fieldtype": "Currency",
+   "label": "Total Budgeted Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "design",
+   "fieldtype": "Table",
+   "options": "PB Items"
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Naming Series",
+   "options": "\nASTCC-CE-.YYYY.-\nSHNA-PB-.YYYY.-\nSHBW-PB-.YYYY.-\nSHBO-PB-.YYYY.-\nELE-PB-.YYYY.-\nENG-PB-.YYYY.-\nINT-PB-.YYYY.-\nSHKF-PB-.YYYY.-\nKTRA-PB-.YYYY.-\nKFTC-PB-.YYYY.-\nMSS-PB-.YYYY.-\nMSHO-PB-.YYYY.-\nSHMS-PB-.YYYY.-\nMEP-PB-.YYYY.-\nESD-PB-.YYYY.-\nTRD-PB-.YYYY.-",
+   "read_only": 1
+  },
+  {
+   "fieldname": "installation",
+   "fieldtype": "Table",
+   "options": "PB Items"
+  },
+  {
+   "fieldname": "others_section",
+   "fieldtype": "Section Break",
+   "label": "OTHERS"
+  },
+  {
+   "fieldname": "others",
+   "fieldtype": "Table",
+   "options": "PB Items"
+  },
+  {
+   "fieldname": "manpower",
+   "fieldtype": "Table",
+   "options": "PB Items Manpower"
+  },
+  {
+   "fieldname": "total_profit_amount",
+   "fieldtype": "Currency",
+   "label": "Total Profit Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_profit_percent",
+   "fieldtype": "Percent",
+   "label": "Total Profit Percent",
+   "read_only": 1
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Customer",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2022-04-16 14:08:11.802705",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "Project Budget",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1,
+ "track_seen": 1,
+ "track_views": 1
+}

@@ -1,0 +1,51 @@
+{
+ "actions": [],
+ "creation": "2021-12-10 12:20:35.563396",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "employee_name",
+  "salary_structure",
+  "base",
+  "date"
+ ],
+ "fields": [
+  {
+   "fieldname": "employee_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Employee name"
+  },
+  {
+   "fieldname": "salary_structure",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Salary Structure"
+  },
+  {
+   "fieldname": "base",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Base"
+  },
+  {
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Date"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2021-12-10 12:28:51.465371",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "Employee Increment",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}
