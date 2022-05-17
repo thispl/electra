@@ -17,7 +17,7 @@ base_template_path = "templates/www/printview.html"
 standard_format = "templates/print_formats/standard.html"
 
 def get_context(context):
-    frappe.log_error("---------context---")
+    frappe.log_error("","---------context---")
     """Build context for print"""
     if not ((frappe.form_dict.doctype and frappe.form_dict.name) or frappe.form_dict.doc):
         return {
@@ -45,7 +45,7 @@ def get_context(context):
             meta=meta, trigger_print = frappe.form_dict.trigger_print,
             no_letterhead=frappe.form_dict.no_letterhead, letterhead=letterhead,
             settings=settings)
-    frappe.log_error("data", "--data---")
+    frappe.log_error(data, "--data---")
     return {
         "body": get_rendered_template(doc, print_format = print_format,
             meta=meta, trigger_print = frappe.form_dict.trigger_print,
