@@ -406,9 +406,11 @@ frappe.ui.form.LinkSelector.prototype.set_in_grid = function() {
 
 frappe.link_searchs = function (doctype, args, name_data, description_data, callback, btn) {
 	console.log("----------linksearch---------")
+	console.log(args)
 	console.log(name_data)
 	console.log(description_data)
 	if (!args) {
+		console.log("----------1---------")
 		// if(doctype in search_docs){
 		if(jQuery.inArray(doctype, search_docs) !== -1){
 			args = {
@@ -425,12 +427,18 @@ frappe.link_searchs = function (doctype, args, name_data, description_data, call
 		}
 		
 	}
+	if(jQuery.inArray(doctype, search_docs) !== -1){
+		args.filters={"name": name_data,"description": description_data}
+		args.filters["name"] = name_data
+		args.filters["description"]= description_data
+	}
 	args.doctype = doctype;
 	if (!args.searchfield) {
 		args.searchfield = 'name';
 	}
 	console.log(doctype)
 	console.log(args)
+	console.log(args.filters)
 	console.log(btn)
 	frappe.call({
 		method: "frappe.desk.search.search_widget",
