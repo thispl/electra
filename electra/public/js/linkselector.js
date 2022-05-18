@@ -2,7 +2,7 @@
 // MIT License. See license.txt
 let search_docs=["Quotation", "Sales Invoice", "Sales Order", "Material Request", "Purchase Order", "Purchase Invoice", "Item"]
 frappe.ui.form.LinkSelector.prototype.make = function() {
-	console.log("---------make------")
+	// console.log("---------make------")
 		var me = this;
 		this.start = 0;
 		let fields = [
@@ -88,7 +88,7 @@ frappe.ui.form.LinkSelector.prototype.make = function() {
 }
 
 frappe.ui.form.LinkSelector.prototype.search = function() {
-	console.log("-------search------------")
+	// console.log("-------search------------")
 	var name_data = null
 	var description_data = null
 	if(jQuery.inArray(this.doctype, search_docs) !== -1){
@@ -102,8 +102,8 @@ frappe.ui.form.LinkSelector.prototype.search = function() {
 		};
 		name_data = this.dialog.fields_dict.name.get_value()
 		description_data = this.dialog.fields_dict.description.get_value()
-			console.log("args----")
-			console.log(args.filters)
+			// console.log("args----")
+			// console.log(args.filters)
 		if(name_data && !description_data){
 			args.filters={"name": name_data}
 			args.filters["name"] = name_data
@@ -118,7 +118,7 @@ frappe.ui.form.LinkSelector.prototype.search = function() {
 			args.filters["description"] = description_data
 		}
 		
-		console.log(args.filters)
+		// console.log(args.filters)
 	}else{
 		var args = {
 			txt: this.dialog.fields_dict.txt.get_value(),
@@ -126,25 +126,25 @@ frappe.ui.form.LinkSelector.prototype.search = function() {
 			start: this.start
 		};
 	}
-		console.log("args---0-")
-console.log(args)
+// 		console.log("args---0-")
+// console.log(args)
 		var me = this;
 
 		if (this.target.set_custom_query) {
 			this.target.set_custom_query(args);
 		}
-	console.log("args--1--")
-console.log(args)
+// 	console.log("args--1--")
+// console.log(args)
 		// load custom query from grid
 		if (this.target.is_grid && this.target.fieldinfo[this.fieldname]
 			&& this.target.fieldinfo[this.fieldname].get_query) {
 			$.extend(args,
 				this.target.fieldinfo[this.fieldname].get_query(cur_frm.doc));
 		}
-		console.log("args-2---")
-console.log(args)
+// 		console.log("args-2---")
+// console.log(args)
 		frappe.link_searchs(this.doctype, args, name_data, description_data, function (r) {
-			console.log(r)
+			// console.log(r)
 			var parent = me.dialog.fields_dict.results.$wrapper;
 			if (args.start === 0) {
 				parent.empty();
@@ -200,7 +200,7 @@ console.log(args)
 		}, this.dialog.get_primary_btn());
 	}
 
-frappe.ui.form.LinkSelector.prototype.set_in_grid = function() {
+frappe.ui.form.LinkSelector.prototype.set_in_grid = function(value) {
 	console.log("--setingrid--")
 	var me = this, updated = false;
 		var d = null;
@@ -209,6 +209,7 @@ frappe.ui.form.LinkSelector.prototype.set_in_grid = function() {
 				fieldname: "qty", fieldtype: "Float", label: "Qty",
 				"default": 1, reqd: 1
 			}, function (data) {
+				console.log(data)
 				$.each(me.target.frm.doc[me.target.df.fieldname] || [], function (i, d) {
 					if (d[me.fieldname] === value) {
 						frappe.model.set_value(d.doctype, d.name, me.qty_fieldname, data.qty);
@@ -417,12 +418,9 @@ frappe.ui.form.LinkSelector.prototype.set_in_grid = function() {
 // });
 
 frappe.link_searchs = function (doctype, args, name_data, description_data, callback, btn) {
-	console.log("----------linksearch---------")
-	console.log(args)
-	console.log(name_data)
-	console.log(description_data)
+	
 	if (!args) {
-		console.log("----------1---------")
+		
 		// if(doctype in search_docs){
 		if(jQuery.inArray(doctype, search_docs) !== -1){
 			args = {
@@ -460,10 +458,10 @@ frappe.link_searchs = function (doctype, args, name_data, description_data, call
 	if (!args.searchfield) {
 		args.searchfield = 'name';
 	}
-	console.log(doctype)
-	console.log(args)
-	console.log(args.filters)
-	console.log(btn)
+	// console.log(doctype)
+	// console.log(args)
+	// console.log(args.filters)
+	// console.log(btn)
 	frappe.call({
 		method: "frappe.desk.search.search_widget",
 		type: "GET",
