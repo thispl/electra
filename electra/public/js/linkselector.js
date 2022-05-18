@@ -94,7 +94,7 @@ frappe.ui.form.LinkSelector.prototype.search = function() {
 	if(jQuery.inArray(this.doctype, search_docs) !== -1){
 		var args = {
 			txt: this.dialog.fields_dict.txt.get_value(),
-			filters:{"name": this.dialog.fields_dict.name.get_value(),"description": this.dialog.fields_dict.description.get_value()},
+			// filters:{"name": this.dialog.fields_dict.name.get_value(),"description": this.dialog.fields_dict.description.get_value()},
 			// name: this.dialog.fields_dict.name.get_value(),
 			// description: this.dialog.fields_dict.description.get_value(),
 			searchfield: "name",
@@ -104,8 +104,13 @@ frappe.ui.form.LinkSelector.prototype.search = function() {
 		description_data = this.dialog.fields_dict.description.get_value()
 			console.log("args----")
 			console.log(args.filters)
-		args.filters["name"] = this.dialog.fields_dict.name.get_value()
-		args.filters["description"] = this.dialog.fields_dict.description.get_value()
+		if(name_data){
+			args.filters["name"] = name_data
+		}
+		if(description_data){
+			args.filters["description"] = description_data
+		}
+		
 		console.log(args.filters)
 	}else{
 		var args = {
@@ -415,11 +420,11 @@ frappe.link_searchs = function (doctype, args, name_data, description_data, call
 		if(jQuery.inArray(doctype, search_docs) !== -1){
 			args = {
 				txt: '',
-				filters:{"name": name_data,"description": description_data}
+				// filters:{"name": name_data,"description": description_data}
 				// name: '',
 				// description: ''
 			}
-			args.filters={"name": name_data,"description": description_data}
+			// args.filters={"name": name_data,"description": description_data}
 		}else{
 			args = {
 				txt: ''
@@ -428,10 +433,14 @@ frappe.link_searchs = function (doctype, args, name_data, description_data, call
 		
 	}
 	if(jQuery.inArray(doctype, search_docs) !== -1){
+		if(name_data){
+			args.filters["name"] = name_data
+		}
+		if(description_data){
+			args.filters["description"]= description_data
+		}
 		
-		args.filters["name"] = name_data
-		args.filters["description"]= description_data
-		args.filters=JSON.stringify({"name": name_data,"description": description_data})
+		// args.filters=JSON.stringify({"name": name_data,"description": description_data})
 	}
 	args.doctype = doctype;
 	if (!args.searchfield) {
