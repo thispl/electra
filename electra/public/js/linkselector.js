@@ -417,6 +417,7 @@ frappe.link_searchs = function (doctype, args, name_data, description_data, call
 				// name: '',
 				// description: ''
 			}
+			args.filters={"name": name_data,"description": description_data}
 		}else{
 			args = {
 				txt: ''
