@@ -20,7 +20,7 @@
 	    </div>
 	</div>
 	<script>
-		console.log("----script---")
+		
 		document.addEventListener('DOMContentLoaded', () => {
 			const page_div = document.querySelector(".page-break");
 
@@ -31,7 +31,7 @@
 				$('.print-format').prepend('<div class="letter-head tri"><img src="/files/head.jpg" style="width: 100%;"></div>')
 			}
 			var foot = $('.print-format div').hasClass("letter-head-footer");
-			console.log(foot)
+			
 			if(foot==false){
 				$('.print-format').append('<div id="footer-html tri" class="visible-pdf" style="display: block !important;order: 1;margin-top: auto;"><div class="letter-head-footer"><img src="/files/footer.jpg" style="width: 100%;"></div><p class="text-center small page-number visible-pdf">Page <span class="page"></span> of <span class="topage"></span></p></div>');
 			}
