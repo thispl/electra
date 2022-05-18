@@ -2,6 +2,7 @@
 // MIT License. See license.txt
 let search_docs=["Quotation", "Sales Invoice", "Sales Order", "Material Request", "Purchase Order", "Purchase Invoice"]
 frappe.ui.form.LinkSelector.prototype.make = function() {
+	console.log("---------make------")
 		var me = this;
 		this.start = 0;
 		let fields = [
@@ -86,6 +87,7 @@ frappe.ui.form.LinkSelector.prototype.make = function() {
 }
 
 frappe.ui.form.LinkSelector.prototype.search = function() {
+	console.log("-------search------------")
 	if(this.doctype in search_docs){
 		var args = {
 			txt: this.dialog.fields_dict.txt.get_value(),
@@ -171,6 +173,7 @@ frappe.ui.form.LinkSelector.prototype.search = function() {
 	}
 
 frappe.ui.form.LinkSelector.prototype.set_in_grid = function() {
+	console.log("--setingrid--")
 	var me = this, updated = false;
 		var d = null;
 		if (this.qty_fieldname) {
