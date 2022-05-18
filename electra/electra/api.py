@@ -35,8 +35,7 @@ def search_widget(doctype, txt, query=None, searchfield=None, start=0,
 		# by method
 		try:
 			is_whitelisted(frappe.get_attr(query))
-			frappe.response["values"] = frappe.call(query, doctype, txt,
-				searchfield, start, page_length, filters, as_dict=as_dict)
+			frappe.response["values"] = frappe.call(query, doctype, txt, searchfield, start, page_length, filters, as_dict=as_dict)
 		except frappe.exceptions.PermissionError as e:
 			if frappe.local.conf.developer_mode:
 				raise e
