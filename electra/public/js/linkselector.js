@@ -92,8 +92,9 @@ frappe.ui.form.LinkSelector.prototype.search = function() {
 	if(jQuery.inArray(this.doctype, search_docs) !== -1){
 		var args = {
 			txt: this.dialog.fields_dict.txt.get_value(),
-			name: this.dialog.fields_dict.name.get_value(),
-			description: this.dialog.fields_dict.description.get_value(),
+			filters:{"name": this.dialog.fields_dict.name.get_value(),"description": this.dialog.fields_dict.description.get_value()}
+			// name: this.dialog.fields_dict.name.get_value(),
+			// description: this.dialog.fields_dict.description.get_value(),
 			searchfield: "name",
 			start: this.start
 		};
@@ -397,8 +398,9 @@ frappe.link_search = function (doctype, args, callback, btn) {
 		if(jQuery.inArray(doctype, search_docs) !== -1){
 			args = {
 				txt: '',
-				name: '',
-				description: ''
+				filters:{"name": '',"description": ''}
+				// name: '',
+				// description: ''
 			}
 		}else{
 			args = {
