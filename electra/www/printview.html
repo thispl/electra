@@ -22,25 +22,44 @@
 	<script>
 		
 		document.addEventListener('DOMContentLoaded', () => {
+			  var vars = {};
+            var x = document.location.search.substring(1).split('&');
+            for (var i in x) {
+                var z = x[i].split('=', 2);
+                vars[z[0]] = unescape(z[1]);
+            }
+            var x = ['frompage', 'topage', 'page', 'webpage', 'section', 'subsection', 'subsubsection'];
+            for (var i in x) {
+                var y = document.getElementsByClassName(x[i]);
+                for (var j = 0; j < y.length; ++j) y[j].textContent = vars[x[i]];
+                console.log(vars['page'])
+                if (vars['page'] === 1) { // If page is 1, set FakeHeaders display to none
+                    document.getElementById("footer-html").style.display = 'none';
+                }
+				
+            }
 			const page_div = document.querySelector(".page-break");
 
 			page_div.style.display = 'flex';
 			page_div.style.flexDirection = 'column';
-			const head = $('.print-format div').hasClass('letter-head');
-			if(head==false){
-				$('.print-format').prepend('<div class="letter-head tri"><img src="/files/head.jpg" style="width: 100%;"></div>')
-			}
-			var foot = $('.print-format div').hasClass("letter-head-footer");
+			// const head = document.querySelector('.print-format div').hasClass('letter-head');
+			// if(head==false){
+			// 	$('.print-format').prepend('<div class="letter-head tri"><img src="/files/head.jpg" style="width: 100%;"></div>')
+			// }
+			// var foot = document.querySelector('.print-format div').hasClass("letter-head-footer");
 			
-			if(foot==false){
-				$('.print-format').append('<div id="footer-html tri" class="visible-pdf" style="display: block !important;order: 1;margin-top: auto;"><div class="letter-head-footer"><img src="/files/footer.jpg" style="width: 100%;"></div><p class="text-center small page-number visible-pdf">Page <span class="page"></span> of <span class="topage"></span></p></div>');
-			}
+			// if(foot==false){
+			// 	$('.print-format').append('<div id="footer-html tri" class="visible-pdf" style="display: block !important;order: 1;margin-top: auto;"><div class="letter-head-footer"><img src="/files/footer.jpg" style="width: 100%;"></div><p class="text-center small page-number visible-pdf">Page <span class="page"></span> of <span class="topage"></span></p></div>');
+			// }
 			const footer_html = document.getElementById('footer-html');
 			footer_html.classList.add('hidden-pdf');
 			footer_html.classList.remove('visible-pdf');
 			footer_html.style.order = 1;
 			footer_html.style.marginTop = '20px';
 		});
+		function remove_footer_except_last_page(id) {
+          
+        }
 	</script>
 </body>
 {%- if comment -%}

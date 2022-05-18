@@ -184,6 +184,7 @@ def prepare_header_footer(soup):
 	options = {}
 
 	head = soup.find("head").contents
+	frappe
 	styles = soup.find_all("style")
 
 	print_css = bundled_asset("print.bundle.css").lstrip("/")
@@ -210,7 +211,7 @@ def prepare_header_footer(soup):
 					"layout_direction": "rtl" if is_rtl() else "ltr",
 				},
 			)
-
+			frappe.log_error(html,'hf-html')
 			# create temp file
 			fname = os.path.join("/tmp", "frappe-pdf-{0}.html".format(frappe.generate_hash()))
 			with open(fname, "wb") as f:
@@ -223,7 +224,7 @@ def prepare_header_footer(soup):
 				options["margin-top"] = "15mm"
 			elif html_id == "footer-html":
 				options["margin-bottom"] = "15mm"
-
+	frappe.log_error(options,'options')
 	return options
 
 
