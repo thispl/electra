@@ -1,6 +1,6 @@
 // Copyright (c) 2018, Frappe Technologies Pvt. Ltd. and Contributors
 // MIT License. See license.txt
-let search_docs=["Quotation", "Sales Invoice", "Sales Order", "Material Request", "Purchase Order", "Purchase Invoice"]
+let search_docs=["Quotation", "Sales Invoice", "Sales Order", "Material Request", "Purchase Order", "Purchase Invoice", "Item"]
 frappe.ui.form.LinkSelector.prototype.make = function() {
 	console.log("---------make------")
 		var me = this;
@@ -20,6 +20,7 @@ frappe.ui.form.LinkSelector.prototype.make = function() {
 				// 	}
 				// }
 			]
+			console.log(this.doctype)
 		console.log(search_docs)
 		console.log(jQuery.inArray(this.doctype, search_docs) !== -1)
 		// if(this.doctype in search_docs){
