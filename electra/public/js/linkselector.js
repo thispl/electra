@@ -98,6 +98,8 @@ frappe.ui.form.LinkSelector.prototype.search = function() {
 			searchfield: "name",
 			start: this.start
 		};
+			console.log("args----")
+console.log(args)
 	}else{
 		var args = {
 			txt: this.dialog.fields_dict.txt.get_value(),
@@ -105,19 +107,22 @@ frappe.ui.form.LinkSelector.prototype.search = function() {
 			start: this.start
 		};
 	}
+		console.log("args---0-")
+console.log(args)
 		var me = this;
 
 		if (this.target.set_custom_query) {
 			this.target.set_custom_query(args);
 		}
-
+	console.log("args--1--")
+console.log(args)
 		// load custom query from grid
 		if (this.target.is_grid && this.target.fieldinfo[this.fieldname]
 			&& this.target.fieldinfo[this.fieldname].get_query) {
 			$.extend(args,
 				this.target.fieldinfo[this.fieldname].get_query(cur_frm.doc));
 		}
-		console.log("args----")
+		console.log("args-2---")
 console.log(args)
 		frappe.link_searchs(this.doctype, args, function (r) {
 			console.log(r)
