@@ -89,6 +89,8 @@ frappe.ui.form.LinkSelector.prototype.make = function() {
 
 frappe.ui.form.LinkSelector.prototype.search = function() {
 	console.log("-------search------------")
+	var name_data = null
+	var description_data = null
 	if(jQuery.inArray(this.doctype, search_docs) !== -1){
 		var args = {
 			txt: this.dialog.fields_dict.txt.get_value(),
@@ -98,6 +100,8 @@ frappe.ui.form.LinkSelector.prototype.search = function() {
 			searchfield: "name",
 			start: this.start
 		};
+		name_data = this.dialog.fields_dict.name.get_value()
+		description_data = this.dialog.fields_dict.description.get_value()
 			console.log("args----")
 			console.log(args.filters)
 		args.filters["name"] = this.dialog.fields_dict.name.get_value()
@@ -127,7 +131,7 @@ console.log(args)
 		}
 		console.log("args-2---")
 console.log(args)
-		frappe.link_searchs(this.doctype, args, function (r) {
+		frappe.link_searchs(this.doctype, args, name_data, description_data, function (r) {
 			console.log(r)
 			var parent = me.dialog.fields_dict.results.$wrapper;
 			if (args.start === 0) {
@@ -400,15 +404,16 @@ frappe.ui.form.LinkSelector.prototype.set_in_grid = function() {
 // 	}
 // });
 
-frappe.link_searchs = function (doctype, args, callback, btn) {
+frappe.link_searchs = function (doctype, args, name_data, description_data, callback, btn) {
 	console.log("----------linksearch---------")
-	
+	console.log(name_data)
+	console.log(description_data)
 	if (!args) {
 		// if(doctype in search_docs){
 		if(jQuery.inArray(doctype, search_docs) !== -1){
 			args = {
 				txt: '',
-				filters:{"name": '',"description": ''}
+				filters:{"name": name_data,"description": description_data}
 				// name: '',
 				// description: ''
 			}
