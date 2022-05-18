@@ -92,7 +92,7 @@ frappe.ui.form.LinkSelector.prototype.search = function() {
 	if(jQuery.inArray(this.doctype, search_docs) !== -1){
 		var args = {
 			txt: this.dialog.fields_dict.txt.get_value(),
-			filters:{"name": this.dialog.fields_dict.name.get_value(),"description": this.dialog.fields_dict.description.get_value()}
+			filters:{"name": this.dialog.fields_dict.name.get_value(),"description": this.dialog.fields_dict.description.get_value()},
 			// name: this.dialog.fields_dict.name.get_value(),
 			// description: this.dialog.fields_dict.description.get_value(),
 			searchfield: "name",
