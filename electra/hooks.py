@@ -170,7 +170,8 @@ scheduler_events = {
 # ------------------------------
 #
 override_whitelisted_methods = {
-	"frappe.desk.search.search_widget": "electra.electra.api.search_widget"
+	"frappe.desk.search.search_widget": "electra.electra.api.search_widget",
+	"frappe.utils.pdf.get_pdf":"electra.utils.pdf.get_pdf"
 }
 
 # each overriding function accepts a `data` argument;
