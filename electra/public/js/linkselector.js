@@ -20,8 +20,10 @@ frappe.ui.form.LinkSelector.prototype.make = function() {
 				// 	}
 				// }
 			]
-		
-		if(this.doctype in search_docs){
+		console.log(search_docs)
+		console.log(jQuery.inArray(this.doctype, search_docs) !== -1)
+		// if(this.doctype in search_docs){
+		if(jQuery.inArray(this.doctype, search_docs) !== -1){
 			fields.push({
 					fieldtype: "Column Break", fieldname: "col_1"})
 			fields.push({
@@ -56,7 +58,7 @@ frappe.ui.form.LinkSelector.prototype.make = function() {
 
 		if (this.txt)
 			this.dialog.fields_dict.txt.set_input(this.txt);
-		if(this.doctype in search_docs){
+		if(jQuery.inArray(this.doctype, search_docs) !== -1){
 			if (this.name)
 				this.dialog.fields_dict.name.set_input(this.name);
 			if (this.description)
@@ -68,7 +70,7 @@ frappe.ui.form.LinkSelector.prototype.make = function() {
 				me.search();
 			}
 		});
-		if(this.doctype in search_docs){
+		if(jQuery.inArray(this.doctype, search_docs) !== -1){
 			this.dialog.get_input("name").on("keypress", function (e) {
 				if (e.which === 13) {
 					me.start = 0;
@@ -88,7 +90,7 @@ frappe.ui.form.LinkSelector.prototype.make = function() {
 
 frappe.ui.form.LinkSelector.prototype.search = function() {
 	console.log("-------search------------")
-	if(this.doctype in search_docs){
+	if(jQuery.inArray(this.doctype, search_docs) !== -1){
 		var args = {
 			txt: this.dialog.fields_dict.txt.get_value(),
 			name: this.dialog.fields_dict.name.get_value(),
@@ -394,7 +396,8 @@ frappe.link_search = function (doctype, args, callback, btn) {
 	console.log(args)
 	console.log(btn)
 	if (!args) {
-		if(doctype in search_docs){
+		// if(doctype in search_docs){
+		if(jQuery.inArray(doctype, search_docs) !== -1){
 			args = {
 				txt: '',
 				name: '',
