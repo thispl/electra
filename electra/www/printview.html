@@ -32,7 +32,7 @@
             for (var i in x) {
                 var y = document.getElementsByClassName(x[i]);
                 for (var j = 0; j < y.length; ++j) y[j].textContent = vars[x[i]];
-
+                console.log(vars['page'])
                 if (vars['page'] === 1) { // If page is 1, set FakeHeaders display to none
                     document.getElementById("footer-html").style.display = 'none';
                 }
