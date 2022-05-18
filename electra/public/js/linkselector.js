@@ -104,10 +104,17 @@ frappe.ui.form.LinkSelector.prototype.search = function() {
 		description_data = this.dialog.fields_dict.description.get_value()
 			console.log("args----")
 			console.log(args.filters)
-		if(name_data){
+		if(name_data && !description_data){
+			args.filters={"name": name_data}
 			args.filters["name"] = name_data
 		}
-		if(description_data){
+		if(description_data && !name_data){
+			args.filters={"description": description_data}
+			args.filters["description"] = description_data
+		}
+		if(name_data && description_data){
+			args.filters={"name": name_data, "description": description_data}
+			args.filters["name"] = name_data
 			args.filters["description"] = description_data
 		}
 		
@@ -433,13 +440,20 @@ frappe.link_searchs = function (doctype, args, name_data, description_data, call
 		
 	}
 	if(jQuery.inArray(doctype, search_docs) !== -1){
-		if(name_data){
+		if(name_data && !description_data){
+			args.filters={"name": name_data}
 			args.filters["name"] = name_data
 		}
-		if(description_data){
+		if(description_data && !name_data){
+			args.filters={"description": description_data}
 			args.filters["description"]= description_data
 		}
-		
+		if(name_data && description_data){
+			args.filters={"name": name_data,"description": description_data}
+			args.filters["name"] = name_data
+			args.filters["description"]= description_data
+		}
+
 		// args.filters=JSON.stringify({"name": name_data,"description": description_data})
 	}
 	args.doctype = doctype;
