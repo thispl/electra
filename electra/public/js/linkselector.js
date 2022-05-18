@@ -20,9 +20,7 @@ frappe.ui.form.LinkSelector.prototype.make = function() {
 				// 	}
 				// }
 			]
-			console.log(this.doctype)
-		console.log(search_docs)
-		console.log(jQuery.inArray(this.doctype, search_docs) !== -1)
+
 		// if(this.doctype in search_docs){
 		if(jQuery.inArray(this.doctype, search_docs) !== -1){
 			fields.push({
@@ -393,9 +391,7 @@ frappe.ui.form.LinkSelector.prototype.set_in_grid = function() {
 
 frappe.link_search = function (doctype, args, callback, btn) {
 	console.log("----------linksearch---------")
-	console.log(doctype)
-	console.log(args)
-	console.log(btn)
+	
 	if (!args) {
 		// if(doctype in search_docs){
 		if(jQuery.inArray(doctype, search_docs) !== -1){
@@ -415,12 +411,15 @@ frappe.link_search = function (doctype, args, callback, btn) {
 	if (!args.searchfield) {
 		args.searchfield = 'name';
 	}
-
+	console.log(doctype)
+	console.log(args)
+	console.log(btn)
 	frappe.call({
 		method: "frappe.desk.search.search_widget",
 		type: "GET",
 		args: args,
 		callback: function (r) {
+			console.log(r)
 			callback && callback(r);
 		},
 		btn: btn
