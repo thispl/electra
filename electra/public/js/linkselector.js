@@ -105,17 +105,17 @@ frappe.ui.form.LinkSelector.prototype.search = function() {
 			// console.log("args----")
 			// console.log(args.filters)
 		if(name_data && !description_data){
-			args.filters={"name": name_data}
-			args.filters["name"] = name_data
+			args.filters={"name": ["like","%"+name_data+"%"]}
+			args.filters["name"] = ["like","%"+name_data+"%"]
 		}
 		if(description_data && !name_data){
-			args.filters={"description": description_data}
-			args.filters["description"] = description_data
+			args.filters={"description": ["like","%"+description_data+"%"]}
+			args.filters["description"] = ["like","%"+description_data+"%"]
 		}
 		if(name_data && description_data){
-			args.filters={"name": name_data, "description": description_data}
-			args.filters["name"] = name_data
-			args.filters["description"] = description_data
+			args.filters={"name": ["like","%"+name_data+"%"], "description": ["like","%"+description_data+"%"]}
+			args.filters["name"] = ["like","%"+name_data+"%"]
+			args.filters["description"] = ["like","%"+description_data+"%"]
 		}
 		
 		// console.log(args.filters)
@@ -439,17 +439,17 @@ frappe.link_searchs = function (doctype, args, name_data, description_data, call
 	}
 	if(jQuery.inArray(doctype, search_docs) !== -1){
 		if(name_data && !description_data){
-			args.filters={"name": name_data}
-			args.filters["name"] = name_data
+			args.filters={"name": ["like","%"+name_data+"%"]}
+			args.filters["name"] = ["like","%"+name_data+"%"]
 		}
 		if(description_data && !name_data){
-			args.filters={"description": description_data}
-			args.filters["description"]= description_data
+			args.filters={"description": ["like","%"+description_data+"%"]}
+			args.filters["description"]= ["like","%"+description_data+"%"]
 		}
 		if(name_data && description_data){
-			args.filters={"name": name_data,"description": description_data}
-			args.filters["name"] = name_data
-			args.filters["description"]= description_data
+			args.filters={"name": ["like","%"+name_data+"%"],"description": ["like","%"+description_data+"%"]}
+			args.filters["name"] = ["like","%"+name_data+"%"]
+			args.filters["description"]= ["like","%"+description_data+"%"]
 		}
 
 		// args.filters=JSON.stringify({"name": name_data,"description": description_data})
