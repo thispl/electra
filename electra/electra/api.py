@@ -10,7 +10,7 @@ from frappe import _, is_whitelisted
 from six import string_types
 import re
 import wrapt
-from frappe.desk.search import sanitize_searchfield, get_std_fields_list, relevance_sorter
+from frappe.desk.search import sanitize_searchfield, get_std_fields_list
 
 UNTRANSLATED_DOCTYPES = ["DocType", "Role"]
 
@@ -173,3 +173,11 @@ def search_widget(doctype, txt, query=None, searchfield=None, start=0,
 				frappe.response["values"] = values
 			else:
 				frappe.response["values"] = [r[:-1] for r in values]
+
+
+def relevance_sorter(key, query, as_dict):
+	value = _(key.name if as_dict else key[0])
+	return (
+		value.lower().startswith(query.lower()) is not True,
+		value
+	)
