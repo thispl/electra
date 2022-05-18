@@ -117,8 +117,10 @@ frappe.ui.form.LinkSelector.prototype.search = function() {
 			$.extend(args,
 				this.target.fieldinfo[this.fieldname].get_query(cur_frm.doc));
 		}
-
-		frappe.link_search(this.doctype, args, function (r) {
+		console.log("args----")
+console.log(args)
+		frappe.link_searchs(this.doctype, args, function (r) {
+			console.log(r)
 			var parent = me.dialog.fields_dict.results.$wrapper;
 			if (args.start === 0) {
 				parent.empty();
@@ -390,7 +392,7 @@ frappe.ui.form.LinkSelector.prototype.set_in_grid = function() {
 // 	}
 // });
 
-frappe.link_search = function (doctype, args, callback, btn) {
+frappe.link_searchs = function (doctype, args, callback, btn) {
 	console.log("----------linksearch---------")
 	
 	if (!args) {
