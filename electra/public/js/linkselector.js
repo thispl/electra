@@ -8,7 +8,7 @@ frappe.ui.form.LinkSelector.prototype.make = function() {
 		let fields = [
 				{
 					fieldtype: "Data", fieldname: "txt", label: __("Beginning with"),
-					description: __("You can use wildcard %"),
+					description: __("You can use wildcard %"), hidden:1
 				},
 				// {
 				// 	fieldtype: "HTML", fieldname: "results"
