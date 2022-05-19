@@ -23,8 +23,8 @@ frappe.ui.form.LinkSelector.prototype.make = function() {
 
 		// if(this.doctype in search_docs){
 		if(jQuery.inArray(this.doctype, search_docs) !== -1){
-			fields.push({
-					fieldtype: "Column Break", fieldname: "col_1"})
+			// fields.push({
+			// 		fieldtype: "Column Break", fieldname: "col_1"})
 			fields.push({
 					fieldtype: "Data", fieldname: "name", label: __("Name")})
 			fields.push({
