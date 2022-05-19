@@ -70,17 +70,17 @@ frappe.ui.form.LinkSelector.prototype.make = function() {
 				this.dialog.fields_dict.description.set_input(this.description);
 			this.dialog.get_input("name").on("keypress", function (e) {
 				console.log(e.which)
-				if (e.which === 13) {
+				// if (e.which === 13) {
 					me.start = 0;
 					me.search();
-				}
+				// }
 			});
 			this.dialog.get_input("description").on("keypress", function (e) {
 				console.log(e.which)
-				if (e.which === 13) {
+				// if (e.which === 13) {
 					me.start = 0;
 					me.search();
-				}
+				// }
 			});
 		}else{
 			if (this.txt)
