@@ -68,14 +68,14 @@ frappe.ui.form.LinkSelector.prototype.make = function() {
 				this.dialog.fields_dict.name.set_input(this.name);
 			if (this.description)
 				this.dialog.fields_dict.description.set_input(this.description);
-			this.dialog.get_input("name").on("keypress", function (e) {
+			this.dialog.get_input("name").on("keydown", function (e) {
 				console.log(e.which)
 				// if (e.which === 13) {
 					me.start = 0;
 					me.search();
 				// }
 			});
-			this.dialog.get_input("description").on("keypress", function (e) {
+			this.dialog.get_input("description").on("keydown", function (e) {
 				console.log(e.which)
 				// if (e.which === 13) {
 					me.start = 0;
