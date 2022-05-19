@@ -8,7 +8,7 @@ frappe.ui.form.LinkSelector.prototype.make = function() {
 		let fields = [
 				{
 					fieldtype: "Data", fieldname: "txt", label: __("Beginning with"),
-					description: __("You can use wildcard %"), hidden:1
+					description: __("You can use wildcard %"),hidden:1
 				},
 				// {
 				// 	fieldtype: "HTML", fieldname: "results"
@@ -55,20 +55,20 @@ frappe.ui.form.LinkSelector.prototype.make = function() {
 			}
 		});
 
-		if (this.txt)
-			this.dialog.fields_dict.txt.set_input(this.txt);
+		// if (this.txt)
+		// 	this.dialog.fields_dict.txt.set_input(this.txt);
 		if(jQuery.inArray(this.doctype, search_docs) !== -1){
 			if (this.name)
 				this.dialog.fields_dict.name.set_input(this.name);
 			if (this.description)
 				this.dialog.fields_dict.description.set_input(this.description);
 		}
-		this.dialog.get_input("txt").on("keypress", function (e) {
-			if (e.which === 13) {
-				me.start = 0;
-				me.search();
-			}
-		});
+		// this.dialog.get_input("txt").on("keypress", function (e) {
+		// 	if (e.which === 13) {
+		// 		me.start = 0;
+		// 		me.search();
+		// 	}
+		// });
 		if(jQuery.inArray(this.doctype, search_docs) !== -1){
 			this.dialog.get_input("name").on("keypress", function (e) {
 				if (e.which === 13) {
@@ -93,7 +93,8 @@ frappe.ui.form.LinkSelector.prototype.search = function() {
 	var description_data = null
 	if(jQuery.inArray(this.doctype, search_docs) !== -1){
 		var args = {
-			txt: this.dialog.fields_dict.txt.get_value(),
+			txt: '',
+			// txt: this.dialog.fields_dict.txt.get_value(),
 			// filters:{"name": this.dialog.fields_dict.name.get_value(),"description": this.dialog.fields_dict.description.get_value()},
 			// name: this.dialog.fields_dict.name.get_value(),
 			// description: this.dialog.fields_dict.description.get_value(),
@@ -121,7 +122,8 @@ frappe.ui.form.LinkSelector.prototype.search = function() {
 		// console.log(args.filters)
 	}else{
 		var args = {
-			txt: this.dialog.fields_dict.txt.get_value(),
+			// txt: this.dialog.fields_dict.txt.get_value(),
+			txt:'',
 			searchfield: "name",
 			start: this.start
 		};
