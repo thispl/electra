@@ -6,10 +6,7 @@ frappe.ui.form.LinkSelector.prototype.make = function() {
 		var me = this;
 		this.start = 0;
 		let fields = [
-				{
-					fieldtype: "Data", fieldname: "txt", label: __("Beginning with"),
-					description: __("You can use wildcard %"),hidden:1
-				},
+				
 				// {
 				// 	fieldtype: "HTML", fieldname: "results"
 				// },
@@ -23,6 +20,10 @@ frappe.ui.form.LinkSelector.prototype.make = function() {
 
 		// if(this.doctype in search_docs){
 		if(jQuery.inArray(this.doctype, search_docs) !== -1){
+			fields.push({
+					fieldtype: "Data", fieldname: "txt", label: __("Beginning with"),
+					description: __("You can use wildcard %"),hidden:1
+				})
 			// fields.push({
 			// 		fieldtype: "Column Break", fieldname: "col_1"})
 			fields.push({
@@ -34,7 +35,12 @@ frappe.ui.form.LinkSelector.prototype.make = function() {
 			fields.push({
 					fieldtype: "Section Break", fieldname: "sec_1"})
 		}
-
+		else{
+			fields.push({
+					fieldtype: "Data", fieldname: "txt", label: __("Beginning with"),
+					description: __("You can use wildcard %"),hidden:0
+				})
+		}
 		fields.push({
 					fieldtype: "HTML", fieldname: "results"
 				})
@@ -55,34 +61,38 @@ frappe.ui.form.LinkSelector.prototype.make = function() {
 			}
 		});
 
-		// if (this.txt)
-		// 	this.dialog.fields_dict.txt.set_input(this.txt);
+	
 		if(jQuery.inArray(this.doctype, search_docs) !== -1){
+			console.log("---------e.which-----------")
 			if (this.name)
 				this.dialog.fields_dict.name.set_input(this.name);
 			if (this.description)
 				this.dialog.fields_dict.description.set_input(this.description);
-		}
-		// this.dialog.get_input("txt").on("keypress", function (e) {
-		// 	if (e.which === 13) {
-		// 		me.start = 0;
-		// 		me.search();
-		// 	}
-		// });
-		if(jQuery.inArray(this.doctype, search_docs) !== -1){
 			this.dialog.get_input("name").on("keypress", function (e) {
+				console.log(e.which)
 				if (e.which === 13) {
 					me.start = 0;
 					me.search();
 				}
 			});
 			this.dialog.get_input("description").on("keypress", function (e) {
+				console.log(e.which)
 				if (e.which === 13) {
 					me.start = 0;
 					me.search();
 				}
 			});
+		}else{
+			if (this.txt)
+				this.dialog.fields_dict.txt.set_input(this.txt);
+			this.dialog.get_input("txt").on("keypress", function (e) {
+			if (e.which === 13) {
+				me.start = 0;
+				me.search();
+			}
+		});
 		}
+		
 		this.dialog.show();
 		this.search();
 }
@@ -122,8 +132,8 @@ frappe.ui.form.LinkSelector.prototype.search = function() {
 		// console.log(args.filters)
 	}else{
 		var args = {
-			// txt: this.dialog.fields_dict.txt.get_value(),
-			txt:'',
+			txt: this.dialog.fields_dict.txt.get_value(),
+			// txt:'',
 			searchfield: "name",
 			start: this.start
 		};
