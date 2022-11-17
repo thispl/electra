@@ -247,4 +247,4 @@ user_data_fields = [
 # 	"electra.auth.validate"
 # ]
 
-fixtures = ['Custom Field','Client Script','Workspace','User Permission']
+fixtures = ['Custom Field','Client Script','Workspace','User Permission','Print Format']
