@@ -15,6 +15,7 @@
   "resident_id_number",
   "date_of_joining",
   "company",
+  "letter_head",
   "details_of_injured_person_section",
   "details_of_injured_person",
   "head",
@@ -198,12 +199,17 @@
    "fieldname": "resident_id_number",
    "fieldtype": "Read Only",
    "label": "Resident ID Number(QID)"
+  },
+  {
+   "fieldname": "letter_head",
+   "fieldtype": "Link",
+   "label": "Letter Head",
+   "options": "Letter Head"
   }
  ],
  "index_web_pages_for_search": 1,
- "is_submittable": 1,
  "links": [],
- "modified": "2021-10-04 08:57:45.456784",
+ "modified": "2022-10-31 13:21:29.986984",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Accident Declaration Form",

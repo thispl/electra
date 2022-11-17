@@ -3,24 +3,27 @@
 
 frappe.ui.form.on('Staff Skill Mapping Form', {
 	onload: function(frm) {
-		frappe.call({
-			method: "frappe.client.get_list",
-			args: {
-				doctype: "Skill Set",
-				order_by: "name",
-				fields: ["name"],
-			},
-			callback: function(r) {
-				if(r.message) {
-					frm.clear_table("table_14");
-					$.each(r.message,function(i,d){
-						frm.add_child("table_14", {
-							skill_sets: d.name,
+		if(frm.doc.__islocal){
+			frappe.call({
+				method: "frappe.client.get_list",
+				args: {
+					doctype: "Skill Set",
+					order_by: "name",
+					fields: ["name"],
+				},
+				callback: function(r) {
+					if(r.message) {
+						frm.clear_table("table_14");
+						$.each(r.message,function(i,d){
+							frm.add_child("table_14", {
+								skill_sets: d.name,
+							})
+							frm.refresh_field('table_14');
 						})
-						frm.refresh_field('table_14');
-					})
+					}
 				}
-			}
-		});
+			});
+		}
+		
 	}
 });

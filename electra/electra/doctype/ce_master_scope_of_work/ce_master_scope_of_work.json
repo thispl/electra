@@ -6,33 +6,34 @@
  "engine": "InnoDB",
  "field_order": [
   "msow",
+  "estimate",
   "view",
   "column_break_3",
   "msow_desc",
   "section_break_5",
   "total_overhead",
   "total_amount_as_overhead",
-  "column_break_8",
-  "total_profit",
-  "total_amount_of_profit",
-  "column_break_11",
+  "column_break_14",
   "contigency_percent",
   "contigency",
-  "column_break_14",
+  "column_break_17",
   "engineering_overhead",
   "total_amount_as_engineering_overhead",
   "section_break_17",
   "total_cost",
   "total_overheads",
   "total_business_promotion",
-  "total_profit_amount",
-  "total_profit_percent",
-  "estimate",
+  "column_break_8",
+  "net_profit_percent",
+  "net_profit_amount",
+  "gross_profit_percent",
+  "gross_profit_amount",
+  "column_break_11",
   "unit",
   "qty",
+  "column_break_19",
   "unit_price",
   "total_bidding_price",
-  "column_break_19",
   "optional"
  ],
  "fields": [
@@ -43,7 +44,8 @@
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "MSoW ID",
-   "options": "Master Scope of Work"
+   "options": "Master Scope of Work",
+   "reqd": 1
   },
   {
    "columns": 3,
@@ -69,7 +71,8 @@
   {
    "fieldname": "total_overhead",
    "fieldtype": "Percent",
-   "label": "Overhead %"
+   "label": "Overhead %",
+   "read_only": 1
   },
   {
    "fieldname": "total_amount_as_overhead",
@@ -80,18 +83,6 @@
   {
    "fieldname": "column_break_8",
    "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "total_profit",
-   "fieldtype": "Percent",
-   "label": "Profit %",
-   "read_only": 1
-  },
-  {
-   "fieldname": "total_amount_of_profit",
-   "fieldtype": "Currency",
-   "label": "Total Profit",
-   "read_only": 1
   },
   {
    "fieldname": "column_break_11",
@@ -202,22 +193,38 @@
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "total_profit_amount",
-   "fieldtype": "Currency",
-   "label": "Total Profit Amount",
+   "fieldname": "net_profit_percent",
+   "fieldtype": "Percent",
+   "label": "Net Profit Percent",
    "read_only": 1
   },
   {
-   "fieldname": "total_profit_percent",
-   "fieldtype": "Percent",
-   "label": "Total Profit %",
+   "fieldname": "net_profit_amount",
+   "fieldtype": "Currency",
+   "label": "Net Profit Amount",
    "read_only": 1
+  },
+  {
+   "fieldname": "gross_profit_percent",
+   "fieldtype": "Percent",
+   "label": "Gross Profit Percent",
+   "read_only": 1
+  },
+  {
+   "fieldname": "gross_profit_amount",
+   "fieldtype": "Currency",
+   "label": "Gross Profit Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_17",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2022-04-18 09:11:16.878094",
+ "modified": "2022-08-09 09:58:54.903188",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "CE Master Scope of Work",

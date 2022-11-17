@@ -10,6 +10,10 @@ frappe.ui.form.on('Report Dashboard', {
 			var path = "electra.electra.doctype.report_dashboard.salary_register.download"
 			var args = 'from_date=%(from_date)s&to_date=%(to_date)s&division=%(division)s'
 		}
+		if (frm.doc.report == 'Working Progress Report') {
+			var path = "electra.electra.doctype.report_dashboard.working_progress_report.download"
+			var args = 'from_date=%(from_date)s&to_date=%(to_date)s&division=%(division)s'
+		}
 
 		if (path) {
 			window.location.href = repl(frappe.request.url +

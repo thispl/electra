@@ -10,10 +10,12 @@
   "emp_id",
   "name1",
   "dept",
+  "company",
   "column_break_5",
   "designation",
   "date",
   "qid_no",
+  "letter_head",
   "vehicle_information",
   "plate_no",
   "type_of_vehicle",
@@ -23,10 +25,11 @@
   "current_responsibility",
   "division_of_vehicle",
   "vehicle_accident_information_section",
+  "time",
   "date_of_accident",
   "kilometer",
-  "time",
   "place_of_accident",
+  "remarks",
   "column_break_20",
   "accident_regisration",
   "accident_report_date",
@@ -73,8 +76,10 @@
   {
    "fieldname": "emp_id",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Employee ID",
-   "options": "Employee"
+   "options": "Employee",
+   "reqd": 1
   },
   {
    "fetch_from": "emp_id.qid_id_",
@@ -91,14 +96,16 @@
    "fetch_from": "plate_no.vehicle_type",
    "fieldname": "type_of_vehicle",
    "fieldtype": "Select",
-   "label": "Type of vehicle",
+   "label": "Type of Vehicle",
    "options": "\nTransport\nPrivate"
   },
   {
    "fieldname": "plate_no",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Plate No",
-   "options": "Vehicle"
+   "options": "Vehicle",
+   "reqd": 1
   },
   {
    "fetch_from": "plate_no.make",
@@ -110,13 +117,13 @@
    "fetch_from": "plate_no.expiry_of_istimara",
    "fieldname": "istimara_expiry",
    "fieldtype": "Data",
-   "label": "Istimara expiry"
+   "label": "Istimara Expiry"
   },
   {
    "fetch_from": "emp_id.employee_name",
    "fieldname": "current_responsibility",
    "fieldtype": "Data",
-   "label": "Current responsibility"
+   "label": "Current Responsibility"
   },
   {
    "fieldname": "vehicle_accident_information_section",
@@ -126,7 +133,7 @@
   {
    "fieldname": "date_of_accident",
    "fieldtype": "Date",
-   "label": "Date of accident"
+   "label": "Date of Accident"
   },
   {
    "fieldname": "kilometer",
@@ -141,7 +148,7 @@
   {
    "fieldname": "place_of_accident",
    "fieldtype": "Data",
-   "label": "Place of accident"
+   "label": "Place of Accident"
   },
   {
    "fieldname": "column_break_20",
@@ -150,23 +157,24 @@
   {
    "fieldname": "accident_regisration",
    "fieldtype": "Select",
-   "label": "Accident regisration(Metarsh)",
+   "label": "Accident Registration(Metrash)",
    "options": "\nYes\nNo"
   },
   {
    "fieldname": "accident_report_date",
    "fieldtype": "Date",
-   "label": "Accident report date"
+   "label": "Accident Report Date"
   },
   {
    "fieldname": "date_of_registration",
    "fieldtype": "Date",
-   "label": "Date of registration"
+   "label": "Date of Registration"
   },
   {
+   "description": "(Please attach the Police report with accident photos)",
    "fieldname": "traffic_report",
    "fieldtype": "Select",
-   "label": "Traffic report(*Please attach the police report with accident photos)",
+   "label": "Traffic Report",
    "options": "\nYes\nNo"
   },
   {
@@ -177,7 +185,7 @@
   {
    "fieldname": "small_text_27",
    "fieldtype": "Small Text",
-   "label": "Description of the vehicle accident"
+   "label": "Description of the Vehicle Accident"
   },
   {
    "fieldname": "column_break_13",
@@ -189,7 +197,7 @@
    "options": "Note: The condition of the vehicle needs to be checked by the Auto technician and Admin Dept. shall do receive and handover function only.\n\n"
   },
   {
-   "fetch_from": "plate_no.vehicle_division",
+   "fetch_from": "plate_no.division",
    "fieldname": "division_of_vehicle",
    "fieldtype": "Data",
    "label": "Division of Vehicle"
@@ -198,11 +206,30 @@
    "fieldname": "for_office_use",
    "fieldtype": "Section Break",
    "label": "For Office Use"
+  },
+  {
+   "fetch_from": "emp_id.company",
+   "fetch_if_empty": 1,
+   "fieldname": "company",
+   "fieldtype": "Data",
+   "label": "Company"
+  },
+  {
+   "fieldname": "letter_head",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Letter Head",
+   "options": "Letter Head"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2021-08-20 14:21:40.261762",
+ "modified": "2022-10-31 17:52:48.055789",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Vehicle Accident Report",

@@ -1,0 +1,199 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "naming_series:",
+ "creation": "2022-02-12 18:29:48.042127",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "requested_date",
+  "project",
+  "source_company",
+  "column_break_2",
+  "raised_by",
+  "company",
+  "parent_company",
+  "sales_order",
+  "transfer_incharge_user",
+  "section_break_4",
+  "items",
+  "items_html",
+  "section_break_2",
+  "default_source_warehouse",
+  "letter_head",
+  "amended_from",
+  "transfer_approved",
+  "section_break_16",
+  "remarks",
+  "section_break_19",
+  "cancellation_remark"
+ ],
+ "fields": [
+  {
+   "fieldname": "requested_date",
+   "fieldtype": "Date",
+   "label": "Requested Date"
+  },
+  {
+   "depends_on": "eval:doc.company == 'MEP DIVISION - ELECTRA'||doc.company=='INTERIOR DIVISION - ELECTRA'||doc.company == 'ENGINEERING DIVISION - ELECTRA'",
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "label": "Project",
+   "options": "Project"
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "raised_by",
+   "fieldtype": "Link",
+   "ignore_user_permissions": 1,
+   "label": "Raised By",
+   "options": "User"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Company",
+   "options": "Company"
+  },
+  {
+   "fieldname": "sales_order",
+   "fieldtype": "Link",
+   "ignore_user_permissions": 1,
+   "label": "Sales Order",
+   "options": "Sales Order"
+  },
+  {
+   "fieldname": "section_break_4",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "label": "Items",
+   "options": "Material Transfer Items"
+  },
+  {
+   "fieldname": "items_html",
+   "fieldtype": "HTML",
+   "label": "Items HTML"
+  },
+  {
+   "fieldname": "section_break_2",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "source_company",
+   "fieldtype": "Link",
+   "ignore_user_permissions": 1,
+   "in_list_view": 1,
+   "label": "Request to Company",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "fieldname": "default_source_warehouse",
+   "fieldtype": "Link",
+   "label": "Request to Warehouse",
+   "options": "Warehouse",
+   "read_only": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Stock Request",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "transfer_approved",
+   "fieldtype": "Check",
+   "label": "Transfer Approved",
+   "read_only": 1
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "ELE-STR-.YYYY.-"
+  },
+  {
+   "fieldname": "section_break_16",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  },
+  {
+   "fieldname": "transfer_incharge_user",
+   "fieldtype": "Link",
+   "ignore_user_permissions": 1,
+   "label": "Transfer Incharge User",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_19",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "cancellation_remark",
+   "fieldtype": "Small Text",
+   "label": "Cancellation Remark"
+  },
+  {
+   "fetch_from": "company.parent_company",
+   "fieldname": "parent_company",
+   "fieldtype": "Data",
+   "ignore_user_permissions": 1,
+   "label": "Parent Company",
+   "read_only": 1
+  },
+  {
+   "fieldname": "letter_head",
+   "fieldtype": "Link",
+   "label": "Letter Head",
+   "options": "Letter Head"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2022-07-16 07:49:15.478159",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "Stock Request",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "source_company",
+ "track_changes": 1
+}

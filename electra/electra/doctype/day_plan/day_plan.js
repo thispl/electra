@@ -4,12 +4,17 @@
 frappe.ui.form.on('Day Plan', {
 	validate(frm){
 		$.each(frm.doc.employee_table,function(i,d){
+			// console.log(d)
 			d.planned_date = frm.doc.planned_date
+			// d.employee = frm.doc.employee
 		})	
+		
+
 		$.each(frm.doc.employee_multiselect,function(i,d){
 			d.planned_date = frm.doc.planned_date
 		})
 	},
+	
 	setup(frm) {
 		frm.set_query("project", function() {
 			return {
@@ -85,5 +90,4 @@ frappe.ui.form.on('Day Plan', {
 			}
 		});
 	},
-	
 });

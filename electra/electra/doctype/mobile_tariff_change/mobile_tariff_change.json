@@ -17,6 +17,7 @@
   "resident_id_number",
   "date_of_join",
   "company",
+  "letter_head",
   "request_section",
   "date",
   "service_provider",
@@ -25,9 +26,9 @@
   "amount_2",
   "column_break_15",
   "benefits",
-  "benefits_1",
+  "proposed_plan",
   "amount_3",
-  "benefits_3",
+  "proposed_benefits",
   "section_break_19",
   "section_break_25",
   "plan_name",
@@ -86,10 +87,8 @@
    "fieldtype": "Column Break"
   },
   {
-   "default": "Today",
-   "fetch_from": "emp_id.date",
    "fieldname": "date",
-   "fieldtype": "Read Only",
+   "fieldtype": "Date",
    "label": "Date"
   },
   {
@@ -105,27 +104,26 @@
    "label": "Request Details"
   },
   {
+   "fetch_from": "emp_id.service_provider",
    "fieldname": "service_provider",
    "fieldtype": "Data",
-   "label": "Service provider "
+   "label": "Service provider"
   },
   {
+   "fetch_from": "emp_id.mobile_number",
    "fieldname": "service_no",
    "fieldtype": "Int",
    "label": "Service Number",
    "options": "Phone"
   },
   {
+   "fetch_from": "emp_id.current_plan",
    "fieldname": "current_plan",
    "fieldtype": "Data",
    "label": "Current Plan"
   },
   {
-   "fieldname": "benefits_1",
-   "fieldtype": "Int",
-   "label": "Proposed Plan"
-  },
-  {
+   "fetch_from": "emp_id.current_benefits",
    "fieldname": "benefits",
    "fieldtype": "Data",
    "label": "Current Benefits"
@@ -150,11 +148,6 @@
    "fieldname": "amount_3",
    "fieldtype": "Int",
    "label": "Proposed Amount"
-  },
-  {
-   "fieldname": "benefits_3",
-   "fieldtype": "Data",
-   "label": "Proposed Benefits"
   },
   {
    "fieldname": "plan_activation_date",
@@ -272,11 +265,28 @@
    "fieldname": "for_office_use_section",
    "fieldtype": "Section Break",
    "label": "For Office Use"
+  },
+  {
+   "fieldname": "letter_head",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Letter Head",
+   "options": "Letter Head"
+  },
+  {
+   "fieldname": "proposed_plan",
+   "fieldtype": "Data",
+   "label": "Proposed Plan"
+  },
+  {
+   "fieldname": "proposed_benefits",
+   "fieldtype": "Data",
+   "label": "Proposed Benefits"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2021-10-07 09:42:30.352633",
+ "modified": "2022-11-01 07:35:17.775871",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Mobile Tariff Change",

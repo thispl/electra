@@ -14,16 +14,18 @@
   "unit",
   "qty",
   "vr",
+  "estimated_amount",
+  "estimated_cost",
   "cost_with_transfer_percent",
   "vr_with_tr_percent",
   "transfer_charges",
   "transfer_amount",
   "cost",
   "transfer_cost_amount",
-  "amount_with_overheads",
   "unit_price",
+  "amount",
   "rate_with_overheads",
-  "amount"
+  "amount_with_overheads"
  ],
  "fields": [
   {
@@ -138,6 +140,7 @@
    "label": "Trf. Cost Amount"
   },
   {
+   "columns": 1,
    "fieldname": "amount_with_overheads",
    "fieldtype": "Currency",
    "label": "Amount With Overheads"
@@ -150,6 +153,7 @@
    "label": "Rate"
   },
   {
+   "columns": 1,
    "fieldname": "rate_with_overheads",
    "fieldtype": "Currency",
    "label": "Rate with Overheads"
@@ -160,12 +164,24 @@
    "fieldtype": "Currency",
    "in_list_view": 1,
    "label": "Amount"
+  },
+  {
+   "fieldname": "estimated_amount",
+   "fieldtype": "Currency",
+   "label": "Estimated Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "estimated_cost",
+   "fieldtype": "Currency",
+   "label": "Estimated Cost",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2022-04-14 14:16:33.224367",
+ "modified": "2022-10-11 16:56:09.703145",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "PB MEP Materials",

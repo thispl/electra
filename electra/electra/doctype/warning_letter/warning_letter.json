@@ -23,7 +23,8 @@
   "subject",
   "created_by",
   "warning_template_section",
-  "warning_template"
+  "warning_template",
+  "amended_from"
  ],
  "fields": [
   {
@@ -129,11 +130,21 @@
    "fieldtype": "Link",
    "label": "Created By",
    "options": "User"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Warning Letter",
+   "print_hide": 1,
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
+ "is_submittable": 1,
  "links": [],
- "modified": "2022-04-14 08:17:50.789239",
+ "modified": "2022-07-14 10:04:17.237935",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Warning Letter",

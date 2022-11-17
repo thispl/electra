@@ -19,7 +19,21 @@
   "resident_id_numberqid",
   "doj",
   "company",
+  "request_date",
   "s_section",
+  "column_break_15",
+  "basic",
+  "accomodation_allowance",
+  "transport_allowance",
+  "other_allowance",
+  "total",
+  "column_break_20",
+  "basic_salary",
+  "accomodation_allow",
+  "transport_allow",
+  "other_allow",
+  "total_new",
+  "section_break_26",
   "name_of_appraiser",
   "column_break1",
   "job_title_1",
@@ -39,9 +53,9 @@
   "total_salary_increment",
   "effective_from",
   "additional_benefits_and_perks_section",
-  "yes",
+  "additional",
   "small_text_25",
-  "no",
+  "letter_head",
   "for_office_use_section",
   "hod",
   "column_break_37",
@@ -133,19 +147,7 @@
    "label": "Additional Benefits and Perks "
   },
   {
-   "default": "0",
-   "fieldname": "yes",
-   "fieldtype": "Check",
-   "label": "Yes"
-  },
-  {
-   "default": "0",
-   "fieldname": "no",
-   "fieldtype": "Check",
-   "label": "Not Applicable"
-  },
-  {
-   "depends_on": "eval:doc.yes == 1",
+   "depends_on": "eval:doc.additional == 'Yes'",
    "fieldname": "small_text_25",
    "fieldtype": "Small Text"
   },
@@ -304,11 +306,105 @@
    "fieldname": "resident_id_numberqid",
    "fieldtype": "Read Only",
    "label": "Resident ID Number(QID)"
+  },
+  {
+   "default": "0",
+   "fetch_from": "emp_id.basic",
+   "fieldname": "basic",
+   "fieldtype": "Currency",
+   "label": "Basic"
+  },
+  {
+   "default": "0",
+   "fetch_from": "emp_id.accommodation",
+   "fieldname": "accomodation_allowance",
+   "fieldtype": "Currency",
+   "label": "Accomodation Allowance"
+  },
+  {
+   "default": "0",
+   "fetch_from": "emp_id.transportation",
+   "fieldname": "transport_allowance",
+   "fieldtype": "Currency",
+   "label": "Transport Allowance"
+  },
+  {
+   "default": "0",
+   "fetch_from": "emp_id._other_allowance",
+   "fieldname": "other_allowance",
+   "fieldtype": "Currency",
+   "label": "Other Allowance "
+  },
+  {
+   "fetch_from": "emp_id.gross_salary",
+   "fieldname": "total",
+   "fieldtype": "Currency",
+   "label": "Total "
+  },
+  {
+   "fieldname": "column_break_20",
+   "fieldtype": "Column Break",
+   "label": "Revised"
+  },
+  {
+   "default": "0",
+   "fieldname": "basic_salary",
+   "fieldtype": "Currency",
+   "label": "Basic Salary"
+  },
+  {
+   "default": "0",
+   "fieldname": "accomodation_allow",
+   "fieldtype": "Currency",
+   "label": "Accomodation Allow"
+  },
+  {
+   "default": "0",
+   "fieldname": "transport_allow",
+   "fieldtype": "Currency",
+   "label": "Transport Allow"
+  },
+  {
+   "default": "0",
+   "fieldname": "other_allow",
+   "fieldtype": "Currency",
+   "label": "Other Allow"
+  },
+  {
+   "fieldname": "total_new",
+   "fieldtype": "Currency",
+   "label": "Total "
+  },
+  {
+   "fieldname": "section_break_26",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_15",
+   "fieldtype": "Column Break",
+   "label": "OLD"
+  },
+  {
+   "fieldname": "additional",
+   "fieldtype": "Select",
+   "label": "Additional ",
+   "options": "\nYes\nNo"
+  },
+  {
+   "fieldname": "letter_head",
+   "fieldtype": "Link",
+   "label": "Letter Head",
+   "options": "Letter Head"
+  },
+  {
+   "fieldname": "request_date",
+   "fieldtype": "Date",
+   "label": "Request Date"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2021-10-21 07:22:38.580180",
+ "modified": "2022-11-14 16:10:18.307474",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Salary and Benefit Form",

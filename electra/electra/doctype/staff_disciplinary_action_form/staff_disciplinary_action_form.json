@@ -48,7 +48,9 @@
   "column_break_31",
   "hr_manager",
   "section_break_34",
-  "html_22"
+  "letter_head",
+  "html_22",
+  "amended_from"
  ],
  "fields": [
   {
@@ -185,11 +187,12 @@
    "fieldname": "penalty_type",
    "fieldtype": "Select",
    "label": "Type of Penalty",
-   "options": "Salary Deduction\nSuspended from service"
+   "options": "\nSalary Deduction\nSuspended from service"
   },
   {
    "fieldname": "section_break_1",
-   "fieldtype": "Section Break"
+   "fieldtype": "Section Break",
+   "hidden": 1
   },
   {
    "fieldname": "column_break_3",
@@ -273,11 +276,26 @@
   {
    "fieldname": "section_break_34",
    "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "letter_head",
+   "fieldtype": "Link",
+   "label": "Letter Head",
+   "options": "Letter Head"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Staff Disciplinary Action Form",
+   "print_hide": 1,
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2021-10-04 08:51:19.153679",
+ "modified": "2022-10-31 08:33:22.869398",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Staff Disciplinary Action Form",

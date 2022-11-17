@@ -1,0 +1,72 @@
+{
+ "actions": [],
+ "creation": "2022-06-22 08:49:07.926261",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "type",
+  "document",
+  "document_type",
+  "purchase_invoice",
+  "amount",
+  "remark"
+ ],
+ "fields": [
+  {
+   "columns": 1,
+   "fieldname": "type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Type",
+   "options": "\nPurchase Invoice\nAdvance\nGeneral"
+  },
+  {
+   "fieldname": "document",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Document",
+   "options": "DocType"
+  },
+  {
+   "fieldname": "document_type",
+   "fieldtype": "Dynamic Link",
+   "in_list_view": 1,
+   "label": "Document Type",
+   "options": "document"
+  },
+  {
+   "fieldname": "purchase_invoice",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Purchase Invoice",
+   "options": "Purchase Invoice"
+  },
+  {
+   "fetch_from": "purchase_invoice.base_grand_total",
+   "fieldname": "amount",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Amount"
+  },
+  {
+   "columns": 1,
+   "fieldname": "remark",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "label": "Remark"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2022-06-22 10:39:46.041564",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "Internal Payment",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

@@ -1,0 +1,198 @@
+{
+ "actions": [],
+ "autoname": "field:employee_name",
+ "creation": "2021-08-14 12:54:41.399169",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "column_break_2",
+  "status",
+  "employee_details_section",
+  "emp_id",
+  "employee_name",
+  "dept",
+  "job_title",
+  "section_break_5",
+  "resident_id_number",
+  "date_of_join",
+  "company",
+  "letter_head",
+  "request_details_section",
+  "dec_date",
+  "html_17",
+  "check_15",
+  "self_declaration_section",
+  "accommodation_eligibility",
+  "attach",
+  "data_10",
+  "hr",
+  "column_break_22",
+  "hr_admin",
+  "managing_director"
+ ],
+ "fields": [
+  {
+   "fetch_from": "emp_id.employee_name",
+   "fieldname": "employee_name",
+   "fieldtype": "Read Only",
+   "label": "Employee Name",
+   "unique": 1
+  },
+  {
+   "fetch_from": "emp_id.designation",
+   "fieldname": "job_title",
+   "fieldtype": "Read Only",
+   "label": "Designation"
+  },
+  {
+   "fetch_from": "emp_id.department",
+   "fieldname": "dept",
+   "fieldtype": "Read Only",
+   "label": "Department"
+  },
+  {
+   "fetch_from": "emp_id.employee_number",
+   "fieldname": "emp_id",
+   "fieldtype": "Link",
+   "label": "Employee ID",
+   "options": "Employee",
+   "unique": 1
+  },
+  {
+   "fieldname": "section_break_5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "emp_id.scheduled_confirmation_date",
+   "fieldname": "date_of_join",
+   "fieldtype": "Read Only",
+   "label": "Date of Joining"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "self_declaration_section",
+   "fieldtype": "Section Break",
+   "label": "For Office Use"
+  },
+  {
+   "description": "Comments",
+   "fieldname": "data_10",
+   "fieldtype": "Small Text",
+   "label": "Accommodation Detials"
+  },
+  {
+   "fieldname": "accommodation_eligibility",
+   "fieldtype": "Select",
+   "label": "Accommodation Eligibility",
+   "options": "\nYes\nNo\nSpecial Approval(Doc Enclosed)"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "employee_details_section",
+   "fieldtype": "Section Break",
+   "label": "Employee Details"
+  },
+  {
+   "default": "0",
+   "fieldname": "check_15",
+   "fieldtype": "Check",
+   "label": "I agree with these terms and I shall co-operate"
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Requested",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "\nRequested\nInitiated\nCompleted\nHold"
+  },
+  {
+   "description": "Comments",
+   "fieldname": "hr_admin",
+   "fieldtype": "Small Text",
+   "label": "HR & Admin Manager"
+  },
+  {
+   "description": "Comments",
+   "fieldname": "hr",
+   "fieldtype": "Small Text",
+   "label": "HR & Admin Assistant"
+  },
+  {
+   "description": "Comments",
+   "fieldname": "managing_director",
+   "fieldtype": "Small Text",
+   "label": "Managing Director"
+  },
+  {
+   "fieldname": "column_break_22",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "request_details_section",
+   "fieldtype": "Section Break",
+   "label": "Request Details"
+  },
+  {
+   "fieldname": "html_17",
+   "fieldtype": "HTML",
+   "options": "<h4>Self Declaration</h4>\nI hereby understand that I am vacating my company provided accommodation for a shorter duration due to my personal reasons and  I am eligible for a leave out allowance as per the company policy.<br> If I wish to re-possess in the company provided accommodation at the later date , the company shall be verify the availability of bed space  and process my request . If there is no accommodation/bed space available during the time the company shall continue to provide me with leave out allowance as per the company policy"
+  },
+  {
+   "fetch_from": "emp_id.company",
+   "fieldname": "company",
+   "fieldtype": "Read Only",
+   "label": "Company / Division"
+  },
+  {
+   "depends_on": "eval:doc.accommodation_eligibility == \"Special Approval(Doc Enclosed)\"",
+   "fieldname": "attach",
+   "fieldtype": "Attach"
+  },
+  {
+   "fetch_from": "emp_id.resident_id_no",
+   "fieldname": "resident_id_number",
+   "fieldtype": "Read Only",
+   "label": "Resident ID Number(QID)"
+  },
+  {
+   "fieldname": "letter_head",
+   "fieldtype": "Link",
+   "label": "Letter Head",
+   "options": "Letter Head"
+  },
+  {
+   "fieldname": "dec_date",
+   "fieldtype": "Date",
+   "label": "Date"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2022-10-31 12:35:47.766759",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "Employee Vacating Accommodation Declaration",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

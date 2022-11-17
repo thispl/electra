@@ -26,7 +26,7 @@ frappe.query_reports["Stock Ageing Report"] = {
 		},
 		{
 			"fieldname":"item_code",
-			"label": __("Item"),
+			"label": __("Item Code"),
 			"fieldtype": "Link",
 			"options": "Item"
 		},

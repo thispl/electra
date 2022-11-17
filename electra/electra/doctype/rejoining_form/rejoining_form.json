@@ -1,0 +1,211 @@
+{
+ "actions": [],
+ "autoname": "Re-Joining Form-.####",
+ "creation": "2021-08-16 08:21:06.638996",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "column_break_2",
+  "leave_application",
+  "status",
+  "employee_details",
+  "emp_no",
+  "employee_name",
+  "designation",
+  "department",
+  "column_break_3",
+  "resident_id_number",
+  "date_of_joining",
+  "company",
+  "section_break_5",
+  "start",
+  "end",
+  "column_break_16",
+  "total_leave_in_days",
+  "nature_of_leave",
+  "re_join",
+  "column_break_10",
+  "re_joining_date",
+  "reporting_date",
+  "column_break_22",
+  "late_joining_in_days",
+  "section_break_13",
+  "eid_holidays"
+ ],
+ "fields": [
+  {
+   "collapsible": 1,
+   "fieldname": "section_break_5",
+   "fieldtype": "Section Break",
+   "label": "Request Details"
+  },
+  {
+   "fetch_from": "leave_application.total_leave_days",
+   "fetch_if_empty": 1,
+   "fieldname": "total_leave_in_days",
+   "fieldtype": "Read Only",
+   "label": "Total Leave in Days"
+  },
+  {
+   "fetch_from": "leave_application.description",
+   "fetch_if_empty": 1,
+   "fieldname": "nature_of_leave",
+   "fieldtype": "Data",
+   "label": "Nature of Leave"
+  },
+  {
+   "fieldname": "reporting_date",
+   "fieldtype": "Date",
+   "label": "Reporting Date"
+  },
+  {
+   "fieldname": "re_join",
+   "fieldtype": "Date",
+   "label": "Re Joining Date"
+  },
+  {
+   "fieldname": "late_joining_in_days",
+   "fieldtype": "Read Only",
+   "label": "Late Joining in Days"
+  },
+  {
+   "fieldname": "section_break_13",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "eid_holidays",
+   "fieldtype": "HTML",
+   "options": "<b>REMARKS :</b> EXCLUDING 3 DAYS EID HOLIDAYS"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "column_break_10",
+   "fieldtype": "Section Break",
+   "label": "For Office Use"
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "emp_no.employee_name",
+   "fieldname": "employee_name",
+   "fieldtype": "Read Only",
+   "in_list_view": 1,
+   "label": "Employee Name"
+  },
+  {
+   "fetch_from": "emp_no.department",
+   "fieldname": "department",
+   "fieldtype": "Read Only",
+   "label": "Department"
+  },
+  {
+   "fetch_from": "emp_no.date_of_joining",
+   "fieldname": "date_of_joining",
+   "fieldtype": "Read Only",
+   "label": "Date of Joining"
+  },
+  {
+   "fieldname": "column_break_16",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_22",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "leave_application.from_date",
+   "fetch_if_empty": 1,
+   "fieldname": "start",
+   "fieldtype": "Date",
+   "label": "Start of Leave Date"
+  },
+  {
+   "fetch_from": "leave_application.to_date",
+   "fetch_if_empty": 1,
+   "fieldname": "end",
+   "fieldtype": "Date",
+   "label": "End of Leave Date"
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Requested",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "\nRequested\nInitiated\nCompleted\nHold"
+  },
+  {
+   "fetch_from": "leave_application.employee",
+   "fetch_if_empty": 1,
+   "fieldname": "emp_no",
+   "fieldtype": "Link",
+   "label": "Employee ID",
+   "options": "Employee"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "employee_details",
+   "fieldtype": "Section Break",
+   "label": "Employee Details"
+  },
+  {
+   "fetch_from": "emp_no.company",
+   "fieldname": "company",
+   "fieldtype": "Read Only",
+   "label": "Company / Division"
+  },
+  {
+   "fetch_from": "emp_no.resident_id_no",
+   "fieldname": "resident_id_number",
+   "fieldtype": "Read Only",
+   "label": "Resident ID Number(QID)"
+  },
+  {
+   "fetch_from": "emp_no.designation",
+   "fieldname": "designation",
+   "fieldtype": "Read Only",
+   "label": "Designation"
+  },
+  {
+   "fieldname": "leave_application",
+   "fieldtype": "Link",
+   "label": "Leave Application",
+   "options": "Leave Application"
+  },
+  {
+   "fieldname": "re_joining_date",
+   "fieldtype": "Date",
+   "label": "Re Joining Date"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2022-11-11 09:57:52.539455",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "Rejoining Form",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

@@ -1,0 +1,114 @@
+{
+ "actions": [],
+ "creation": "2022-10-12 12:52:00.149701",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "project",
+  "employee",
+  "column_break_3",
+  "employee_name",
+  "designation",
+  "section_break_5",
+  "from_time",
+  "to_time",
+  "lunch_break",
+  "column_break_9",
+  "total_working_hours",
+  "ot"
+ ],
+ "fields": [
+  {
+   "fieldname": "project",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Project"
+  },
+  {
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Employee",
+   "options": "Employee"
+  },
+  {
+   "fetch_from": "employee.employee_name",
+   "fieldname": "employee_name",
+   "fieldtype": "Read Only",
+   "label": "Employee Name"
+  },
+  {
+   "fetch_from": "employee.designation",
+   "fieldname": "designation",
+   "fieldtype": "Read Only",
+   "label": "Designation"
+  },
+  {
+   "fieldname": "section_break_5",
+   "fieldtype": "Section Break"
+  },
+  {
+   "columns": 1,
+   "default": "0",
+   "fieldname": "from_time",
+   "fieldtype": "Time",
+   "in_list_view": 1,
+   "label": "From Time"
+  },
+  {
+   "columns": 1,
+   "default": "0",
+   "fieldname": "to_time",
+   "fieldtype": "Time",
+   "in_list_view": 1,
+   "label": "To Time"
+  },
+  {
+   "columns": 1,
+   "default": "0",
+   "fieldname": "total_working_hours",
+   "fieldtype": "Time",
+   "in_list_view": 1,
+   "label": "TWH",
+   "read_only": 1
+  },
+  {
+   "columns": 1,
+   "default": "0",
+   "fieldname": "ot",
+   "fieldtype": "Time",
+   "in_list_view": 1,
+   "label": "OT",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_9",
+   "fieldtype": "Column Break"
+  },
+  {
+   "columns": 1,
+   "default": "0",
+   "fieldname": "lunch_break",
+   "fieldtype": "Time",
+   "in_list_view": 1,
+   "label": "Lunch Break"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2022-11-08 14:47:22.113816",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "Project Day Plan Employee",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

@@ -6,7 +6,6 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "workflow",
   "column_break_2",
   "status_section",
   "requested_date",
@@ -16,6 +15,8 @@
   "job__title",
   "dept",
   "column_break_5",
+  "company",
+  "letter_head",
   "resident_id_number",
   "date_of_join",
   "date_of_birth",
@@ -98,14 +99,10 @@
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "workflow",
-   "fieldtype": "Read Only",
-   "label": "Workflow"
-  },
-  {
    "default": "Requested",
    "fieldname": "status_section",
    "fieldtype": "Select",
+   "hidden": 1,
    "in_list_view": 1,
    "label": "Status",
    "options": "\nRequested\nInitiated\nCompleted\nHold"
@@ -162,11 +159,24 @@
    "in_list_view": 1,
    "label": "Requested Date",
    "reqd": 1
+  },
+  {
+   "fetch_from": "emp_id.company",
+   "fieldname": "company",
+   "fieldtype": "Data",
+   "label": "Company"
+  },
+  {
+   "fieldname": "letter_head",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Letter Head",
+   "options": "Letter Head"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-03-31 15:10:56.686149",
+ "modified": "2022-10-28 13:48:19.628904",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "HR Request",

@@ -95,7 +95,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2021-11-09 12:47:06.553822",
+ "modified": "2022-11-02 12:23:34.853616",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Visa Approval Monitor",
@@ -116,5 +116,6 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
+ "title_field": "visa_application_no",
  "track_changes": 1
 }

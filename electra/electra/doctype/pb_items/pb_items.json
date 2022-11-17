@@ -15,8 +15,11 @@
   "qty",
   "cost",
   "cost_amount",
+  "estimated_cost",
+  "estimated_amount",
   "unit_price",
   "amount",
+  "difference",
   "rate_with_overheads",
   "amount_with_overheads",
   "amended_from"
@@ -91,8 +94,7 @@
    "fieldname": "cost",
    "fieldtype": "Currency",
    "in_list_view": 1,
-   "label": "Cost",
-   "read_only": 1
+   "label": "Cost"
   },
   {
    "default": "0",
@@ -113,8 +115,7 @@
    "fieldname": "amount",
    "fieldtype": "Currency",
    "in_list_view": 1,
-   "label": "Budgeted Amount",
-   "read_only": 1
+   "label": "Budgeted Amount"
   },
   {
    "columns": 1,
@@ -139,13 +140,30 @@
    "options": "PB Items",
    "print_hide": 1,
    "read_only": 1
+  },
+  {
+   "fieldname": "difference",
+   "fieldtype": "Currency",
+   "label": "Difference Amount"
+  },
+  {
+   "fieldname": "estimated_cost",
+   "fieldtype": "Currency",
+   "label": "Estimated Cost",
+   "read_only": 1
+  },
+  {
+   "fieldname": "estimated_amount",
+   "fieldtype": "Currency",
+   "label": "Estimated Amount",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "istable": 1,
  "links": [],
- "modified": "2022-05-10 12:52:00.017451",
+ "modified": "2022-11-10 12:37:19.115902",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "PB Items",

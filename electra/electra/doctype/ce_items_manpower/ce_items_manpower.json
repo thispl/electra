@@ -10,10 +10,10 @@
   "worker",
   "total_workers",
   "cost",
+  "cost_amount",
   "unit_price",
   "working_hours",
   "days",
-  "cost_amount",
   "rate",
   "amount",
   "rate_with_overheads",
@@ -34,7 +34,8 @@
    "fieldname": "total_workers",
    "fieldtype": "Float",
    "in_list_view": 1,
-   "label": "Total Workers"
+   "label": "Total Workers",
+   "reqd": 1
   },
   {
    "columns": 1,
@@ -48,14 +49,16 @@
    "fieldname": "working_hours",
    "fieldtype": "Float",
    "in_list_view": 1,
-   "label": "Working Hours"
+   "label": "Working Hours",
+   "reqd": 1
   },
   {
    "columns": 1,
    "fieldname": "days",
    "fieldtype": "Float",
    "in_list_view": 1,
-   "label": "Days"
+   "label": "Days",
+   "reqd": 1
   },
   {
    "fieldname": "amount",
@@ -89,7 +92,7 @@
    "fieldname": "cost_amount",
    "fieldtype": "Currency",
    "in_list_view": 1,
-   "label": "Cost",
+   "label": "Cost Amount",
    "read_only": 1
   },
   {
@@ -97,8 +100,7 @@
    "fieldname": "rate_with_overheads",
    "fieldtype": "Currency",
    "in_list_view": 1,
-   "label": "Selling Price (SP)",
-   "read_only": 1
+   "label": "SP Rate"
   },
   {
    "columns": 1,
@@ -112,14 +114,13 @@
    "fieldname": "rate",
    "fieldtype": "Currency",
    "in_list_view": 1,
-   "label": "Est.Cost(EC)",
-   "read_only": 1
+   "label": "Est.Cost"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2022-04-13 11:01:14.991108",
+ "modified": "2022-10-30 12:04:39.535510",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "CE Items Manpower",

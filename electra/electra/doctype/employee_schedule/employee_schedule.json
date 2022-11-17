@@ -7,6 +7,7 @@
  "field_order": [
   "project",
   "project_name",
+  "schedule_date",
   "staff",
   "supervisor",
   "worker",
@@ -18,7 +19,8 @@
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Project",
-   "options": "Project"
+   "options": "Project",
+   "reqd": 1
   },
   {
    "fieldname": "staff",
@@ -41,18 +43,26 @@
   {
    "fieldname": "project_name",
    "fieldtype": "Data",
+   "in_list_view": 1,
    "label": "Project Name"
   },
   {
    "fieldname": "supervisor",
    "fieldtype": "Int",
+   "in_list_view": 1,
    "label": "Supervisor"
+  },
+  {
+   "fieldname": "schedule_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Schedule Date"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2022-04-26 17:40:50.649446",
+ "modified": "2022-08-01 08:44:45.962931",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Employee Schedule",

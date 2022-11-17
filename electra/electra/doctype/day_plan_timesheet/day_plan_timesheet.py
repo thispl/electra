@@ -8,10 +8,21 @@ import datetime
 
 
 class DayPlanTimesheet(Document):
-    # def validate(self):
+    def validate(self):
+        for tl in self.time_log:
+            task_id = frappe.get_doc("Task",tl.activity)
+            if task_id.qty > 0:
+                task_id.pending_qty -= tl.qty
+                task_id.completed_qty += tl.qty
+                task_id.save(ignore_permissions=True)
+                frappe.db.commit()
+            
     #     self.start_time = frappe.get_value("Day Plan",self.day_plan,"from_time")
 
     def on_submit(self):
+        # update task qty
+        
+        #create timesheet
         self.start_time = frappe.get_value("Day Plan",self.day_plan,"from_time")
         if self.start_time:
             start_time = self.start_time
@@ -45,7 +56,7 @@ class DayPlanTimesheet(Document):
                         "from_time" : end_time,
                         "to_time" : overtime,
                         "hours": tlog.overtime,
-                        "is_billable" : True,
+                        "is_billable" : 1,
                         "billing_rate": amt_1,
                         
                     })
@@ -59,7 +70,7 @@ class DayPlanTimesheet(Document):
                         "from_time" : end_time,
                         "to_time" : overtime,
                         "hours": tlog.overtime,
-                        "is_billable" : True,
+                        "is_billable" : 1,
                         "billing_rate":amt_2,
                         
                     })

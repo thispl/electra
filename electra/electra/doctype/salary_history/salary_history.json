@@ -1,0 +1,44 @@
+{
+ "actions": [],
+ "creation": "2022-08-23 08:36:01.484639",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "date",
+  "salary_amount",
+  "remark"
+ ],
+ "fields": [
+  {
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Increment Date"
+  },
+  {
+   "fieldname": "salary_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Salary Amount"
+  },
+  {
+   "fieldname": "remark",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "label": "Remark"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2022-08-23 08:39:55.780592",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "Salary History",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

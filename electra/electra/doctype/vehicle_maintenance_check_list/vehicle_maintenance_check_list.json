@@ -33,6 +33,7 @@
   "date_of_joining",
   "company",
   "email",
+  "letter_head",
   "section_break_10",
   "complaint",
   "garage_name",
@@ -80,13 +81,14 @@
   },
   {
    "fieldname": "complaint",
-   "fieldtype": "Data",
+   "fieldtype": "Small Text",
    "label": "Complaint"
   },
   {
    "fieldname": "garage_name",
-   "fieldtype": "Data",
-   "label": "Garage Name"
+   "fieldtype": "Link",
+   "label": "Garage Name",
+   "options": "Supplier"
   },
   {
    "fieldname": "approximate_exp",
@@ -224,8 +226,10 @@
   {
    "fetch_from": "employee_id.company",
    "fieldname": "company",
-   "fieldtype": "Read Only",
-   "label": "Company"
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "read_only": 1
   },
   {
    "fetch_from": "register_no.make",
@@ -277,11 +281,18 @@
    "fieldname": "hr_manager",
    "fieldtype": "Small Text",
    "label": "HR Manager"
+  },
+  {
+   "fieldname": "letter_head",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Letter Head",
+   "options": "Letter Head"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2021-10-13 14:37:54.944560",
+ "modified": "2022-10-31 09:01:06.741817",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Vehicle Maintenance Check List",

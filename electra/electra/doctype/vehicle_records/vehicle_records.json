@@ -74,8 +74,9 @@
   {
    "fetch_from": "vehicle.vehicle_division",
    "fieldname": "division",
-   "fieldtype": "Data",
-   "label": "Division"
+   "fieldtype": "Link",
+   "label": "Division",
+   "options": "Company"
   },
   {
    "fetch_from": "vehicle.vehicle_number",
@@ -254,7 +255,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2021-08-19 09:44:45.623947",
+ "modified": "2022-07-06 13:57:45.950371",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Vehicle Records",

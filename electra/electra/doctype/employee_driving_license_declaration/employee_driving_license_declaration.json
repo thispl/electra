@@ -1,0 +1,136 @@
+{
+ "actions": [],
+ "autoname": "field:employee_name",
+ "creation": "2022-10-31 13:41:06.395591",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "employee_details_section",
+  "emp_id",
+  "employee_name",
+  "designation",
+  "department",
+  "column_break_6",
+  "resident_id_numberqid",
+  "date_of_joining",
+  "company",
+  "letter_head",
+  "section_break_11",
+  "date",
+  "html",
+  "terms"
+ ],
+ "fields": [
+  {
+   "fieldname": "employee_details_section",
+   "fieldtype": "Section Break",
+   "label": "Employee Details"
+  },
+  {
+   "fieldname": "emp_id",
+   "fieldtype": "Link",
+   "label": "Employee ID",
+   "options": "Employee"
+  },
+  {
+   "fetch_from": "emp_id.employee_name",
+   "fieldname": "employee_name",
+   "fieldtype": "Data",
+   "label": "Employee Name",
+   "read_only": 1,
+   "unique": 1
+  },
+  {
+   "fetch_from": "emp_id.designation",
+   "fieldname": "designation",
+   "fieldtype": "Data",
+   "label": "Designation",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "emp_id.department",
+   "fieldname": "department",
+   "fieldtype": "Data",
+   "label": "Department",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_6",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "emp_id.resident_id_no",
+   "fieldname": "resident_id_numberqid",
+   "fieldtype": "Read Only",
+   "label": "Resident ID Number(QID)"
+  },
+  {
+   "fetch_from": "emp_id.date_of_joining",
+   "fieldname": "date_of_joining",
+   "fieldtype": "Data",
+   "label": "Date of Joining",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "emp_id.company",
+   "fieldname": "company",
+   "fieldtype": "Data",
+   "label": "Company",
+   "read_only": 1
+  },
+  {
+   "fieldname": "letter_head",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Letter Head",
+   "options": "Letter Head",
+   "read_only": 1
+  },
+  {
+   "fieldname": "html",
+   "fieldtype": "HTML",
+   "options": "<h4>Self Declaration</h4>\n1.I should work with Electra for minimum 2 years after getting license <br><br>\n2.If I resigned or terminated from the company before the above-mentioned period, the expense for the license can be deducted from the final settlement <br><br>\n3.If I did not get the license after the course completed, the expense for the license can be deducted from my salary.<br><br>"
+  },
+  {
+   "default": "0",
+   "fieldname": "terms",
+   "fieldtype": "Check",
+   "label": "I agree with these terms and I shall co-operate"
+  },
+  {
+   "fieldname": "section_break_11",
+   "fieldtype": "Section Break",
+   "label": "Request Details"
+  },
+  {
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "label": "Date"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2022-10-31 14:01:42.706493",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "Employee Driving License Declaration",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

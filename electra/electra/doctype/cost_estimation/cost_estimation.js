@@ -5,8 +5,8 @@ frappe.ui.form.on('Cost Estimation', {
 	update_sub(frm) {
 		frm.save()
 	},
-	setup(frm){
-		frm.set_query("company", function() {
+	setup(frm) {
+		frm.set_query("company", function () {
 			return {
 				filters: {
 					'has_project': 1
@@ -51,7 +51,7 @@ frappe.ui.form.on('Cost Estimation', {
 		}
 	},
 	onload(frm) {
-		if(frm.doc.docstatus != 1){
+		if (frm.doc.docstatus == 0) {
 			if (frm.doc.master_scope_of_work) {
 				$.each(frm.doc.master_scope_of_work, function (i, d) {
 					frappe.call({
@@ -71,21 +71,21 @@ frappe.ui.form.on('Cost Estimation', {
 								d.unit = k.uom
 								d.total_overhead = k.total_overhead
 								d.total_amount_as_overhead = k.total_amount_as_overhead
-								d.total_profit = k.total_profit
-								d.total_amount_of_profit = k.total_amount_of_profit
+								d.net_profit_percent = k.net_profit_percent + k.mep_net_profit_percent
+								d.net_profit_amount = k.net_profit_amount + k.mep_net_profit_amount
+								d.gross_profit_percent = k.gross_profit_percent
+								d.gross_profit_amount = k.gross_profit_amount
 								d.contigency_percent = k.contigency_percent
 								d.contigency = k.contigency
 								d.engineering_overhead = k.engineering_overhead
 								d.total_amount_as_engineering_overhead = k.total_amount_as_engineering_overhead
-								d.total_overheads = k.total_amount_as_overhead + k.total_amount_of_profit + k.contigency + k.total_amount_as_engineering_overhead
-								d.total_profit_amount = k.total_profit_amount
-								d.total_profit_percent = k.total_profit_percent
-								d.total_business_promotion = k.business_promotion
+								d.total_overheads = k.total_amount_as_overhead + k.contigency + k.total_amount_as_engineering_overhead
+								d.total_business_promotion = k.business_promotion_amount
 								d.total_cost = k.total_cost
 								d.total_bidding_price = k.total_bidding_price
 								d.unit_price = k.unit_price
 							})
-	
+
 						}
 					})
 					frm.refresh_field("master_scope_of_work")
@@ -93,7 +93,7 @@ frappe.ui.form.on('Cost Estimation', {
 				frm.trigger('get_ce_sow')
 			}
 		}
-		
+
 
 
 	},
@@ -178,7 +178,7 @@ frappe.ui.form.on('Cost Estimation', {
 									'qty': c.qty,
 									'unit_price': c.unit_price,
 									'rate_with_overheads': c.rate_with_overheads,
-									'amount_with_overheads': c.amount_with_overheads,
+									'amount_with_overheads': c.amount,
 									'amount': c.amount
 								})
 							})
@@ -451,40 +451,73 @@ frappe.ui.form.on('Cost Estimation', {
 		// })
 		// frm.save()
 	},
-	company(frm){
-	    if(frm.doc.company){
-	    frm.trigger("set_series")
-	    }
+	company(frm) {
+		if (frm.doc.company) {
+			frm.trigger("set_series")
+		}
 	},
-	set_series(frm){
-	    frappe.call({
-    		method: "electra.utils.get_series",
-    		args: {
-    			company: frm.doc.company,
-    			doctype: frm.doc.doctype
-    		},
-    		callback: function (r) {
-    			if (r) {
-    			    frm.set_value('naming_series',r.message)
-    			}
-    		}
-			});
+	set_series(frm) {
+		frappe.call({
+			method: "electra.utils.get_series",
+			args: {
+				company: frm.doc.company,
+				doctype: frm.doc.doctype
+			},
+			callback: function (r) {
+				if (r) {
+					frm.set_value('naming_series', r.message)
+				}
+			}
+		});
 	},
 	refresh(frm) {
-		if(frm.doc.company){
+		if (frm.doc.company) {
 			frm.trigger("set_series")
-			}
+		}
 		if (frm.doc.__islocal) {
 			frm.set_value("date_of_estimation", frappe.datetime.nowdate())
 		}
 
+		if (frm.doc.docstatus == 1) {
 		frm.add_custom_button(__('Quotation'),
 			function () {
-				frappe.model.open_mapped_doc({
-					method: "electra.custom.make_quotation",
-					frm: cur_frm
-				})
-			}, __('Create'));
+				if(frm.doc.amended_from){
+					frappe.db.get_value('Quotation', { 'cost_estimation': frm.doc.amended_from}, 'name')
+					.then(r => {
+						if (r.message && Object.entries(r.message).length === 0) {
+							frappe.model.open_mapped_doc({
+								method: "electra.custom.make_quotation",
+								frm: cur_frm
+							})
+						}
+						else {
+							frappe.set_route('Form', 'Quotation', r.message.name)
+							console.log(r.message.name)			
+						}
+
+
+					})
+				}	
+				else{
+					frappe.db.get_value('Quotation', { 'cost_estimation': frm.doc.name }, 'name')
+					.then(r => {
+						if (r.message && Object.entries(r.message).length === 0) {
+							frappe.model.open_mapped_doc({
+								method: "electra.custom.make_quotation",
+								frm: cur_frm
+							})
+						}
+						else {
+							frappe.set_route('Form', 'Quotation', r.message.name)
+							
+						}
+
+
+					})
+				}
+				
+			}, __('Create/Edit'));
+		}
 	},
 	onload_after_render(frm) {
 		frm.trigger('total_calculation')
@@ -515,41 +548,44 @@ frappe.ui.form.on('Cost Estimation', {
 		var total_amount_of_profit = 0
 		var total_cost = 0
 		var total_overhead = 0
-		var total_profit = 0
 		var contigency_percent = 0
 		var engineering_overhead = 0
 		var total_business_promotion = 0
 		var total_overheads = 0
-		var total_profit_amount = 0
-		var total_profit_percent = 0
+		var total_net_profit_amount = 0
+		var total_net_profit_percent = 0
+		var total_gross_profit_percent = 0
+		var total_gross_profit_amount = 0
 		if (frm.doc.master_scope_of_work) {
 			$.each(frm.doc.master_scope_of_work, function (i, d) {
 				if (d.optional == 0) {
 					total_amount_as_overhead += d.total_amount_as_overhead
-					total_amount_of_profit += d.total_amount_of_profit
 					contigency += d.contigency
 					total_amount_as_engineering_overhead += d.total_amount_as_engineering_overhead
 					total_overheads += d.total_overheads
 					total_business_promotion += d.total_business_promotion
 					total_cost += d.total_cost
 					total_bidding_price += d.total_bidding_price
-					total_profit_amount += d.total_profit_amount
-					// total_profit_percent += d.total_profit_percent
+					total_net_profit_percent += d.net_profit_percent
+					total_net_profit_amount += d.net_profit_amount
+					total_gross_profit_percent += d.gross_profit_percent
+					total_gross_profit_amount += d.gross_profit_amount
 				}
 			})
 			total_overhead = (total_amount_as_overhead / total_cost) * 100
-			total_profit = (total_amount_of_profit / total_cost) * 100
 			contigency_percent = (contigency / total_cost) * 100
 			engineering_overhead = (total_amount_as_engineering_overhead / total_cost) * 100
 			total_overheads = total_amount_as_overhead + total_amount_of_profit + contigency + total_amount_as_engineering_overhead
-			// total_bidding_price = total_overheads + total_cost
+			// total_bidding_price = total_bidding_price + total_business_promotion
 
 			frm.set_value("total_amount_as_overhead", total_amount_as_overhead)
-			frm.set_value("total_amount_of_profit", total_amount_of_profit)
 			frm.set_value("contigency", contigency)
 			frm.set_value("total_amount_as_engineering_overhead", total_amount_as_engineering_overhead)
 			frm.set_value("total_overhead", total_overhead)
-			frm.set_value("total_profit", total_profit)
+			frm.set_value("net_profit_percent", total_net_profit_percent)
+			frm.set_value("net_profit_amount", total_net_profit_amount)
+			frm.set_value("gross_profit_percent", total_gross_profit_percent)
+			frm.set_value("gross_profit_amount", total_gross_profit_amount)
 			frm.set_value("contigency_percent", contigency_percent)
 			frm.set_value("engineering_overhead", engineering_overhead)
 
@@ -558,11 +594,6 @@ frappe.ui.form.on('Cost Estimation', {
 			frm.set_value("total_overheads", total_overheads)
 			frm.set_value("total_business_promotion", total_business_promotion)
 			frm.set_value("total_bidding_price", total_bidding_price)
-			frm.set_value("total_profit_amount", total_profit_amount)
-
-			total_profit_percent = (total_profit_amount / total_bidding_price) * 100
-
-			frm.set_value("total_profit_percent", total_profit_percent)
 		}
 	},
 	total_design_calculation: function (frm) {

@@ -1,14 +1,14 @@
 {
  "actions": [],
- "autoname": "field:employee_name",
+ "autoname": "field:emp_id",
  "creation": "2021-08-17 10:06:37.926788",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
   "section_break_1",
-  "workflow",
   "column_break_3",
+  "workflow_state",
   "status",
   "section_break_3",
   "emp_id",
@@ -19,9 +19,13 @@
   "resident_id_number",
   "doj",
   "date_of_evaluation",
+  "company",
+  "letter_head",
   "skill_sets_section",
   "table_14",
   "total_score",
+  "remarks_section",
+  "remarks",
   "line_manager_remarks_section",
   "small_text_30",
   "section_break_32",
@@ -55,7 +59,8 @@
    "fieldname": "emp_id",
    "fieldtype": "Link",
    "label": "Employee ID",
-   "options": "Employee"
+   "options": "Employee",
+   "unique": 1
   },
   {
    "fetch_from": "emp_id.date_of_joining",
@@ -106,12 +111,8 @@
   },
   {
    "fieldname": "section_break_1",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "workflow",
-   "fieldtype": "Read Only",
-   "label": "Workflow"
+   "fieldtype": "Section Break",
+   "hidden": 1
   },
   {
    "fieldname": "column_break_3",
@@ -121,6 +122,7 @@
    "default": "Requested",
    "fieldname": "status",
    "fieldtype": "Select",
+   "hidden": 1,
    "label": "Status",
    "options": "\nRequested\nInitiated\nCompleted\nHold"
   },
@@ -143,11 +145,40 @@
    "fieldname": "resident_id_number",
    "fieldtype": "Read Only",
    "label": "Resident ID Number(QID)"
+  },
+  {
+   "fieldname": "workflow_state",
+   "fieldtype": "Link",
+   "label": "Workflow State",
+   "options": "Workflow State"
+  },
+  {
+   "fieldname": "remarks_section",
+   "fieldtype": "Section Break",
+   "label": "Remarks"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  },
+  {
+   "fetch_from": "emp_id.company",
+   "fieldname": "company",
+   "fieldtype": "Read Only",
+   "label": "Company"
+  },
+  {
+   "fieldname": "letter_head",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Letter Head",
+   "options": "Letter Head"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2021-10-04 08:53:35.699980",
+ "modified": "2022-10-28 15:38:05.644976",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Staff Skill Mapping Form",

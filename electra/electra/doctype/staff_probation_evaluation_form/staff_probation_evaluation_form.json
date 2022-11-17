@@ -18,7 +18,14 @@
   "column_break_6",
   "resident_id_number",
   "doj",
+  "letter_head",
   "company",
+  "assessment_period_section",
+  "from_date",
+  "column_break_16",
+  "to_date",
+  "section_break_18",
+  "evaluator",
   "section_break_10",
   "child",
   "total_score",
@@ -30,7 +37,8 @@
   "section_break_19",
   "hr_manager",
   "column_break_21",
-  "managing_director"
+  "managing_director",
+  "amended_from"
  ],
  "fields": [
   {
@@ -165,11 +173,59 @@
    "fieldname": "resident_id_number",
    "fieldtype": "Read Only",
    "label": "Resident ID Number(QID)"
+  },
+  {
+   "fieldname": "assessment_period_section",
+   "fieldtype": "Section Break",
+   "label": "Assessment Period"
+  },
+  {
+   "fetch_from": "emp_id.date_of_joining",
+   "fieldname": "from_date",
+   "fieldtype": "Date",
+   "label": "From Date"
+  },
+  {
+   "fieldname": "column_break_16",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "emp_id.probation_end_date",
+   "fieldname": "to_date",
+   "fieldtype": "Date",
+   "label": "To Date"
+  },
+  {
+   "fieldname": "section_break_18",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fetch_from": "emp_id.leave_approver",
+   "fieldname": "evaluator",
+   "fieldtype": "Link",
+   "label": "Evaluator",
+   "options": "User"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Staff Probation Evaluation Form",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "letter_head",
+   "fieldtype": "Link",
+   "label": "Letter Head",
+   "options": "Letter Head"
   }
  ],
  "index_web_pages_for_search": 1,
+ "is_submittable": 1,
  "links": [],
- "modified": "2021-10-04 08:45:04.631341",
+ "modified": "2022-11-14 07:41:48.872475",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Staff Probation Evaluation Form",

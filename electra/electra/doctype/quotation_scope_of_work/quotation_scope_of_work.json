@@ -13,10 +13,12 @@
   "qty",
   "unit",
   "unit_price",
+  "unit_price_company_currency",
   "total_cost",
   "total_overheads",
   "total_business_promotion",
   "total_bidding_price",
+  "bidding_price_company_currency",
   "optional",
   "print_work_titles",
   "print_items"
@@ -42,13 +44,13 @@
    "fieldtype": "Currency",
    "in_list_view": 1,
    "label": "Total Bidding Price",
-   "read_only": 1
+   "options": "Quotation:parent:currency"
   },
   {
    "columns": 1,
    "fieldname": "details",
    "fieldtype": "Button",
-   "in_list_view": 1,
+   "hidden": 1,
    "label": "Details"
   },
   {
@@ -89,7 +91,8 @@
    "fieldname": "unit_price",
    "fieldtype": "Currency",
    "in_list_view": 1,
-   "label": "Unit Price"
+   "label": "Unit Price",
+   "options": "Quotation:parent:currency"
   },
   {
    "fieldname": "total_cost",
@@ -119,11 +122,23 @@
    "fieldname": "brand",
    "fieldtype": "Data",
    "label": "Brand"
+  },
+  {
+   "fieldname": "unit_price_company_currency",
+   "fieldtype": "Currency",
+   "label": "Unit Price Company Currency",
+   "options": "Company:company:default_currency"
+  },
+  {
+   "fieldname": "bidding_price_company_currency",
+   "fieldtype": "Currency",
+   "label": "Bidding Price Company Currency",
+   "options": "Company:company:default_currency"
   }
  ],
  "istable": 1,
  "links": [],
- "modified": "2022-03-29 10:38:37.012071",
+ "modified": "2022-11-07 16:24:43.786664",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Quotation Scope of Work",

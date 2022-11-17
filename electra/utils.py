@@ -1,6 +1,10 @@
 from __future__ import unicode_literals
 import json
+from re import S
 from unicodedata import name
+from datetime import datetime
+from datetime import date, timedelta
+import calendar
 from erpnext.stock.get_item_details import get_item_price
 import frappe
 from frappe import _
@@ -8,6 +12,19 @@ from frappe.utils import flt
 from erpnext.selling.doctype.customer.customer import get_customer_outstanding, get_credit_limit
 from erpnext.stock.get_item_details import get_valuation_rate
 from frappe.utils.background_jobs import enqueue
+from frappe.utils import (
+    add_days,
+    add_months,
+    cint,
+    date_diff,
+    flt,
+    get_first_day,
+    get_last_day,
+    get_link_to_form,
+    getdate,
+    rounded,
+    today,
+)
 
 @frappe.whitelist()
 def get_item_details(item_group=None,brand=None,item=None):
@@ -171,6 +188,7 @@ def make_dn(name):
 #     return name
 
 
+
 @frappe.whitelist()
 def get_user_details(user):
     employees = frappe.get_list("Employee",{'user_id':user},['employee_name','designation','cell_number'],ignore_permissions=True)
@@ -181,6 +199,7 @@ def get_user_details(user):
             'designation': e.designation,
             'cell_number': e.cell_number
         })
+    frappe.errprint(employee_list)
     return employee_list
 
 @frappe.whitelist()
@@ -260,6 +279,27 @@ def get_series(company,doctype):
     return company_series
 
 @frappe.whitelist()
+def get_so_sow(sales_order,msow):
+    so_sow = frappe.get_all("SO Scope of Work",{'parent':sales_order,'msow':msow},['*'])
+    return so_sow
+
+@frappe.whitelist()
+def get_ce_sow(cost_estimation,msow):
+    ce_sow = frappe.get_all("CE Master Scope of Work",{'parent':cost_estimation,'msow':msow},['*'])
+    return ce_sow
+
+    
+
+@frappe.whitelist()
+def add_quotation_ce(doc,method):
+    if doc.cost_estimation:
+        qno = frappe.get_value('Cost Estimation',doc.cost_estimation,'quotation')
+        if not qno:
+            frappe.db.set_value('Cost Estimation',doc.cost_estimation,'quotation',doc.name)
+            frappe.db.commit()
+
+        
+@frappe.whitelist()
 def validate_opportunity_sow(doc,method):
     sows = doc.scope_of_work
     for sow in sows:
@@ -281,7 +321,7 @@ def item_default_wh(doc,method):
             {"company":"STEEL DIVISION - ELECTRA","default_warehouse":"Steel Warehouse - SDE", "buying_cost_center" : "Main - SDE", "selling_cost_center" : "Main - SDE","expense_account": "5118 - Expenses Included In Valuation - SDE","income_account":"5111 - Cost of Goods Sold - SDE"},
             {"company":"MARAZEEM SECURITY SERVICES - HO","default_warehouse":"Marazeem HO Warehouse - MSSHO", "buying_cost_center" : "Main - MSSHO", "selling_cost_center" : "Main - MSSHO","expense_account": "5118 - Expenses Included In Valuation - MSSHO","income_account":"5111 - Cost of Goods Sold - MSSHO"},
             {"company":"TRADING DIVISION - ELECTRA","default_warehouse":"Electra Trading Warehouse - TDE", "buying_cost_center" : "Main - TDE", "selling_cost_center" : "Main - TDE","expense_account": "5118 - Expenses Included In Valuation - TDE","income_account":"5111 - Cost of Goods Sold - TDE"},
-            {"company":"MEP DIVISION - ELECTRA","default_warehouse":"Electra MEP Warehouse - MDE", "buying_cost_center" : "Main - MDE", "selling_cost_center" : "Main - MDE","expense_account": "5118 - Expenses Included In Valuation - MDE","income_account":"5111 - Cost of Goods Sold - MDE"},
+            {"company":"MEP DIVISION - ELECTRA","default_warehouse":"Electra MEP Warehouse - MEP", "buying_cost_center" : "Main - MEP", "selling_cost_center" : "Main - MEP","expense_account": "5118 - Expenses Included In Valuation - MEP","income_account":"5111 - Cost of Goods Sold - MEP"},
             {"company":"ELECTRA - BINOMRAN SHOWROOM","default_warehouse":"Electra Binomran Showroom Warehouse - EBO", "buying_cost_center" : "Main - EBO", "selling_cost_center" : "Main - EBO","expense_account": "5118 - Expenses Included In Valuation - EBO","income_account":"5111 - Cost of Goods Sold - EBO"},
             {"company":"KINGFISHER TRADING AND CONTRACTING COMPANY","default_warehouse":"Kingfisher Warehouse - KTCC", "buying_cost_center" : "Main - KTCC", "selling_cost_center" : "Main - KTCC","expense_account": "Expenses Included In Valuation - KTCC","income_account":"Cost of Goods Sold - KTCC"},
             {"company":"KINGFISHER - SHOWROOM","default_warehouse":"Kingfisher Showroom Warehouse - KS", "buying_cost_center" : "Main - KS", "selling_cost_center" : "Main - KS","expense_account": "Expenses Included In Valuation - KS","income_account":"Cost of Goods Sold - KS"},
@@ -306,6 +346,7 @@ def item_default_wh(doc,method):
                     'expense_account':company['expense_account'],
                     'income_account':company['income_account'],
                 })
+                frappe.errprint(company['default_warehouse'])
                 itemid.save(ignore_permissions=True)
             else:
                 frappe.db.set_value('Item Default',{'parent':itemid.name,'company':company['company']},'default_warehouse',company['default_warehouse'])
@@ -366,7 +407,7 @@ def mark_default_wh():
                 frappe.db.set_value('Item Default',{'parent':item.name,'company':company['company']},'expense_account',company['expense_account'])
                 frappe.db.set_value('Item Default',{'parent':item.name,'company':company['company']},'income_account',company['income_account'])
                 frappe.db.commit()
-        frappe.db.set_value('Item',item.name,"item_default_set",1)
+        # frappe.db.set_value('Item',item.name,"item_default_set",1)
     frappe.db.auto_commit_on_many_writes = 0
 
 @frappe.whitelist()
@@ -435,3 +476,310 @@ def create_project_from_so(doc,method):
         })
         project.save(ignore_permissions=True)
         frappe.db.commit()
+
+@frappe.whitelist(allow_guest=True)
+def ping():
+    return 'Pong'
+
+
+@frappe.whitelist()
+def submit_dummy_dn(doc,method):
+    if doc.grand_total <= 0 and doc.dummy_dn == 0 and not doc.is_return:
+        frappe.throw("Cannot deliver with zero rate unless it is a dummy DN")
+
+# @frappe.whitelist()
+# def stockpopup(item_code):
+#     item = frappe.get_value('Item',{'item_code':item_code},'item_code')
+#     stocks = frappe.db.sql("""select actual_qty,warehouse,stock_uom,stock_value from tabBin
+#         where item_code = '%s' """%(item),as_dict=True)
+#     frappe.errprint(stocks[8])
+#     data = ''
+#     data += '<table class="table table-bordered"><tr><th style="padding:1px;border:1px solid black;font-size:14px;background-color:#e35310;color:white;" colspan=8><center><b>STOCK DETAILS</b></center></th></tr>'
+#     data += '<tr><td colspan=1 style="border: 1px solid black;font-size:12px;"><center><b>ITEM CODE</b><center></td></tr>'
+#     data += '<tr><td colspan=1 style="border: 1px solid black;font-size:12px;"><center>%s<center><center></td></tr>'%(stocks[2])
+#     data += '</table>'
+#     return item
+
+@frappe.whitelist()
+def get_stock_details(item_details,company):
+    item_details = json.loads(item_details)
+    frappe.errprint(item_details)
+    data = ''
+    data += '<table class="table table-bordered"><tr><th style="padding:1px;border:1px solid black;font-size:14px;background-color:#e35310;color:white;" colspan=8><center><b>STOCK DETAILS</b></center></th></tr>'
+    data +='<tr><td colspan=1 style="border: 1px solid black;font-size:12px;"><center><b>ITEM CODE</b><center></td><td colspan=1 style="border: 1px solid black;font-size:12px;"><center><b>ITEM NAME</b><center></td><td colspan=1 style="border: 1px solid black;font-size:12px;"><center><b>IN WAREHOUSE</b><center></td><td colspan=1 style="border: 1px solid black;font-size:12px;"><center><b>IN TRANSIT</b><center></td><td colspan=1 style="border: 1px solid black;font-size:12px;"><center><b>TOTAL</b><center></td></tr>'
+    
+    for j in item_details:
+        country = frappe.get_value("Company",{"name":company},["country"])
+        warehouse_stock = frappe.db.sql("""
+        select sum(b.actual_qty) as qty from `tabBin` b 
+        join `tabWarehouse` wh on wh.name = b.warehouse
+        join `tabCompany` c on c.name = wh.company
+        where c.country = '%s' and b.item_code = '%s'
+        """ % (country,j["item_code"]),as_dict=True)[0]
+        if not warehouse_stock["qty"]:
+            warehouse_stock["qty"] = 0
+        purchase_order = frappe.db.sql("""select sum(`tabPurchase Order Item`.qty) as qty from `tabPurchase Order`
+                left join `tabPurchase Order Item` on `tabPurchase Order`.name = `tabPurchase Order Item`.parent
+                where `tabPurchase Order Item`.item_code = '%s' and `tabPurchase Order`.docstatus != 2 """%(j["item_code"]),as_dict=True)[0] or 0 
+        if not purchase_order["qty"]:
+            purchase_order["qty"] = 0
+        purchase_receipt = frappe.db.sql("""select sum(`tabPurchase Receipt Item`.qty) as qty from `tabPurchase Receipt`
+                left join `tabPurchase Receipt Item` on `tabPurchase Receipt`.name = `tabPurchase Receipt Item`.parent
+                where `tabPurchase Receipt Item`.item_code = '%s' and `tabPurchase Receipt`.docstatus = 1 """%(j["item_code"]),as_dict=True)[0] or 0 
+        if not purchase_receipt["qty"]:
+            purchase_receipt["qty"] = 0
+        in_transit = purchase_order["qty"] - purchase_receipt["qty"]
+        total = warehouse_stock["qty"] + in_transit
+        data+='<tr><td colspan=1 style="border: 1px solid black;font-size:12px;"><center>%s<center><center></td><td colspan=1 style="border: 1px solid black;font-size:12px;"><center>%s<center><center></td><td colspan=1 style="border: 1px solid black;font-size:12px;"><center>%s<center><center></td><td colspan=1 style="border: 1px solid black;font-size:12px;"><center>%s</center></td><td colspan=1 style="border: 1px solid black;font-size:12px;"><center>%s</center></td></tr>'%(j["item_code"],j["item_name"],warehouse_stock["qty"], in_transit,total)
+    
+    data += '</table>'
+    return data
+
+@frappe.whitelist()
+def getstock_detail(item_details,company):
+    item_details = json.loads(item_details)
+    frappe.errprint(item_details)
+    data = ''
+    data += '<h4><center><b>STOCK DETAILS</b></center></h4>'
+
+    for j in item_details:
+        country = frappe.get_value("Company",{"name":company},["country"])
+
+        warehouse_stock = frappe.db.sql("""
+        select sum(b.actual_qty) as qty from `tabBin` b join `tabWarehouse` wh on wh.name = b.warehouse join `tabCompany` c on c.name = wh.company where c.country = '%s' and b.item_code = '%s'
+        """ % (country,j["item_code"]),as_dict=True)[0]
+
+        if not warehouse_stock["qty"]:
+            warehouse_stock["qty"] = 0
+        purchase_order = frappe.db.sql("""select sum(`tabPurchase Order Item`.qty) as qty from `tabPurchase Order`
+                left join `tabPurchase Order Item` on `tabPurchase Order`.name = `tabPurchase Order Item`.parent
+                where `tabPurchase Order Item`.item_code = '%s' and `tabPurchase Order`.docstatus != 2 """%(j["item_code"]),as_dict=True)[0] or 0 
+        if not purchase_order["qty"]:
+            purchase_order["qty"] = 0
+        purchase_receipt = frappe.db.sql("""select sum(`tabPurchase Receipt Item`.qty) as qty from `tabPurchase Receipt`
+                left join `tabPurchase Receipt Item` on `tabPurchase Receipt`.name = `tabPurchase Receipt Item`.parent
+                where `tabPurchase Receipt Item`.item_code = '%s' and `tabPurchase Receipt`.docstatus = 1 """%(j["item_code"]),as_dict=True)[0] or 0 
+        if not purchase_receipt["qty"]:
+            purchase_receipt["qty"] = 0
+        in_transit = purchase_order["qty"] - purchase_receipt["qty"]
+        total = warehouse_stock["qty"] + in_transit
+
+        stocks = frappe.db.sql("""select actual_qty,warehouse,stock_uom,stock_value from tabBin
+        where item_code = '%s' """%(j["item_code"]),as_dict=True)
+
+        pos = frappe.db.sql("""select `tabPurchase Order Item`.item_code as item_code,`tabPurchase Order Item`.item_name as item_name,`tabPurchase Order`.supplier as supplier,sum(`tabPurchase Order Item`.qty) as qty,`tabPurchase Order Item`.rate as rate,`tabPurchase Order`.transaction_date as date,`tabPurchase Order`.name as po from `tabPurchase Order`
+        left join `tabPurchase Order Item` on `tabPurchase Order`.name = `tabPurchase Order Item`.parent
+        where `tabPurchase Order Item`.item_code = '%s' and `tabPurchase Order`.docstatus != 2 order by rate asc limit 1""" % (j["item_code"]), as_dict=True)
+    
+        i = 0
+        for po in pos:
+            
+            if pos:
+                frappe.errprint(po.qty)
+                data += '<table class="table table-bordered">'
+                data += '<tr>'
+                data += '<td colspan=1 style="width:13%;padding:1px;border:1px solid black;font-size:14px;font-size:12px;background-color:#e35310;color:white;"><center><b>ITEM CODE</b><center></td>'
+                data += '<td colspan=1 style="width:33%;padding:1px;border:1px solid black;font-size:14px;font-size:12px;background-color:#e35310;color:white;"><center><b>ITEM NAME</b><center></td>'
+                for stock in stocks:
+                    if stock.actual_qty > 0:
+                        wh = stock.warehouse
+                        x = wh.split('- ')
+                        data += '<td colspan=1 style="padding:1px;border:1px solid black;font-size:14px;font-size:12px;background-color:#e35310;color:white;"><center><b>%s</b><center></td>'%(x[-1])
+                data += '<td colspan=1 style="padding:1px;border:1px solid black;font-size:14px;font-size:12px;background-color:#e35310;color:white;"><center><b>IN TRANSIT</b><center></td>'
+                data += '<td colspan=1 style="padding:1px;border:1px solid black;font-size:14px;font-size:12px;background-color:#e35310;color:white;"><center><b>AGAINST PO</b><center></td>'
+                data += '</tr>'
+                
+                
+                
+                data +='<tr>'
+                data += '<td style="text-align:center;border: 1px solid black" colspan=1>%s</td>'%(j["item_code"])
+                data += '<td style="text-align:center;border: 1px solid black" colspan=1>%s</td>'%(j["item_name"])
+                for stock in stocks:
+                    if stock.actual_qty > 0:
+                        data += '<td style="text-align:center;border: 1px solid black" colspan=1>%s</td>'%(stock.actual_qty)
+                data += '<td style="text-align:center;border: 1px solid black" colspan=1>%s</td>'%(in_transit)
+                data += '<td style="text-align:center;border: 1px solid black" colspan=1>%s</td>'%(po.qty)
+                data += '</tr>'
+            i += 1
+        data += '</table>'
+        
+    #     data+='<tr><td colspan=1 style="border: 1px solid black;font-size:12px;"><center>%s<center><center></td><td colspan=1 style="border: 1px solid black;font-size:12px;"><center>%s<center><center></td><td colspan=1 style="border: 1px solid black;font-size:12px;"><center>%s<center><center></td><td colspan=1 style="border: 1px solid black;font-size:12px;"><center>%s</center></td><td colspan=1 style="border: 1px solid black;font-size:12px;"><center>%s</center></td></tr>'%(j["item_code"],j["item_name"],warehouse_stock["qty"], in_transit,total)
+    
+    # data += '</table>'
+    return data
+
+
+
+@frappe.whitelist()
+def get_item_margin(item_details,company):
+    item_details = json.loads(item_details)
+    data_4 = ''
+    data_4 += '''<table class="table">
+    <tr>
+    <th style="padding:1px;border: 1px solid black;font-size:14px;background-color:#FF4500;color:white;" colspan =9 ><center><b>MARGIN</b></center></th>
+    </tr>'''
+
+    data_4+='''<tr>
+    <td colspan=1 style="border: 1px solid black;font-size:12px;"><b>ITEM</b></td>
+    <td colspan=1 style="border: 1px solid black;font-size:12px;"><b>ITEM NAME</b></td>
+    <td colspan=1 style="border: 1px solid black;font-size:12px;"><b><center>QTY</center></b></td>
+    <td colspan=1 style="border: 1px solid black;font-size:12px;"><b><center>Cost</center></b></td>
+    <td colspan=1 style="border: 1px solid black;font-size:12px;"><b><center>Rate</center></b></td>
+    <td colspan=1 style="border: 1px solid black;font-size:12px;"><b><center>Cost Amount</center></b></td>
+    <td colspan=1 style="border: 1px solid black;font-size:12px;"><b><center>Selling Amount</center></b></td>
+    <td colspan=1 style="border: 1px solid black;font-size:12px;"><b><center>Profit Amount</center></b></td>
+    <td colspan=1 style="border: 1px solid black;font-size:12px;"><b><center>Profit %</center></b></td>
+    </tr>'''
+    cost_amount = 0
+    total_selling_price = 0
+    
+    for i in item_details:
+        total_selling_price =  (i["rate"] * i["qty"]) + total_selling_price
+        frappe.errprint(total_selling_price)
+        warehouse_stock = frappe.db.sql("""
+        select valuation_rate as vr from `tabBin` b 
+        join `tabWarehouse` wh on wh.name = b.warehouse
+        join `tabCompany` c on c.name = wh.company
+        where b.item_code = '%s'
+        """ % (i["item_code"]),as_dict=True)[0]    
+        if not warehouse_stock.vr :
+            warehouse_stock.vr  = 0
+        cost_amount = (warehouse_stock.vr  * i["qty"]) + cost_amount
+        cost_amount_ = (warehouse_stock.vr * i["qty"])
+        tot =  cost_amount - total_selling_price
+        tot_diff =  cost_amount_ - i["base_amount"]
+        tot_ = tot_diff/cost_amount_ *100
+        data_4+='''<tr>
+        <td colspan=1 style="border: 1px solid black;font-size:12px;">%s</td>
+        <td colspan=1 style="border: 1px solid black;font-size:12px;">%s</td>
+        <td colspan=1 style="border: 1px solid black;font-size:12px;"><center>%s</center></td>
+        <td colspan=1 style="border: 1px solid black;font-size:12px;"><center>%s</center></td>
+        <td colspan=1 style="border: 1px solid black;font-size:12px;"><center>%s</center></td>
+        <td colspan=1 style="border: 1px solid black;font-size:12px;"><center>%s</center></td>
+        <td colspan=1 style="border: 1px solid black;font-size:12px;"><center>%s</center></td>
+        <td colspan=1 style="border: 1px solid black;font-size:12px;"><center>%s</center></td>
+        <td colspan=1 style="border: 1px solid black;font-size:12px;"><center>%s</center></td>
+        </tr>'''%(i["item_code"],i["description"],i["qty"],warehouse_stock.vr ,i["rate"],round(cost_amount_,2),i["base_amount"],round(-tot_diff,2),round(-tot_,2))
+    data_5 = ''
+    if cost_amount_ == 0:
+        total_margin_internal = (total_selling_price - cost_amount_)/100
+        frappe.errprint('total_margin_internal')
+
+    else:
+        total_margin_internal = (round(-tot_,2))
+        frappe.errprint(total_margin_internal)
+        frappe.errprint('oo')
+
+        
+
+    
+    data_5 += '''<table class="table"><tr>
+    <td style="padding:1px;font-size:12px"><center><b>Cost Amount</b></center></td>
+
+    <td  style="padding:1px;font-size:12px;"><b><center>:%s</center></b></td>
+    <td style="padding:1px;font-size:12px"><center><b>Profit Amount</b></center></td>
+
+    <td  style="padding:1px;font-size:12px;"><b><center>:%s</center></b></td>
+    <td style="padding:1px;font-size:12px"><center><b>Profit Percentage</b></center></td>
+    <td  style="padding:1px;font-size:12px;"><b><center>:%s</center></b></td>
+    
+    
+   
+    </tr>'''%(round(cost_amount,2),round(-tot,2),round(total_margin_internal,2))
+    data_5+='''</table>'''
+# pro/cost 100
+    
+    return data_4,data_5
+
+@frappe.whitelist()
+def get_invoice_summary(project):
+    # data = ''
+    # data += '<table class="table table-bordered"><tr><th style="padding:1px;border:1px solid black;font-size:14px;background-color:#e35310;color:white;" colspan=8><center><b>INVOICE SUMMARY</b></center></th></tr>'
+    # data +='<tr><td colspan=1 style="border: 1px solid black;font-size:12px;"><center><b>INVOICE LIST</b><center></td></tr>'
+   
+    invoice = frappe.get_all('Sales Invoice',{"project":project},["*"])
+    for i in invoice:
+        frappe.errprint(i.name)
+    
+    # data+='<tr><td colspan=1 style="border: 1px solid black;font-size:12px;"><center>%s<center><center></td></tr>'%(invoice)
+    
+    # data += '</table>'
+    # return 
+
+@frappe.whitelist()
+def get_current_month_date(employee):
+    now = datetime.now()
+    days = calendar.monthrange(now.year, now.month)[1]
+    return(days)
+
+@frappe.whitelist()
+def calculate_attendance(employee):
+    name_reg = frappe.db.sql(
+        """select name,hods_relieving_date,actual_relieving_date from `tabResignation Form` where employee = %s """ % (employee), as_dict=True)[0]
+    current_date = name_reg.actual_relieving_date
+    first_day_of_month = current_date.replace(day=1)
+    hod_date = str(first_day_of_month)
+    app_date = str(name_reg.actual_relieving_date)
+    frappe.errprint(hod_date)
+    frappe.errprint(app_date)
+    frappe.errprint(type(app_date))
+    if name_reg:
+        att = frappe.db.sql("""select count(*) as count from `tabAttendance` where attendance_date between '%s' and '%s' and status = 'Present'  and employee = %s""" %
+                            (hod_date, app_date, employee), as_dict=True)[0]
+        cal = att
+        return cal, name_reg
+
+@frappe.whitelist()
+def get_reg_form(employee):
+    frappe.errprint(employee)
+    name_reg = frappe.db.sql(
+        """select name,hods_relieving_date,actual_relieving_date from `tabResignation Form` where employee = %s """ % (employee), as_dict=True)[0]
+    current_date = name_reg.actual_relieving_date
+    first_day_of_month = current_date.replace(day=1)
+    return name_reg.name, first_day_of_month, name_reg.actual_relieving_date
+
+@frappe.whitelist()
+def get_gratuity(employee):
+    from datetime import datetime
+    from dateutil import relativedelta
+    date_2 = datetime.now()
+    emp = frappe.get_doc('Employee', employee)
+    # Get the interval between two dates
+    diff = relativedelta.relativedelta(date_2, emp.date_of_joining)
+
+    exp_years = diff.years
+    exp_month = diff.months
+    exp_days = diff.days
+
+    basic_salary = frappe.db.get_value(
+        'Employee', emp.employee_number, 'basic')
+
+    per_day_basic = basic_salary / 30
+
+    if emp.grade == 'Office Staff':
+        gratuity_per_year = per_day_basic * 30
+    else:
+        gratuity_per_year = per_day_basic * 21
+
+    gratuity_per_month = gratuity_per_year / 12
+    gratuity_per_day = gratuity_per_month / 30
+    earned_gpy = gratuity_per_year * exp_years
+    earned_gpm = gratuity_per_month * exp_month
+    earned_gpd = gratuity_per_day * exp_days
+    total_gratuity = earned_gpy + earned_gpm + earned_gpd
+
+    return total_gratuity
+
+@frappe.whitelist()
+def update_employee_status(doc,method):
+    reg = frappe.db.sql(
+        """select * from `tabResignation Form` where docstatus = 1""", as_dict=1)
+    if reg:
+        for emp in reg:
+            frappe.errprint(emp)
+            if emp.actual_relieving_date == datetime.strptime((today()), '%Y-%m-%d').date():
+                emp_n = frappe.get_doc('Employee', emp.employee)
+                emp_n.status = "Left"
+                emp_n.relieving_date = emp.actual_relieving_date
+                emp_n.save(ignore_permissions=True)
+    

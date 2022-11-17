@@ -24,21 +24,21 @@
   "column_break_25",
   "total_bidding_price",
   "column_break_28",
-  "total_profit_amount",
   "total_business_promotion",
   "column_break_30",
-  "total_profit_percent",
   "total_overheads",
   "total_cost_section",
   "total_overhead",
   "engineering_overhead",
-  "total_profit",
   "contigency_percent",
+  "gross_profit_percent",
+  "net_profit_percent",
   "column_break_21",
   "total_amount_as_overhead",
   "total_amount_as_engineering_overhead",
-  "total_amount_of_profit",
   "contigency",
+  "gross_profit_amount",
+  "net_profit_amount",
   "applicable_sections_section",
   "a_design",
   "b_materials",
@@ -97,7 +97,10 @@
   "others_amount",
   "others_amount_with_overheads",
   "others_profit",
+  "more_information_section",
+  "remarks",
   "opportunity",
+  "project_budget",
   "amended_from"
  ],
  "fields": [
@@ -136,6 +139,7 @@
   {
    "fieldname": "project_name",
    "fieldtype": "Data",
+   "in_list_view": 1,
    "label": "Title of Project",
    "reqd": 1
   },
@@ -203,7 +207,7 @@
    "depends_on": "eval:doc.__islocal != 1",
    "fieldname": "heavy_equipments_section",
    "fieldtype": "Section Break",
-   "label": "TOOLS / EQUIPMENT / TRANSPORT"
+   "label": "TOOLS / EQUIPMENT / TRANSPORT / OTHERS"
   },
   {
    "fieldname": "heavy_equipments",
@@ -216,7 +220,7 @@
    "depends_on": "eval:doc.__islocal != 1",
    "fieldname": "manpower_subcontract_section",
    "fieldtype": "Section Break",
-   "label": "OTHERS"
+   "label": "SUBCONTRACT"
   },
   {
    "fieldname": "manpower_subcontract",
@@ -238,6 +242,7 @@
   {
    "fieldname": "lead_customer",
    "fieldtype": "Dynamic Link",
+   "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Lead Customer",
    "options": "cost_estimation_for"
@@ -300,13 +305,13 @@
    "default": "0",
    "fieldname": "f_tools__equipment__transport",
    "fieldtype": "Check",
-   "label": "TOOLS / EQUIPMENT / TRANSPORT"
+   "label": "TOOLS / EQUIPMENT / TRANSPORT / OTHERS"
   },
   {
    "default": "0",
    "fieldname": "g_others",
    "fieldtype": "Check",
-   "label": "OTHERS"
+   "label": "SUBCONTRACT"
   },
   {
    "depends_on": "eval:doc.__islocal != 1",
@@ -360,13 +365,6 @@
    "read_only": 1
   },
   {
-   "fieldname": "total_profit",
-   "fieldtype": "Percent",
-   "in_list_view": 1,
-   "label": "PROFIT %",
-   "read_only": 1
-  },
-  {
    "fieldname": "contigency_percent",
    "fieldtype": "Percent",
    "label": "CONTIGENCY %",
@@ -386,12 +384,6 @@
    "fieldname": "total_amount_as_engineering_overhead",
    "fieldtype": "Currency",
    "label": "TOTAL AMOUNT AS ENGINEERING OVERHEAD",
-   "read_only": 1
-  },
-  {
-   "fieldname": "total_amount_of_profit",
-   "fieldtype": "Currency",
-   "label": "TOTAL AMOUNT OF PROFIT",
    "read_only": 1
   },
   {
@@ -426,7 +418,6 @@
   {
    "fieldname": "total_business_promotion",
    "fieldtype": "Currency",
-   "hidden": 1,
    "label": "Total Business Promotion",
    "read_only": 1
   },
@@ -437,18 +428,6 @@
    "no_copy": 1,
    "options": "Cost Estimation",
    "print_hide": 1,
-   "read_only": 1
-  },
-  {
-   "fieldname": "total_profit_amount",
-   "fieldtype": "Currency",
-   "label": "Total Profit Amount",
-   "read_only": 1
-  },
-  {
-   "fieldname": "total_profit_percent",
-   "fieldtype": "Percent",
-   "label": "Total Profit Percent",
    "read_only": 1
   },
   {
@@ -657,33 +636,34 @@
    "fieldname": "others_cost",
    "fieldtype": "Currency",
    "hidden": 1,
-   "label": "Others Cost",
+   "label": "Subcontract Cost",
    "read_only": 1
   },
   {
    "fieldname": "others_amount",
    "fieldtype": "Currency",
    "hidden": 1,
-   "label": "Others Amount",
+   "label": "Subcontract Amount",
    "read_only": 1
   },
   {
    "fieldname": "others_amount_with_overheads",
    "fieldtype": "Currency",
    "hidden": 1,
-   "label": "Others Amount with Overheads",
+   "label": "Subcontract Amount with Overheads",
    "read_only": 1
   },
   {
    "fieldname": "others_profit",
    "fieldtype": "Currency",
    "hidden": 1,
-   "label": "Others Profit",
+   "label": "Subcontract Profit",
    "read_only": 1
   },
   {
    "fieldname": "naming_series",
    "fieldtype": "Select",
+   "in_list_view": 1,
    "label": "Naming Series",
    "options": "\nASTCC-CE-.YYYY.-\nSHNA-CE-.YYYY.-\nSHBW-CE-.YYYY.-\nSHBO-CE-.YYYY.-\nELE-CE-.YYYY.-\nENG-CE-.YYYY.-\nINT-CE-.YYYY.-\nSHKF-CE-.YYYY.-\nKTRA-CE-.YYYY.-\nKFTC-CE-.YYYY.-\nMSS-CE-.YYYY.-\nMSHO-CE-.YYYY.-\nSHMS-CE-.YYYY.-\nMEP-CE-.YYYY.-\nESD-CE-.YYYY.-\nTRD-CE-.YYYY.-",
    "read_only": 1,
@@ -693,17 +673,54 @@
    "fieldname": "lead_customer_name",
    "fieldtype": "Data",
    "label": "Lead Customer Name"
+  },
+  {
+   "fieldname": "net_profit_percent",
+   "fieldtype": "Percent",
+   "label": "Net Profit %",
+   "read_only": 1
+  },
+  {
+   "fieldname": "net_profit_amount",
+   "fieldtype": "Currency",
+   "label": "Net Profit Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "gross_profit_percent",
+   "fieldtype": "Percent",
+   "label": "Gross Profit %",
+   "read_only": 1
+  },
+  {
+   "fieldname": "gross_profit_amount",
+   "fieldtype": "Currency",
+   "label": "Gross Profit Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "more_information_section",
+   "fieldtype": "Section Break",
+   "label": "More Information"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "project_budget",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Project Budget",
+   "options": "Project Budget"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
- "links": [
-  {
-   "link_doctype": "Quotation",
-   "link_fieldname": "cost_estimation"
-  }
- ],
- "modified": "2022-04-18 13:16:29.610788",
+ "links": [],
+ "modified": "2022-11-08 12:08:51.497494",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Cost Estimation",

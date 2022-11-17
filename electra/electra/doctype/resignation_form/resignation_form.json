@@ -1,0 +1,197 @@
+{
+ "actions": [],
+ "autoname": "field:employee",
+ "creation": "2022-09-12 07:49:29.655027",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "employee",
+  "employee_name",
+  "department",
+  "designation",
+  "reports_to",
+  "reports_to_name",
+  "date_of_joining",
+  "nationality",
+  "passport_number",
+  "resignation_type",
+  "column_break_11",
+  "date_of_change",
+  "session_user",
+  "requested_relieving_date",
+  "reason",
+  "section_break_16",
+  "hods_relieving_date",
+  "new_qid_no",
+  "column_break_19",
+  "approved_relieving_date",
+  "actual_relieving_date",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Employee",
+   "options": "Employee",
+   "unique": 1
+  },
+  {
+   "fetch_from": "employee.employee_name",
+   "fieldname": "employee_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Employee Name",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "employee.department",
+   "fieldname": "department",
+   "fieldtype": "Link",
+   "label": "Department",
+   "options": "Department",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "employee.designation",
+   "fieldname": "designation",
+   "fieldtype": "Data",
+   "label": "Designation",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "employee.reports_to",
+   "fieldname": "reports_to",
+   "fieldtype": "Data",
+   "label": "Reports To",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "employee.reports_to_name",
+   "fieldname": "reports_to_name",
+   "fieldtype": "Data",
+   "label": "Reports To Name",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "employee.date_of_joining",
+   "fieldname": "date_of_joining",
+   "fieldtype": "Data",
+   "label": "Date of Joining",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "employee.nationality",
+   "fieldname": "nationality",
+   "fieldtype": "Data",
+   "label": "Nationality",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "employee.passport_number",
+   "fieldname": "passport_number",
+   "fieldtype": "Data",
+   "label": "Passport Number",
+   "read_only": 1
+  },
+  {
+   "fieldname": "resignation_type",
+   "fieldtype": "Select",
+   "label": "Resignation Type",
+   "options": "\nExit From Country\nLocal Transfer"
+  },
+  {
+   "fieldname": "column_break_11",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Resignation Form",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "default": "Today",
+   "fieldname": "date_of_change",
+   "fieldtype": "Date",
+   "label": "Date"
+  },
+  {
+   "fieldname": "session_user",
+   "fieldtype": "Data",
+   "label": "Session User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "requested_relieving_date",
+   "fieldtype": "Date",
+   "label": "Requested Relieving Date"
+  },
+  {
+   "fieldname": "reason",
+   "fieldtype": "Small Text",
+   "label": "Reason"
+  },
+  {
+   "fieldname": "section_break_16",
+   "fieldtype": "Section Break"
+  },
+  {
+   "depends_on": "eval:doc.workflow_state == 'Pending for HOD' || doc.workflow_state == 'Pending for HR' || doc.workflow_state == 'Pending for Exit'",
+   "fieldname": "hods_relieving_date",
+   "fieldtype": "Date",
+   "label": "Hod's Relieving Date"
+  },
+  {
+   "depends_on": "eval:doc.resignation_type == 'Local Transfer' && doc.workflow_state == 'Draft'",
+   "fieldname": "new_qid_no",
+   "fieldtype": "Int",
+   "label": "New QID No"
+  },
+  {
+   "fieldname": "column_break_19",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.workflow_state == 'Pending for HR' || doc.workflow_state == 'Pending for Exit'",
+   "fieldname": "approved_relieving_date",
+   "fieldtype": "Date",
+   "label": "Approved Relieving Date"
+  },
+  {
+   "fieldname": "actual_relieving_date",
+   "fieldtype": "Date",
+   "label": "Actual Relieving Date"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2022-09-12 08:05:29.811074",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "Resignation Form",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

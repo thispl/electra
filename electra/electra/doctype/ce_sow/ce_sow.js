@@ -11,9 +11,26 @@ frappe.ui.form.on('CE SOW', {
 		}
 
 	},
+	business_promotion_amount(frm){
+		var business_promotion_percent = (frm.doc.business_promotion_amount / frm.doc.total_cost) * 100
+		frm.set_value("business_promotion_percent",business_promotion_percent)
+	},
+	business_promotion_percent(frm){
+		var business_promotion_amount = frm.doc.total_cost * (frm.doc.business_promotion_percent / 100)
+		frm.set_value("business_promotion_amount",business_promotion_amount)
+	},
+	net_profit_amount(frm){
+		var net_profit_percent = (frm.doc.net_profit_amount/frm.doc.total_cost) * 100
+		frm.set_value("net_profit_percent",net_profit_percent)
+	},
+	net_profit_percent(frm){
+		var net_profit_amount = frm.doc.total_cost * (frm.doc.net_profit_percent / 100)
+		frm.set_value("net_profit_amount",net_profit_amount)
+	},
+	
+	
+	
 	onload(frm) {
-
-
 		frappe.call({
 			'method': 'frappe.client.get_value',
 			args: {
@@ -162,13 +179,15 @@ frappe.ui.form.on('CE SOW', {
 		if (frm.doc.company == 'MEP DIVISION - ELECTRA') {
 			var profit_amount = frm.doc.design_amount_with_overheads - frm.doc.design_cost
 			var profit_percent = (frm.doc.design_cost / frm.doc.design_amount_with_overheads) * 100
+			var design_amount = frm.doc.design_cost
 		} else {
 			var profit_amount = frm.doc.design_amount_with_overheads - frm.doc.design_amount
 			var profit_percent = (profit_amount / frm.doc.design_amount_with_overheads) * 100
+			var design_amount = frm.doc.design_amount
 		}
 		var table = `<table border='1' style="width:100%">
 							<tr><th style="background-color:grey;color:white">Est.Cost Amount</th><th  style="background-color:grey;color:white">Selling Price Amount</th><th  style="background-color:grey;color:white">Profit Amount</th><th  style="background-color:grey;color:white">Profit %</th></tr>
-							<tr><td style="text-align:center"> QR ${Math.ceil(frm.doc.design_amount)}</td><td style="text-align:center">QR ${Math.ceil(frm.doc.design_amount_with_overheads)}</td><td style="text-align:center">QR ${Math.ceil(profit_amount)}</td><td style="text-align:center">${Math.ceil(profit_percent)} %</td></tr>
+							<tr><td style="text-align:center"> QR ${Math.round(design_amount)}</td><td style="text-align:center">QR ${Math.round(frm.doc.design_amount_with_overheads)}</td><td style="text-align:center">QR ${Math.round(profit_amount)}</td><td style="text-align:center">${Math.round(profit_percent)} %</td></tr>
 						 </table>`
 		frm.get_field("design_html").$wrapper.html(table);
 
@@ -177,17 +196,17 @@ frappe.ui.form.on('CE SOW', {
 		if (frm.doc.company == 'MEP DIVISION - ELECTRA') {
 			var table = `<table border='1' style="width:100%">
 						<tr><th style="background-color:grey;color:white">Cost Amount</th><th  style="background-color:grey;color:white">Transfer Amount</th><th  style="background-color:grey;color:white">Transfer Cost Amount</th><th  style="background-color:grey;color:white">Selling Amount</th><th  style="background-color:grey;color:white">Profit Amount</th><th  style="background-color:grey;color:white">Profit %</th></tr>
-						<tr><td style="text-align:center"> QR ${Math.ceil(frm.doc.cost_amount)}</td><td style="text-align:center">QR ${Math.ceil(frm.doc.transfer_amount)}</td><td style="text-align:center">QR ${Math.ceil(frm.doc.transfer_cost_amount)}</td><td style="text-align:center">QR ${Math.ceil(frm.doc.selling_amount)}</td><td style="text-align:center">QR ${Math.ceil(frm.doc.profit_amount)}</td><td style="text-align:center">${Math.ceil(frm.doc.profit_percent)} %</td></tr>
+						<tr><td style="text-align:center"> QR ${Math.round(frm.doc.cost_amount)}</td><td style="text-align:center">QR ${Math.round(frm.doc.transfer_amount)}</td><td style="text-align:center">QR ${Math.round(frm.doc.transfer_cost_amount)}</td><td style="text-align:center">QR ${Math.round(frm.doc.selling_amount)}</td><td style="text-align:center">QR ${Math.round(frm.doc.profit_amount)}</td><td style="text-align:center">${Math.round(frm.doc.profit_percent)} %</td></tr>
 					 </table>`
 			frm.get_field("mep_materials_html").$wrapper.html(table);
 		} else {
 
-			var profit_amount = Math.ceil(frm.doc.materials_amount_with_overheads - frm.doc.materials_amount)
-			var profit_percent = Math.ceil((profit_amount / frm.doc.materials_amount_with_overheads) * 100)
+			var profit_amount = Math.round(frm.doc.materials_amount_with_overheads - frm.doc.materials_amount)
+			var profit_percent = Math.round((profit_amount / frm.doc.materials_amount_with_overheads) * 100)
 
 			var table = `<table border='1' style="width:100%">
 							<tr><th style="background-color:grey;color:white">Est.Cost Amount</th><th  style="background-color:grey;color:white">Selling Price Amount</th><th  style="background-color:grey;color:white">Profit Amount</th><th  style="background-color:grey;color:white">Profit %</th></tr>
-							<tr><td style="text-align:center"> QR ${Math.ceil(frm.doc.materials_amount)}</td><td style="text-align:center">QR ${Math.ceil(frm.doc.materials_amount_with_overheads)}</td><td style="text-align:center">QR ${Math.ceil(profit_amount)}</td><td style="text-align:center">${Math.ceil(profit_percent)} %</td></tr>
+							<tr><td style="text-align:center"> QR ${Math.round(frm.doc.materials_amount)}</td><td style="text-align:center">QR ${Math.round(frm.doc.materials_amount_with_overheads)}</td><td style="text-align:center">QR ${Math.round(profit_amount)}</td><td style="text-align:center">${Math.round(profit_percent)} %</td></tr>
 						 </table>`
 			frm.get_field("materials_html").$wrapper.html(table);
 		}
@@ -196,13 +215,15 @@ frappe.ui.form.on('CE SOW', {
 		if (frm.doc.company == 'MEP DIVISION - ELECTRA') {
 			var profit_amount = frm.doc.finishing_work_amount_with_overheads - frm.doc.finishing_work_cost
 			var profit_percent = (frm.doc.finishing_work_cost / frm.doc.finishing_work_amount_with_overheads) * 100
+			var finishing_work_amount = frm.doc.finishing_work_cost
 		} else {
 			var profit_amount = frm.doc.finishing_work_amount_with_overheads - frm.doc.finishing_work_amount
 			var profit_percent = (profit_amount / frm.doc.finishing_work_amount_with_overheads) * 100
+			var finishing_work_amount = frm.doc.finishing_work_amount
 		}
 		var table = `<table border='1' style="width:100%">
 							<tr><th style="background-color:grey;color:white">Est.Cost Amount</th><th  style="background-color:grey;color:white">Selling Price Amount</th><th  style="background-color:grey;color:white">Profit Amount</th><th  style="background-color:grey;color:white">Profit %</th></tr>
-							<tr><td style="text-align:center"> QR ${Math.ceil(frm.doc.finishing_work_amount)}</td><td style="text-align:center">QR ${Math.ceil(frm.doc.finishing_work_amount_with_overheads)}</td><td style="text-align:center">QR ${Math.ceil(profit_amount)}</td><td style="text-align:center">${Math.ceil(profit_percent)} %</td></tr>
+							<tr><td style="text-align:center"> QR ${Math.round(finishing_work_amount)}</td><td style="text-align:center">QR ${Math.round(frm.doc.finishing_work_amount_with_overheads)}</td><td style="text-align:center">QR ${Math.round(profit_amount)}</td><td style="text-align:center">${Math.round(profit_percent)} %</td></tr>
 						 </table>`
 		frm.get_field("finishing_work_html").$wrapper.html(table);
 
@@ -211,30 +232,34 @@ frappe.ui.form.on('CE SOW', {
 		if (frm.doc.company == 'MEP DIVISION - ELECTRA') {
 			var profit_amount = frm.doc.accessories_amount_with_overheads - frm.doc.accessories_cost
 			var profit_percent = (frm.doc.accessories_cost / frm.doc.accessories_amount_with_overheads) * 100
+			var accessories_amount = frm.doc.accessories_cost
 		} else {
 			var profit_amount = frm.doc.accessories_amount_with_overheads - frm.doc.accessories_amount
 			var profit_percent = (profit_amount / frm.doc.accessories_amount_with_overheads) * 100
+			var accessories_amount = frm.doc.accessories_amount
 		}
 
 		var table = `<table border='1' style="width:100%">
 							<tr><th style="background-color:grey;color:white">Est.Cost Amount</th><th  style="background-color:grey;color:white">Selling Price Amount</th><th  style="background-color:grey;color:white">Profit Amount</th><th  style="background-color:grey;color:white">Profit %</th></tr>
-							<tr><td style="text-align:center"> QR ${Math.ceil(frm.doc.accessories_amount)}</td><td style="text-align:center">QR ${Math.ceil(frm.doc.accessories_amount_with_overheads)}</td><td style="text-align:center">QR ${Math.ceil(profit_amount)}</td><td style="text-align:center">${Math.ceil(profit_percent)} %</td></tr>
+							<tr><td style="text-align:center"> QR ${Math.round(accessories_amount)}</td><td style="text-align:center">QR ${Math.round(frm.doc.accessories_amount_with_overheads)}</td><td style="text-align:center">QR ${Math.round(profit_amount)}</td><td style="text-align:center">${Math.round(profit_percent)} %</td></tr>
 						 </table>`
 		frm.get_field("accessories_html").$wrapper.html(table);
 
 		// Installation
 
 		if (frm.doc.company == 'MEP DIVISION - ELECTRA') {
-			var profit_amount = frm.doc.installation_amount_with_overheads - frm.doc.installation_cost
-			var profit_percent = (frm.doc.installation_cost / frm.doc.installation_amount_with_overheads) * 100
+			var profit_amount = frm.doc.installation_amount_with_overheads - frm.doc.installation_amount
+			var profit_percent = (frm.doc.installation_amount / frm.doc.installation_amount_with_overheads) * 100
+			var installation_amount = frm.doc.installation_amount
 		} else {
 			var profit_amount = frm.doc.installation_amount_with_overheads - frm.doc.installation_amount
 			var profit_percent = (profit_amount / frm.doc.installation_amount_with_overheads) * 100
+			var installation_amount = frm.doc.installation_amount
 		}
 
 		var table = `<table border='1' style="width:100%">
 							<tr><th style="background-color:grey;color:white">Est.Cost Amount</th><th  style="background-color:grey;color:white">Selling Price Amount</th><th  style="background-color:grey;color:white">Profit Amount</th><th  style="background-color:grey;color:white">Profit %</th></tr>
-							<tr><td style="text-align:center"> QR ${Math.ceil(frm.doc.installation_amount)}</td><td style="text-align:center">QR ${Math.ceil(frm.doc.installation_amount_with_overheads)}</td><td style="text-align:center">QR ${Math.ceil(profit_amount)}</td><td style="text-align:center">${Math.ceil(profit_percent)} %</td></tr>
+							<tr><td style="text-align:center"> QR ${Math.round(installation_amount)}</td><td style="text-align:center">QR ${Math.round(frm.doc.installation_amount_with_overheads)}</td><td style="text-align:center">QR ${Math.round(profit_amount)}</td><td style="text-align:center">${Math.round(profit_percent)} %</td></tr>
 						 </table>`
 		frm.get_field("installation_html").$wrapper.html(table);
 
@@ -242,14 +267,16 @@ frappe.ui.form.on('CE SOW', {
 		if (frm.doc.company == 'MEP DIVISION - ELECTRA') {
 			var profit_amount = frm.doc.manpower_amount_with_overheads - frm.doc.manpower_cost
 			var profit_percent = (frm.doc.manpower_cost / frm.doc.manpower_amount_with_overheads) * 100
+			var manpower_amount = frm.doc.manpower_cost
 		} else {
 			var profit_amount = frm.doc.manpower_amount_with_overheads - frm.doc.manpower_amount
 			var profit_percent = (profit_amount / frm.doc.manpower_amount_with_overheads) * 100
+			var manpower_amount = frm.doc.manpower_amount
 		}
 
 		var table = `<table border='1' style="width:100%">
 							<tr><th style="background-color:grey;color:white">Est.Cost Amount</th><th  style="background-color:grey;color:white">Selling Price Amount</th><th  style="background-color:grey;color:white">Profit Amount</th><th  style="background-color:grey;color:white">Profit %</th></tr>
-							<tr><td style="text-align:center"> QR ${Math.ceil(frm.doc.manpower_amount)}</td><td style="text-align:center">QR ${Math.ceil(frm.doc.manpower_amount_with_overheads)}</td><td style="text-align:center">QR ${Math.ceil(profit_amount)}</td><td style="text-align:center">${Math.ceil(profit_percent)} %</td></tr>
+							<tr><td style="text-align:center"> QR ${Math.round(manpower_amount)}</td><td style="text-align:center">QR ${Math.round(frm.doc.manpower_amount_with_overheads)}</td><td style="text-align:center">QR ${Math.round(profit_amount)}</td><td style="text-align:center">${Math.round(profit_percent)} %</td></tr>
 						 </table>`
 		frm.get_field("manpower_html").$wrapper.html(table);
 
@@ -258,14 +285,16 @@ frappe.ui.form.on('CE SOW', {
 		if (frm.doc.company == 'MEP DIVISION - ELECTRA') {
 			var profit_amount = frm.doc.heavy_equipments_amount_with_overheads - frm.doc.heavy_equipments_cost
 			var profit_percent = (frm.doc.heavy_equipments_cost / frm.doc.heavy_equipments_amount_with_overheads) * 100
+			var heavy_equipments_amount = frm.doc.heavy_equipments_cost
 		} else {
 			var profit_amount = frm.doc.heavy_equipments_amount_with_overheads - frm.doc.heavy_equipments_amount
 			var profit_percent = (profit_amount / frm.doc.heavy_equipments_amount_with_overheads) * 100
+			var heavy_equipments_amount = frm.doc.heavy_equipments_amount
 		}
 
 		var table = `<table border='1' style="width:100%">
 							<tr><th style="background-color:grey;color:white">Est.Cost Amount</th><th  style="background-color:grey;color:white">Selling Price Amount</th><th  style="background-color:grey;color:white">Profit Amount</th><th  style="background-color:grey;color:white">Profit %</th></tr>
-							<tr><td style="text-align:center"> QR ${Math.ceil(frm.doc.heavy_equipments_amount)}</td><td style="text-align:center">QR ${Math.ceil(frm.doc.heavy_equipments_amount_with_overheads)}</td><td style="text-align:center">QR ${Math.ceil(profit_amount)}</td><td style="text-align:center">${Math.ceil(profit_percent)} %</td></tr>
+							<tr><td style="text-align:center"> QR ${Math.round(heavy_equipments_amount)}</td><td style="text-align:center">QR ${Math.round(frm.doc.heavy_equipments_amount_with_overheads)}</td><td style="text-align:center">QR ${Math.round(profit_amount)}</td><td style="text-align:center">${Math.round(profit_percent)} %</td></tr>
 						 </table>`
 		frm.get_field("heavy_equipments_html").$wrapper.html(table);
 
@@ -274,14 +303,16 @@ frappe.ui.form.on('CE SOW', {
 		if (frm.doc.company == 'MEP DIVISION - ELECTRA') {
 			var profit_amount = frm.doc.others_amount_with_overheads - frm.doc.others_cost
 			var profit_percent = (frm.doc.others_cost / frm.doc.others_amount_with_overheads) * 100
+			var others_amount = frm.doc.others_cost
 		} else {
 			var profit_amount = frm.doc.others_amount_with_overheads - frm.doc.others_amount
 			var profit_percent = (profit_amount / frm.doc.others_amount_with_overheads) * 100
+			var others_amount = frm.doc.others_amount
 		}
 
 		var table = `<table border='1' style="width:100%">
 							<tr><th style="background-color:grey;color:white">Est.Cost Amount</th><th  style="background-color:grey;color:white">Selling Price Amount</th><th  style="background-color:grey;color:white">Profit Amount</th><th  style="background-color:grey;color:white">Profit %</th></tr>
-							<tr><td style="text-align:center"> QR ${Math.ceil(frm.doc.others_amount)}</td><td style="text-align:center">QR ${Math.ceil(frm.doc.others_amount_with_overheads)}</td><td style="text-align:center">QR ${Math.ceil(profit_amount)}</td><td style="text-align:center">${Math.ceil(profit_percent)} %</td></tr>
+							<tr><td style="text-align:center"> QR ${Math.round(others_amount)}</td><td style="text-align:center">QR ${Math.round(frm.doc.others_amount_with_overheads)}</td><td style="text-align:center">QR ${Math.round(profit_amount)}</td><td style="text-align:center">${Math.round(profit_percent)} %</td></tr>
 						 </table>`
 		frm.get_field("others_html").$wrapper.html(table);
 	},
@@ -297,8 +328,11 @@ frappe.ui.form.on('CE SOW', {
 			amount += d.amount
 			cost_amount += d.cost_amount
 			amount_with_overheads += d.amount_with_overheads
+			// if (d.unit_price < d.cost){
+			// 	frappe.throw('Bidding Price should not be less than Cost Price in Design Section')
+			// }
 		})
-		var profit = amount_with_overheads - cost_amount
+		var profit = amount_with_overheads - amount
 		frm.set_value("design_cost", cost_amount)
 		frm.set_value("design_amount", amount)
 		frm.set_value("design_amount_with_overheads", amount_with_overheads)
@@ -308,11 +342,13 @@ frappe.ui.form.on('CE SOW', {
 		var cost_amount = 0
 		var amount_with_overheads = 0
 		if (frm.doc.company == 'MEP DIVISION - ELECTRA') {
-			$.each(frm.doc.mep_materials, function (i, d) {
-				amount += d.amount
-				cost_amount += d.cost_amount
-
-			})
+			// $.each(frm.doc.mep_materials, function (i, d) {
+			// 	amount += d.amount
+			// 	cost_amount += d.cost_amount
+			// 	if (d.unit_price < d.cost){
+			// 		frappe.throw('Bidding Price should not be less than Cost Price in Materials Section')
+			// 	}
+			// })
 			var profit = amount_with_overheads - cost_amount
 			// frm.set_value("materials_cost", amount)
 			// frm.set_value("materials_profit", profit)
@@ -329,9 +365,12 @@ frappe.ui.form.on('CE SOW', {
 				transfer_amount += d.transfer_amount
 				transfer_cost_amount += d.transfer_cost_amount
 				selling_amount += d.amount
+				// if (d.unit_price < d.cost){
+				// 	frappe.throw('Bidding Price should not be less than Cost Price in Materials Section')
+				// }
 			})
 			profit_amount = selling_amount - transfer_cost_amount
-			profit_percent = Math.ceil((profit_amount / selling_amount) * 100)
+			profit_percent = Math.round((profit_amount / selling_amount) * 100)
 
 			frm.set_value("materials_profit", profit_amount)
 			frm.set_value("materials_amount", transfer_cost_amount)
@@ -355,8 +394,11 @@ frappe.ui.form.on('CE SOW', {
 				amount += d.amount
 				cost_amount += d.cost_amount
 				amount_with_overheads += d.amount_with_overheads
+				// if (d.unit_price < d.cost){
+				// 	frappe.throw('Bidding Price should not be less than Cost Price in Materials Section')
+				// }
 			})
-			var profit = amount_with_overheads - cost_amount
+			var profit = amount_with_overheads - amount
 			frm.set_value("materials_profit", profit)
 			frm.set_value("materials_amount", amount)
 			frm.set_value("materials_amount_with_overheads", amount_with_overheads)
@@ -371,8 +413,11 @@ frappe.ui.form.on('CE SOW', {
 			amount += d.amount
 			cost_amount += d.cost_amount
 			amount_with_overheads += d.amount_with_overheads
+			// if (d.unit_price < d.cost){
+			// 	frappe.throw('Bidding Price should not be less than Cost Price in Finishing Work Section')
+			// }
 		})
-		var profit = amount_with_overheads - cost_amount
+		var profit = amount_with_overheads - amount
 		frm.set_value("finishing_work_profit", profit)
 		frm.set_value("finishing_work_cost", cost_amount)
 		frm.set_value("finishing_work_amount", amount)
@@ -385,8 +430,11 @@ frappe.ui.form.on('CE SOW', {
 			amount += d.amount
 			cost_amount += d.cost_amount
 			amount_with_overheads += d.amount_with_overheads
+			// if (d.unit_price < d.cost){
+			// 	frappe.throw('Bidding Price should not be less than Cost Price in Accessories Section')
+			// }
 		})
-		var profit = amount - cost_amount
+		var profit = amount_with_overheads - amount
 		frm.set_value("accessories_profit", profit)
 		frm.set_value("accessories_cost", cost_amount)
 		frm.set_value("accessories_amount", amount)
@@ -400,9 +448,12 @@ frappe.ui.form.on('CE SOW', {
 			amount += d.amount
 			cost_amount += d.cost_amount
 			amount_with_overheads += d.amount_with_overheads
+			// if (d.unit_price < d.cost){
+			// 	frappe.throw('Bidding Price should not be less than Cost Price in Installation Section')
+			// }
 		})
 		
-		var profit = amount_with_overheads - cost_amount
+		var profit = amount_with_overheads - amount
 		frm.set_value("installation_profit", profit)
 		frm.set_value("installation_cost", cost_amount)
 		frm.set_value("installation_amount", amount)
@@ -415,8 +466,11 @@ frappe.ui.form.on('CE SOW', {
 			amount += d.amount
 			cost_amount += d.cost_amount
 			amount_with_overheads += d.amount_with_overheads
+			// if (d.unit_price < d.cost){
+			// 	frappe.throw('Bidding Price should not be less than Cost Price in Mapower Section')
+			// }
 		})
-		var profit = amount_with_overheads - cost_amount
+		var profit = amount_with_overheads - amount
 		frm.set_value("manpower_profit", profit)
 		frm.set_value("manpower_cost", cost_amount)
 		frm.set_value("manpower_amount", amount)
@@ -429,8 +483,11 @@ frappe.ui.form.on('CE SOW', {
 			amount += d.amount
 			cost_amount += d.cost_amount
 			amount_with_overheads += d.amount_with_overheads
+			// if (d.unit_price < d.cost){
+			// 	frappe.throw('Bidding Price should not be less than Cost Price in Tools/Equipments/Transport/Others Section')
+			// }
 		})
-		var profit = amount_with_overheads - cost_amount
+		var profit = amount_with_overheads - amount
 		frm.set_value("heavy_equipments_profit", profit)
 		frm.set_value("heavy_equipments_cost", cost_amount)
 		frm.set_value("heavy_equipments_amount", amount)
@@ -443,8 +500,11 @@ frappe.ui.form.on('CE SOW', {
 			amount += d.amount
 			cost_amount += d.cost_amount
 			amount_with_overheads += d.amount_with_overheads
+			// if (d.unit_price < d.cost){
+			// 	frappe.throw('Bidding Price should not be less than Cost Price in Subcontract Section')
+			// }
 		})
-		var profit = amount_with_overheads - cost_amount
+		var profit = amount_with_overheads - amount
 		frm.set_value("others_profit", profit)
 		frm.set_value("others_cost", cost_amount)
 		frm.set_value("others_amount", amount)
@@ -466,26 +526,62 @@ frappe.ui.form.on('CE SOW', {
 		var total_overheads = 0
 		var total_business_promotion = 0
 
+		var mep_net_profit_amount = 0
+		var mep_net_profit_percent = 0
+
+		
+		// if (frm.doc.company == "MEP DIVISION - ELECTRA") {
+		// var total_cost = frm.doc.design_cost + frm.doc.materials_cost + frm.doc.finishing_work_cost + frm.doc.accessories_cost + frm.doc.installation_amount + frm.doc.manpower_cost + frm.doc.heavy_equipments_cost + frm.doc.others_cost
+		// }
+		// else{
 		var total_cost = frm.doc.design_amount + frm.doc.materials_amount + frm.doc.finishing_work_amount + frm.doc.accessories_amount + frm.doc.installation_amount + frm.doc.manpower_amount + frm.doc.heavy_equipments_amount + frm.doc.others_amount
-		console.log(total_cost)
+
+		// } 
 		var total_amount_as_overhead = total_cost * (frm.doc.total_overhead / 100)
 		var total_amount_as_engineering_overhead = total_cost * (frm.doc.engineering_overhead / 100)
 		var total_contigency = total_cost * (frm.doc.contigency_percent / 100)
 		var business_promotion_amount = total_cost * (frm.doc.business_promotion_percent / 100)
+		
+
+
+
+		if (frm.doc.company == "MEP DIVISION - ELECTRA") {
+			mep_net_profit_amount = frm.doc.gross_profit_amount-(frm.doc.total_amount_as_overhead + frm.doc.business_promotion_amount + frm.doc.contigency + frm.doc.total_amount_as_engineering_overhead)
+			mep_net_profit_percent = (mep_net_profit_amount / total_cost) * 100
+			frm.set_value('mep_net_profit_percent',mep_net_profit_percent)
+		}		
+		
+
+
 
 		total_overhead_percent = (total_amount_as_overhead / total_cost) * 100
 		contigency_percent = (total_contigency / total_cost) * 100
 		engineering_overhead_percent = (total_amount_as_engineering_overhead / total_cost) * 100
 		business_promotion_percent = (business_promotion_amount / total_cost) * 100
-
+		
 		var total_overheads = total_amount_as_overhead + total_amount_as_engineering_overhead + total_contigency + business_promotion_amount
-		var net_profit_amount = total_cost * (frm.doc.net_profit_percent / 100)
-		var gross_profit_amount = total_overheads + net_profit_amount
-		var total_bidding_price = total_cost + gross_profit_amount
+		
+		if (frm.doc.company == "MEP DIVISION - ELECTRA") {
+		var gross_profit_amount = frm.doc.design_profit + frm.doc.materials_profit + frm.doc.finishing_work_profit + frm.doc.accessories_profit + frm.doc.installation_profit + frm.doc.manpower_profit + frm.doc.heavy_equipments_profit + frm.doc.others_profit	
+		var total_bidding_price = total_cost + mep_net_profit_amount + total_overheads
+		}
+		else{
+		
+		var gross_profit_amount = frm.doc.design_profit + frm.doc.materials_profit + frm.doc.finishing_work_profit + frm.doc.accessories_profit + frm.doc.installation_profit + frm.doc.manpower_profit + frm.doc.heavy_equipments_profit + frm.doc.others_profit	
+		var total_bidding_price = total_cost + total_overheads + frm.doc.net_profit_amount
+		}
 		var gross_profit_percent = (gross_profit_amount / total_bidding_price) * 100
+		// var gross_profit_amount = frm.doc.total_amount_as_overhead + net_profit_amount
+		// var gross_profit_amount = total_overheads + net_profit_amount
+		// var net_profit_amount = frm.doc.gross_profit_amount - frm.doc.total_overheads
+		
+
 		frm.set_value("gross_profit_amount", gross_profit_amount)
 		frm.set_value("gross_profit_percent", gross_profit_percent)
-		frm.set_value("net_profit_amount", net_profit_amount)
+		frm.set_value("mep_net_profit_amount", mep_net_profit_amount)
+		frm.set_value("mep_net_profit_percent", mep_net_profit_percent)
+
+
 
 		// if (frm.doc.add_sub) {
 		// 	$.each(frm.doc.sub_scope_of_work, function (i, d) {
@@ -503,13 +599,13 @@ frappe.ui.form.on('CE SOW', {
 
 		frm.set_value("total_amount_as_overhead", total_amount_as_overhead)
 		frm.set_value("total_amount_as_engineering_overhead", total_amount_as_engineering_overhead)
-		frm.set_value("business_promotion_amount", business_promotion_amount)
+		// frm.set_value("business_promotion_amount", business_promotion_amount)
 		frm.set_value("contigency", total_contigency)
 
 		frm.set_value("total_overhead", total_overhead_percent)
 		frm.set_value("contigency_percent", contigency_percent)
 		frm.set_value("engineering_overhead", engineering_overhead_percent)
-		frm.set_value("business_promotion_percent", business_promotion_percent)
+		// frm.set_value("business_promotion_percent", business_promotion_percent)
 
 		frm.set_value("total_cost", total_cost)
 		frm.set_value("total_overheads", total_overheads)
@@ -517,13 +613,13 @@ frappe.ui.form.on('CE SOW', {
 
 		
 
-		var unit_price = Math.ceil(total_bidding_price / frm.doc.qty)
+		var unit_price = (total_bidding_price / frm.doc.qty)
 		frm.set_value("unit_price", unit_price)
 
-		var total_additions = gross_profit_amount
+		var total_additions = frm.doc.total_overheads + frm.doc.net_profit_amount
 
 		// calculating selling price with Overheads distributed to all items
-		// if (frm.doc.company != "MEP DIVISION - ELECTRA") {
+		if (frm.doc.company != "MEP DIVISION - ELECTRA") {
 			var total_spa = 0
 			$.each(frm.doc.design, function (i, d) {
 				total_spa += d.amount
@@ -597,7 +693,7 @@ frappe.ui.form.on('CE SOW', {
 			var dt_name = frm.doc.others
 			var dt_field = "others"
 			calculate_selling_price(frm, dt_name, dt_field, total_additions, total_spa)
-		
+		}
 
 
 
@@ -611,15 +707,19 @@ function calculate_selling_price(frm, dt_name, dt_field, total_additions, total_
 		var spa = d.amount
 		if (dt_field == 'manpower') {
 			var qty = d.total_workers
-			var sp = d.rate
+			var sp = d.unit_price * d.working_hours * d.days
 			var spa = sp * qty
 		}
 		var sp_distribution_percent = spa / total_spa
+		// console.log("total_spa=",total_spa)
+		// console.log('spa',spa)
+		// console.log('total_additions',total_additions)
 		var proportionate_overhead = sp_distribution_percent * total_additions
 		var spa_with_overhead = spa + proportionate_overhead
 		var sp_with_overhead = spa_with_overhead / qty
 		d.rate_with_overheads = sp_with_overhead
 		d.amount_with_overheads = qty * d.rate_with_overheads
+		// console.log('spa',d.amount_with_overheads)
 	})
 	frm.refresh_field(dt_field)
 }
@@ -808,6 +908,8 @@ frappe.ui.form.on('CE MEP Materials', {
 		row.cost_amount = row.cost * row.qty
 		row.cost_with_transfer_percent = row.vr * row.qty
 		row.transfer_cost_amount = row.qty * row.cost
+		row.rate_with_overheads = row.unit_price
+		row.amount_with_overheads = row.qty * row.unit_price
 		frm.refresh_field('mep_materials')
 
 	},
@@ -820,6 +922,8 @@ frappe.ui.form.on('CE MEP Materials', {
 		row.cost_with_transfer_percent = row.vr * row.qty
 		row.transfer_cost_amount = row.qty * row.cost
 		row.amount = row.qty * row.unit_price
+		row.rate_with_overheads = row.unit_price
+		row.amount_with_overheads = row.qty * row.unit_price
 		frm.refresh_field('mep_materials')
 
 	},
@@ -832,6 +936,8 @@ frappe.ui.form.on('CE MEP Materials', {
 		row.cost_with_transfer_percent = row.vr * row.qty
 		row.transfer_cost_amount = row.qty * row.cost
 		row.amount = row.qty * row.unit_price
+		row.rate_with_overheads = row.unit_price
+		row.amount_with_overheads = row.qty * row.unit_price
 		// cur_frm.set_value('materials_cost',row.amount)
 		frm.refresh_field('mep_materials')
 	},
@@ -863,46 +969,45 @@ frappe.ui.form.on('CE Items Manpower', {
 		});
 	},
 	total_workers: function (frm, cdt, cdn) {
-		var row = locals[cdt][cdn];
-		row.amount = row.total_workers * row.unit_price * row.working_hours * row.days
+		var row = locals[cdt][cdn]	
 		row.cost_amount = row.total_workers * row.cost * row.working_hours * row.days
 		row.rate = row.unit_price * row.working_hours * row.days
+		row.amount = row.total_workers * row.rate
 		frm.refresh_field('manpower')
-		// frm.trigger("total_manpower_calculation")
+		frm.trigger("total_manpower_calculation")
 	},
 	working_hours: function (frm, cdt, cdn) {
-		var row = locals[cdt][cdn];
-		row.amount = row.total_workers * row.unit_price * row.working_hours * row.days
+		var row = locals[cdt][cdn]	
 		row.cost_amount = row.total_workers * row.cost * row.working_hours * row.days
 		row.rate = row.unit_price * row.working_hours * row.days
+		row.amount = row.total_workers * row.rate
 		frm.refresh_field('manpower')
 		frm.trigger("total_manpower_calculation")
 	},
 	days: function (frm, cdt, cdn) {
-		var row = locals[cdt][cdn];
-		row.amount = row.total_workers * row.unit_price * row.working_hours * row.days
+		var row = locals[cdt][cdn]	
 		row.cost_amount = row.total_workers * row.cost * row.working_hours * row.days
 		row.rate = row.unit_price * row.working_hours * row.days
+		row.amount = row.total_workers * row.rate
 		frm.refresh_field('manpower')
 		frm.trigger("total_manpower_calculation")
 	},
 	unit_price: function (frm, cdt, cdn) {
-		var row = locals[cdt][cdn];
-		row.amount = row.total_workers * row.unit_price * row.working_hours * row.days
+		var row = locals[cdt][cdn]	
 		row.cost_amount = row.total_workers * row.cost * row.working_hours * row.days
 		row.rate = row.unit_price * row.working_hours * row.days
+		row.amount = row.total_workers * row.rate
 		frm.refresh_field('manpower')
 		frm.trigger("total_manpower_calculation")
 	},
-	// rate_with_overheads: function (frm, cdt, cdn) {
-	// 	var row = locals[cdt][cdn];
-	// 	row.amount = row.total_workers * row.unit_price * row.working_hours * row.days
-	// 	row.cost_amount = row.total_workers * row.cost * row.working_hours * row.days
-	// 	row.rate = row.unit_price * row.working_hours * row.days
-	// 	row.amount_with_overheads = row.rate_with_overheads * row.working_hours * row.days
-	// 	frm.refresh_field('manpower')
-	// 	frm.trigger("total_manpower_calculation")
-	// },
+	rate_with_overheads: function (frm, cdt, cdn) {
+		var row = locals[cdt][cdn]	
+		row.cost_amount = row.total_workers * row.cost * row.working_hours * row.days
+		row.rate = row.unit_price * row.working_hours * row.days
+		row.amount_with_overheads = row.total_workers * row.rate_with_overheads
+		frm.refresh_field('manpower')
+		frm.trigger("total_manpower_calculation")
+	},
 	manpower_cost_remove(frm, cdt, cdn) {
 		frm.trigger('total_manpower_calculation')
 	}

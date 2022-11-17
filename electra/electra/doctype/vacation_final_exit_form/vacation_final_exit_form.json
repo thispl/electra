@@ -15,6 +15,7 @@
   "resident_id_no",
   "date_of_joining",
   "company",
+  "type",
   "site_store_clearance",
   "equipments",
   "tools",
@@ -24,11 +25,6 @@
   "other_items",
   "remarks_column",
   "data_15",
-  "data_16",
-  "data_17",
-  "data_18",
-  "data_19",
-  "data_20",
   "admin_hr_clearance",
   "vehical_no",
   "mobile",
@@ -40,35 +36,24 @@
   "bank",
   "duty_handover_letter",
   "remarks_2",
-  "data_32",
-  "data_33",
-  "data_34",
-  "data_35",
-  "data_36",
-  "data_37",
-  "data_38",
-  "data_39",
-  "data_40",
+  "remarks_admin",
   "it_clearance",
   "laptop",
   "hardisk",
   "computer_accessories",
   "column_break_45",
-  "data",
-  "data_46",
-  "data_47",
+  "remarks_it",
   "finance_clearance",
   "personal_loan__with_company",
   "cash_advances",
   "other_financial_liabilities",
   "column_break_38",
-  "data_59",
-  "data_60",
-  "data_61",
+  "remarks",
   "clearance_approval",
   "accounts_dept",
   "column_break_40",
   "admin_dept",
+  "letter_head",
   "amended_from"
  ],
  "fields": [
@@ -122,10 +107,6 @@
    "fieldtype": "Select",
    "label": " Other Items",
    "options": "\nYes\nNo"
-  },
-  {
-   "fieldname": "data_16",
-   "fieldtype": "Data"
   },
   {
    "fieldname": "vehical_no",
@@ -207,8 +188,7 @@
   },
   {
    "fieldname": "column_break_38",
-   "fieldtype": "Column Break",
-   "label": "REMARKS"
+   "fieldtype": "Column Break"
   },
   {
    "fieldname": "accounts_dept",
@@ -256,6 +236,7 @@
   },
   {
    "collapsible": 1,
+   "depends_on": "eval:doc.workflow_state == \"Pending for Store Clearance\"",
    "fieldname": "site_store_clearance",
    "fieldtype": "Section Break",
    "label": "SITE/STORE CLEARANCE"
@@ -274,31 +255,16 @@
   },
   {
    "fieldname": "remarks_column",
-   "fieldtype": "Column Break",
-   "label": "REMARKS"
+   "fieldtype": "Column Break"
   },
   {
    "fieldname": "data_15",
-   "fieldtype": "Data"
-  },
-  {
-   "fieldname": "data_17",
-   "fieldtype": "Data"
-  },
-  {
-   "fieldname": "data_18",
-   "fieldtype": "Data"
-  },
-  {
-   "fieldname": "data_19",
-   "fieldtype": "Data"
-  },
-  {
-   "fieldname": "data_20",
-   "fieldtype": "Data"
+   "fieldtype": "Small Text",
+   "label": "Remark"
   },
   {
    "collapsible": 1,
+   "depends_on": "eval:doc.workflow_state == \"Pending for HR Clearance\"",
    "fieldname": "admin_hr_clearance",
    "fieldtype": "Section Break",
    "label": "ADMIN/HR CLEARANCE"
@@ -311,88 +277,29 @@
   },
   {
    "fieldname": "remarks_2",
-   "fieldtype": "Column Break",
-   "label": "REMARKS"
-  },
-  {
-   "fieldname": "data_32",
-   "fieldtype": "Data"
-  },
-  {
-   "fieldname": "data_33",
-   "fieldtype": "Data"
-  },
-  {
-   "fieldname": "data_34",
-   "fieldtype": "Data"
-  },
-  {
-   "fieldname": "data_35",
-   "fieldtype": "Data"
-  },
-  {
-   "fieldname": "data_36",
-   "fieldtype": "Data"
-  },
-  {
-   "fieldname": "data_37",
-   "fieldtype": "Data"
-  },
-  {
-   "fieldname": "data_38",
-   "fieldtype": "Data"
-  },
-  {
-   "fieldname": "data_39",
-   "fieldtype": "Data"
-  },
-  {
-   "fieldname": "data_40",
-   "fieldtype": "Data"
+   "fieldtype": "Column Break"
   },
   {
    "collapsible": 1,
+   "depends_on": "eval:doc.workflow_state == \"Pending for IT Clearance\"",
    "fieldname": "it_clearance",
    "fieldtype": "Section Break",
    "label": "IT CLEARANCE"
   },
   {
    "fieldname": "column_break_45",
-   "fieldtype": "Column Break",
-   "label": "REMARKS"
-  },
-  {
-   "fieldname": "data",
-   "fieldtype": "Data"
-  },
-  {
-   "fieldname": "data_46",
-   "fieldtype": "Data"
-  },
-  {
-   "fieldname": "data_47",
-   "fieldtype": "Data"
+   "fieldtype": "Column Break"
   },
   {
    "collapsible": 1,
+   "depends_on": "eval:doc.workflow_state == \"Pending for Finance Clearance\"",
    "fieldname": "finance_clearance",
    "fieldtype": "Section Break",
    "label": "FINANCE CLEARANCE"
   },
   {
-   "fieldname": "data_59",
-   "fieldtype": "Data"
-  },
-  {
-   "fieldname": "data_60",
-   "fieldtype": "Data"
-  },
-  {
-   "fieldname": "data_61",
-   "fieldtype": "Data"
-  },
-  {
    "collapsible": 1,
+   "depends_on": "eval:doc.workflow_state == \"Pending for Clearance Approval\"",
    "fieldname": "clearance_approval",
    "fieldtype": "Section Break",
    "label": "CLEARANCE APPROVAL"
@@ -411,12 +318,39 @@
    "fieldname": "resident_id_no",
    "fieldtype": "Read Only",
    "label": "Resident ID No(QID)"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "REMARKS"
+  },
+  {
+   "fieldname": "remarks_it",
+   "fieldtype": "Small Text",
+   "label": "REMARKS"
+  },
+  {
+   "fieldname": "remarks_admin",
+   "fieldtype": "Small Text",
+   "label": "REMARKS"
+  },
+  {
+   "fieldname": "letter_head",
+   "fieldtype": "Link",
+   "label": "Letter Head",
+   "options": "Letter Head"
+  },
+  {
+   "fieldname": "type",
+   "fieldtype": "Select",
+   "label": "Exit Type",
+   "options": "Vacation\nFinal Exit"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2021-10-04 08:48:15.210469",
+ "modified": "2022-11-11 15:49:09.817578",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Vacation Final Exit Form",

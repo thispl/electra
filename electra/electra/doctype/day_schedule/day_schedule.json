@@ -1,6 +1,6 @@
 {
  "actions": [],
- "autoname": "DC-.####",
+ "autoname": "format:{schedule_date}-{#####}",
  "creation": "2022-04-26 12:34:04.415521",
  "doctype": "DocType",
  "editable_grid": 1,
@@ -10,7 +10,8 @@
   "customer",
   "schedule_date",
   "schedule",
-  "amended_from"
+  "amended_from",
+  "project"
  ],
  "fields": [
   {
@@ -44,18 +45,26 @@
    "fieldtype": "Table",
    "label": "Schedule",
    "options": "Employee Schedule"
+  },
+  {
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "label": "Project",
+   "options": "Project"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2022-04-26 17:46:33.201998",
+ "modified": "2022-11-07 11:33:19.675234",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Day Schedule",
  "owner": "Administrator",
  "permissions": [
   {
+   "amend": 1,
+   "cancel": 1,
    "create": 1,
    "delete": 1,
    "email": 1,
@@ -65,6 +74,7 @@
    "report": 1,
    "role": "System Manager",
    "share": 1,
+   "submit": 1,
    "write": 1
   }
  ],

@@ -2,6 +2,28 @@
 // For license information, please see license.txt
 
 frappe.ui.form.on('Day Plan Timesheet', {
+	day_plan(frm){
+		frm.clear_table("time_log")
+		frappe.db.get_list('Day Plan Employee', {
+            fields: ['*'],
+            filters: {
+                parent: frm.doc.day_plan
+            },
+            order_by: "idx",
+        }).then(records => {
+            $.each(records,function(i,d){
+                d.employee
+				frm.add_child("time_log", {
+					employee: d.employee,
+					employee_name : d.employee_name,
+					designation : d.designation,
+					grade : d.grade,
+					contact_no : d.contact_no,
+				})
+				frm.refresh_field('time_log');
+            });
+        })
+	},
 	entry_type(frm){
 		frm.trigger("select_group")
 	},

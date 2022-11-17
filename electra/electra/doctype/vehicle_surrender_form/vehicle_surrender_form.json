@@ -133,7 +133,7 @@
    "label": "Type of Action"
   },
   {
-   "depends_on": "eval:doc.type_of_file==\"POSSESSION OF VEHICLE\"",
+   "depends_on": "eval:doc.type_of_file==\"POSSESSION OF VEHICLE\" ||doc.type_of_file==\"SURRENDER OF VEHICLE\"",
    "fieldname": "section_break_11",
    "fieldtype": "Section Break",
    "label": "Required details"
@@ -264,7 +264,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-04-12 11:56:14.623585",
+ "modified": "2022-07-06 14:00:30.972950",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Vehicle Surrender Form",

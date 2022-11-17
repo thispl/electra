@@ -84,7 +84,7 @@
    "fieldname": "data_11",
    "fieldtype": "Select",
    "label": "Type",
-   "options": "\nSick\nPermission\nTardy\nAbsent"
+   "options": "\nPermission\nTardy\nAbsent"
   },
   {
    "fieldname": "reason",
@@ -139,6 +139,7 @@
    "default": "0",
    "fieldname": "sick_leave",
    "fieldtype": "Check",
+   "hidden": 1,
    "label": "Sick Leave",
    "read_only_depends_on": "eval:doc.annual_leave || doc.casual_leave"
   },
@@ -162,7 +163,7 @@
   {
    "fieldname": "html_12",
    "fieldtype": "HTML",
-   "options": "<b>LATE :</b> If the employee report to duty BETWEEN  \u2013 8.10 AM &amp; 8.30 AM shall be marked as LATE and maximum 2 LATEs\u2019 are allowed per month for each employee<br>\n<b>TARDY:</b> If the employee reports to duty after 8.30 AM and before 9.00 AM shall be considered as TARDY and marked as PERMISSION  and later on, it will be marked as Half Day Leave, same will be deducted from Casual leave (if available) or from the Annual Leave (if Leave balance is available).<br>\n<b>PERMISSION:</b> If the employee informs his/ her immediate supervisor &amp; HR, with 1 day prior notice that, the employee is going to attend the duty late or leaving the work place early (before the office closing time).  Then he/ she is eligible to take PERMISSION for duration of not more than 2 hours and same can be availed 2 times per month.<br>\n<b>Sick Leave:</b> If the employee is sick, he/she should inform his immediate superior and HR through mail and provide Medical Certificate upon rejoining.<br>\n"
+   "options": "<b>LATE :</b> If the employee report to duty BETWEEN  \u2013 8.10 AM &amp; 8.30 AM shall be marked as LATE and maximum 2 LATEs\u2019 are allowed per month for each employee<br>\n<b>TARDY:</b> If the employee reports to duty after 8.30 AM and before 9.00 AM shall be considered as TARDY and marked as PERMISSION  and later on, it will be marked as Half Day Leave, same will be deducted from Casual leave (if available) or from the Annual Leave (if Leave balance is available).<br>\n<b>PERMISSION:</b> If the employee informs his/ her immediate supervisor &amp; HR, with 1 day prior notice that, the employee is going to attend the duty late or leaving the work place early (before the office closing time).  Then he/ she is eligible to take PERMISSION for duration of not more than 2 hours and same can be availed 2 times per month.<br>\n"
   },
   {
    "collapsible": 1,
@@ -229,7 +230,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2021-10-05 10:06:48.984116",
+ "modified": "2022-10-31 10:00:47.687654",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Staff Permission Tardy Absent Form",

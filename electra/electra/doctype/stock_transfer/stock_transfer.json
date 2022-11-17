@@ -1,0 +1,184 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "naming_series:",
+ "creation": "2022-02-12 18:58:35.606282",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "ic_material_transfer_request",
+  "naming_series",
+  "requested_date",
+  "transferred_date",
+  "project",
+  "column_break_2",
+  "raised_by",
+  "transferred_by",
+  "sales_order",
+  "section_break_4",
+  "items",
+  "items_html",
+  "section_break_2",
+  "target_company",
+  "default_target_warehouse",
+  "letter_head",
+  "amended_from",
+  "section_break_15",
+  "cancellation_remark"
+ ],
+ "fields": [
+  {
+   "fieldname": "ic_material_transfer_request",
+   "fieldtype": "Link",
+   "ignore_user_permissions": 1,
+   "label": "Stock Request",
+   "options": "Stock Request",
+   "read_only": 1
+  },
+  {
+   "fieldname": "requested_date",
+   "fieldtype": "Date",
+   "label": "Requested Date"
+  },
+  {
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "label": "Project",
+   "options": "Project"
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "raised_by",
+   "fieldtype": "Read Only",
+   "ignore_user_permissions": 1,
+   "label": "Requested By"
+  },
+  {
+   "fieldname": "sales_order",
+   "fieldtype": "Link",
+   "label": "Sales Order",
+   "options": "Sales Order"
+  },
+  {
+   "fieldname": "section_break_4",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "label": "Items",
+   "options": "Material Transfer Items"
+  },
+  {
+   "fieldname": "items_html",
+   "fieldtype": "HTML",
+   "label": "Items HTML"
+  },
+  {
+   "fieldname": "section_break_2",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "target_company",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Target Company",
+   "reqd": 1
+  },
+  {
+   "fieldname": "default_target_warehouse",
+   "fieldtype": "Link",
+   "ignore_user_permissions": 1,
+   "label": "Default Target Warehouse",
+   "options": "Warehouse",
+   "read_only": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "ignore_user_permissions": 1,
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Stock Transfer",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "ELE-STT-.YYYY.-"
+  },
+  {
+   "fieldname": "section_break_15",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "cancellation_remark",
+   "fieldtype": "Small Text",
+   "label": "Cancellation Remark"
+  },
+  {
+   "fieldname": "letter_head",
+   "fieldtype": "Link",
+   "label": "Letter Head",
+   "options": "Letter Head"
+  },
+  {
+   "fieldname": "transferred_by",
+   "fieldtype": "Read Only",
+   "label": "Transferred By"
+  },
+  {
+   "fieldname": "transferred_date",
+   "fieldtype": "Date",
+   "label": "Transferred Date"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2022-08-23 17:17:03.690140",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "Stock Transfer",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Sales Coordinator",
+   "select": 1,
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "target_company",
+ "track_changes": 1
+}

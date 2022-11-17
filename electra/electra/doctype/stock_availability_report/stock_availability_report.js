@@ -5,7 +5,6 @@ frappe.ui.form.on('Stock Availability Report', {
 	// refresh: function(frm) {
 
 	// }
-
 	item_code(frm){
 		frm.call('get_data').then(r=>{
 			if (r.message) {

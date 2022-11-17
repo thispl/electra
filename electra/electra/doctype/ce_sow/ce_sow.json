@@ -1,6 +1,5 @@
 {
  "actions": [],
- "allow_copy": 1,
  "autoname": "CESOW.####",
  "creation": "2022-01-16 08:38:59.329334",
  "doctype": "DocType",
@@ -110,7 +109,9 @@
   "total_overheads",
   "column_break_55",
   "net_profit_percent",
+  "mep_net_profit_percent",
   "net_profit_amount",
+  "mep_net_profit_amount",
   "column_break_57",
   "gross_profit_percent",
   "gross_profit_amount",
@@ -197,28 +198,27 @@
   {
    "fieldname": "others",
    "fieldtype": "Table",
-   "label": "OTHERS",
+   "label": "SUBCONTRACT",
    "options": "CE Items"
   },
   {
    "default": "0",
    "fieldname": "materials_cost",
    "fieldtype": "Float",
-   "hidden": 1,
-   "label": "Materials Cost"
+   "label": "Materials Cost",
+   "read_only": 1
   },
   {
    "default": "0",
    "fieldname": "finishing_work_cost",
    "fieldtype": "Float",
-   "hidden": 1,
-   "label": "Finishing Work Cost"
+   "label": "Finishing Work Cost",
+   "read_only": 1
   },
   {
    "default": "0",
    "fieldname": "accessories_cost",
    "fieldtype": "Float",
-   "hidden": 1,
    "label": "Accessories Cost",
    "read_only": 1
   },
@@ -226,7 +226,6 @@
    "default": "0",
    "fieldname": "installation_cost",
    "fieldtype": "Float",
-   "hidden": 1,
    "label": "Installation Cost",
    "read_only": 1
   },
@@ -234,7 +233,6 @@
    "default": "0",
    "fieldname": "manpower_cost",
    "fieldtype": "Float",
-   "hidden": 1,
    "label": "Manpower Cost",
    "read_only": 1
   },
@@ -242,7 +240,6 @@
    "default": "0",
    "fieldname": "heavy_equipments_cost",
    "fieldtype": "Float",
-   "hidden": 1,
    "label": "Heavy Equipments Cost",
    "read_only": 1
   },
@@ -250,8 +247,7 @@
    "default": "0",
    "fieldname": "others_cost",
    "fieldtype": "Float",
-   "hidden": 1,
-   "label": "Others Cost",
+   "label": "Subcontract Cost",
    "read_only": 1
   },
   {
@@ -300,7 +296,7 @@
    "depends_on": "h_others",
    "fieldname": "others_section",
    "fieldtype": "Section Break",
-   "label": "OTHERS"
+   "label": "SUBCONTRACT"
   },
   {
    "default": "0",
@@ -357,13 +353,13 @@
    "default": "0",
    "fieldname": "g_tools__equipment__transport",
    "fieldtype": "Check",
-   "label": "TOOLS / EQUIPMENT / TRANSPORT"
+   "label": "TOOLS / EQUIPMENT / TRANSPORT / OTHERS"
   },
   {
    "default": "0",
    "fieldname": "h_others",
    "fieldtype": "Check",
-   "label": "OTHERS"
+   "label": "SUBCONTRACT"
   },
   {
    "fetch_from": "msow.desc",
@@ -505,7 +501,6 @@
   {
    "fieldname": "design_profit",
    "fieldtype": "Currency",
-   "hidden": 1,
    "label": "Design Profit",
    "read_only": 1
   },
@@ -513,7 +508,6 @@
    "default": "0",
    "fieldname": "materials_profit",
    "fieldtype": "Currency",
-   "hidden": 1,
    "label": "Materials Profit",
    "read_only": 1
   },
@@ -521,7 +515,6 @@
    "default": "0",
    "fieldname": "finishing_work_profit",
    "fieldtype": "Currency",
-   "hidden": 1,
    "label": "Finishing Work Profit",
    "read_only": 1
   },
@@ -529,7 +522,6 @@
    "default": "0",
    "fieldname": "accessories_profit",
    "fieldtype": "Currency",
-   "hidden": 1,
    "label": "Accessories Profit",
    "read_only": 1
   },
@@ -537,7 +529,6 @@
    "default": "0",
    "fieldname": "installation_profit",
    "fieldtype": "Currency",
-   "hidden": 1,
    "label": "Installation Profit",
    "read_only": 1
   },
@@ -545,22 +536,19 @@
    "default": "0",
    "fieldname": "manpower_profit",
    "fieldtype": "Currency",
-   "hidden": 1,
    "label": "Manpower Profit",
    "read_only": 1
   },
   {
    "fieldname": "others_profit",
    "fieldtype": "Currency",
-   "hidden": 1,
-   "label": "Others Profit",
+   "label": "Subcontract Profit",
    "read_only": 1
   },
   {
    "default": "0",
    "fieldname": "heavy_equipments_profit",
    "fieldtype": "Currency",
-   "hidden": 1,
    "label": "Heavy Equipments Profit",
    "read_only": 1
   },
@@ -595,7 +583,6 @@
    "default": "0",
    "fieldname": "selling_amount",
    "fieldtype": "Currency",
-   "hidden": 1,
    "label": "Selling Amount"
   },
   {
@@ -623,7 +610,6 @@
    "default": "0",
    "fieldname": "finishing_work_amount",
    "fieldtype": "Currency",
-   "hidden": 1,
    "label": "Finishing Work Amount",
    "read_only": 1
   },
@@ -631,21 +617,20 @@
    "default": "0",
    "fieldname": "accessories_amount",
    "fieldtype": "Currency",
-   "hidden": 1,
-   "label": "Accessories Amount"
+   "label": "Accessories Amount",
+   "read_only": 1
   },
   {
    "default": "0",
    "fieldname": "installation_amount",
    "fieldtype": "Currency",
-   "hidden": 1,
-   "label": "Installation Amount"
+   "label": "Installation Amount",
+   "read_only": 1
   },
   {
    "default": "0",
    "fieldname": "manpower_amount",
    "fieldtype": "Currency",
-   "hidden": 1,
    "label": "Manpower Amount",
    "read_only": 1
   },
@@ -653,83 +638,73 @@
    "default": "0",
    "fieldname": "heavy_equipments_amount",
    "fieldtype": "Currency",
-   "hidden": 1,
-   "label": "Heavy Equipments Amount"
+   "label": "Heavy Equipments Amount",
+   "read_only": 1
   },
   {
    "default": "0",
    "fieldname": "others_amount",
    "fieldtype": "Currency",
-   "hidden": 1,
-   "label": "Others Amount",
+   "label": "Subcontract Amount",
    "read_only": 1
   },
   {
    "fieldname": "design_amount",
    "fieldtype": "Currency",
-   "hidden": 1,
    "label": "Design Amount",
    "read_only": 1
   },
   {
    "fieldname": "design_cost",
    "fieldtype": "Float",
-   "hidden": 1,
    "label": "Design Cost",
    "read_only": 1
   },
   {
    "fieldname": "materials_amount_with_overheads",
    "fieldtype": "Currency",
-   "hidden": 1,
    "label": "Materials Amount with overheads",
    "read_only": 1
   },
   {
    "fieldname": "finishing_work_amount_with_overheads",
    "fieldtype": "Currency",
-   "hidden": 1,
-   "label": "Finishing Work Amount with Overheads"
+   "label": "Finishing Work Amount with Overheads",
+   "read_only": 1
   },
   {
    "fieldname": "accessories_amount_with_overheads",
    "fieldtype": "Currency",
-   "hidden": 1,
    "label": "Accessories Amount with Overheads",
    "read_only": 1
   },
   {
    "fieldname": "installation_amount_with_overheads",
    "fieldtype": "Currency",
-   "hidden": 1,
    "label": "Installation Amount with Overheads",
    "read_only": 1
   },
   {
    "fieldname": "manpower_amount_with_overheads",
    "fieldtype": "Currency",
-   "hidden": 1,
    "label": "Manpower Amount with Overheads",
    "read_only": 1
   },
   {
    "fieldname": "heavy_equipments_amount_with_overheads",
    "fieldtype": "Currency",
-   "hidden": 1,
    "label": "Heavy Equipments Amount with Overheads",
    "read_only": 1
   },
   {
    "fieldname": "others_amount_with_overheads",
    "fieldtype": "Currency",
-   "hidden": 1,
-   "label": "Others Amount with Overheads",
+   "label": "Subcontract Amount with Overheads",
    "read_only": 1
   },
   {
    "fieldname": "design_amount_with_overheads",
    "fieldtype": "Currency",
-   "hidden": 1,
    "label": "Design Amount with Overheads",
    "read_only": 1
   },
@@ -766,7 +741,7 @@
   {
    "fieldname": "others_html",
    "fieldtype": "HTML",
-   "label": "Others HTML"
+   "label": "Subcontract HTML"
   },
   {
    "fieldname": "design_html",
@@ -774,12 +749,13 @@
    "label": "Design HTML"
   },
   {
+   "depends_on": "eval:doc.company != \"MEP DIVISION - ELECTRA\"",
    "fieldname": "net_profit_amount",
    "fieldtype": "Currency",
-   "label": "Net Profit Amount",
-   "read_only": 1
+   "label": "Net Profit Amount"
   },
   {
+   "depends_on": "eval:doc.company != \"MEP DIVISION - ELECTRA\"",
    "fieldname": "net_profit_percent",
    "fieldtype": "Percent",
    "label": "Net Profit %"
@@ -805,12 +781,26 @@
    "fieldname": "business_promotion_amount",
    "fieldtype": "Currency",
    "label": "Business Promotion Amount"
+  },
+  {
+   "depends_on": "eval:doc.company == \"MEP DIVISION - ELECTRA\"",
+   "fieldname": "mep_net_profit_percent",
+   "fieldtype": "Percent",
+   "label": "Net Profit %",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.company == \"MEP DIVISION - ELECTRA\"",
+   "fieldname": "mep_net_profit_amount",
+   "fieldtype": "Currency",
+   "label": "Net Profit Amount",
+   "read_only": 1
   }
  ],
  "hide_toolbar": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-05-10 12:49:48.539815",
+ "modified": "2022-09-27 15:12:18.888006",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "CE SOW",
@@ -823,6 +813,18 @@
    "print": 1,
    "read": 1,
    "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Cost Estimator",
    "share": 1,
    "write": 1
   }

@@ -17,6 +17,7 @@
   "resident_id_number",
   "date_of_join",
   "company",
+  "letter_head",
   "section_break_9",
   "date",
   "date_and",
@@ -61,10 +62,8 @@
    "label": "Department"
   },
   {
-   "default": "Today",
-   "fetch_from": "emp_id.date",
    "fieldname": "date",
-   "fieldtype": "Read Only",
+   "fieldtype": "Date",
    "in_list_view": 1,
    "label": "Date"
   },
@@ -208,11 +207,18 @@
   {
    "fieldname": "section_break_28",
    "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "letter_head",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Letter Head",
+   "options": "Letter Head"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2021-10-06 16:06:43.776798",
+ "modified": "2022-10-31 10:26:41.798599",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Grievance",

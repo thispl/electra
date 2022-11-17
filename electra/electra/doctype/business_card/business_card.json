@@ -13,14 +13,19 @@
   "employee_name",
   "desigination",
   "department",
+  "letter_head",
   "column_break_5",
   "resident_id_number",
   "date_of_joining",
   "company__division",
+  "company_email",
+  "mobile_number",
   "request_section",
   "date",
   "column_break_15",
   "no_of_copies",
+  "section_break_16",
+  "remarks",
   "column_break_10",
   "additional_info",
   "hod",
@@ -30,11 +35,10 @@
  ],
  "fields": [
   {
-   "fetch_from": "employee_id.date",
    "fieldname": "date",
    "fieldtype": "Date",
    "in_list_view": 1,
-   "label": "Date"
+   "label": "Requested Date"
   },
   {
    "fetch_from": "employee_id.employee_name",
@@ -63,13 +67,11 @@
    "label": "Notes"
   },
   {
-   "collapsible": 1,
    "fieldname": "column_break_10",
    "fieldtype": "Section Break",
    "label": "For Office Use"
   },
   {
-   "collapsible": 1,
    "fieldname": "business_card",
    "fieldtype": "Section Break",
    "label": "Employee Details "
@@ -109,7 +111,6 @@
    "options": "\nRequested\nInitiated\nCompleted\nHold"
   },
   {
-   "collapsible": 1,
    "fieldname": "request_section",
    "fieldtype": "Section Break",
    "label": "Requested Details "
@@ -151,11 +152,38 @@
    "fieldname": "company__division",
    "fieldtype": "Read Only",
    "label": "Company / Division"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  },
+  {
+   "fieldname": "section_break_16",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fetch_from": "employee_id.company_email",
+   "fieldname": "company_email",
+   "fieldtype": "Read Only",
+   "label": "Company Email"
+  },
+  {
+   "fetch_from": "employee_id.mobile_number",
+   "fieldname": "mobile_number",
+   "fieldtype": "Read Only",
+   "label": "Mobile Number"
+  },
+  {
+   "fieldname": "letter_head",
+   "fieldtype": "Link",
+   "label": "Letter Head",
+   "options": "Letter Head"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2021-10-05 09:38:40.075902",
+ "modified": "2022-10-31 09:31:06.165704",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Business Card",

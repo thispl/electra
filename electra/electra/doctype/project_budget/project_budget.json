@@ -19,24 +19,23 @@
   "project_name",
   "ce_scope_of_work_section",
   "master_scope_of_work",
-  "total_cost_section",
-  "total_overhead",
-  "engineering_overhead",
-  "total_profit",
-  "contigency_percent",
-  "column_break_21",
-  "total_amount_as_overhead",
-  "total_amount_as_engineering_overhead",
-  "total_amount_of_profit",
-  "contigency",
   "section_break_26",
   "total_cost_of_the_project",
   "column_break_28",
   "total_bidding_price",
   "column_break_30",
-  "total_profit_amount",
-  "column_break_32",
-  "total_profit_percent",
+  "total_cost_section",
+  "total_overhead",
+  "engineering_overhead",
+  "contigency_percent",
+  "gross_profit_percent",
+  "net_profit_percent",
+  "column_break_21",
+  "total_amount_as_overhead",
+  "total_amount_as_engineering_overhead",
+  "contigency",
+  "gross_profit_amount",
+  "net_profit_amount",
   "applicable_sections_section",
   "a_design",
   "b_materials",
@@ -49,20 +48,44 @@
   "g_others",
   "design_calculation_section",
   "design",
+  "design_qty_total",
+  "design_cost_price",
+  "design_selling_price",
   "materials_section",
   "materials",
+  "material_qty_total_",
+  "material_cost_price_",
+  "material_selling_price_",
   "finishing_work_section",
   "finishing_work",
+  "finishing_qty_total",
+  "finishing_cost_price",
+  "finishing_selling_price",
   "bolts_accessories_section",
   "bolts_accessories",
+  "accessories_qty_total",
+  "accessories_cost_price",
+  "accessories_selling_price",
   "fabrication_installation_section",
   "installation",
+  "installation_qty_total",
+  "installation_cost_price",
+  "installation_selling_price",
   "manpower_section",
   "manpower",
+  "manpower_qty_total",
+  "manpower_cost_price",
+  "manpower_selling_price",
   "heavy_equipments_section",
   "heavy_equipments",
+  "heavy_equipments_qty_total",
+  "heavy_equipments_cost_price",
+  "heavy_equipments_selling_price",
   "others_section",
   "others",
+  "subcontract_qty_total",
+  "subcontract_cost_price",
+  "subcontract_selling_price",
   "opportunity",
   "work_titles_section",
   "project_budget_work_title_item",
@@ -71,7 +94,8 @@
   "section_break_69",
   "total_estimated_amount",
   "column_break_71",
-  "total_budgeted_amount"
+  "total_budgeted_amount",
+  "amended_from"
  ],
  "fields": [
   {
@@ -133,11 +157,6 @@
    "label": "ENGINEERING OVERHEAD %"
   },
   {
-   "fieldname": "total_profit",
-   "fieldtype": "Percent",
-   "label": "PROFIT %"
-  },
-  {
    "fieldname": "contigency_percent",
    "fieldtype": "Percent",
    "label": "CONTIGENCY %"
@@ -157,14 +176,9 @@
    "label": "TOTAL AMOUNT AS ENGINEERING OVERHEAD"
   },
   {
-   "fieldname": "total_amount_of_profit",
-   "fieldtype": "Currency",
-   "label": "TOTAL AMOUNT OF PROFIT"
-  },
-  {
    "fieldname": "contigency",
    "fieldtype": "Currency",
-   "label": "Contigency"
+   "label": "CONTIGENCY AMOUNT"
   },
   {
    "fieldname": "section_break_26",
@@ -181,10 +195,6 @@
   },
   {
    "fieldname": "column_break_30",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "column_break_32",
    "fieldtype": "Column Break"
   },
   {
@@ -243,13 +253,13 @@
    "default": "0",
    "fieldname": "f_tools__equipment__transport",
    "fieldtype": "Check",
-   "label": "TOOLS / EQUIPMENT / TRANSPORT"
+   "label": "TOOLS / EQUIPMENT / TRANSPORT / OTHERS"
   },
   {
    "default": "0",
    "fieldname": "g_others",
    "fieldtype": "Check",
-   "label": "OTHERS"
+   "label": "SUBCONTRACT"
   },
   {
    "fieldname": "design_calculation_section",
@@ -299,7 +309,7 @@
   {
    "fieldname": "heavy_equipments_section",
    "fieldtype": "Section Break",
-   "label": "TOOLS / EQUIPMENT / TRANSPORT"
+   "label": "TOOLS / EQUIPMENT / TRANSPORT / OTHERS"
   },
   {
    "fieldname": "heavy_equipments",
@@ -400,7 +410,7 @@
   {
    "fieldname": "others_section",
    "fieldtype": "Section Break",
-   "label": "OTHERS"
+   "label": "SUBCONTRACT"
   },
   {
    "fieldname": "others",
@@ -413,28 +423,171 @@
    "options": "PB Items Manpower"
   },
   {
-   "fieldname": "total_profit_amount",
-   "fieldtype": "Currency",
-   "label": "Total Profit Amount",
-   "read_only": 1
-  },
-  {
-   "fieldname": "total_profit_percent",
-   "fieldtype": "Percent",
-   "label": "Total Profit Percent",
-   "read_only": 1
-  },
-  {
    "fieldname": "customer",
    "fieldtype": "Link",
    "label": "Customer",
    "options": "Customer",
    "read_only": 1
+  },
+  {
+   "fieldname": "gross_profit_percent",
+   "fieldtype": "Percent",
+   "label": "GROSS PROFIT %"
+  },
+  {
+   "fieldname": "net_profit_percent",
+   "fieldtype": "Percent",
+   "label": "NET PROFIT %"
+  },
+  {
+   "fieldname": "gross_profit_amount",
+   "fieldtype": "Currency",
+   "label": "GROSS PROFIT AMOUNT"
+  },
+  {
+   "fieldname": "net_profit_amount",
+   "fieldtype": "Currency",
+   "label": "NET PROFIT AMOUNT"
+  },
+  {
+   "fieldname": "design_qty_total",
+   "fieldtype": "Int",
+   "label": "Design Qty Total"
+  },
+  {
+   "fieldname": "design_cost_price",
+   "fieldtype": "Int",
+   "label": "Design Cost Price"
+  },
+  {
+   "fieldname": "design_selling_price",
+   "fieldtype": "Int",
+   "label": "Design Selling Price"
+  },
+  {
+   "fieldname": "finishing_qty_total",
+   "fieldtype": "Int",
+   "label": "Finishing Qty Total"
+  },
+  {
+   "fieldname": "finishing_cost_price",
+   "fieldtype": "Int",
+   "label": "Finishing Cost Price"
+  },
+  {
+   "fieldname": "finishing_selling_price",
+   "fieldtype": "Int",
+   "label": "Finishing Selling Price"
+  },
+  {
+   "fieldname": "accessories_qty_total",
+   "fieldtype": "Int",
+   "label": "Accessories Qty Total"
+  },
+  {
+   "fieldname": "accessories_cost_price",
+   "fieldtype": "Int",
+   "label": "Accessories Cost Price"
+  },
+  {
+   "fieldname": "accessories_selling_price",
+   "fieldtype": "Int",
+   "label": "Accessories Selling Price"
+  },
+  {
+   "fieldname": "installation_qty_total",
+   "fieldtype": "Int",
+   "label": "Installation Qty Total"
+  },
+  {
+   "fieldname": "installation_cost_price",
+   "fieldtype": "Int",
+   "label": "Installation Cost Price"
+  },
+  {
+   "fieldname": "installation_selling_price",
+   "fieldtype": "Int",
+   "label": "Installation Selling Price"
+  },
+  {
+   "fieldname": "manpower_qty_total",
+   "fieldtype": "Int",
+   "label": "Manpower Qty Total"
+  },
+  {
+   "fieldname": "manpower_cost_price",
+   "fieldtype": "Int",
+   "label": "Manpower Cost Price"
+  },
+  {
+   "fieldname": "manpower_selling_price",
+   "fieldtype": "Int",
+   "label": "Manpower Selling Price"
+  },
+  {
+   "fieldname": "heavy_equipments_qty_total",
+   "fieldtype": "Int",
+   "label": "Heavy Equipments Qty Total"
+  },
+  {
+   "fieldname": "heavy_equipments_cost_price",
+   "fieldtype": "Int",
+   "label": "Heavy Equipments Cost Price"
+  },
+  {
+   "fieldname": "material_qty_total_",
+   "fieldtype": "Int",
+   "label": "Material Qty Total"
+  },
+  {
+   "fieldname": "material_cost_price_",
+   "fieldtype": "Int",
+   "label": "Material Cost Price"
+  },
+  {
+   "fieldname": "material_selling_price_",
+   "fieldtype": "Int",
+   "label": "Material Selling Price"
+  },
+  {
+   "fieldname": "heavy_equipments_selling_price",
+   "fieldtype": "Int",
+   "label": "Heavy Equipments Selling Price"
+  },
+  {
+   "fieldname": "subcontract_qty_total",
+   "fieldtype": "Int",
+   "label": "Subcontract Qty Total"
+  },
+  {
+   "fieldname": "subcontract_cost_price",
+   "fieldtype": "Int",
+   "label": "Subcontract Cost Price"
+  },
+  {
+   "fieldname": "subcontract_selling_price",
+   "fieldtype": "Int",
+   "label": "Subcontract Selling Price"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Project Budget",
+   "print_hide": 1,
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
- "links": [],
- "modified": "2022-04-16 14:08:11.802705",
+ "is_submittable": 1,
+ "links": [
+  {
+   "link_doctype": "Sales Order",
+   "link_fieldname": "project_budget"
+  }
+ ],
+ "modified": "2022-11-07 15:27:27.677572",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Project Budget",
@@ -449,6 +602,18 @@
    "read": 1,
    "report": 1,
    "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Projects User",
    "share": 1,
    "write": 1
   }

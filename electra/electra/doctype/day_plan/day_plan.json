@@ -1,20 +1,15 @@
 {
  "actions": [],
- "autoname": "format:{project}-{customer}-{planned_date}-{#####}",
+ "autoname": "format:{project}-{planned_date}-{#####}",
  "creation": "2021-11-15 11:01:41.970881",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "customer",
   "project",
   "project_name",
   "company",
   "entry_type",
-  "staff",
-  "supervisor",
-  "worker",
-  "day_schedule",
   "column_break_3",
   "planned_date",
   "from_time",
@@ -22,6 +17,10 @@
   "vehicle",
   "driver",
   "employee_multiselect",
+  "day_schedule",
+  "worker",
+  "staff",
+  "supervisor",
   "section_break_7",
   "employee_table"
  ],
@@ -35,19 +34,13 @@
    "reqd": 1
   },
   {
-   "fetch_from": "project.customer",
-   "fieldname": "customer",
-   "fieldtype": "Link",
-   "label": "Customer",
-   "options": "Customer"
-  },
-  {
    "fieldname": "column_break_3",
    "fieldtype": "Column Break"
   },
   {
    "fieldname": "planned_date",
    "fieldtype": "Date",
+   "in_list_view": 1,
    "label": "Planned Date"
   },
   {
@@ -61,6 +54,7 @@
    "depends_on": "eval: doc.entry_type == 'One-by-One'",
    "fieldname": "employee_multiselect",
    "fieldtype": "Table MultiSelect",
+   "ignore_user_permissions": 1,
    "label": "Employee List",
    "options": "Day Plan Employee"
   },
@@ -108,7 +102,8 @@
    "fieldname": "company",
    "fieldtype": "Link",
    "label": "Company",
-   "options": "Company"
+   "options": "Company",
+   "read_only": 1
   },
   {
    "fieldname": "staff",
@@ -134,7 +129,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-04-26 18:46:24.845708",
+ "modified": "2022-07-31 12:38:41.902463",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Day Plan",

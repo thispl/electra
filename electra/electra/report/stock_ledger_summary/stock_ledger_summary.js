@@ -7,7 +7,7 @@ frappe.query_reports["Stock Ledger Summary"] = {
 
 		{
 			"fieldname":"item",
-			"label": __("Item"),
+			"label": __("Item Code"),
 			"fieldtype": "Link",
 			"options": "Item",
 			"default": frappe.defaults.get_default('Item')

@@ -11,25 +11,25 @@ frappe.ui.form.on('Vacation Final Exit Form', {
 				frm.trigger("user_validate")
 			},
 			
-			get_today_date:function(frm){
-				var today = new Date()
-				console.log(today)
-				var dd = today.getDate();
-				var mm = today.getMonth() + 1; 
-				var yyyy = today.getFullYear();
-				if(dd<10) 
-					{
-						dd='0'+dd;
-					} 
+			// get_today_date:function(frm){
+			// 	var today = new Date()
+			// 	console.log(today)
+			// 	var dd = today.getDate();
+			// 	var mm = today.getMonth() + 1; 
+			// 	var yyyy = today.getFullYear();
+			// 	if(dd<10) 
+			// 		{
+			// 			dd='0'+dd;
+			// 		} 
 					
-				if(mm<10) 
-					{
-						mm='0'+mm;
-					} 
-				today = dd+'-'+mm+'-'+yyyy;
-				frm.set_value('date',today)
+			// 	if(mm<10) 
+			// 		{
+			// 			mm='0'+mm;
+			// 		} 
+			// 	today = dd+'-'+mm+'-'+yyyy;
+			// 	frm.set_value('date',today)
 				
-			},
+			// },
 			
 		
 

@@ -7,7 +7,7 @@ from frappe.model.mapper import get_mapped_doc
 from frappe.utils.file_manager import get_file
 from frappe.utils.csvutils import UnicodeWriter, read_csv_content
 import datetime
-from datetime import datetime
+from datetime import datetime,timedelta
 import openpyxl
 from openpyxl import Workbook
 import openpyxl
@@ -106,7 +106,7 @@ def get_stock_balance_from_wh(item_code,warehouse):
             where item_code = '%s' and warehouse = '%s' """%(item_code,warehouse),as_dict=True)
     except:
         pass
-    return actual_qty[0]
+    return actual_qty
 
 @frappe.whitelist()
 def get_stock_balance(item_table):
@@ -133,10 +133,62 @@ def get_previous_po(item_table):
             pos = frappe.db.sql("""select `tabPurchase Order Item`.item_code as item_code,`tabPurchase Order Item`.item_name as item_name,`tabPurchase Order`.supplier as supplier,`tabPurchase Order Item`.qty as qty,`tabPurchase Order Item`.amount as amount,`tabPurchase Order`.transaction_date as date,`tabPurchase Order`.name as po from `tabPurchase Order`
             left join `tabPurchase Order Item` on `tabPurchase Order`.name = `tabPurchase Order Item`.parent
             where `tabPurchase Order Item`.item_code = '%s' and `tabPurchase Order`.docstatus != 2 """%(item["item_code"]),as_dict=True)
+            
             for po in pos:
                 data.append([item['item_code'],item_name,po.supplier,po.qty,po.date,po.amount,po.po])
         except:
             pass
+    return data 
+
+@frappe.whitelist()
+def set_previous_po(item_table):
+    item_table = json.loads(item_table)
+    data = []
+    for item in item_table:
+        try:
+            item_name = frappe.get_value('Item',{'name':item['item_code']},"item_name")
+            pos = frappe.db.sql("""select `tabPurchase Order Item`.item_code as item_code,`tabPurchase Order Item`.item_name as item_name,sum(`tabPurchase Order Item`.qty) as qty from `tabPurchase Order`
+            left join `tabPurchase Order Item` on `tabPurchase Order`.name = `tabPurchase Order Item`.parent
+            where `tabPurchase Order Item`.item_code = '%s' and `tabPurchase Order`.docstatus != 2 """%(item["item_code"]),as_dict=True)
+            for po in pos:
+                data.append([item['item_code'],item_name,po.qty])
+        except:
+            pass
+    return data 
+@frappe.whitelist()
+def previous_po_html(item_code):
+    data = ""
+    item_name = frappe.get_value('Item',{'item_code':item_code},"item_name")
+    frappe.errprint(item_name)
+    pos = frappe.db.sql("""select `tabPurchase Order Item`.item_code as item_code,`tabPurchase Order Item`.item_name as item_name,`tabPurchase Order`.supplier as supplier,`tabPurchase Order Item`.qty as qty,`tabPurchase Order Item`.rate as rate,`tabPurchase Order Item`.amount as amount,`tabPurchase Order`.transaction_date as date,`tabPurchase Order`.name as po from `tabPurchase Order`
+    left join `tabPurchase Order Item` on `tabPurchase Order`.name = `tabPurchase Order Item`.parent
+    where `tabPurchase Order Item`.item_code = '%s' and `tabPurchase Order`.docstatus != 2 order by date"""%(item_code),as_dict=True)
+    
+
+    data += '<table class="table table-bordered"><tr><th style="padding:1px;border: 1px solid black;color:white;background-color:orange" colspan=6><center>Previous Purchase Order</center></th></tr>'
+    data += '''
+    <tr><td colspan =2 style="padding:1px;border: 1px solid black;width:300px" ><b>Item Code</b></td>
+    <td style="padding:1px;border: 1px solid black;width:200px" colspan =4>%s</td></tr>
+    <tr><td colspan =2 style="padding:1px;border: 1px solid black" ><b>Item Name</b></td>
+    <td style="padding:1px;border: 1px solid black" colspan =4>%s</td></tr>
+    
+    <tr><td style="padding:1px;border: 1px solid black" colspan =1><b>Supplier Name</b></td>
+    <td style="padding:1px;border: 1px solid black" colspan=1><b>Previous Purchase Order</b></td>
+    <td style="padding:1px;border: 1px solid black" colspan=1><b>PO Date</b></td>
+    <td style="padding:1px;border: 1px solid black" colspan=1><b>PO Rate</b></td>
+    <td style="padding:1px;border: 1px solid black" colspan=1><b>PO Quantity</b></td>
+    <td style="padding:1px;border: 1px solid black" colspan=1><b>PO Amount</b>
+    </td></tr>'''%(item_code,item_name)
+    for po in pos:
+        data += '''<tr>
+            <td style="padding:1px;border: 1px solid black" colspan =1>%s</td>
+            <td style="padding:1px;border: 1px solid black" colspan=1>%s</td>
+            <td style="padding:1px;border: 1px solid black" colspan=1>%s</td>
+            <td style="padding:1px;border: 1px solid black" colspan=1>%s</td>
+            <td style="padding:1px;border: 1px solid black" colspan=1>%s</td>
+            <td style="padding:1px;border: 1px solid black" colspan=1>%s</td></tr>'''%(po.supplier,po.po,po.date,po.rate,po.qty,po.amount)
+
+    data += '</table>'
     return data
 
 # @frappe.whitelist()
@@ -371,16 +423,14 @@ def make_so(source_name, target_doc=None):
 
 @frappe.whitelist()
 def make_project_budget(source_name, target_doc=None):
-    doc = frappe.get_doc("Quotation",source_name)
+    doc = frappe.get_doc("Sales Order",source_name)
     cost_estimation = doc.cost_estimation
-    doclist = get_mapped_doc("Quotation", source_name, {
-        "Quotation": {
+    doclist = get_mapped_doc("Sales Order", source_name, {
+        "Sales Order": {
             "doctype": "Project Budget",
             "field_map": {
                 "title_of_project": "title_of_project",
-                "name": "quotation",
-                "party_name":"customer",
-                "cost_estimation" : "cost_estimation"
+                "name": "sales_order",
             }
         }
     }, target_doc)
@@ -404,23 +454,60 @@ def make_project(source_name, target_doc=None):
 @frappe.whitelist()
 def stock_popup(item_code):
     item = frappe.get_value('Item',{'item_code':item_code},'item_code')
+    # item_price= frappe.get_value('Item Price',{item:'item_code'},'price_list_rate')
     data = ''
     stocks = frappe.db.sql("""select actual_qty,warehouse,stock_uom,stock_value from tabBin
         where item_code = '%s' """%(item),as_dict=True)
-    data += '<table class="table table-bordered"><tr><th style="padding:1px;border: 1px solid black" colspan=6><center>Stock Availability</center></th></tr>'
-    data += '<tr><td style="padding:1px;border: 1px solid black"><b>Item Code</b></td><td style="padding:1px;border: 1px solid black"><b>Item Name</b></td><td style="padding:1px;border: 1px solid black"><b>Warehouse</b></td><td style="padding:1px;border: 1px solid black"><b>QTY</b></td><td style="padding:1px;border: 1px solid black"><b>UOM</b></td></tr>'
-    i = 0
-    for stock in stocks:
-        if stock.actual_qty > 0:
-            data += '<tr><td style="padding:1px;border: 1px solid black">%s</td><td style="padding:1px;border: 1px solid black">%s</td><td style="padding:1px;border: 1px solid black">%s</td><td style="padding:1px;border: 1px solid black">%s</td><td style="padding:1px;border: 1px solid black">%s</td></tr>'%(item,frappe.db.get_value('Item',item,'item_name'),stock.warehouse,stock.actual_qty,stock.stock_uom)
-            i += 1
-    data += '</table>'
-    if i > 0:
-        return data
+    # frappe.errprint(stocks)
+    # pos = frappe.db.sql("""select `tabPurchase Order Item`.item_code as item_code,`tabPurchase Order Item`.item_name as item_name,`tabPurchase Order`.supplier as supplier,`tabPurchase Order Item`.qty as qty,`tabPurchase Order Item`.amount as amount,`tabPurchase Order`.transaction_date as date,`tabPurchase Order`.company as company,`tabPurchase Order`.name as po from `tabPurchase Order`
+    # left join `tabPurchase Order Item` on `tabPurchase Order`.name = `tabPurchase Order Item`.parent
+    # where `tabPurchase Order Item`.item_code = '%s' and `tabPurchase Order`.docstatus != 1   order by amount desc limit 1"""%(item),as_dict=True)
+    
+   
 
+    pos = frappe.db.sql("""select `tabPurchase Order Item`.item_code as item_code,`tabPurchase Order Item`.item_name as item_name,`tabPurchase Order`.supplier as supplier,`tabPurchase Order Item`.qty as qty,`tabPurchase Order Item`.rate as rate,`tabPurchase Order`.transaction_date as date,`tabPurchase Order`.name as po from `tabPurchase Order`
+    left join `tabPurchase Order Item` on `tabPurchase Order`.name = `tabPurchase Order Item`.parent
+    where `tabPurchase Order Item`.item_code = '%s' and `tabPurchase Order`.docstatus != 2 order by rate asc limit 1""" % (item), as_dict=True)
+    frappe.errprint(pos)
+    data += '<table class="table table-bordered"><tr><th style="padding:1px;border: 1px solid black;color:white;background-color:orange" colspan=4><center>Stock Availability</center></th></tr>'
+    data += '''
+    <tr><td style="padding:1px;border: 1px solid black;width:300px" ><b>Item Code</b></td>
+    <td style="padding:1px;border: 1px solid black;width:200px" colspan =3>%s</td></tr>
+    <tr><td style="padding:1px;border: 1px solid black" ><b>Item Name</b></td>
+    <td style="padding:1px;border: 1px solid black" colspan =3>%s</td></tr>
+    <tr>
+    <td style="padding:1px;border: 1px solid black;"  ><b>Warehouse</b></td>
+    <td style="padding:1px;border: 1px solid black;max-width:50px"  ><b>QTY</b></td>
+    <td style="padding:1px;border: 1px solid black;max-width:50px;" colspan ='1' ><b>Previous Purchase Order</b></td>
+    <td style="padding:1px;border: 1px solid black;max-width:50px;" colspan ='1' ><b>PPQ</b></td></tr>'''%(item,frappe.db.get_value('Item',item,'item_name'))
+   
+    i = 0
+    for po in pos:
+        for stock in stocks:
+            if stock.actual_qty > 0:
+                if pos:
+                    frappe.errprint(po.qty)
+                    data += '''<tr>
+                    <td style="padding:1px;border: 1px solid black" colspan =1>%s</td><td style="padding:1px;border: 1px solid black" colspan=1>%s</td>
+                    <td style="padding:1px;border: 1px solid black" colspan=1>%s</td><td style="padding:1px;border: 1px solid black" colspan=1>%s</td></tr>'''%(stock.warehouse,stock.actual_qty,po.rate,po.qty)
+                i += 1
+    
+    data += '</table>'
+
+    return data
+
+# @frappe.whitelist()
+# def get_stock_price():
+#     data =''
+#     price = frappe.db.sql("""select `tabQuotation Item`.item_code as item_code,`tabQuotation Item`.item_name as item_name,`tabItem Price`.item_code as item_code,`tabItem Price`.price_list_rate as price_list_rate
+#     left join `tabQuotation Item` on `tabItem Price`.name =`tabQuotation Item`.parent
+#     where `tabItem Price`.item_code = '%s' and `tabItem Price`
+#     """)
 
 @frappe.whitelist()
-def po_popup(item):
+def po_popup(item_code):
+    item = frappe.get_value('Item',{'item_name':item_code},'item_code')
+
     data = ''
     pos = frappe.db.sql("""select `tabPurchase Order Item`.item_code as item_code,`tabPurchase Order Item`.item_name as item_name,`tabPurchase Order`.supplier as supplier,`tabPurchase Order Item`.qty as qty,`tabPurchase Order Item`.amount as amount,`tabPurchase Order`.transaction_date as date,`tabPurchase Order`.name as po from `tabPurchase Order`
     left join `tabPurchase Order Item` on `tabPurchase Order`.name = `tabPurchase Order Item`.parent
@@ -432,6 +519,8 @@ def po_popup(item):
     data += '</table>'
     if pos:
         return data
+
+
 
 @frappe.whitelist()
 def out_qty_popup(item):
@@ -450,13 +539,25 @@ def out_qty_popup(item):
 def create_tasks(doc,method):
     if doc.sales_order:
         so = frappe.get_doc("Sales Order",doc.sales_order)
-        for so_wt in so.so_work_title_item:
-            task_name = so_wt.item_name
+        frappe.errprint(so.installation)
+        for so_installation in so.installation:
             task = frappe.new_doc("Task")
             task.update({
-                "subject": task_name,
                 "project": doc.name,
-                "is_group": 1
+                "msow":so_installation.msow,
+                "item_code":so_installation.item,
+                "subject": so_installation.item_name,
+                "description":so_installation.description,
+                "uom":so_installation.unit,
+                "qty": so_installation.qty,
+                "pending_qty": so_installation.qty,
+                "cost":so_installation.cost,
+                "cost_amount":so_installation.cost_amount,
+                "budgeted_cost":so_installation.unit_price,
+                "budgeted_amount":so_installation.amount,
+                "selling_price":so_installation.rate_with_overheads,
+                "selling_amount":so_installation.amount_with_overheads,
+                "is_group": 0
             })
             task.save(ignore_permissions=True)
 
@@ -566,6 +667,23 @@ def alert_to_substitute(doc,method):
     )
 
 @frappe.whitelist()
+def isthimara_exp_mail(doc,method):
+    vehicle_main = frappe.get_value('Vehicle Maintenance Check List',{'register_no':doc.register_no},['expiry_date'])
+    Previous_Date = vehicle_main - timedelta(days=30)
+    if Previous_Date:
+        frappe.sendmail(
+        recipients='chitra@electraqatar.com',
+        subject=('Isthimara Expiry'),
+        cc = 'rejin@electraqtar.com',
+        message="""
+            Dear Sir/Madam,<br>
+            Vehicle No %s is going for Expire.Kindly Renew before Due date
+            """%(doc.register_no)
+        
+        )
+        frappe.errprint (Previous_Date)
+
+@frappe.whitelist()
 def grade(name,grade):
     doc = frappe.get_doc('Employee Grade',name)
     ticket = doc.air_ticket_allowance_
@@ -631,6 +749,7 @@ def additional_salary(import_file):
                             doc.payroll_date = '2022-02-16'
                             doc.save(ignore_permissions = True)
                             doc.submit
+                            
 @frappe.whitelist()
 def gratuity_calc(employee):
     basic,doj = frappe.db.get_value('Employee',employee,['basic','date_of_joining'])
@@ -708,5 +827,223 @@ def create_sales_person(name,department,employee):
     doc.enabled = True
     doc.save(ignore_permissions=True)
 
+@frappe.whitelist()
+def calculate_commission_for_item():
+    items = frappe.get_all('Item',['*'])
+    for item in items:
+        item_group = frappe.get_all('Item Group',['*'])
+        for item_g in item_group:
+            if item.item_group == item_g.name:
+                item.commission_ = item_g.commission
 
+@frappe.whitelist()
+def mail_trigger():
+    day = datetime.strptime(str(today()),"%Y-%m-%d").date()
+    past_two_day = add_days(day,-2)
+
+
+    day_plan = frappe.db.get_all('Day Plan Timesheet',{'docstatus':'Draft','worked_date':past_two_day},['*'])
+    for dp in day_plan:
+        
+        project = frappe.get_all('Project',{'status':'Open'},['*'])
+        for p in project:
+            # print(p.name)
+            if dp.project == p.name:
+                print(dp.project == p.name)
+                frappe.sendmail(
+                    recipients =['mohamedyousuf.e@groupteampro.com'],
+                    subject = 'NO Day Plan Timesheet',
+                    message = 'Dear Sir <br> For the project %s Day Plan TimeSheet is not submitted'%(dp.project) 
+            )
+                print(dp.project)
+
+
+@frappe.whitelist()
+def get_default_warehouse(company):
+    w_house = frappe.db.get_value("Warehouse",{'company':company,'default_for_stock_transfer':1},['name'])
+    return w_house
+
+@frappe.whitelist()
+def product_bundle(item_code):
+    bundle = frappe.db.exists("Product Bundle",{'name':item_code})
+    if bundle:
+        bundle_item = frappe.get_doc("Product Bundle",item_code)
+        frappe.errprint(bundle_item)
+        return bundle_item.items
+
+
+# bundle = frappe.db.sql("""select `tabProduct Bundle Item`.item_code as item_code,`tabProduct Bundle Item`.description as description,
+    #                         `tabProduct Bundle Item`.qty as qty from `tabProduct Bundle` left join `tabProduct Bundle Item` 
+    #                         on `tabProduct Bundle`.name = `tabProduct Bundle Item`.parent where `tabProduct Bundle`.name ='%s' """%(item_code),as_dict=True)[0]
+    
+    # for bb in bundle:
+    #     frappe.errprint(bb.item_code)
+    #     doc.append("packed_items",{
+    #         "item_code": bb.item_code,
+    #         "description": bb.description,
+    #         "qty": bb.qty * bun.qty,
+    #         "parent_item":bun.item_code
+    #     })
+
+
+
+
+                   
+
+
+
+
+@frappe.whitelist()
+def create_payment_entry(doc, method):
+    if doc.is_paid == 1:
+        doc.status = "Paid"
+        pe = frappe.new_doc("Payment Entry")
+        pe.posting_date = doc.posting_date
+        pe.payment_type = "Pay"
+        pe.company = doc.company
+        pe.paid_amount = doc.total
+        pe.received_amount = doc.total
+        pe.paid_to_account_currency = doc.currency
+        pe.paid_from_account_currency = doc.currency
+        pe.paid_from = doc.debit_to
+        pe.party_type = "Supplier"
+        pe.party = "INDUSTRIAL EQUIPMENT & SERVICES CO."
+        pe.save(ignore_permissions=True)
+
+
+@frappe.whitelist()
+def cancel_ce(doc,method):
+    frappe.errprint("Cancelling CE")
+    if doc.cost_estimation:
+        cost_estimation = frappe.get_doc("Cost Estimation",{'quotation':doc.name})
+        cost_estimation.cancel()
+
+# @frappe.whitelist()
+# def cancel_pb(doc,method):
+#     frappe.errprint("Cancelling PB")
+#     project_bud = frappe.get_doc("Project Budget",{'sales_order':doc.name})
+#     project_bud.cancel()
+
+@frappe.whitelist()
+def amend_ce(doc,method):
+    frappe.errprint("Amending CE")
+    if doc.amended_from:
+        ce_sow = frappe.get_all("CE SOW",{'cost_estimation':doc.amended_from},['name','cost_estimation'])
+        for ce in ce_sow:
+            ces = frappe.get_doc("CE SOW",{'name':ce.name,'cost_estimation':ce.cost_estimation})
+            ces.cost_estimation = doc.name
+            ces.save(ignore_permissions=True)
+
+            
+# @frappe.whitelist()
+# def amend_pb(doc,method):
+#     frappe.errprint("Amending PB")
+#     if doc.amended_from:
+#         pb_sow = frappe.get_all("PB SOW",{'project_budget':doc.amended_from},['name','project_budget'])
+#         # frappe.errprint(pb_sow)
+#         for pb in pb_sow:
+#             pbs = frappe.get_doc("PB SOW",{'name':pb.name,'project_budget':pb.project_budget})
+#             pbs.cost_estimation = doc.name
+#             # frappe.errprint(pbs)
+#             pbs.save(ignore_permissions=True)
+
+
+@frappe.whitelist()
+def find_item():
+    items = frappe.db.sql(""" select name from `tabItem` where owner = 'rizni@electraqatar.com' """, as_dict=1)
+    for item in items:     
+        po = frappe.db.sql(""" select count(*) as count from `tabPurchase Order Item` where item_code = '%s' """%(item.name),as_dict = 1)[0]
+        if po['count'] == 0:
+            pi = frappe.db.sql(""" select count(*) as count from `tabPurchase Invoice Item` where item_code = '%s' """%(item.name),as_dict = 1)[0]
+            if pi['count'] == 0:
+                pr = frappe.db.sql(""" select count(*) as count from `tabPurchase Receipt Item` where item_code = '%s' """%(item.name),as_dict = 1)[0]
+                if pr['count'] == 0:
+                    si = frappe.db.sql(""" select count(*) as count from `tabSales Invoice Item` where item_code = '%s' """%(item.name),as_dict = 1)[0]
+                    if si['count'] == 0:
+                        so = frappe.db.sql(""" select count(*) as count from `tabSales Order Item` where item_code = '%s' """%(item.name),as_dict = 1)[0]
+                        if so['count'] == 0:
+                            qo = frappe.db.sql(""" select count(*) as count from `tabQuotation Item` where item_code = '%s' """%(item.name),as_dict = 1)[0]
+                            if qo['count'] == 1:
+                                print(item.name)
+
+
+
+        # quotation = frappe.db.sql(""" select `tabQuotation`.name from `tabQuotation` left join `tabQuotation Item` on `tabQuotation`.name = `tabQuotation Item`.parent where `tabQuotation Item`.item_code ='%s' """%(it.name),  as_dict=1)
+        # if not quotation:
+            # print(it.name)
+            # sales_order = frappe.db.sql(""" select `tabSales Invoice`.name from `tabSales Invoice` left join `tabSales Invoice Item` on `tabSales Invoice`.name = `tabSales Invoice Item`.parent where `tabSales Invoice Item`.item_code ='%s' """%(it.name),  as_dict=1)
+            
+@frappe.whitelist()
+def visa_expire():
+    visa = frappe.db.sql(""" select name,visa_expiry_date from `tabVisa Approval Monitor`""",as_dict = 1)
+    data = ''
+    data += '<table class = table table - bordered><tr><td colspan = 5>Expired Visa</td></tr>'
+    for date in visa:
+        expire = date.visa_expiry_date
+        if expire:
+            str_date = datetime.strptime(str(today()),'%Y-%m-%d').date()
+            expiry = add_days(today(),30) 
+
+
+
+
+
+
+
+            expiry_date = datetime.strptime(str(expiry),'%Y-%m-%d').date()
+            if expire < expiry_date:
+                print(expire)            
+                data += '<tr><td>%s</td><td>%s</td></tr>'%(expire,date.name)
+    data += '</table>' 
+    frappe.sendmail(
+            recipients=['mohamedshajith.j@groupteampro.com'],
+            subject=('Visa Expiry'),
+            header=('Visa Expiry List'),
+            message="""
+                    Dear Sir,<br><br>
+                    %s
+                    """ % (data)
+        ) 
+
+
+
+@frappe.whitelist()
+def change_name():
+    emp = frappe.db.get_all('Employee',{'status':'Active'},['employee'])
+    for em in emp:
+        name = frappe.get_doc('Employee',em.employee)
+        print(name)
+        fname = name.first_name
+        f_name = fname.title()
+        name.first_name = f_name
+        if name.last_name:
+            lname = name.last_name
+            l_name = lname.title()
+            name.last_name = l_name
+            name.save(ignore_permissions=True)
+            frappe.db.commit()
+            
+@frappe.whitelist()
+def employee_number(doc,method):
+    emp = frappe.db.sql(""" select employee_number from `tabEmployee` order by name """,as_dict = 1)[-1]
+    last = emp.employee_number
+    las = int(last)
+    new = las+1
+    doc.employee_number = new
+    doc.name = new
+    # frappe.db.set_value('Job Offer',doc.name,'employee_number',new)
+    # frappe.errprint(new)
+
+
+@frappe.whitelist()
+def record(name):
+    maintenance = frappe.db.exists("Vehicle Maintenance Check List",{'name':name})
+    if maintenance:
+        main = frappe.db.get_all("Vehicle Maintenance Check List",{'name':name},['complaint','employee_id','vehicle_handover_date','garage_name'])[0]
+
+    accident = frappe.db.exists("Vehicle Accident Report",{'plate_no':name})
+    if accident:
+        acc = frappe.db.get_all("Vehicle Accident Report",{'plate_no':name},['name','emp_id','date_of_accident','remarks'])[0]
+
+        return main,acc
 

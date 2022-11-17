@@ -37,11 +37,11 @@ frappe.ui.form.on('External Provider Evaluation Form', {
 	        frappe.validated = false
 	    }
 	    else if(frm.doc.approval_status == 'Approved'){
-	        frappe.db.set_value('Supplier', frm.doc.external_provider, 'disabled', 0)
-    .then(r => {
-        let doc = r.message;
-    })
-	    }
+	        frappe.db.set_value('Supplier', frm.doc.external_provider, 'approved_supplier', 1)
+			.then(r => {
+				let doc = r.message;
+			})
+		}
 	},
     validate(frm){
         

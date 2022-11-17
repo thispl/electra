@@ -8,6 +8,7 @@
  "engine": "InnoDB",
  "field_order": [
   "cost_estimation",
+  "sales_order",
   "project_budget",
   "company",
   "column_break_2",
@@ -16,6 +17,7 @@
   "ssow",
   "qty",
   "uom",
+  "amount_disbursed",
   "section_break_7",
   "add_sub",
   "sub_scope_of_work",
@@ -30,39 +32,37 @@
   "g_tools__equipment__transport",
   "h_others",
   "section_break_23",
-  "unit_price",
-  "so_bidding_unit_rate",
+  "bidding_unit_rate",
+  "bidding_amount_difference",
+  "adjustable_amount",
   "column_break_24",
-  "total_bidding_price",
-  "so_bidding_amount",
+  "bidding_amount",
   "column_break_26",
   "lpo_unit_rate",
-  "lpo_unit_rate_difference",
   "column_break_28",
   "lpo_amount",
-  "lpo_amount_difference",
   "total_costs_section",
-  "net_profit_amount",
   "overhead_amount",
   "overhead_percent",
   "column_break_33",
-  "net_profit_percent",
   "business_promotion_amount",
   "business_promotion_percent",
   "column_break_29",
-  "test1",
   "contigency_amount",
   "contigency_percent",
   "column_break_32",
-  "test2",
   "engineering_overhead_amount",
   "engineering_overhead_percent",
   "section_break_35",
   "total_cost",
   "total_overheads",
   "column_break_41",
+  "net_profit_percent",
+  "net_profit_amount",
+  "column_break_51",
   "gross_profit_percent",
   "gross_profit_amount",
+  "budgeted_profit_section",
   "section_break_4",
   "design",
   "design_html",
@@ -126,7 +126,8 @@
   "others_cost",
   "others_amount",
   "others_amount_with_overheads",
-  "others_profit"
+  "others_profit",
+  "amended_from"
  ],
  "fields": [
   {
@@ -246,13 +247,13 @@
    "default": "0",
    "fieldname": "g_tools__equipment__transport",
    "fieldtype": "Check",
-   "label": "TOOLS / EQUIPMENT / TRANSPORT"
+   "label": "TOOLS / EQUIPMENT / TRANSPORT / OTHERS"
   },
   {
    "default": "0",
    "fieldname": "h_others",
    "fieldtype": "Check",
-   "label": "OTHERS"
+   "label": "SUBCONTRACT"
   },
   {
    "fieldname": "section_break_4",
@@ -262,7 +263,6 @@
   {
    "fieldname": "design",
    "fieldtype": "Table",
-   "label": "DESIGN",
    "options": "PB Items"
   },
   {
@@ -303,7 +303,6 @@
    "depends_on": "eval:doc.company == 'MEP DIVISION - ELECTRA'",
    "fieldname": "mep_materials",
    "fieldtype": "Table",
-   "label": "MEP MATERIALS",
    "options": "PB MEP Materials"
   },
   {
@@ -363,8 +362,7 @@
   },
   {
    "fieldname": "materials_html",
-   "fieldtype": "HTML",
-   "label": "Materials HTML"
+   "fieldtype": "HTML"
   },
   {
    "default": "0",
@@ -400,7 +398,6 @@
   {
    "fieldname": "finishing_work",
    "fieldtype": "Table",
-   "label": "FINISHING WORK",
    "options": "PB Items"
   },
   {
@@ -441,7 +438,6 @@
   {
    "fieldname": "bolts_accessories",
    "fieldtype": "Table",
-   "label": "ACCESSORIES",
    "options": "PB Items"
   },
   {
@@ -483,7 +479,6 @@
   {
    "fieldname": "installation",
    "fieldtype": "Table",
-   "label": "INSTALLATION",
    "options": "PB Items"
   },
   {
@@ -525,7 +520,6 @@
   {
    "fieldname": "manpower",
    "fieldtype": "Table",
-   "label": "MANPOWER",
    "options": "PB Items Manpower"
   },
   {
@@ -563,12 +557,11 @@
   {
    "fieldname": "heavy_equipments_section",
    "fieldtype": "Section Break",
-   "label": "HEAVY EQUIPMENTS"
+   "label": " TOOLS / EQUIPMENT / TRANSPORT / OTHERS"
   },
   {
    "fieldname": "heavy_equipments",
    "fieldtype": "Table",
-   "label": "HEAVY EQUIPMENTS",
    "options": "PB Items"
   },
   {
@@ -605,43 +598,42 @@
   {
    "fieldname": "others_section",
    "fieldtype": "Section Break",
-   "label": "OTHERS"
+   "label": "SUBCONTRACT"
   },
   {
    "fieldname": "others",
    "fieldtype": "Table",
-   "label": "OTHERS",
    "options": "PB Items"
   },
   {
    "fieldname": "others_html",
    "fieldtype": "HTML",
-   "label": "Others HTML"
+   "label": "Subcontract HTML"
   },
   {
    "default": "0",
    "fieldname": "others_cost",
    "fieldtype": "Float",
-   "label": "Others Cost",
+   "label": "Subcontract Cost",
    "read_only": 1
   },
   {
    "default": "0",
    "fieldname": "others_amount",
    "fieldtype": "Currency",
-   "label": "Others Amount",
+   "label": "Subcontract Amount",
    "read_only": 1
   },
   {
    "fieldname": "others_amount_with_overheads",
    "fieldtype": "Currency",
-   "label": "Others Amount with Overheads",
+   "label": "Subcontract Amount with Overheads",
    "read_only": 1
   },
   {
    "fieldname": "others_profit",
    "fieldtype": "Currency",
-   "label": "Others Profit",
+   "label": "Subcontract Profit",
    "read_only": 1
   },
   {
@@ -721,12 +713,14 @@
    "label": "Total Overheads"
   },
   {
+   "depends_on": "eval:doc.company != \"MEP DIVISION - ELECTRA\"",
    "fieldname": "net_profit_percent",
    "fieldtype": "Percent",
    "label": "Net Profit Percent",
    "read_only": 1
   },
   {
+   "depends_on": "eval:doc.company != \"MEP DIVISION - ELECTRA\"",
    "fieldname": "net_profit_amount",
    "fieldtype": "Currency",
    "label": "Net Profit Amount"
@@ -744,16 +738,6 @@
    "fieldname": "gross_profit_amount",
    "fieldtype": "Currency",
    "label": "Gross Profit Amount"
-  },
-  {
-   "fieldname": "total_bidding_price",
-   "fieldtype": "Currency",
-   "label": "Bidding Amount"
-  },
-  {
-   "fieldname": "unit_price",
-   "fieldtype": "Currency",
-   "label": "Bidding Unit Rate"
   },
   {
    "fieldname": "total_costs_section",
@@ -787,44 +771,62 @@
    "fieldtype": "Section Break"
   },
   {
-   "fieldname": "lpo_unit_rate_difference",
+   "fieldname": "sales_order",
+   "fieldtype": "Link",
+   "label": "Sales Order",
+   "options": "Sales Order"
+  },
+  {
+   "fieldname": "bidding_unit_rate",
    "fieldtype": "Currency",
-   "label": "LPO Unit Rate Difference",
+   "label": "Bidding Unit Rate"
+  },
+  {
+   "fieldname": "bidding_amount",
+   "fieldtype": "Currency",
+   "label": "Bidding Amount"
+  },
+  {
+   "fieldname": "bidding_amount_difference",
+   "fieldtype": "Currency",
+   "label": "Bidding Amount Difference",
    "read_only": 1
   },
   {
-   "fieldname": "lpo_amount_difference",
-   "fieldtype": "Currency",
-   "label": "LPO Amount Difference",
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "PB SOW",
+   "print_hide": 1,
    "read_only": 1
   },
   {
-   "fieldname": "test1",
+   "fieldname": "column_break_51",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "adjustable_amount",
    "fieldtype": "Currency",
-   "label": "SO",
+   "label": "Adjustable Amount",
    "read_only": 1
   },
   {
-   "fieldname": "test2",
-   "fieldtype": "Data"
+   "default": "0",
+   "fieldname": "amount_disbursed",
+   "fieldtype": "Check",
+   "label": "Amount Disbursed"
   },
   {
-   "fieldname": "so_bidding_unit_rate",
-   "fieldtype": "Currency",
-   "label": "SO Bidding Unit Rate",
-   "read_only": 1
-  },
-  {
-   "fieldname": "so_bidding_amount",
-   "fieldtype": "Currency",
-   "label": "SO Bidding Amount",
-   "read_only": 1
+   "fieldname": "budgeted_profit_section",
+   "fieldtype": "Section Break",
+   "label": "Budgeted Profit"
   }
  ],
  "hide_toolbar": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-04-18 00:14:27.069007",
+ "modified": "2022-09-27 18:16:45.463915",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "PB SOW",

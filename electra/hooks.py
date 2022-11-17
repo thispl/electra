@@ -84,7 +84,9 @@ doctype_list_js = {"Lead" : "public/js/lead_list.js"}
 # Override standard doctype classes
 
 # override_doctype_class = {
-# 	"ToDo": "custom_app.overrides.CustomToDo"
+	# "Employee":"electra.overrides.CustomEmployee",
+	# "ToDo": "custom_app.overrides.CustomToDo",\
+
 # }
 
 # Document Events
@@ -93,6 +95,7 @@ doctype_list_js = {"Lead" : "public/js/lead_list.js"}
 
 doc_events = {
 	"Employee": {
+		# "on_update_"electra.custom.employee_number",
 		"on_trash": "electra.utils.manpower_avg_cost_calculation",
 		"after_insert": [
 			"electra.custom.visa_creation",
@@ -108,29 +111,56 @@ doc_events = {
 	},
 	"Project":{
 		"on_update" : "electra.custom.create_tasks",
-		"after_insert" : "electra.utils.create_project_warehouse"
+		# "after_insert" : "electra.utils.create_project_warehouse"
 	},
     "Leave Application":{
 		"after_insert" : "electra.custom.alert_to_substitute"
 	},
-	"Opportunity":{
-		"validate":"electra.utils.validate_opportunity_sow"
+	"Cost Estimation":{
+		"after_insert" : "electra.custom.amend_ce"
 	},
-	# "Quotation":{
-	# 	"validate":"electra.utils.validate_sow"
+	# "Project Budget":{
+	# 	"after_insert" : "electra.custom.amend_pb"
 	# },
+	# "Opportunity":{
+	# 	"validate":"electra.utils.validate_opportunity_sow"
+	# },
+	"Quotation":{
+		"after_insert":"electra.utils.add_quotation_ce",
+		"on_cancel":"electra.custom.cancel_ce"
+	},
 	"Sales Order":{
 		"validate":"electra.utils.validate_sow",
-		"on_submit": "electra.utils.create_project_from_so"
+		"on_submit": "electra.utils.create_project_from_so",
+		# "on_cancel":"electra.custom.cancel_pb"
+		# "after_save":"electra.custom.set_default_warehouse"
 	},
 	"Item":{
 		"after_insert":"electra.utils.item_default_wh"
 	},
+	"Delivery Note":{
+		"on_submit":"electra.utils.submit_dummy_dn"
+	},
+	"Vehicle Maintenance Check List":{
+		"on_update":"electra.custom.isthimara_exp_mail"
+	},
 	"Sales Invoice":{
-		"on_update_after_submit":"electra.custom.get_dn_list_sales_invoice",
+		"on_submit":"electra.custom.create_payment_entry"
+		# "on_update_after_submit":"electra.custom.get_dn_list_sales_invoice",
 		# "onload":"electra.custom.get_due_date"
+	},
+	# "Project Day Plan":{
+	# 	"before_save":"electra.custom.get_all_projects"
+	# },
+	# "Stock Transfer":{
+	# 	"on_update":"electra.electra.doctype.stock_transfer.stock_transfer.cancel_stock_request"
+	# },
+	'Resignation Form':{
+		'on_submit':'electra.utils.update_employee_status'
+	},
+	'Job Offer':{
+		'on_update':'electra.custom.employee_number'
 	}
-	
 }
 
 
@@ -156,9 +186,9 @@ scheduler_events = {
 # 	"weekly": [
 # 		"electra.tasks.weekly"
 # 	]
-# 	"monthly": [
-# 		"electra.tasks.monthly"
-# 	]
+	"monthly": [
+		"electra.custom.isthimara_exp_mail"
+	]
 }
 
 # Testing

@@ -17,6 +17,7 @@
   "resident_id_number",
   "date_of_join",
   "company__division",
+  "letter_head",
   "request",
   "please_provide",
   "bed",
@@ -215,11 +216,17 @@
    "fieldname": "company__division",
    "fieldtype": "Read Only",
    "label": "Company / Division"
+  },
+  {
+   "fieldname": "letter_head",
+   "fieldtype": "Link",
+   "label": "Letter Head",
+   "options": "Letter Head"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2021-10-05 09:51:36.810702",
+ "modified": "2022-11-14 17:26:47.344387",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Accommodation Material",

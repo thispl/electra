@@ -1,0 +1,120 @@
+{
+ "actions": [],
+ "creation": "2022-07-06 14:12:28.563018",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "division_name",
+  "section_break_2",
+  "week_starting",
+  "column_break_5",
+  "week_ending",
+  "section_break_4",
+  "table_5",
+  "section_break_8",
+  "verified_by",
+  "column_break_9",
+  "department_head_approval",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "division_name",
+   "fieldtype": "Link",
+   "ignore_user_permissions": 1,
+   "label": "Raised By",
+   "options": "Company"
+  },
+  {
+   "fieldname": "section_break_2",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "week_starting",
+   "fieldtype": "Date",
+   "label": "Week Starting "
+  },
+  {
+   "fieldname": "column_break_5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "week_ending",
+   "fieldtype": "Date",
+   "label": "week Ending"
+  },
+  {
+   "fieldname": "section_break_4",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "table_5",
+   "fieldtype": "Table",
+   "options": "Vehicle Information"
+  },
+  {
+   "fieldname": "section_break_8",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "verified_by",
+   "fieldtype": "Link",
+   "label": "Verified by",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "column_break_9",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "department_head_approval",
+   "fieldtype": "Link",
+   "label": "Department Head Approval",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Vehicle Utilization Report",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Vehicle Utilization Report",
+   "print_hide": 1,
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2022-07-06 14:13:58.404595",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "Vehicle Utilization Report",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

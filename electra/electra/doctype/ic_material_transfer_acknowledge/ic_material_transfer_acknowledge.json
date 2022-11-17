@@ -26,14 +26,14 @@
    "fieldname": "ic_material_transfer_request",
    "fieldtype": "Link",
    "label": "IC Material Transfer Request",
-   "options": "IC Material Transfer Request",
+   "options": "Stock Request",
    "read_only": 1
   },
   {
    "fieldname": "ic_material_transfer_confirmation",
    "fieldtype": "Link",
    "label": "IC Material Transfer Confirmation",
-   "options": "IC Material Transfer Confirmation"
+   "options": "Stock Transfer"
   },
   {
    "fieldname": "requested_date",
@@ -120,7 +120,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2022-04-06 14:53:18.280594",
+ "modified": "2022-05-24 20:17:49.342166",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "IC Material Transfer Acknowledge",
