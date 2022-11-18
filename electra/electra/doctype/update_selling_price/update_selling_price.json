@@ -1,0 +1,92 @@
+{
+ "actions": [],
+ "creation": "2022-03-28 17:04:59.085313",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "item_group",
+  "item",
+  "column_break_3",
+  "brand",
+  "section_break_6",
+  "update_selling_price_item",
+  "percentage_selling",
+  "update_percentage",
+  "update_button"
+ ],
+ "fields": [
+  {
+   "fieldname": "item_group",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Item Group",
+   "options": "Item Group"
+  },
+  {
+   "fieldname": "item",
+   "fieldtype": "Link",
+   "label": "Item",
+   "options": "Item"
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "brand",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Brand",
+   "options": "Brand"
+  },
+  {
+   "fieldname": "section_break_6",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "update_selling_price_item",
+   "fieldtype": "Table",
+   "label": "Update Selling Price Item",
+   "options": "Update Selling Price Item"
+  },
+  {
+   "fieldname": "percentage_selling",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "update_percentage",
+   "fieldtype": "Percent",
+   "label": "Update Percentage"
+  },
+  {
+   "fieldname": "update_button",
+   "fieldtype": "Button",
+   "label": "Update"
+  }
+ ],
+ "hide_toolbar": 1,
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2022-11-18 12:25:49.364972",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "Update Selling Price",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}
