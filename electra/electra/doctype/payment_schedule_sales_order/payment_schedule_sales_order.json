@@ -12,9 +12,10 @@
  "fields": [
   {
    "fieldname": "payment_terms",
-   "fieldtype": "Data",
+   "fieldtype": "Link",
    "in_list_view": 1,
-   "label": "Payment Terms"
+   "label": "Payment Terms",
+   "options": "Payment Term"
   },
   {
    "fieldname": "percentage",
@@ -33,7 +34,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2022-07-28 16:53:12.106646",
+ "modified": "2023-03-06 15:57:27.657305",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Payment Schedule Sales Order",
@@ -41,5 +42,6 @@
  "permissions": [],
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }

@@ -1,66 +1,135 @@
 {
  "actions": [],
- "autoname": "IPR.####",
- "creation": "2022-06-22 08:51:35.056461",
+ "allow_rename": 1,
+ "autoname": "IRP.####",
+ "creation": "2022-12-06 09:54:16.414203",
+ "default_view": "List",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "employee",
+  "employee_details_section",
+  "employee_number",
   "employee_name",
-  "column_break_3",
-  "designation",
+  "column_break_4",
   "department",
-  "section_break_6",
-  "table_7"
+  "designation",
+  "request_details_section",
+  "request_from",
+  "supplier_name",
+  "name_of_the_party",
+  "request_type",
+  "purchase_receipt_name",
+  "purchase_invoice_name",
+  "column_break_10",
+  "mode_of_payment",
+  "amount"
  ],
  "fields": [
   {
-   "fieldname": "employee",
+   "fieldname": "employee_details_section",
+   "fieldtype": "Section Break",
+   "label": "Employee Details"
+  },
+  {
+   "fieldname": "employee_number",
    "fieldtype": "Link",
-   "label": "Employee",
+   "label": "Employee Number",
    "options": "Employee"
   },
   {
-   "fetch_from": "employee.employee_name",
+   "fetch_from": "employee_number.employee_name",
    "fieldname": "employee_name",
    "fieldtype": "Data",
-   "label": "Employee Name"
+   "label": "Employee Name",
+   "read_only": 1
   },
   {
-   "fieldname": "column_break_3",
+   "fieldname": "column_break_4",
    "fieldtype": "Column Break"
   },
   {
-   "fetch_from": "employee.designation",
-   "fieldname": "designation",
-   "fieldtype": "Link",
-   "label": "Designation",
-   "options": "Designation"
-  },
-  {
-   "fetch_from": "employee.department",
+   "fetch_from": "employee_number.department",
    "fieldname": "department",
-   "fieldtype": "Link",
+   "fieldtype": "Data",
    "label": "Department",
-   "options": "Department"
+   "read_only": 1
   },
   {
-   "fieldname": "section_break_6",
-   "fieldtype": "Section Break"
+   "fetch_from": "employee_number.designation",
+   "fieldname": "designation",
+   "fieldtype": "Data",
+   "label": "Designation",
+   "read_only": 1
   },
   {
-   "fieldname": "table_7",
-   "fieldtype": "Table",
-   "options": "Internal Payment"
+   "fieldname": "request_details_section",
+   "fieldtype": "Section Break",
+   "label": "Request Details"
+  },
+  {
+   "fieldname": "request_from",
+   "fieldtype": "Select",
+   "label": "Request From",
+   "options": "\nAgainst Supplier\nGeneral"
+  },
+  {
+   "depends_on": "eval:doc.request_from == \"Against Supplier\"",
+   "fieldname": "supplier_name",
+   "fieldtype": "Link",
+   "label": "Supplier Name",
+   "options": "Supplier"
+  },
+  {
+   "depends_on": "eval:doc.request_from == \"General\"",
+   "fieldname": "name_of_the_party",
+   "fieldtype": "Data",
+   "label": "Name of the Party"
+  },
+  {
+   "depends_on": "eval:doc.request_from == \"Against Supplier\"",
+   "fieldname": "request_type",
+   "fieldtype": "Select",
+   "label": "Request Type",
+   "options": "\nOn Purchase Receipt\nOn Purchase Invoice\nAs Advance"
+  },
+  {
+   "depends_on": "eval:doc.request_type ==\"On Purchase Receipt\"",
+   "fieldname": "purchase_receipt_name",
+   "fieldtype": "Link",
+   "label": "Purchase Receipt Name",
+   "options": "Purchase Receipt"
+  },
+  {
+   "depends_on": "eval:doc.request_type ==\"On Purchase Invoice\"",
+   "fieldname": "purchase_invoice_name",
+   "fieldtype": "Link",
+   "label": "Purchase Invoice Name",
+   "options": "Purchase Invoice"
+  },
+  {
+   "fieldname": "column_break_10",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "mode_of_payment",
+   "fieldtype": "Select",
+   "label": "Mode of Payment ",
+   "options": "\nCash\nBank"
+  },
+  {
+   "fieldname": "amount",
+   "fieldtype": "Currency",
+   "label": "Amount"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-06-22 10:42:56.126889",
+ "modified": "2022-12-07 11:04:03.566001",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Internal Payment Request",
+ "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
   {
@@ -78,5 +147,6 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }

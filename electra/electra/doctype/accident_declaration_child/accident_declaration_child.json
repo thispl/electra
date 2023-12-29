@@ -18,20 +18,23 @@
    "fieldname": "name1",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Name"
+   "label": "Name",
+   "reqd": 1
   },
   {
    "fieldname": "age",
    "fieldtype": "Int",
    "in_list_view": 1,
-   "label": "Age"
+   "label": "Age",
+   "reqd": 1
   },
   {
    "fieldname": "gender",
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Gender",
-   "options": "Gender"
+   "options": "Gender",
+   "reqd": 1
   },
   {
    "fieldname": "occupation",
@@ -64,7 +67,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2021-09-11 10:29:45.545214",
+ "modified": "2023-02-23 09:48:33.772960",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Accident Declaration Child",
@@ -72,5 +75,6 @@
  "permissions": [],
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }

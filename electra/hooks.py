@@ -17,6 +17,7 @@ app_include_css = "/assets/electra/css/electra.css"
 # app_include_js = "/assets/electra/js/electra.js"
 app_include_js = [
             "/assets/electra/js/linkselector.js",
+            "https://maps.googleapis.com/maps/api/js?sensor=false&libraries=places&key=AIzaSyAdaNNXhTh13TRLiZjSa9YYp66gNNj9aZ8"
                 ]
 # include js, css files in header of web template
 # web_include_css = "/assets/electra/css/electra.css"
@@ -33,7 +34,7 @@ app_include_js = [
 # page_js = {"page" : "public/js/file.js"}
 
 # include js in doctype views
-# doctype_js = {"doctype" : "public/js/quotation.js"}
+doctype_js = {"Sales Invoice" : "public/js/sales_invoice.js"}
 doctype_list_js = {"Lead" : "public/js/lead_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
@@ -60,7 +61,7 @@ doctype_list_js = {"Lead" : "public/js/lead_list.js"}
 
 # before_install = "electra.install.before_install"
 # after_install = "electra.install.after_install"
-
+# boot_session = "electra.utils.add_company_to_session_defaults"
 # Desk Notifications
 # ------------------
 # See frappe.core.notifications.get_notification_config
@@ -89,6 +90,7 @@ doctype_list_js = {"Lead" : "public/js/lead_list.js"}
 
 # }
 
+
 # Document Events
 # ---------------
 # Hook on document methods and events
@@ -101,37 +103,64 @@ doc_events = {
 			"electra.custom.visa_creation",
 			"electra.utils.manpower_avg_cost_calculation",
 			],
+		"validate": "electra.custom.inactive_employee",
+	},
+    "Material Request" : {
+        "after_insert":"electra.custom.get_hod_values"
 	},
 	"Landed Cost Voucher": {
 		"on_submit": "electra.custom.create_lcv_je",
 		"on_cancel": "electra.custom.cancel_lcv_je",
 	},
-	"Leave Application": {
-		"after_insert": "electra.custom.rejoin_form_creation",
+    "Payment Entry":{
+        # "on_submit":"electra.utils.update_outstanding_without_retention"
 	},
+	# "Leave Application": {
+	# 	"after_insert": "electra.custom.rejoin_form_creation",
+	# },
+	# "Customer":{
+	# 	"after_insert": "electra.custom.cred_limit_upload"
+	# },
+	"Additional Salary": {
+		"on_submit": "electra.custom.salary_payroll",
+	},
+
+    # "Sales Order":
+	# {
+    #     "before_save": "electra.custom.validate",
+    # },
 	"Project":{
-		"on_update" : "electra.custom.create_tasks",
-		# "after_insert" : "electra.utils.create_project_warehouse"
+		"after_insert": ["electra.custom.get_po_name","electra.utils.create_project_warehouse","electra.custom.create_tasks"]
 	},
-    "Leave Application":{
-		"after_insert" : "electra.custom.alert_to_substitute"
+	# "Leave Extension": {
+    #     "on_submit": "electra.custom.on_update_le"
+    # },
+	"Loan Application":{
+		"validate":"electra.custom.check_loan_amount"
+        
 	},
+    # "Leave Application":{
+	# 	"after_insert" : "electra.custom.alert_to_substitute",
+	# },
 	"Cost Estimation":{
 		"after_insert" : "electra.custom.amend_ce"
 	},
-	# "Project Budget":{
-	# 	"after_insert" : "electra.custom.amend_pb"
-	# },
+	"Project Budget":{
+		"after_insert" : "electra.custom.amend_pb"
+	},
 	# "Opportunity":{
 	# 	"validate":"electra.utils.validate_opportunity_sow"
 	# },
 	"Quotation":{
 		"after_insert":"electra.utils.add_quotation_ce",
-		"on_cancel":"electra.custom.cancel_ce"
 	},
 	"Sales Order":{
-		"validate":"electra.utils.validate_sow",
+		"validate":["electra.utils.validate_sow","electra.utils.restrict_general_item_so"],
 		"on_submit": "electra.utils.create_project_from_so",
+		"after_insert": "electra.custom.projectbudget_name",
+		"on_cancel":"electra.custom.sales_order_cancel",
+        "on_update_after_submit":"electra.custom.update_bidding_price",
+        "before_submit":"electra.custom.is_si_approved"
 		# "on_cancel":"electra.custom.cancel_pb"
 		# "after_save":"electra.custom.set_default_warehouse"
 	},
@@ -139,16 +168,33 @@ doc_events = {
 		"after_insert":"electra.utils.item_default_wh"
 	},
 	"Delivery Note":{
-		"on_submit":"electra.utils.submit_dummy_dn"
+        "validate":["electra.utils.restrict_general_item_dn"],
+        "on_cancel":"electra.custom.on_cancel_dn",
+		"on_submit":["electra.utils.submit_dummy_dn","electra.custom.create_stock_out"],
+		"before_submit":"electra.custom.is_dummy_dn_approved"
 	},
 	"Vehicle Maintenance Check List":{
 		"on_update":"electra.custom.isthimara_exp_mail"
 	},
+	"POS Invoice":{
+		"on_submit":"electra.custom.automate_pos"
+	},
 	"Sales Invoice":{
-		"on_submit":"electra.custom.create_payment_entry"
+		"on_submit":[
+		# 	"electra.custom.create_payment_entry",
+			"electra.custom.update_stock_after_return",
+			],
+		# "before_submit": "electra.custom.update_ret_out",
+		"on_update":["electra.custom.update_ret_out","electra.utils.set_income_account","electra.custom.invoice"],
+					
+		"validate":["electra.utils.set_income_account","electra.utils.restrict_general_item_si","electra.custom.update_return_doc"],
+		"after_save":"electra.custom.sales_invoice_remarks",
+		"on_cancel":"electra.custom.invoice_cancel",
+
 		# "on_update_after_submit":"electra.custom.get_dn_list_sales_invoice",
 		# "onload":"electra.custom.get_due_date"
 	},
+	
 	# "Project Day Plan":{
 	# 	"before_save":"electra.custom.get_all_projects"
 	# },
@@ -158,9 +204,9 @@ doc_events = {
 	'Resignation Form':{
 		'on_submit':'electra.utils.update_employee_status'
 	},
-	'Job Offer':{
-		'on_update':'electra.custom.employee_number'
-	}
+	# 'Job Offer':{
+	# 	'on_update':'electra.custom.employee_number'
+	# }
 }
 
 
@@ -172,17 +218,24 @@ scheduler_events = {
 	"cron": {
 		"0/15 * * * *": [
 			"electra.utils.cron_test"
+		],
+        "0 2 * * * *": [
+			"electra.custom.monthly_expiry_doc"
+		],
+		"30 10 * * *": [
+			"electra.custom.mark_absent"
 		]
 	},
 	"daily": [
 		"electra.alerts.update_lcm_due_status"
+		# "electra.custom.update_employee_salary"
 	],
 # 	"daily": [
 # 		"electra.tasks.daily"
 # 	],
-# 	"hourly": [
-# 		"electra.tasks.hourly"
-# 	],
+	"hourly": [
+		"electra.utils.reset_general_entry_purchase_rate"
+	],
 # 	"weekly": [
 # 		"electra.tasks.weekly"
 # 	]
@@ -201,8 +254,33 @@ scheduler_events = {
 #
 override_whitelisted_methods = {
 	"frappe.desk.search.search_widget": "electra.electra.api.search_widget",
-	"frappe.utils.pdf.get_pdf":"electra.utils.pdf.get_pdf"
+	# "frappe.utils.pdf.get_pdf":"electra.utils.pdf.get_pdf"
 }
+
+override_doctype_class = {
+	"Employee Separation":"electra.overrides.CustomEmployeeSeparation"
+}
+
+jinja = {
+	"methods": [
+		"electra.utils.get_dns",
+		"electra.utils.get_sos",
+		"electra.electra.doctype.multi_project_day_plan.multi_project_day_plan.get_child_table_data",
+		"electra.electra.doctype.multi_project_day_plan.multi_project_day_plan.get_driver_table_data",
+		# "electra.custom.get_sales_person_invoice",
+        "electra.custom.get_sales_person",
+		"electra.custom.get_accounts_ledger",
+        "electra.custom.get_items",
+		"electra.utils.actual_vs_budgeted",
+		"electra.utils.work_order_brief_report",
+		"electra.utils.work_order_detailed_report",
+		"electra.custom.pay_consolidated_req",
+		"electra.custom.return_total_amt",
+        "electra.custom.scope_of_work",
+        "electra.electra.doctype.cost_estimation.cost_estimation.get_data"
+	]
+}
+
 
 # each overriding function accepts a `data` argument;
 # generated from the base implementation of the doctype dashboard,

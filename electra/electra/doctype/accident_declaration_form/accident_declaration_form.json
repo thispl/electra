@@ -1,6 +1,6 @@
 {
  "actions": [],
- "autoname": "field:employee_name",
+ "autoname": "ELE/HRA/08/.####",
  "creation": "2021-08-12 10:49:02.517381",
  "doctype": "DocType",
  "editable_grid": 1,
@@ -11,19 +11,24 @@
   "employee_name",
   "designation",
   "department",
+  "nationality",
+  "marital_status",
   "column_break_6",
   "resident_id_number",
   "date_of_joining",
   "company",
+  "ag",
+  "gender",
   "letter_head",
   "details_of_injured_person_section",
   "details_of_injured_person",
   "head",
   "location",
   "date",
+  "column_break_20",
   "day",
-  "break_3",
   "time",
+  "break_3",
   "description",
   "column_break_16",
   "person_involved",
@@ -42,22 +47,20 @@
   {
    "fieldname": "location",
    "fieldtype": "Data",
-   "label": "Place"
+   "label": "Place",
+   "reqd": 1
   },
   {
    "fieldname": "date",
    "fieldtype": "Date",
-   "label": "Date"
-  },
-  {
-   "fieldname": "day",
-   "fieldtype": "Data",
-   "label": "Day"
+   "label": "Date",
+   "reqd": 1
   },
   {
    "fieldname": "time",
    "fieldtype": "Time",
-   "label": "Time"
+   "label": "Time",
+   "reqd": 1
   },
   {
    "fieldname": "description",
@@ -136,7 +139,6 @@
    "read_only": 1
   },
   {
-   "collapsible": 1,
    "fieldname": "employee_details_section",
    "fieldtype": "Section Break",
    "label": "Employee Details"
@@ -146,38 +148,45 @@
    "fieldname": "employee_name",
    "fieldtype": "Data",
    "label": "Employee Name",
+   "read_only": 1,
    "unique": 1
   },
   {
    "fetch_from": "employee_number.employee_id",
    "fieldname": "employee_id",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Employee ID",
-   "options": "Employee"
+   "options": "Employee",
+   "reqd": 1
   },
   {
    "fetch_from": "employee_id.department",
    "fieldname": "department",
    "fieldtype": "Data",
-   "label": "Department"
+   "label": "Department",
+   "read_only": 1
   },
   {
    "fetch_from": "employee_id.date_of_joining",
    "fieldname": "date_of_joining",
    "fieldtype": "Data",
-   "label": "Date of Joining"
+   "label": "Date of Joining",
+   "read_only": 1
   },
   {
    "fetch_from": "employee_id.designation",
    "fieldname": "designation",
    "fieldtype": "Data",
-   "label": "Designation"
+   "label": "Designation",
+   "read_only": 1
   },
   {
    "fetch_from": "employee_id.company",
    "fieldname": "company",
    "fieldtype": "Data",
-   "label": "Company"
+   "label": "Company",
+   "read_only": 1
   },
   {
    "fieldname": "column_break_6",
@@ -192,7 +201,7 @@
   {
    "fieldname": "details_of_injured_person_section",
    "fieldtype": "Section Break",
-   "label": "Details of Injured Person"
+   "label": "Details of Injured Persons"
   },
   {
    "fetch_from": "employee_id.resident_id_no",
@@ -203,16 +212,57 @@
   {
    "fieldname": "letter_head",
    "fieldtype": "Link",
+   "hidden": 1,
    "label": "Letter Head",
    "options": "Letter Head"
+  },
+  {
+   "fetch_from": "employee_id.age",
+   "fieldname": "ag",
+   "fieldtype": "Data",
+   "label": "Age",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "employee_id.gender",
+   "fieldname": "gender",
+   "fieldtype": "Data",
+   "label": "Gender",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "employee_id.nationality",
+   "fieldname": "nationality",
+   "fieldtype": "Data",
+   "label": "Nationality",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "employee_id.marital_status",
+   "fieldname": "marital_status",
+   "fieldtype": "Data",
+   "label": "Marital Status",
+   "read_only": 1
+  },
+  {
+   "fieldname": "day",
+   "fieldtype": "Select",
+   "label": "Day",
+   "options": "\nSunday\nMonday\nTuesday\nWednesday\nThursday\nFriday\nSaturday",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_20",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-10-31 13:21:29.986984",
+ "modified": "2023-05-31 07:57:03.474637",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Accident Declaration Form",
+ "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
   {
@@ -230,5 +280,6 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }

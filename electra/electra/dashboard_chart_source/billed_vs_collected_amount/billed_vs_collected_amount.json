@@ -1,0 +1,13 @@
+{
+ "creation": "2023-04-20 07:21:30.771326",
+ "docstatus": 0,
+ "doctype": "Dashboard Chart Source",
+ "idx": 0,
+ "modified": "2023-04-20 07:21:30.771326",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "Billed vs Collected Amount",
+ "owner": "Administrator",
+ "source_name": "Billed vs Collected Amount",
+ "timeseries": 1
+}

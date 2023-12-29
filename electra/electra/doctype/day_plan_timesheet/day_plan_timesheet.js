@@ -2,6 +2,10 @@
 // For license information, please see license.txt
 
 frappe.ui.form.on('Day Plan Timesheet', {
+	refresh(frm){
+		console.log(frm)
+		$("button[data-original-title=Print]").hide();
+	},
 	day_plan(frm){
 		frm.clear_table("time_log")
 		frappe.db.get_list('Day Plan Employee', {
@@ -65,7 +69,6 @@ frappe.ui.form.on('Day Plan Timesheet', {
 		});
 	},
 	setup(frm){
-		console.log(frm.doc.project)
 		frm.set_query("activity", "time_log", function(doc, cdt, cdn) {
 			let d = locals[cdt][cdn];
 			return {

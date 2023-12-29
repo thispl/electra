@@ -1,0 +1,152 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "IRP.####",
+ "creation": "2022-12-06 09:54:16.414203",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "employee_details_section",
+  "employee_number",
+  "employee_name",
+  "column_break_4",
+  "department",
+  "designation",
+  "request_details_section",
+  "request_from",
+  "supplier_name",
+  "name_of_the_party",
+  "request_type",
+  "purchase_receipt_name",
+  "purchase_invoice_name",
+  "column_break_10",
+  "mode_of_payment",
+  "amount"
+ ],
+ "fields": [
+  {
+   "fieldname": "employee_details_section",
+   "fieldtype": "Section Break",
+   "label": "Employee Details"
+  },
+  {
+   "fieldname": "employee_number",
+   "fieldtype": "Link",
+   "label": "Employee Number",
+   "options": "Employee"
+  },
+  {
+   "fetch_from": "employee_number.employee_name",
+   "fieldname": "employee_name",
+   "fieldtype": "Data",
+   "label": "Employee Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "employee_number.department",
+   "fieldname": "department",
+   "fieldtype": "Data",
+   "label": "Department",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "employee_number.designation",
+   "fieldname": "designation",
+   "fieldtype": "Data",
+   "label": "Designation",
+   "read_only": 1
+  },
+  {
+   "fieldname": "request_details_section",
+   "fieldtype": "Section Break",
+   "label": "Request Details"
+  },
+  {
+   "fieldname": "request_from",
+   "fieldtype": "Select",
+   "label": "Request From",
+   "options": "\nAgainst Supplier\nGeneral"
+  },
+  {
+   "depends_on": "eval:doc.request_from == \"Against Supplier\"",
+   "fieldname": "request_type",
+   "fieldtype": "Select",
+   "label": "Request Type",
+   "options": "\nOn Purchase Receipt\nOn Purchase Invoice\nAs Advance"
+  },
+  {
+   "fieldname": "column_break_10",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.request_from == \"General\"",
+   "fieldname": "name_of_the_party",
+   "fieldtype": "Data",
+   "label": "Name of the Party"
+  },
+  {
+   "fieldname": "mode_of_payment",
+   "fieldtype": "Select",
+   "label": "Mode of Payment ",
+   "options": "\nCash\nBank"
+  },
+  {
+   "fieldname": "amount",
+   "fieldtype": "Currency",
+   "label": "Amount"
+  },
+  {
+   "depends_on": "eval:doc.request_from == \"Against Supplier\"",
+   "fieldname": "supplier_name",
+   "fieldtype": "Link",
+   "label": "Supplier Name",
+   "options": "Supplier"
+  },
+  {
+   "depends_on": "eval:doc.request_type ==\"On Purchase Receipt\"",
+   "fieldname": "purchase_receipt_name",
+   "fieldtype": "Link",
+   "label": "Purchase Receipt Name",
+   "options": "Purchase Receipt"
+  },
+  {
+   "depends_on": "eval:doc.request_type ==\"On Purchase Invoice\"",
+   "fieldname": "purchase_invoice_name",
+   "fieldtype": "Link",
+   "label": "Purchase Invoice Name",
+   "options": "Purchase Invoice"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2022-12-07 11:02:17.031838",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "Request Payment",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

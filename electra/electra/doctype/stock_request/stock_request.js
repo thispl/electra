@@ -3,6 +3,27 @@
 
 frappe.ui.form.on('Stock Request', {
 	refresh(frm){
+		var input = 'input[data-fieldname="item_code"][data-doctype="Material Transfer Items"]';
+		var isFocus = false;
+		frm.fields_dict.items.grid.wrapper.on('click', input, function (e) {
+			if (!isFocus) {
+				const item_code = e.currentTarget.value;
+				frappe.call({
+					method: 'electra.custom.stock_popup',
+					args: {
+						'item_code': item_code,
+						'company':frm.doc.company
+					},
+					callback(d) {
+					    console.log(d.message)
+						if (d.message) {
+							frm.get_field("items_html").$wrapper.html(d.message);
+						}
+					}
+				})
+			}
+			isFocus = false;
+		});
 		frm.trigger('print')
 		if (frm.doc.company) {
 			frm.trigger("set_series")
@@ -22,8 +43,14 @@ frappe.ui.form.on('Stock Request', {
 			}
 		});
 	},
-	onload(frm){
+	onload:function(frm){
 		frm.trigger('print')
+		frm.get_field("items_html").$wrapper.html();
+		if(frm.doc.__islocal){
+			frm.set_value("requested_date",frappe.datetime.nowdate())
+			frm.set_value("raised_by",frappe.session.user)
+			// frm.set_df_property("sales_order","hidden",1)	
+	}
 	},
 	print: function (frm) {
 		
@@ -50,10 +77,11 @@ frappe.ui.form.on('Stock Request', {
 		});
 	},
 	validate: function(frm) {
+		frm.trigger("source_company")
 		$.each(frm.doc.items,function(i,d){
-		frappe.db.get_value('Warehouse', {'default_for_stock_transfer':1,'company':frm.doc.company}, ["name"], function(value) {
-			d.t_warehouse = value.name
-		});
+			frappe.db.get_value('Warehouse', {'default_for_stock_transfer':1,'company':frm.doc.company}, ["name"], function(value) {
+				d.t_warehouse = value.name
+			});
 		})
 		$.each(frm.doc.items,function(i,d){
 			frappe.call({
@@ -76,14 +104,7 @@ frappe.ui.form.on('Stock Request', {
 		})
 		frm.refresh_field("items")
 	},
-	onload:function(frm){
-		frm.get_field("items_html").$wrapper.html();
-		if(frm.doc.__islocal){
-			frm.set_value("requested_date",frappe.datetime.nowdate())
-			frm.set_value("raised_by",frappe.session.user)
-			frm.set_df_property("sales_order","hidden",1)	
-	}
-	},
+	
 	set_so(frm){
 		if(frm.doc.source_company){
 			frm.set_df_property("sales_order","hidden",0)
@@ -102,30 +123,56 @@ frappe.ui.form.on('Stock Request', {
 			callback:function(r){
 				$.each(r.message.items,function(i,d){
 					var row = frappe.model.add_child(frm.doc, "Material Transfer Items", "items");
-					frappe.call({
-						method: 'electra.electra.doctype.material_transfer_inter_company.material_transfer_inter_company.get_item_availability',
-						args:{
-							'item_code':d.item_code,
-							'source_warehouse' : frm.doc.default_source_warehouse
-						},
-						callback(r){
-							row.availability = r.message.actual_qty
-						}
-					})
-					
+					if (frm.doc.default_source_warehouse){
+						frappe.call({
+							method: 'electra.electra.doctype.material_transfer_inter_company.material_transfer_inter_company.get_item_availability',
+							args:{
+								'item_code':d.item_code,
+								'source_warehouse' : frm.doc.default_source_warehouse
+							},
+							callback(r){
+								row.availability = r.message.actual_qty;
+							}
+						})
+					}
+					console.log(r.message.project)
 					row.s_warehouse = frm.doc.default_source_warehouse;
 					row.t_warehouse = frm.doc.default_target_warehouse;
 					row.item_code = d.item_code;
+					row.item_name = d.item_name;
+					row.project = r.message.project;
 					row.uom = d.uom;
 					row.qty = d.qty;
-					row.project = d.project;
 				})
 				refresh_field("items")
 			}
 		})
 	},
 	
-
+	company(frm){
+		frm.set_query("default_source_warehouse",function() {
+			return {
+				filters: [
+					['Warehouse', 'company', '=', frm.doc.source_company]
+				]
+			};
+		});
+		frm.trigger("set_series")
+	    if (frm.doc.company == "MARAZEEM SECURITY SERVICES" || frm.doc.company == "MARAZEEM SECURITY SERVICES - SHOWROOM" || frm.doc.company == "MARAZEEM SECURITY SERVICES - HO") {
+			frm.set_value('letter_head', "MARAZEEM SECURITY SERVICES")
+		}
+		if (frm.doc.company == "KINGFISHER TRADING AND CONTRACTING COMPANY" || frm.doc.company == "KINGFISHER - TRANSPORTATION" || frm.doc.company == "KINGFISHER - SHOWROOM") {
+			frm.set_value('letter_head', "KINGFISHER TRADING AND CONTRACTING COMPANY")
+		}
+		if (frm.doc.company == "Al - Shaghairi Trading and Contracting Company W.L.L (ELECTRA)" || frm.doc.company == "ELECTRA - BARWA SHOWROOM" || frm.doc.company == "ELECTRA - ALKHOR SHOWROOM" || frm.doc.company == "ELECTRA - BINOMRAN SHOWROOM" || frm.doc.company == "ELECTRA  - NAJMA SHOWROOM" || frm.doc.company == "ELECTRICAL DIVISION - ELECTRA" || frm.doc.company == "MEP DIVISION - ELECTRA" || frm.doc.company == "STEEL DIVISION - ELECTRA" || frm.doc.company == "TRADING DIVISION - ELECTRA" || frm.doc.company == "INTERIOR DIVISION - ELECTRA" || frm.doc.company == "ENGINEERING DIVISION - ELECTRA") {
+			frm.set_value('letter_head', "Electra")
+	}
+	},
+	default_source_warehouse(frm){
+		$.each(frm.doc.items,function(i,d){
+			d.s_warehouse = frm.doc.default_source_warehouse
+		})
+	},
 	source_company(frm){
 		frm.trigger("set_so")
 		frappe.call({
@@ -157,7 +204,7 @@ frappe.ui.form.on('Stock Request', {
 				]
 			};
 		});
-
+		
 	}
 });
 
@@ -174,7 +221,8 @@ frappe.ui.form.on('Material Transfer Items', {
 		frappe.call({
 	        method: 'electra.custom.stock_popup',
 	        args:{
-	            'item_code': child.item_code
+	            'item_code': child.item_code,
+				'company':frm.doc.source_company
 	        },
 	        callback(d){
 	           if (d.message){ 

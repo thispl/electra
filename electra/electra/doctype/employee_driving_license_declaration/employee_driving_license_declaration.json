@@ -1,6 +1,6 @@
 {
  "actions": [],
- "autoname": "field:employee_name",
+ "autoname": "ELE/HRA/30/.####",
  "creation": "2022-10-31 13:41:06.395591",
  "doctype": "DocType",
  "editable_grid": 1,
@@ -104,6 +104,7 @@
    "label": "Request Details"
   },
   {
+   "default": "Today",
    "fieldname": "date",
    "fieldtype": "Date",
    "label": "Date"
@@ -111,10 +112,11 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-10-31 14:01:42.706493",
+ "modified": "2023-05-31 08:18:47.680410",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Employee Driving License Declaration",
+ "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
   {
@@ -132,5 +134,6 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }

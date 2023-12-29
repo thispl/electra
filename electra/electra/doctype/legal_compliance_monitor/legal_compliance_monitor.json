@@ -3,12 +3,17 @@
  "allow_import": 1,
  "autoname": "LCM.####",
  "creation": "2021-08-10 17:41:39.595769",
+ "default_view": "List",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "group",
   "name_of_licence",
+  "sub_category",
+  "group",
+  "vehicle_number",
+  "vehicle_type",
+  "waste_type",
   "category",
   "contact_number",
   "reference_number",
@@ -18,9 +23,9 @@
   "column_break_10",
   "issue_date",
   "possibility_status",
-  "frequency_of_renewal_days",
   "last_renewal_date",
   "next_due",
+  "frequency_of_renewal_days",
   "days_left",
   "status",
   "current_status",
@@ -28,19 +33,23 @@
   "custodian_information_section",
   "custodian",
   "custodian_name",
+  "attach",
   "column_break_21",
+  "custodian_resident_qid_number",
   "email",
   "remarks"
  ],
  "fields": [
   {
    "fieldname": "name_of_licence",
-   "fieldtype": "Data",
-   "label": "Name of the License"
+   "fieldtype": "Link",
+   "label": "Main Category",
+   "options": "Name of the License"
   },
   {
    "fieldname": "category",
    "fieldtype": "Link",
+   "ignore_user_permissions": 1,
    "label": "Category",
    "options": "Category"
   },
@@ -64,6 +73,7 @@
   {
    "fieldname": "company",
    "fieldtype": "Link",
+   "ignore_user_permissions": 1,
    "label": "Company",
    "options": "Company"
   },
@@ -89,8 +99,7 @@
    "fieldname": "next_due",
    "fieldtype": "Date",
    "in_standard_filter": 1,
-   "label": "Next Due Date",
-   "read_only": 1
+   "label": "Next Due Date"
   },
   {
    "fieldname": "days_left",
@@ -102,7 +111,7 @@
    "fieldname": "status",
    "fieldtype": "Select",
    "label": "Renewal Status",
-   "options": "\nValid\nDue for Renewal\nNot Renewable\nUnlimited",
+   "options": "\nValid\nExpired\nExpiring Soon\nDue for Renewal\nNot Renewable\nUnlimited\nVacated",
    "read_only": 1
   },
   {
@@ -141,17 +150,20 @@
   {
    "fetch_from": "custodian.employee_name",
    "fieldname": "custodian_name",
-   "fieldtype": "Read Only",
-   "label": "Custodian Name"
+   "fieldtype": "Data",
+   "label": "Custodian Name",
+   "read_only": 1
   },
   {
    "fetch_from": "custodian.company_email",
    "fieldname": "email",
-   "fieldtype": "Read Only",
+   "fieldtype": "Data",
    "label": "Email",
-   "options": "Email"
+   "options": "Email",
+   "read_only": 1
   },
   {
+   "fetch_from": "name_of_licence.group",
    "fieldname": "group",
    "fieldtype": "Select",
    "label": "Group",
@@ -170,15 +182,53 @@
    "fieldname": "current_status",
    "fieldtype": "Select",
    "label": "Current Status",
-   "options": "\nLive\nInactive"
+   "options": "\nLive\nInactive\nActive"
+  },
+  {
+   "fetch_from": "custodian.resident_id_no",
+   "fieldname": "custodian_resident_qid_number",
+   "fieldtype": "Data",
+   "label": "Custodian Resident QID Number",
+   "read_only": 1
+  },
+  {
+   "fieldname": "attach",
+   "fieldtype": "Attach",
+   "label": "Attach"
+  },
+  {
+   "depends_on": "eval:doc.group==\"Vehicle\"",
+   "fieldname": "vehicle_number",
+   "fieldtype": "Link",
+   "label": "Vehicle Number",
+   "options": "Vehicle"
+  },
+  {
+   "depends_on": "eval:doc.group==\"Vehicle\"",
+   "fetch_from": "vehicle_number.vehicle_category",
+   "fieldname": "vehicle_type",
+   "fieldtype": "Data",
+   "label": "Vehicle Type"
+  },
+  {
+   "depends_on": "eval:doc.name_of_licence==\"WASTE\"",
+   "fieldname": "waste_type",
+   "fieldtype": "Data",
+   "label": "Waste Type"
+  },
+  {
+   "fieldname": "sub_category",
+   "fieldtype": "Data",
+   "label": "Sub Category"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-04-10 10:05:08.507232",
+ "modified": "2023-10-18 16:23:56.111337",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Legal Compliance Monitor",
+ "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
   {
@@ -196,6 +246,7 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "title_field": "sponsor_company",
  "track_changes": 1
 }

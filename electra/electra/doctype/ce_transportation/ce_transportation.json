@@ -102,6 +102,7 @@
    "fieldtype": "Currency",
    "in_list_view": 1,
    "label": "Selling Price",
+   "precision": "4",
    "read_only": 1
   },
   {
@@ -116,7 +117,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2022-04-18 12:47:56.617654",
+ "modified": "2023-01-05 07:30:30.883811",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "CE TRANSPORTATION",
@@ -124,5 +125,6 @@
  "permissions": [],
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }

@@ -52,7 +52,8 @@ frappe.ui.form.on('External Provider Evaluation Form', {
         var total = 0
         $.each(frm.doc.evaluation_ratings,function(i,d){
             if(d.rating){
-            total += d.rating
+				var rate = d.rating * 5
+            	total += rate
             }
         })
         frm.set_value('actual_score',total)

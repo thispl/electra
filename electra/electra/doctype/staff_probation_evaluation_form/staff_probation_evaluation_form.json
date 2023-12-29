@@ -1,6 +1,6 @@
 {
  "actions": [],
- "autoname": "field:employee_name",
+ "autoname": "ELE/HRA/13/.####",
  "creation": "2021-08-17 10:36:30.565374",
  "doctype": "DocType",
  "editable_grid": 1,
@@ -149,13 +149,15 @@
   },
   {
    "fieldname": "section_break_1",
-   "fieldtype": "Section Break"
+   "fieldtype": "Section Break",
+   "hidden": 1
   },
   {
    "fieldname": "workflow",
    "fieldtype": "Link",
    "label": "Workflow",
-   "options": "Workflow State"
+   "options": "Workflow State",
+   "read_only": 1
   },
   {
    "fieldname": "column_break_3",
@@ -191,6 +193,7 @@
   },
   {
    "fetch_from": "emp_id.probation_end_date",
+   "fetch_if_empty": 1,
    "fieldname": "to_date",
    "fieldtype": "Date",
    "label": "To Date"
@@ -200,7 +203,6 @@
    "fieldtype": "Section Break"
   },
   {
-   "fetch_from": "emp_id.leave_approver",
    "fieldname": "evaluator",
    "fieldtype": "Link",
    "label": "Evaluator",
@@ -218,6 +220,7 @@
   {
    "fieldname": "letter_head",
    "fieldtype": "Link",
+   "hidden": 1,
    "label": "Letter Head",
    "options": "Letter Head"
   }
@@ -225,26 +228,15 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2022-11-14 07:41:48.872475",
+ "modified": "2023-05-31 08:01:13.216775",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Staff Probation Evaluation Form",
+ "naming_rule": "Expression (old style)",
  "owner": "Administrator",
- "permissions": [
-  {
-   "create": 1,
-   "delete": 1,
-   "email": 1,
-   "export": 1,
-   "print": 1,
-   "read": 1,
-   "report": 1,
-   "role": "System Manager",
-   "share": 1,
-   "write": 1
-  }
- ],
+ "permissions": [],
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }

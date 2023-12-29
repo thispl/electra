@@ -1,4 +1,10 @@
 frappe.ui.form.on('Cost Estimation', {
+	discount_tolerance(frm){
+		var discount_percentage = (frm.doc.discount_tolerance/100)*frm.doc.total_bidding_price
+		var calc = frm.doc.total_bidding_price - discount_percentage
+		frm.set_value("discount_tolerance_amount",discount_percentage)
+		frm.set_value("discount_upto",calc)
+	},
 	add_sub(frm) {
 		frm.save()
 	},
@@ -83,6 +89,8 @@ frappe.ui.form.on('Cost Estimation', {
 								d.total_business_promotion = k.business_promotion_amount
 								d.total_cost = k.total_cost
 								d.total_bidding_price = k.total_bidding_price
+								d.discount_tolerance = k.discount_tolerance_
+								d.discount_tolerance_amount = k.discount_tolerance_amount
 								d.unit_price = k.unit_price
 							})
 
@@ -106,6 +114,8 @@ frappe.ui.form.on('Cost Estimation', {
 		frm.clear_table('manpower')
 		frm.clear_table('heavy_equipments')
 		frm.clear_table('manpower_subcontract')
+		frm.clear_table('finished_goods')
+
 		var design_cost = 0
 		var design_amount = 0
 		var design_amount_with_overheads = 0
@@ -148,6 +158,26 @@ frappe.ui.form.on('Cost Estimation', {
 							})
 							frm.refresh_field('design_calculation')
 
+
+							$.each(r.message.finished_goods, function (i, c) {
+								frm.add_child('finished_goods', {
+									'msow': r.message.msow,
+									'ssow': r.message.ssow,
+									'bom': c.bom,
+									'item': c.item,
+									'item_name': c.item_name,
+									'description': c.description,
+									'unit': c.unit,
+									'qty': c.qty,
+									'unit_price': c.unit_price,
+									'rate_with_overheads': c.rate_with_overheads,
+									'amount_with_overheads': c.amount_with_overheads,
+									'amount': c.amount
+								})
+							})
+							frm.refresh_field('finished_goods')
+
+							
 							$.each(r.message.materials, function (i, c) {
 								frm.add_child('materials', {
 									'msow': r.message.msow,
@@ -471,6 +501,9 @@ frappe.ui.form.on('Cost Estimation', {
 		});
 	},
 	refresh(frm) {
+		if(frm.doc.design_calculation == 2){
+			console.log("Hiii")
+		}
 		if (frm.doc.company) {
 			frm.trigger("set_series")
 		}
@@ -481,9 +514,10 @@ frappe.ui.form.on('Cost Estimation', {
 		if (frm.doc.docstatus == 1) {
 		frm.add_custom_button(__('Quotation'),
 			function () {
-				if(frm.doc.amended_from){
-					frappe.db.get_value('Quotation', { 'cost_estimation': frm.doc.amended_from}, 'name')
+				if(frm.doc.amended_from && frm.doc.quotation){
+					frappe.db.get_value('Quotation',frm.doc.quotation, 'name')
 					.then(r => {
+						console.log(r.message.name)
 						if (r.message && Object.entries(r.message).length === 0) {
 							frappe.model.open_mapped_doc({
 								method: "electra.custom.make_quotation",
@@ -492,7 +526,6 @@ frappe.ui.form.on('Cost Estimation', {
 						}
 						else {
 							frappe.set_route('Form', 'Quotation', r.message.name)
-							console.log(r.message.name)			
 						}
 
 
@@ -518,11 +551,56 @@ frappe.ui.form.on('Cost Estimation', {
 				
 			}, __('Create/Edit'));
 		}
+		if (frm.doc.total_bidding_price){
+			frm.add_custom_button(__("Total Cost"), function () {
+				var f_name = frm.doc.name
+		frappe.call({
+			method:'electra.electra.doctype.cost_estimation.cost_estimation.get_data',
+			args:{
+				cmp:frm.doc.company,
+				tc:frm.doc.total_overhead,
+				ec:frm.doc.engineering_overhead,
+				cp:frm.doc.contigency_percent,
+				gpp:frm.doc.gross_profit_percent,
+				netp:frm.doc.net_profit_percent,
+				tcc:frm.doc.total_amount_as_overhead,
+				tec:frm.doc.total_amount_as_engineering_overhead,
+				cpc:frm.doc.contigency,
+				gppc:frm.doc.gross_profit_amount,
+				neta:frm.doc.net_profit_amount,
+				tpb:frm.doc.total_business_promotion,
+				tcp:frm.doc.total_cost_of_the_project,
+				dp:frm.doc.discount_tolerance,
+				dpc:frm.doc.discount_tolerance_amount,
+				// tbp:frm.doc.total_bidding_price,
+			},
+			callback(r){
+				if (r.message) {
+					let d = new frappe.ui.Dialog({
+						size:"small",
+						
+						fields: [
+							{
+								label: 'Cost Estimation',
+								fieldname: 'cost_estimation',
+								fieldtype: 'HTML'
+							},
+						],
+								
+					});
+					d.fields_dict.cost_estimation.$wrapper.html(r.message);
+					d.show();	
+				}
+			}
+		})
+		})
+	}
 	},
 	onload_after_render(frm) {
 		frm.trigger('total_calculation')
 	},
 	validate(frm) {
+		frm.trigger("discount_tolerance")
 		// frm.trigger("total_design_calculation")
 		// frm.trigger("total_material_calculation")
 		// frm.trigger("total_finishing_work_calculation")
@@ -555,6 +633,8 @@ frappe.ui.form.on('Cost Estimation', {
 		var total_net_profit_amount = 0
 		var total_net_profit_percent = 0
 		var total_gross_profit_percent = 0
+		var discount_tolerance = 0
+		var discount_tolerance_amount = 0
 		var total_gross_profit_amount = 0
 		if (frm.doc.master_scope_of_work) {
 			$.each(frm.doc.master_scope_of_work, function (i, d) {
@@ -563,6 +643,8 @@ frappe.ui.form.on('Cost Estimation', {
 					contigency += d.contigency
 					total_amount_as_engineering_overhead += d.total_amount_as_engineering_overhead
 					total_overheads += d.total_overheads
+					discount_tolerance_amount += d.discount_tolerance_amount
+					discount_tolerance += d.discount_tolerance
 					total_business_promotion += d.total_business_promotion
 					total_cost += d.total_cost
 					total_bidding_price += d.total_bidding_price
@@ -592,6 +674,8 @@ frappe.ui.form.on('Cost Estimation', {
 			// overall totals
 			frm.set_value("total_cost_of_the_project", total_cost)
 			frm.set_value("total_overheads", total_overheads)
+			frm.set_value("sow_discount_tolerance_", discount_tolerance)
+			frm.set_value("sow_discount_tolerance_amount", discount_tolerance_amount)
 			frm.set_value("total_business_promotion", total_business_promotion)
 			frm.set_value("total_bidding_price", total_bidding_price)
 		}
@@ -683,6 +767,18 @@ frappe.ui.form.on('Cost Estimation', {
 		}
 		else {
 			frm.set_value("total_transportation_calculation", 0)
+		}
+	},
+	total_finished_goods_calculation:function(frm){
+		var amount = 0
+		$.each(frm.doc.finished_goods, function (i, d) {
+			amount += d.amount
+		})
+		if (!isNaN(amount)) {
+			frm.set_value("total_finished_goods_calculation", amount)
+		}
+		else {
+			frm.set_value("total_finished_goods_calculation", 0)
 		}
 	},
 	total_manpower_subcontract_calculation: function (frm) {
@@ -792,6 +888,25 @@ frappe.ui.form.on('CE MATERIALS', {
 		frm.trigger('total_material_calculation')
 	},
 })
+
+frappe.ui.form.on('CE FINISHED GOODS', {
+	qty: function (frm, cdt, cdn) {
+		var row = locals[cdt][cdn];
+		row.amount = row.qty * row.unit_price
+		frm.refresh_field('finished_goods')
+		frm.trigger("total_finished_goods_calculation")
+	},
+	unit_price: function (frm, cdt, cdn) {
+		var row = locals[cdt][cdn];
+		row.amount = row.qty * row.unit_price
+		frm.refresh_field('finished_goods')
+		frm.trigger("total_finished_goods_calculation")
+	},
+	finished_goods_remove(frm, cdt, cdn) {
+		frm.trigger('total_finished_goods_calculation')
+	},
+})
+
 
 frappe.ui.form.on('CE FINISHING WORK', {
 	qty: function (frm, cdt, cdn) {

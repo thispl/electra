@@ -10,10 +10,12 @@
   "worker",
   "total_workers",
   "cost",
+  "column_break_6",
   "cost_amount",
   "unit_price",
   "working_hours",
   "days",
+  "column_break_11",
   "rate",
   "amount",
   "rate_with_overheads",
@@ -115,12 +117,20 @@
    "fieldtype": "Currency",
    "in_list_view": 1,
    "label": "Est.Cost"
+  },
+  {
+   "fieldname": "column_break_6",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_11",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2022-10-30 12:04:39.535510",
+ "modified": "2023-02-24 16:45:23.422793",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "CE Items Manpower",
@@ -128,5 +138,6 @@
  "permissions": [],
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }

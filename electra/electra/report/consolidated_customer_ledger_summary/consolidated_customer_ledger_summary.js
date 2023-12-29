@@ -79,7 +79,10 @@ frappe.query_reports["Consolidated Customer Ledger Summary"] = {
 			"fieldname":"sales_person",
 			"label": __("Sales Person"),
 			"fieldtype": "Link",
-			"options": "Sales Person"
+			"options": "Sales Person",
+			"reqd": frappe.user.has_role("HOD") || frappe.user.has_role("Accounts User") || frappe.user.has_role("Accounts Manager")?0:1,
+			"ignore_user_permissions":1
+	
 		},
 		{
 			"fieldname":"tax_id",

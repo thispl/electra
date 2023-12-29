@@ -10,13 +10,17 @@
   "details",
   "delivery",
   "brand",
+  "column_break_6",
   "qty",
   "unit",
   "unit_price",
   "unit_price_company_currency",
+  "column_break_11",
   "total_cost",
   "total_overheads",
   "total_business_promotion",
+  "discount",
+  "column_break_16",
   "total_bidding_price",
   "bidding_price_company_currency",
   "optional",
@@ -134,11 +138,30 @@
    "fieldtype": "Currency",
    "label": "Bidding Price Company Currency",
    "options": "Company:company:default_currency"
+  },
+  {
+   "fieldname": "discount",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "in_list_view": 1,
+   "label": "Discount (Currency)"
+  },
+  {
+   "fieldname": "column_break_6",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_11",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_16",
+   "fieldtype": "Column Break"
   }
  ],
  "istable": 1,
  "links": [],
- "modified": "2022-11-07 16:24:43.786664",
+ "modified": "2023-02-24 16:53:32.517647",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Quotation Scope of Work",
@@ -146,5 +169,6 @@
  "permissions": [],
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }

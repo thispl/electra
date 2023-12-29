@@ -1,0 +1,80 @@
+{
+ "actions": [],
+ "creation": "2022-04-18 11:18:45.100648",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "item_code",
+  "column_break_2",
+  "item_description",
+  "section_break_6",
+  "html",
+  "perm",
+  "pod"
+ ],
+ "fields": [
+  {
+   "fieldname": "item_code",
+   "fieldtype": "Link",
+   "label": "Item Code",
+   "options": "Item"
+  },
+  {
+   "fieldname": "section_break_6",
+   "fieldtype": "Section Break"
+  },
+  {
+   "depends_on": "eval:!frappe.user.has_role(\"Purchase User\")",
+   "fieldname": "html",
+   "fieldtype": "HTML",
+   "label": "HTML"
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "item_description",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Item Description",
+   "options": "Item"
+  },
+  {
+   "depends_on": "eval:frappe.user.has_role(\"Purchase User\") ||frappe.user.has_role(\"HOD\") ",
+   "fieldname": "perm",
+   "fieldtype": "HTML",
+   "label": "html1"
+  },
+  {
+   "fieldname": "pod",
+   "fieldtype": "HTML"
+  }
+ ],
+ "hide_toolbar": 1,
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2023-03-08 18:49:40.462001",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "Product Search",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

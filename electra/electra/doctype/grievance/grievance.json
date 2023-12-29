@@ -1,6 +1,6 @@
 {
  "actions": [],
- "autoname": "field:name1",
+ "autoname": "ELE/HRA/22/.####",
  "creation": "2021-08-13 09:24:15.179315",
  "doctype": "DocType",
  "editable_grid": 1,
@@ -20,11 +20,12 @@
   "letter_head",
   "section_break_9",
   "date",
+  "witness_name",
+  "wn",
   "date_and",
   "location",
-  "grievences",
   "column_break_12",
-  "witness_name",
+  "grievences",
   "witness_account_if_any",
   "section_break_15",
   "column_break_15",
@@ -62,10 +63,12 @@
    "label": "Department"
   },
   {
+   "default": "Today",
    "fieldname": "date",
    "fieldtype": "Date",
    "in_list_view": 1,
-   "label": "Date"
+   "label": "Date",
+   "reqd": 1
   },
   {
    "fieldname": "column_break_5",
@@ -78,7 +81,8 @@
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Employee ID",
-   "options": "Employee"
+   "options": "Employee",
+   "reqd": 1
   },
   {
    "fetch_from": "emp_id.scheduled_confirmation_date",
@@ -113,8 +117,9 @@
   {
    "fieldname": "witness_name",
    "fieldtype": "Link",
-   "label": "Witness Name",
-   "options": "Employee"
+   "label": "Witness ID",
+   "options": "Employee",
+   "reqd": 1
   },
   {
    "description": "Comments",
@@ -214,14 +219,22 @@
    "hidden": 1,
    "label": "Letter Head",
    "options": "Letter Head"
+  },
+  {
+   "fetch_from": "witness_name.employee_name",
+   "fieldname": "wn",
+   "fieldtype": "Data",
+   "label": "Witness Name",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-10-31 10:26:41.798599",
+ "modified": "2023-05-31 08:09:44.217042",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Grievance",
+ "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
   {
@@ -239,5 +252,6 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }

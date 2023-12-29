@@ -11,12 +11,17 @@
   "unit",
   "unit_price",
   "unit_price_company_currency",
+  "invoice_amount",
+  "invoice_percent",
   "total_bidding_price",
-  "bidding_price_company_currency"
+  "bidding_price_company_currency",
+  "actual_amount",
+  "pending_amount",
+  "billed_amount"
  ],
  "fields": [
   {
-   "columns": 3,
+   "columns": 2,
    "fieldname": "msow_desc",
    "fieldtype": "Small Text",
    "in_list_view": 1,
@@ -58,8 +63,9 @@
    "fieldname": "total_bidding_price",
    "fieldtype": "Currency",
    "in_list_view": 1,
-   "label": "Total Bidding Price",
-   "options": "Sales Order:parent:currency"
+   "label": "Total SO",
+   "options": "Sales Order:parent:currency",
+   "read_only": 1
   },
   {
    "fieldname": "unit_price_company_currency",
@@ -72,11 +78,41 @@
    "fieldtype": "Currency",
    "label": "Bidding Price Company Currency",
    "options": "Company:company:default_currency"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "invoice_amount",
+   "fieldtype": "Currency",
+   "label": "Invoice Amount"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "invoice_percent",
+   "fieldtype": "Percent",
+   "label": "Invoice Percent"
+  },
+  {
+   "fieldname": "actual_amount",
+   "fieldtype": "Currency",
+   "label": "Actual Amount",
+   "options": "Company:company:default_currency"
+  },
+  {
+   "fieldname": "pending_amount",
+   "fieldtype": "Currency",
+   "label": "Pending Amount",
+   "options": "Company:company:default_currency"
+  },
+  {
+   "fieldname": "billed_amount",
+   "fieldtype": "Currency",
+   "label": "Billed Amount",
+   "options": "Company:company:default_currency"
   }
  ],
  "istable": 1,
  "links": [],
- "modified": "2022-06-23 14:03:38.125846",
+ "modified": "2023-10-07 10:35:59.215140",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "SO Scope of Work",
@@ -84,5 +120,6 @@
  "permissions": [],
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }

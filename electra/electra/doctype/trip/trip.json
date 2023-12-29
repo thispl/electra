@@ -1,0 +1,413 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "TPNO-.####",
+ "creation": "2023-12-11 12:56:58.224324",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "customer",
+  "work_order_no",
+  "vehicle_number",
+  "delivery_date",
+  "column_break_5",
+  "driver_name",
+  "driver",
+  "reference_no",
+  "company",
+  "section_break_8",
+  "from_location",
+  "column_break_9",
+  "to_location",
+  "section_break_11",
+  "trip_item",
+  "total",
+  "transport_tab",
+  "point_type",
+  "break",
+  "location",
+  "section_break_10",
+  "destination",
+  "total_hours",
+  "source_address",
+  "halt_address",
+  "destination_address",
+  "distance_map",
+  "load_this",
+  "section_break_19",
+  "billing",
+  "rate_per_trip",
+  "total_trip1",
+  "total_amount",
+  "column_break_23",
+  "schedule_date__time",
+  "point_of_contact_name",
+  "point_of_contact_mobile",
+  "driver_allowance_section",
+  "name1",
+  "allowance",
+  "description",
+  "column_break_29",
+  "payment_mode",
+  "transaction_date",
+  "trip_documents",
+  "charge_deduction_client_tab",
+  "add_to_invoice_section",
+  "charges",
+  "reduce_from_invoice_section",
+  "deduction",
+  "other_expenses_section",
+  "expenses",
+  "section_break_42",
+  "driver_allowance",
+  "section_break_45",
+  "fuel",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Customer",
+   "options": "Customer"
+  },
+  {
+   "fieldname": "work_order_no",
+   "fieldtype": "Link",
+   "label": "Sales Order",
+   "options": "Sales Order"
+  },
+  {
+   "fieldname": "vehicle_number",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Vehicle Number",
+   "options": "Vehicle",
+   "reqd": 1
+  },
+  {
+   "fieldname": "driver_name",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Driver Name",
+   "options": "Employee",
+   "reqd": 1
+  },
+  {
+   "fieldname": "reference_no",
+   "fieldtype": "Data",
+   "label": "Reference No"
+  },
+  {
+   "fieldname": "transport_tab",
+   "fieldtype": "Tab Break",
+   "label": "Transport"
+  },
+  {
+   "fieldname": "point_type",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Point Type",
+   "options": "\nPickup\nHalt\nDrop"
+  },
+  {
+   "fieldname": "column_break_9",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "location",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Location"
+  },
+  {
+   "fieldname": "destination",
+   "fieldtype": "Table",
+   "label": "Destination",
+   "options": "Destination"
+  },
+  {
+   "fieldname": "source_address",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Source Address"
+  },
+  {
+   "fieldname": "halt_address",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Halt Address"
+  },
+  {
+   "fieldname": "destination_address",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Destination Address"
+  },
+  {
+   "fieldname": "distance_map",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Distance Map"
+  },
+  {
+   "fieldname": "load_this",
+   "fieldtype": "Button",
+   "hidden": 1,
+   "label": "Show Map and Distance"
+  },
+  {
+   "fieldname": "section_break_19",
+   "fieldtype": "Section Break",
+   "label": "Client Freight"
+  },
+  {
+   "fieldname": "billing",
+   "fieldtype": "Link",
+   "label": "Billing",
+   "options": "UOM"
+  },
+  {
+   "depends_on": "eval:doc.billing && doc.billing != \"Fixed\"",
+   "fieldname": "rate_per_trip",
+   "fieldtype": "Currency",
+   "label": "Rate Per Trip"
+  },
+  {
+   "depends_on": "billing",
+   "fieldname": "total_amount",
+   "fieldtype": "Currency",
+   "label": "Total Amount"
+  },
+  {
+   "depends_on": "eval:doc.billing && doc.billing != \"Fixed\"",
+   "fieldname": "total_trip1",
+   "fieldtype": "Int",
+   "label": "Total Trip"
+  },
+  {
+   "fieldname": "section_break_10",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "schedule_date__time",
+   "fieldtype": "Datetime",
+   "label": "Schedule Date & Time"
+  },
+  {
+   "fieldname": "point_of_contact_name",
+   "fieldtype": "Data",
+   "label": "Point Of Contact (Name)"
+  },
+  {
+   "fieldname": "point_of_contact_mobile",
+   "fieldtype": "Int",
+   "label": "Point Of Contact (Mobile)"
+  },
+  {
+   "fieldname": "driver_allowance_section",
+   "fieldtype": "Section Break",
+   "label": "Driver Allowance"
+  },
+  {
+   "fieldname": "name1",
+   "fieldtype": "Link",
+   "label": "Name",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "allowance",
+   "fieldtype": "Currency",
+   "label": "Allowance"
+  },
+  {
+   "fieldname": "payment_mode",
+   "fieldtype": "Select",
+   "label": "Payment Mode",
+   "options": "\nMonthly\nKING FISHER TRADG & CONTG CO\nPetty Cash\nUndeposited Funds"
+  },
+  {
+   "fieldname": "transaction_date",
+   "fieldtype": "Date",
+   "label": "Transaction Date"
+  },
+  {
+   "fieldname": "column_break_29",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "label": "Description"
+  },
+  {
+   "fieldname": "trip_documents",
+   "fieldtype": "Attach",
+   "label": "Trip Documents"
+  },
+  {
+   "fieldname": "column_break_23",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "charge_deduction_client_tab",
+   "fieldtype": "Tab Break",
+   "label": "Charge & Deduction (Client) "
+  },
+  {
+   "fieldname": "add_to_invoice_section",
+   "fieldtype": "Section Break",
+   "label": "Add to Invoice"
+  },
+  {
+   "fieldname": "reduce_from_invoice_section",
+   "fieldtype": "Section Break",
+   "label": "Reduce from Invoice"
+  },
+  {
+   "fieldname": "other_expenses_section",
+   "fieldtype": "Section Break",
+   "label": "Other Expenses"
+  },
+  {
+   "fieldname": "trip_item",
+   "fieldtype": "Table",
+   "label": "Trip Item",
+   "options": "Trip Item"
+  },
+  {
+   "fieldname": "charges",
+   "fieldtype": "Table",
+   "label": "Charges",
+   "options": "Charges"
+  },
+  {
+   "fieldname": "deduction",
+   "fieldtype": "Table",
+   "label": "Deduction",
+   "options": "Deduction"
+  },
+  {
+   "fieldname": "expenses",
+   "fieldtype": "Table",
+   "label": "Expenses",
+   "options": "Expenses"
+  },
+  {
+   "fieldname": "driver_allowance",
+   "fieldtype": "Table",
+   "label": "Driver Allowance",
+   "options": "Driver Allowance"
+  },
+  {
+   "fieldname": "section_break_42",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Trip",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company"
+  },
+  {
+   "fieldname": "section_break_45",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "fuel",
+   "fieldtype": "Table",
+   "label": "Fuel",
+   "options": "Fuel"
+  },
+  {
+   "fieldname": "delivery_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Delivery Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "from_location",
+   "fieldtype": "Data",
+   "label": "From Location"
+  },
+  {
+   "fieldname": "to_location",
+   "fieldtype": "Data",
+   "label": "To Location"
+  },
+  {
+   "fieldname": "section_break_11",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "break",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_8",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "driver_name.last_name",
+   "fieldname": "driver",
+   "fieldtype": "Data",
+   "label": "Driver"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "total",
+   "fieldtype": "Currency",
+   "label": "Total"
+  },
+  {
+   "fieldname": "total_hours",
+   "fieldtype": "Float",
+   "label": "Total Hours"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2023-12-28 22:46:08.009385",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "Trip",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "name",
+ "sort_order": "DESC",
+ "states": []
+}

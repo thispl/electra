@@ -9,8 +9,10 @@
  "field_order": [
   "naming_series",
   "requested_date",
-  "project",
   "source_company",
+  "from__company",
+  "default_source_warehouse",
+  "project",
   "column_break_2",
   "raised_by",
   "company",
@@ -21,7 +23,6 @@
   "items",
   "items_html",
   "section_break_2",
-  "default_source_warehouse",
   "letter_head",
   "amended_from",
   "transfer_approved",
@@ -37,7 +38,8 @@
    "label": "Requested Date"
   },
   {
-   "depends_on": "eval:doc.company == 'MEP DIVISION - ELECTRA'||doc.company=='INTERIOR DIVISION - ELECTRA'||doc.company == 'ENGINEERING DIVISION - ELECTRA'",
+   "depends_on": "eval:doc.sales_order",
+   "fetch_from": "sales_order.project",
    "fieldname": "project",
    "fieldtype": "Link",
    "label": "Project",
@@ -55,12 +57,14 @@
    "options": "User"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "company",
    "fieldtype": "Link",
    "in_list_view": 1,
    "in_standard_filter": 1,
-   "label": "Company",
-   "options": "Company"
+   "label": "To Company",
+   "options": "Company",
+   "reqd": 1
   },
   {
    "fieldname": "sales_order",
@@ -92,17 +96,16 @@
    "fieldname": "source_company",
    "fieldtype": "Link",
    "ignore_user_permissions": 1,
-   "in_list_view": 1,
-   "label": "Request to Company",
+   "label": "From Company",
    "options": "Company",
    "reqd": 1
   },
   {
    "fieldname": "default_source_warehouse",
    "fieldtype": "Link",
-   "label": "Request to Warehouse",
-   "options": "Warehouse",
-   "read_only": 1
+   "ignore_user_permissions": 1,
+   "label": "From Warehouse",
+   "options": "Warehouse"
   },
   {
    "fieldname": "amended_from",
@@ -161,19 +164,29 @@
    "read_only": 1
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "letter_head",
    "fieldtype": "Link",
    "label": "Letter Head",
    "options": "Letter Head"
+  },
+  {
+   "fieldname": "from__company",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "in_standard_filter": 1,
+   "label": "From Company",
+   "options": "\nKINGFISHER TRADING AND CONTRACTING COMPANY\nAl - Shaghairi Trading and Contracting Company W.L.L (ELECTRA)\nMARAZEEM SECURITY SERVICES\nKINGFISHER - TRANSPORTATION\nMARAZEEM SECURITY SERVICES - SHOWROOM\nMARAZEEM SECURITY SERVICES - HO\nMEP DIVISION - ELECTRA\nENGINEERING DIVISION - ELECTRA\nINTERIOR DIVISION - ELECTRA\nINDUSTRIAL TOOLS DIVISION\nKINGFISHER - SHOWROOM\nSTEEL DIVISION - ELECTRA\nELECTRICAL DIVISION - ELECTRA\nTRADING DIVISION - ELECTRA\nELECTRA - BARWA SHOWROOM\nELECTRA  - NAJMA SHOWROOM\nELECTRA - ALKHOR SHOWROOM\nELECTRA - BINOMRAN SHOWROOM"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2022-07-16 07:49:15.478159",
+ "modified": "2023-12-20 12:30:55.960833",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Stock Request",
+ "naming_rule": "By \"Naming Series\" field",
  "owner": "Administrator",
  "permissions": [
   {
@@ -192,8 +205,9 @@
    "write": 1
   }
  ],
- "sort_field": "modified",
+ "sort_field": "naming_series",
  "sort_order": "DESC",
- "title_field": "source_company",
+ "states": [],
+ "title_field": "from__company",
  "track_changes": 1
 }

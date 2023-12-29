@@ -1,5 +1,6 @@
 {
  "actions": [],
+ "autoname": "ELE/HRA/28/.###",
  "creation": "2021-08-17 10:33:46.682651",
  "doctype": "DocType",
  "editable_grid": 1,
@@ -154,10 +155,11 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2021-08-20 07:43:41.565117",
+ "modified": "2023-05-31 08:17:33.549106",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Interim Appraisal Form",
+ "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
   {
@@ -175,5 +177,6 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }

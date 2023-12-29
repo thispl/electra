@@ -6,51 +6,111 @@
  "engine": "InnoDB",
  "field_order": [
   "report",
+  "print",
   "download",
   "from_date",
   "to_date",
   "division",
-  "department"
+  "department",
+  "customer",
+  "company",
+  "sales_person_user",
+  "project",
+  "account",
+  "company_multiselect"
  ],
  "fields": [
   {
    "fieldname": "report",
    "fieldtype": "Select",
    "label": "Report",
-   "options": "\nSalary Register\nWorking Progress Report"
+   "options": "\nSalary Register\nWorking Progress Report\nCustomer Ledger Report\nLedger Summary Report\nSales Person Wise Income Report\nWork Order vs Material Request vs Stock Detailed Report\nWork Order vs Material Request vs Stock Brief Report\nBudgeted vs Actual Report\nAccounts Ledger Summary Report"
   },
   {
+   "depends_on": "eval:doc.report !=\"Work Order vs Material Request vs Stock Brief Report\" && doc.report != \"Work Order vs Material Request vs Stock Detailed Report\"  && doc.report !=\"Budgeted vs Actual Report\"",
    "fieldname": "from_date",
    "fieldtype": "Date",
    "label": "From Date"
   },
   {
+   "depends_on": "eval:doc.report !=\"Work Order vs Material Request vs Stock Brief Report\" && doc.report != \"Work Order vs Material Request vs Stock Detailed Report\"  && doc.report !=\"Budgeted vs Actual Report\" && doc.report !=\"Accounts Ledger Summary Report\"",
    "fieldname": "to_date",
    "fieldtype": "Date",
    "label": "To Date"
   },
   {
+   "depends_on": "eval:doc.report !=\"Sales Person Wise Income Report\" && doc.report !=\"Work Order vs Material Request vs Stock Brief Report\"  && doc.report != \"Work Order vs Material Request vs Stock Detailed Report\"  && doc.report !=\"Budgeted vs Actual Report\" && doc.report != \"Ledger Summary Report\"",
    "fieldname": "division",
    "fieldtype": "Link",
    "label": "Division",
    "options": "Company"
   },
   {
+   "depends_on": "eval:doc.report !=\"Sales Person Wise Income Report\" && doc.report !=\"Work Order vs Material Request vs Stock Brief Report\" && doc.report != \"Work Order vs Material Request vs Stock Detailed Report\" && doc.report !=\"Budgeted vs Actual Report\" && doc.report != \"Ledger Summary Report\"",
    "fieldname": "department",
    "fieldtype": "Link",
    "label": "Department",
    "options": "Department"
   },
   {
+   "depends_on": "eval:doc.report !=\"Sales Person Wise Income Report\" && doc.report !=\"Work Order vs Material Request vs Stock Brief Report\"  && doc.report != \"Work Order vs Material Request vs Stock Detailed Report\" && doc.report !=\"Budgeted vs Actual Report\" && doc.report !=\"Ledger Summary Report\"",
    "fieldname": "download",
    "fieldtype": "Button",
    "label": "Download"
+  },
+  {
+   "depends_on": "eval:doc.report ==\"Customer Ledger Report\" ||\"Sales Person Wise Income Report\" ",
+   "fieldname": "print",
+   "fieldtype": "Button",
+   "label": "Print"
+  },
+  {
+   "depends_on": "eval:doc.report == \"Customer Ledger Report\" ||doc.report == \"Sales Person Wise Income Report\" ||doc.report ==\"Accounts Ledger Summary Report\"",
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Customer"
+  },
+  {
+   "depends_on": "eval:doc.report == \"Work Order vs Material Request vs Stock Brief Report\" || doc.report == \"Work Order vs Material Request vs Stock Detailed Report\"  || doc.report ==\"Budgeted vs Actual Report\"",
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "label": "Project",
+   "options": "Project"
+  },
+  {
+   "fieldname": "account",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Account",
+   "options": "Account"
+  },
+  {
+   "depends_on": "eval:doc.report ==\"Sales Person Wise Income Report\"",
+   "fieldname": "sales_person_user",
+   "fieldtype": "Link",
+   "label": "Sales Person User",
+   "options": "Sales Person"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company"
+  },
+  {
+   "depends_on": "eval:doc.report !=\"Accounts Ledger Summary Report\"",
+   "fieldname": "company_multiselect",
+   "fieldtype": "Table MultiSelect",
+   "label": "Company",
+   "options": "Company Multiselect"
   }
  ],
+ "hide_toolbar": 1,
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2022-07-25 09:07:46.930727",
+ "modified": "2023-12-11 12:25:46.722434",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Report Dashboard",
@@ -69,5 +129,6 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }

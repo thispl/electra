@@ -1,0 +1,75 @@
+{
+ "actions": [],
+ "autoname": "autoincrement",
+ "creation": "2023-11-08 07:47:41.147617",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "point",
+  "location_place",
+  "latitude_longitude",
+  "from_time",
+  "to_time",
+  "odometer",
+  "total"
+ ],
+ "fields": [
+  {
+   "fieldname": "point",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Point Type"
+  },
+  {
+   "fieldname": "location_place",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Location"
+  },
+  {
+   "fieldname": "latitude_longitude",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Latitude/Longitude"
+  },
+  {
+   "fieldname": "from_time",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "From Time",
+   "read_only": 1
+  },
+  {
+   "fieldname": "to_time",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "To Time",
+   "read_only": 1
+  },
+  {
+   "fieldname": "odometer",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Odometer"
+  },
+  {
+   "fieldname": "total",
+   "fieldtype": "Float",
+   "label": "Total "
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2023-12-28 13:52:24.832324",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "Destination",
+ "naming_rule": "Autoincrement",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

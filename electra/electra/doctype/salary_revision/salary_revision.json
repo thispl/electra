@@ -1,0 +1,582 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "SR.####",
+ "creation": "2023-02-18 15:31:44.469782",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "salary_revision_status",
+  "column_break_2",
+  "effective__from_date",
+  "effective_date",
+  "column_break_5",
+  "effective__to_date",
+  "section_break_7",
+  "employee",
+  "employee_name",
+  "department",
+  "designation",
+  "sponser_company",
+  "column_break_12",
+  "company",
+  "employee_number",
+  "grade",
+  "date_of_joining",
+  "date_of_birth",
+  "salary_details_section",
+  "salary_mode",
+  "basic",
+  "hra",
+  "accommodation",
+  "medical_allowance",
+  "air_ticket_allowance",
+  "visa_cost",
+  "gratuity",
+  "gross_salary",
+  "column_break_15",
+  "salary_currency",
+  "mobile_allowance",
+  "transport_allowance",
+  "other_allowance",
+  "leave_salary",
+  "qid_cost",
+  "medical_renewal",
+  "compensation_employee_insurence",
+  "cost_to_company",
+  "per_hour_cost",
+  "amended_from",
+  "temporary_salary_details_section",
+  "salary_mode1",
+  "basic1",
+  "hra1",
+  "accommodation1",
+  "medical_allowance1",
+  "air_ticket_allowance1",
+  "visa_cost1",
+  "gratuity1",
+  "mobile_allowance1",
+  "transport_allowance1",
+  "other_allowance1",
+  "leave_salary1",
+  "qid_cost1",
+  "medical_renewal1",
+  "compensation_1",
+  "gross_salary1",
+  "cost_to_company1",
+  "per_hour_cost1",
+  "column_break_58",
+  "salary_currency1",
+  "basic2",
+  "hra2",
+  "accommodation2",
+  "medical_allowance2",
+  "air_ticket_allowance2",
+  "visa_cost2",
+  "gratuity2",
+  "mobile_allowance2",
+  "transport_allowance2",
+  "other_allowance2",
+  "leave_salary2",
+  "qid_cost2",
+  "medical_renewal2",
+  "compensation_2",
+  "gross_salary2",
+  "cost_to_company2",
+  "per_hour_cost2",
+  "section_break_76",
+  "remarks"
+ ],
+ "fields": [
+  {
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Employee",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Salary Revision",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fetch_from": "employee.employee_name",
+   "fieldname": "employee_name",
+   "fieldtype": "Data",
+   "label": "Employee Name",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "employee.date_of_joining",
+   "fieldname": "date_of_joining",
+   "fieldtype": "Data",
+   "label": "Date of Joining",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "employee.company",
+   "fieldname": "company",
+   "fieldtype": "Data",
+   "label": "Company",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "employee.employee_number",
+   "fieldname": "employee_number",
+   "fieldtype": "Data",
+   "label": "Employee Number",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "employee.department",
+   "fieldname": "department",
+   "fieldtype": "Data",
+   "label": "Department",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "employee.designation",
+   "fieldname": "designation",
+   "fieldtype": "Data",
+   "label": "Designation",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "employee.grade",
+   "fieldname": "grade",
+   "fieldtype": "Data",
+   "label": "Grade",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.salary_revision_status == 'Permanent'",
+   "fieldname": "salary_details_section",
+   "fieldtype": "Section Break",
+   "label": "Salary Details"
+  },
+  {
+   "fetch_from": "employee.salary_mode",
+   "fieldname": "salary_mode",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Salary Mode",
+   "options": "\nBank\nCash\nCheque\nPay Card"
+  },
+  {
+   "fieldname": "basic",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Basic"
+  },
+  {
+   "fieldname": "hra",
+   "fieldtype": "Currency",
+   "label": "HRA"
+  },
+  {
+   "fieldname": "accommodation",
+   "fieldtype": "Currency",
+   "label": "Accommodation"
+  },
+  {
+   "fieldname": "column_break_15",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "employee.salary_currency",
+   "fieldname": "salary_currency",
+   "fieldtype": "Link",
+   "label": "Salary Currency",
+   "mandatory_depends_on": "eval:doc.salary_revision_status == 'Temporary'",
+   "options": "Currency",
+   "read_only": 1
+  },
+  {
+   "fieldname": "mobile_allowance",
+   "fieldtype": "Currency",
+   "label": "Mobile Allowance"
+  },
+  {
+   "fieldname": "transport_allowance",
+   "fieldtype": "Currency",
+   "label": "Transport Allowance"
+  },
+  {
+   "fieldname": "medical_allowance",
+   "fieldtype": "Currency",
+   "label": "Medical Allowance"
+  },
+  {
+   "fieldname": "other_allowance",
+   "fieldtype": "Currency",
+   "label": "Other Allowance"
+  },
+  {
+   "fieldname": "gross_salary",
+   "fieldtype": "Currency",
+   "label": "Gross Salary",
+   "read_only": 1
+  },
+  {
+   "fieldname": "gratuity",
+   "fieldtype": "Currency",
+   "label": "Gratuity",
+   "read_only": 1
+  },
+  {
+   "fieldname": "leave_salary",
+   "fieldtype": "Currency",
+   "label": "Leave Salary"
+  },
+  {
+   "fieldname": "qid_cost",
+   "fieldtype": "Currency",
+   "label": "QID Cost"
+  },
+  {
+   "fieldname": "air_ticket_allowance",
+   "fieldtype": "Currency",
+   "label": "Air Ticket Allowance"
+  },
+  {
+   "fieldname": "medical_renewal",
+   "fieldtype": "Currency",
+   "label": "Medical Renewal"
+  },
+  {
+   "fieldname": "visa_cost",
+   "fieldtype": "Currency",
+   "label": "Visa Cost"
+  },
+  {
+   "fetch_from": "employee.sponsor_company",
+   "fieldname": "sponser_company",
+   "fieldtype": "Data",
+   "label": "Sponser Company",
+   "read_only": 1
+  },
+  {
+   "fieldname": "per_hour_cost",
+   "fieldtype": "Currency",
+   "label": "Per Hour Cost",
+   "read_only": 1
+  },
+  {
+   "fieldname": "cost_to_company",
+   "fieldtype": "Currency",
+   "label": "Cost to Company",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.salary_revision_status == 'Permanent'",
+   "fieldname": "effective_date",
+   "fieldtype": "Date",
+   "label": "Effective Date"
+  },
+  {
+   "fieldname": "salary_revision_status",
+   "fieldtype": "Select",
+   "label": "Salary Revision Status",
+   "options": "\nPermanent\nTemporary",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.salary_revision_status == 'Temporary'",
+   "fieldname": "effective__from_date",
+   "fieldtype": "Date",
+   "label": "Effective  From Date",
+   "mandatory_depends_on": "eval:doc.salary_revision_status == 'Temporary'"
+  },
+  {
+   "depends_on": "eval:doc.salary_revision_status == 'Temporary'",
+   "fieldname": "effective__to_date",
+   "fieldtype": "Date",
+   "label": "Effective  To Date",
+   "mandatory_depends_on": "eval:doc.salary_revision_status == 'Temporary'"
+  },
+  {
+   "fieldname": "column_break_12",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.salary_revision_status",
+   "fieldname": "section_break_7",
+   "fieldtype": "Section Break",
+   "label": "Employee Details"
+  },
+  {
+   "fetch_from": "employee.date_of_birth",
+   "fieldname": "date_of_birth",
+   "fieldtype": "Data",
+   "label": "Date of Birth",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.salary_revision_status == 'Temporary'",
+   "fieldname": "temporary_salary_details_section",
+   "fieldtype": "Section Break",
+   "label": "Temporary Salary Details"
+  },
+  {
+   "fieldname": "salary_mode1",
+   "fieldtype": "Select",
+   "label": "Salary Mode",
+   "mandatory_depends_on": "eval:doc.salary_revision_status == 'Temporary'",
+   "options": "\nBank\nCash\nCheque\nPay Card"
+  },
+  {
+   "fieldname": "salary_currency1",
+   "fieldtype": "Link",
+   "label": "Salary Currency",
+   "options": "Currency"
+  },
+  {
+   "fieldname": "basic1",
+   "fieldtype": "Currency",
+   "label": "Basic",
+   "read_only": 1
+  },
+  {
+   "fieldname": "hra1",
+   "fieldtype": "Currency",
+   "label": "HRA",
+   "read_only": 1
+  },
+  {
+   "fieldname": "accommodation1",
+   "fieldtype": "Currency",
+   "label": "Accommodation",
+   "read_only": 1
+  },
+  {
+   "fieldname": "medical_allowance1",
+   "fieldtype": "Currency",
+   "label": "Medical Allowance",
+   "read_only": 1
+  },
+  {
+   "fieldname": "air_ticket_allowance1",
+   "fieldtype": "Currency",
+   "label": "Air Ticket Allowance",
+   "read_only": 1
+  },
+  {
+   "fieldname": "visa_cost1",
+   "fieldtype": "Currency",
+   "label": "Visa Cost",
+   "read_only": 1
+  },
+  {
+   "fieldname": "gratuity1",
+   "fieldtype": "Currency",
+   "label": "Gratuity",
+   "read_only": 1
+  },
+  {
+   "fieldname": "mobile_allowance1",
+   "fieldtype": "Currency",
+   "label": "Mobile Allowance",
+   "read_only": 1
+  },
+  {
+   "fieldname": "transport_allowance1",
+   "fieldtype": "Currency",
+   "label": "Transport Allowance",
+   "read_only": 1
+  },
+  {
+   "fieldname": "other_allowance1",
+   "fieldtype": "Currency",
+   "label": "Other Allowance",
+   "read_only": 1
+  },
+  {
+   "fieldname": "leave_salary1",
+   "fieldtype": "Currency",
+   "label": "Leave Salary",
+   "read_only": 1
+  },
+  {
+   "fieldname": "qid_cost1",
+   "fieldtype": "Currency",
+   "label": "QID Cost",
+   "read_only": 1
+  },
+  {
+   "fieldname": "medical_renewal1",
+   "fieldtype": "Currency",
+   "label": "Medical Renewal",
+   "read_only": 1
+  },
+  {
+   "fieldname": "gross_salary1",
+   "fieldtype": "Currency",
+   "label": "Gross Salary",
+   "read_only": 1
+  },
+  {
+   "fieldname": "cost_to_company1",
+   "fieldtype": "Currency",
+   "label": "Cost to Company",
+   "read_only": 1
+  },
+  {
+   "fieldname": "per_hour_cost1",
+   "fieldtype": "Currency",
+   "label": "Per Hour Cost",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_58",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "basic2",
+   "fieldtype": "Currency",
+   "label": "Basic"
+  },
+  {
+   "fieldname": "hra2",
+   "fieldtype": "Currency",
+   "label": "HRA"
+  },
+  {
+   "fieldname": "accommodation2",
+   "fieldtype": "Currency",
+   "label": "Accommodation"
+  },
+  {
+   "fieldname": "medical_allowance2",
+   "fieldtype": "Currency",
+   "label": "Medical Allowance"
+  },
+  {
+   "fieldname": "air_ticket_allowance2",
+   "fieldtype": "Currency",
+   "label": "Air Ticket Allowance"
+  },
+  {
+   "fieldname": "visa_cost2",
+   "fieldtype": "Currency",
+   "label": "Visa Cost"
+  },
+  {
+   "fieldname": "mobile_allowance2",
+   "fieldtype": "Currency",
+   "label": "Mobile Allowance"
+  },
+  {
+   "fieldname": "transport_allowance2",
+   "fieldtype": "Currency",
+   "label": "Transport Allowance"
+  },
+  {
+   "fieldname": "other_allowance2",
+   "fieldtype": "Currency",
+   "label": "Other Allowance"
+  },
+  {
+   "fieldname": "leave_salary2",
+   "fieldtype": "Currency",
+   "label": "Leave Salary"
+  },
+  {
+   "fieldname": "qid_cost2",
+   "fieldtype": "Currency",
+   "label": "QID Cost"
+  },
+  {
+   "fieldname": "medical_renewal2",
+   "fieldtype": "Currency",
+   "label": "Medical Renewal"
+  },
+  {
+   "fieldname": "gross_salary2",
+   "fieldtype": "Currency",
+   "label": "Gross Salary"
+  },
+  {
+   "fieldname": "cost_to_company2",
+   "fieldtype": "Currency",
+   "label": "Cost to Company"
+  },
+  {
+   "fieldname": "per_hour_cost2",
+   "fieldtype": "Currency",
+   "label": "Per Hour Cost"
+  },
+  {
+   "fieldname": "gratuity2",
+   "fieldtype": "Currency",
+   "label": "Gratuity"
+  },
+  {
+   "fieldname": "section_break_76",
+   "fieldtype": "Section Break"
+  },
+  {
+   "depends_on": "eval:doc.salary_revision_status",
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  },
+  {
+   "fieldname": "compensation_employee_insurence",
+   "fieldtype": "Currency",
+   "label": "Compensation (Employee Insurence)"
+  },
+  {
+   "fieldname": "compensation_1",
+   "fieldtype": "Currency",
+   "label": "Compensation (Employee Insurence)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "compensation_2",
+   "fieldtype": "Currency",
+   "label": "Compensation (Employee Insurence)"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2023-06-25 09:36:04.694253",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "Salary Revision",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

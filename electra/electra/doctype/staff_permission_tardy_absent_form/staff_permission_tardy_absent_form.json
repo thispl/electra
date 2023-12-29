@@ -1,6 +1,6 @@
 {
  "actions": [],
- "autoname": "field:employee_name",
+ "autoname": "ELE/HRA/16/.####",
  "creation": "2021-08-14 11:15:12.819271",
  "doctype": "DocType",
  "editable_grid": 1,
@@ -98,7 +98,6 @@
    "label": "Authorisation of Dept./ Div. Head"
   },
   {
-   "collapsible": 1,
    "fieldname": "for_hr_use_only_section",
    "fieldtype": "Section Break",
    "label": "For Office Use"
@@ -151,7 +150,6 @@
    "read_only_depends_on": "eval:doc.casual_leave || doc.sick_leave"
   },
   {
-   "collapsible": 1,
    "fieldname": "employee_details_section",
    "fieldtype": "Section Break",
    "label": "Employee Details "
@@ -166,7 +164,6 @@
    "options": "<b>LATE :</b> If the employee report to duty BETWEEN  \u2013 8.10 AM &amp; 8.30 AM shall be marked as LATE and maximum 2 LATEs\u2019 are allowed per month for each employee<br>\n<b>TARDY:</b> If the employee reports to duty after 8.30 AM and before 9.00 AM shall be considered as TARDY and marked as PERMISSION  and later on, it will be marked as Half Day Leave, same will be deducted from Casual leave (if available) or from the Annual Leave (if Leave balance is available).<br>\n<b>PERMISSION:</b> If the employee informs his/ her immediate supervisor &amp; HR, with 1 day prior notice that, the employee is going to attend the duty late or leaving the work place early (before the office closing time).  Then he/ she is eligible to take PERMISSION for duration of not more than 2 hours and same can be availed 2 times per month.<br>\n"
   },
   {
-   "collapsible": 1,
    "fieldname": "section_break_14",
    "fieldtype": "Section Break",
    "label": "Request Details"
@@ -230,10 +227,11 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2022-10-31 10:00:47.687654",
+ "modified": "2023-05-31 08:08:17.654256",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Staff Permission Tardy Absent Form",
+ "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
   {
@@ -254,6 +252,7 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "title_field": "emp_id",
  "track_changes": 1
 }

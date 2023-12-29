@@ -1,41 +1,62 @@
 import frappe
 from frappe import _
-from erpnext.hr.doctype.employee.employee import Employee
-# from erpnext.accounts.report.accounts_recievable.accounts_recievable import ReceivablePayableReport
-from frappe.utils import add_days, cint, cstr, flt, getdate, rounded, date_diff, money_in_words, formatdate, get_first_day
-from erpnext.hr.utils import validate_dates, validate_overlap, get_leave_period, \
-    get_holidays_for_employee, create_additional_leave_ledger_entry
+from frappe.utils import nowdate, unique, add_days, cint, cstr, flt, getdate, rounded, date_diff, money_in_words, formatdate, get_first_day
+from frappe.desk.reportview import get_filters_cond, get_match_cond
+from hrms.hr.doctype.employee_separation.employee_separation import EmployeeSeparation
 
-# class CustomReceivablePayableReport(ReceivablePayableReport):
-#     def add_common_filters(self, conditions, values, party_type_field):
-#         if self.filters.company:
-#             conditions.append("company='STEEL DIVISION - ELECTRA'")
-#             values.append(self.filters.company)
+class CustomEmployeeSeparation(EmployeeSeparation):
+	def on_submit(self):
+		frappe.log_error(title='EmployeeSeparation',message='on_submit')
 
-#         if self.filters.finance_book:
-#             conditions.append("ifnull(finance_book, '') in (%s, '')")
-#             values.append(self.filters.finance_book)
 
-#         if self.filters.get(party_type_field):
-#             conditions.append("party=%s")
-#             values.append(self.filters.get(party_type_field))
+@frappe.whitelist()
+def get_project_emp():
+    pass
 
-#         # get GL with "receivable" or "payable" account_type
-#         account_type = "Receivable" if self.party_type == "Customer" else "Payable"
-#         accounts = [d.name for d in frappe.get_all("Account",
-#             filters={"account_type": account_type, "company": self.filters.company})]
 
-#         if accounts:
-#             conditions.append("account in (%s)" % ','.join(['%s'] *len(accounts)))
-#             values += accounts
+@frappe.whitelist()
+@frappe.validate_and_sanitize_search_inputs
+def get_delivery_notes_to_be_billed(doctype, txt, searchfield, start, page_len, filters, as_dict):
+	doctype = "Delivery Note"
+	fields = get_fields(doctype, ["name","posting_date","po_no"])
 
-# class CustomEmployee(Employee):
-#     def autoname(self):
-#         emp = frappe.db.sql(""" select employee_number from `tabEmployee` order by name """,as_dict = 1)[-1]
-#         last = emp.employee_number
-#         las = int(last)
-#         new = las + 1
-#         # frappe.errprint(type(new))
-#         frappe.errprint(type(new))
-#         self.employee_number = new
-#         # self.name = new
+	return frappe.db.sql(
+		"""
+		select %(fields)s
+		from `tabDelivery Note`
+		where `tabDelivery Note`.`%(key)s` like %(txt)s and
+			`tabDelivery Note`.docstatus = 1
+			and status not in ('Stopped', 'Closed') %(fcond)s
+			and (
+				(`tabDelivery Note`.is_return = 0 and `tabDelivery Note`.per_billed < 100)
+				or (`tabDelivery Note`.grand_total = 0 and `tabDelivery Note`.per_billed < 100)
+				or (
+					`tabDelivery Note`.is_return = 1
+					and return_against in (select name from `tabDelivery Note` where per_billed < 100)
+				)
+			)
+			%(mcond)s order by `tabDelivery Note`.`%(key)s` asc limit %(page_len)s offset %(start)s
+	"""
+		% {
+			"fields": ", ".join(["`tabDelivery Note`.{0}".format(f) for f in fields]),
+			"key": searchfield,
+			"fcond": get_filters_cond(doctype, filters, []),
+			"mcond": get_match_cond(doctype),
+			"start": start,
+			"page_len": page_len,
+			"txt": "%(txt)s",
+		},
+		{"txt": ("%%%s%%" % txt)},
+		as_dict=as_dict,
+	)
+
+def get_fields(doctype, fields=None):
+	if fields is None:
+		fields = []
+	meta = frappe.get_meta(doctype)
+	fields.extend(meta.get_search_fields())
+
+	if meta.title_field and not meta.title_field.strip() in fields:
+		fields.insert(1, meta.title_field.strip())
+
+	return unique(fields)

@@ -17,7 +17,6 @@ UNTRANSLATED_DOCTYPES = ["DocType", "Role"]
 @frappe.whitelist()
 def search_widget(doctype, txt, query=None, searchfield=None, start=0,
 	page_length=20, filters=None, filter_fields=None, as_dict=False, reference_doctype=None, ignore_user_permissions=False):
-	frappe.log_error(filters, "--filters--")
 	start = cint(start)
 
 	if isinstance(filters, string_types):

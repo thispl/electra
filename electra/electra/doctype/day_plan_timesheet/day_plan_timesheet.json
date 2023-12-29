@@ -67,7 +67,7 @@
    "fieldname": "day_plan",
    "fieldtype": "Link",
    "label": "Day Plan",
-   "options": "Day Plan"
+   "options": "Single Project Day Plan"
   },
   {
    "fieldname": "amended_from",
@@ -103,7 +103,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2022-04-10 09:55:47.406629",
+ "modified": "2023-01-23 19:23:48.471265",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Day Plan Timesheet",
@@ -127,5 +127,6 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }

@@ -1,0 +1,756 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:vehicle",
+ "creation": "2023-11-06 10:36:07.098246",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "vehicle",
+  "vehicle_make",
+  "vehicle_model",
+  "no_of_tyres",
+  "column_break_2",
+  "image1",
+  "image_2",
+  "image_3",
+  "image_4",
+  "image_5",
+  "image_6",
+  "image_7",
+  "image_8",
+  "image_9",
+  "image_10",
+  "image_11",
+  "image_12",
+  "test",
+  "section_break_9",
+  "position_1",
+  "date_of_purchase",
+  "kilometer",
+  "position_5",
+  "date_of_purchase5",
+  "kilometer5",
+  "position_9",
+  "date_of_purchase9",
+  "kilometer9",
+  "position_13",
+  "date_of_purchase13",
+  "kilometer13",
+  "position_17",
+  "date_of_purchase17",
+  "kilometer17",
+  "position_21",
+  "date_of_purchase21",
+  "kilometer21",
+  "position_25",
+  "date_of_purchase25",
+  "kilometer25",
+  "column_break_6",
+  "position_2",
+  "date_of_purchase2",
+  "kilometer2",
+  "position_6",
+  "date_of_purchase6",
+  "kilometer6",
+  "position_10",
+  "date_of_purchase10",
+  "kilometer10",
+  "position_14",
+  "date_of_purchase14",
+  "kilometer14",
+  "position_18",
+  "date_of_purchase18",
+  "kilometer18",
+  "position_22",
+  "date_of_purchase22",
+  "kilometer22",
+  "position_26",
+  "date_of_purchase26",
+  "kilometer26",
+  "column_break_8",
+  "position_3",
+  "date_of_purchase3",
+  "kilometer3",
+  "position_7",
+  "date_of_purchase7",
+  "kilometer7",
+  "position_11",
+  "date_of_purchase11",
+  "kilometer11",
+  "position_15",
+  "date_of_purchase15",
+  "kilometer15",
+  "position_19",
+  "date_of_purchase19",
+  "kilometer19",
+  "position_23",
+  "date_of_purchase23",
+  "kilometer23",
+  "column_break_10",
+  "position_4",
+  "date_of_purchase4",
+  "kilometer4",
+  "position_8",
+  "date_of_purchase8",
+  "kilometer8",
+  "position_12",
+  "date_of_purchase12",
+  "kilometer12",
+  "position_16",
+  "date_of_purchase16",
+  "kilometer16",
+  "position_20",
+  "date_of_purchase20",
+  "kilometer20",
+  "position_24",
+  "date_of_purchase24",
+  "kilometer24"
+ ],
+ "fields": [
+  {
+   "fetch_from": "vehicle.make",
+   "fieldname": "vehicle_make",
+   "fieldtype": "Data",
+   "label": "Vehicle Make"
+  },
+  {
+   "fetch_from": "vehicle.model",
+   "fieldname": "vehicle_model",
+   "fieldtype": "Data",
+   "label": "Vehicle Model"
+  },
+  {
+   "fieldname": "no_of_tyres",
+   "fieldtype": "Select",
+   "label": "No of Tyres",
+   "options": "4\n6\n8\n10\n12\n14\n16\n18\n20\n22\n24\n26"
+  },
+  {
+   "fieldname": "position_1",
+   "fieldtype": "Select",
+   "label": "Position 1",
+   "options": "\nFront Axle - Left\nFront Axle - Right\nRear Axle - Left\nRear Axle - Right\nDrive Axle - Left\nDrive Axle - Right"
+  },
+  {
+   "fieldname": "position_2",
+   "fieldtype": "Select",
+   "label": "Position 2",
+   "options": "\nFront Axle - Left\nFront Axle - Right\nRear Axle - Left\nRear Axle - Right\nDrive Axle - Left\nDrive Axle - Right"
+  },
+  {
+   "fieldname": "position_3",
+   "fieldtype": "Select",
+   "label": "Position 3",
+   "options": "\nFront Axle - Left\nFront Axle - Right\nRear Axle - Left\nRear Axle - Right\nDrive Axle - Left\nDrive Axle - Right"
+  },
+  {
+   "fieldname": "position_4",
+   "fieldtype": "Select",
+   "label": "Position 4",
+   "options": "\nFront Axle - Left\nFront Axle - Right\nRear Axle - Left\nRear Axle - Right\nDrive Axle - Left\nDrive Axle - Right"
+  },
+  {
+   "fieldname": "column_break_6",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_8",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_10",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres != \"4\" || doc.no_of_tyres == \"6\"",
+   "fieldname": "position_5",
+   "fieldtype": "Select",
+   "label": "Position 5",
+   "options": "\nFront Axle - Left\nFront Axle - Right\nRear Axle - Left\nRear Axle - Right\nDrive Axle - Left\nDrive Axle - Right"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres != \"4\" || doc.no_of_tyres == \"6\"",
+   "fieldname": "position_6",
+   "fieldtype": "Select",
+   "label": "Position 6",
+   "options": "\nFront Axle - Left\nFront Axle - Right\nRear Axle - Left\nRear Axle - Right\nDrive Axle - Left\nDrive Axle - Right"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres != \"4\" && doc.no_of_tyres != \"6\"",
+   "fieldname": "position_7",
+   "fieldtype": "Select",
+   "label": "Position 7",
+   "options": "\nFront Axle - Left\nFront Axle - Right\nRear Axle - Left\nRear Axle - Right\nDrive Axle - Left\nDrive Axle - Right"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres != \"4\" && doc.no_of_tyres != \"6\"",
+   "fieldname": "position_8",
+   "fieldtype": "Select",
+   "label": "Position 8",
+   "options": "\nFront Axle - Left\nFront Axle - Right\nRear Axle - Left\nRear Axle - Right\nDrive Axle - Left\nDrive Axle - Right"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres != \"4\" && doc.no_of_tyres != \"6\" && doc.no_of_tyres != \"8\" ",
+   "fieldname": "position_9",
+   "fieldtype": "Select",
+   "label": "Position 9",
+   "options": "\nFront Axle - Left\nFront Axle - Right\nRear Axle - Left\nRear Axle - Right\nDrive Axle - Left\nDrive Axle - Right"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres != \"4\" && doc.no_of_tyres != \"6\" && doc.no_of_tyres != \"8\"",
+   "fieldname": "position_10",
+   "fieldtype": "Select",
+   "label": "Position 10",
+   "options": "\nFront Axle - Left\nFront Axle - Right\nRear Axle - Left\nRear Axle - Right\nDrive Axle - Left\nDrive Axle - Right"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres != \"4\" && doc.no_of_tyres != \"6\" && doc.no_of_tyres != \"8\" && doc.no_of_tyres != \"10\"",
+   "fieldname": "position_11",
+   "fieldtype": "Select",
+   "label": "Position 11",
+   "options": "\nFront Axle - Left\nFront Axle - Right\nRear Axle - Left\nRear Axle - Right\nDrive Axle - Left\nDrive Axle - Right"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres != \"4\" && doc.no_of_tyres != \"6\" && doc.no_of_tyres != \"8\" && doc.no_of_tyres != \"10\"",
+   "fieldname": "position_12",
+   "fieldtype": "Select",
+   "label": "Position 12",
+   "options": "\nFront Axle - Left\nFront Axle - Right\nRear Axle - Left\nRear Axle - Right\nDrive Axle - Left\nDrive Axle - Right"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres != \"4\" && doc.no_of_tyres != \"6\" && doc.no_of_tyres != \"8\" && doc.no_of_tyres != \"10\" && doc.no_of_tyres != \"12\"",
+   "fieldname": "position_13",
+   "fieldtype": "Select",
+   "label": "Position 13",
+   "options": "\nFront Axle - Left\nFront Axle - Right\nRear Axle - Left\nRear Axle - Right\nDrive Axle - Left\nDrive Axle - Right"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres != \"4\" && doc.no_of_tyres != \"6\" && doc.no_of_tyres != \"8\" && doc.no_of_tyres != \"10\" && doc.no_of_tyres != \"12\"",
+   "fieldname": "position_14",
+   "fieldtype": "Select",
+   "label": "Position 14",
+   "options": "\nFront Axle - Left\nFront Axle - Right\nRear Axle - Left\nRear Axle - Right\nDrive Axle - Left\nDrive Axle - Right"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres != \"4\" && doc.no_of_tyres != \"6\" && doc.no_of_tyres != \"8\" && doc.no_of_tyres != \"10\" && doc.no_of_tyres != \"12\" && doc.no_of_tyres != \"14\"",
+   "fieldname": "position_15",
+   "fieldtype": "Select",
+   "label": "Position 15",
+   "options": "\nFront Axle - Left\nFront Axle - Right\nRear Axle - Left\nRear Axle - Right\nDrive Axle - Left\nDrive Axle - Right"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres != \"4\" && doc.no_of_tyres != \"6\" && doc.no_of_tyres != \"8\" && doc.no_of_tyres != \"10\" && doc.no_of_tyres != \"12\" && doc.no_of_tyres != \"14\"",
+   "fieldname": "position_16",
+   "fieldtype": "Select",
+   "label": "Position 16",
+   "options": "\nFront Axle - Left\nFront Axle - Right\nRear Axle - Left\nRear Axle - Right\nDrive Axle - Left\nDrive Axle - Right"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres != \"4\" && doc.no_of_tyres != \"6\" && doc.no_of_tyres != \"8\" && doc.no_of_tyres != \"10\" && doc.no_of_tyres != \"12\"&& doc.no_of_tyres != \"14\" && doc.no_of_tyres != \"16\"",
+   "fieldname": "position_17",
+   "fieldtype": "Select",
+   "label": "Position 17",
+   "options": "\nFront Axle - Left\nFront Axle - Right\nRear Axle - Left\nRear Axle - Right\nDrive Axle - Left\nDrive Axle - Right"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres != \"4\" && doc.no_of_tyres != \"6\" && doc.no_of_tyres != \"8\" && doc.no_of_tyres != \"10\" && doc.no_of_tyres != \"12\" && doc.no_of_tyres != \"14\" && doc.no_of_tyres != \"16\"",
+   "fieldname": "position_18",
+   "fieldtype": "Select",
+   "label": "Position 18",
+   "options": "\nFront Axle - Left\nFront Axle - Right\nRear Axle - Left\nRear Axle - Right\nDrive Axle - Left\nDrive Axle - Right"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres != \"4\" && doc.no_of_tyres != \"6\" && doc.no_of_tyres != \"8\" && doc.no_of_tyres != \"10\" && doc.no_of_tyres != \"12\" && doc.no_of_tyres != \"14\" && doc.no_of_tyres != \"16\" && doc.no_of_tyres != \"18\"",
+   "fieldname": "position_19",
+   "fieldtype": "Select",
+   "label": "Position 19",
+   "options": "\nFront Axle - Left\nFront Axle - Right\nRear Axle - Left\nRear Axle - Right\nDrive Axle - Left\nDrive Axle - Right"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres != \"4\" && doc.no_of_tyres != \"6\" && doc.no_of_tyres != \"8\" && doc.no_of_tyres != \"10\" && doc.no_of_tyres != \"12\" && doc.no_of_tyres != \"14\" && doc.no_of_tyres != \"16\" && doc.no_of_tyres != \"18\"",
+   "fieldname": "position_20",
+   "fieldtype": "Select",
+   "label": "Position 20",
+   "options": "\nFront Axle - Left\nFront Axle - Right\nRear Axle - Left\nRear Axle - Right\nDrive Axle - Left\nDrive Axle - Right"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres != \"4\" && doc.no_of_tyres != \"6\" && doc.no_of_tyres != \"8\" && doc.no_of_tyres != \"10\" && doc.no_of_tyres != \"12\" && doc.no_of_tyres != \"14\" && doc.no_of_tyres != \"16\" && doc.no_of_tyres != \"18\"&& doc.no_of_tyres != \"20\"",
+   "fieldname": "position_21",
+   "fieldtype": "Select",
+   "label": "Position 21",
+   "options": "\nFront Axle - Left\nFront Axle - Right\nRear Axle - Left\nRear Axle - Right\nDrive Axle - Left\nDrive Axle - Right"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres != \"4\" && doc.no_of_tyres != \"6\" && doc.no_of_tyres != \"8\" && doc.no_of_tyres != \"10\" && doc.no_of_tyres != \"12\" && doc.no_of_tyres != \"14\" && doc.no_of_tyres != \"16\" && doc.no_of_tyres != \"18\" && doc.no_of_tyres != \"20\"",
+   "fieldname": "position_22",
+   "fieldtype": "Select",
+   "label": "Position 22",
+   "options": "\nFront Axle - Left\nFront Axle - Right\nRear Axle - Left\nRear Axle - Right\nDrive Axle - Left\nDrive Axle - Right"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres != \"4\" && doc.no_of_tyres != \"6\" && doc.no_of_tyres != \"8\" && doc.no_of_tyres != \"10\" && doc.no_of_tyres != \"12\" && doc.no_of_tyres != \"14\" && doc.no_of_tyres != \"16\" && doc.no_of_tyres != \"18\" && doc.no_of_tyres != \"20\" && doc.no_of_tyres != \"22\"",
+   "fieldname": "position_23",
+   "fieldtype": "Select",
+   "label": "Position 23",
+   "options": "\nFront Axle - Left\nFront Axle - Right\nRear Axle - Left\nRear Axle - Right\nDrive Axle - Left\nDrive Axle - Right"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres != \"4\" && doc.no_of_tyres != \"6\" && doc.no_of_tyres != \"8\" && doc.no_of_tyres != \"10\" && doc.no_of_tyres != \"12\" && doc.no_of_tyres != \"14\" && doc.no_of_tyres != \"16\" && doc.no_of_tyres != \"18\" && doc.no_of_tyres != \"20\" && doc.no_of_tyres != \"22\"",
+   "fieldname": "position_24",
+   "fieldtype": "Select",
+   "label": "Position 24",
+   "options": "\nFront Axle - Left\nFront Axle - Right\nRear Axle - Left\nRear Axle - Right\nDrive Axle - Left\nDrive Axle - Right"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres != \"4\" && doc.no_of_tyres != \"6\" && doc.no_of_tyres != \"8\" && doc.no_of_tyres != \"10\" && doc.no_of_tyres != \"12\" && doc.no_of_tyres != \"14\" && doc.no_of_tyres != \"16\" && doc.no_of_tyres != \"18\" && doc.no_of_tyres != \"20\" && doc.no_of_tyres != \"22\" && doc.no_of_tyres != \"24\"",
+   "fieldname": "position_25",
+   "fieldtype": "Select",
+   "label": "Position 25",
+   "options": "\nFront Axle - Left\nFront Axle - Right\nRear Axle - Left\nRear Axle - Right\nDrive Axle - Left\nDrive Axle - Right"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres != \"4\" && doc.no_of_tyres != \"6\" && doc.no_of_tyres != \"8\" && doc.no_of_tyres != \"10\" && doc.no_of_tyres != \"12\" && doc.no_of_tyres != \"14\" && doc.no_of_tyres != \"16\" && doc.no_of_tyres != \"18\" && doc.no_of_tyres != \"20\" && doc.no_of_tyres != \"22\" && doc.no_of_tyres != \"24\"",
+   "fieldname": "position_26",
+   "fieldtype": "Select",
+   "label": "Position 26",
+   "options": "\nFront Axle - Left\nFront Axle - Right\nRear Axle - Left\nRear Axle - Right\nDrive Axle - Left\nDrive Axle - Right"
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "vehicle",
+   "fieldtype": "Link",
+   "label": "Vehicle",
+   "options": "Vehicle",
+   "unique": 1
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres == \"4\"",
+   "fieldname": "image1",
+   "fieldtype": "HTML",
+   "label": "Image1",
+   "options": "<img height=\"200\" src=\"/files/WhatsApp Image 2023-11-07 at 4.36.20 PM.jpeg\" width=\"100%\">"
+  },
+  {
+   "fieldname": "test",
+   "fieldtype": "Attach Image",
+   "hidden": 1,
+   "label": "Test"
+  },
+  {
+   "fieldname": "section_break_9",
+   "fieldtype": "Section Break"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres == \"6\"",
+   "fieldname": "image_2",
+   "fieldtype": "HTML",
+   "label": "Image 2",
+   "options": "<img height=\"200\" src=\"/files/WhatsApp Image 2023-11-07 at 4.36.28 PM.jpeg\">\n\n"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres == \"8\"",
+   "fieldname": "image_3",
+   "fieldtype": "HTML",
+   "label": "Image 3",
+   "options": "<img height=\"200\" src=\"/files/WhatsApp Image 2023-11-07 at 4.36.36 PM.jpeg\" width=\"100%\">"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres == \"10\"",
+   "fieldname": "image_4",
+   "fieldtype": "HTML",
+   "label": "Image 4",
+   "options": "<img height=\"200\" src=\"/files/WhatsApp Image 2023-11-07 at 4.36.44 PM.jpeg\" width=\"100%\">"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres == \"12\"",
+   "fieldname": "image_5",
+   "fieldtype": "HTML",
+   "label": "Image 5",
+   "options": "<img height=\"200\" src=\"/files/WhatsApp Image 2023-11-07 at 4.36.51 PM.jpeg\" width=\"100%\">"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres == \"14\"",
+   "fieldname": "image_6",
+   "fieldtype": "HTML",
+   "label": "Image 6",
+   "options": "<img height=\"200\" src=\"/files/WhatsApp Image 2023-11-07 at 4.36.59 PM.jpeg\" width=\"100%\">"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres == \"16\"",
+   "fieldname": "image_7",
+   "fieldtype": "HTML",
+   "label": "Image 7",
+   "options": "<img height=\"200\" src=\"/files/WhatsApp Image 2023-11-07 at 4.37.07 PM.jpeg\" width=\"100%\">"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres == \"18\"",
+   "fieldname": "image_8",
+   "fieldtype": "HTML",
+   "label": "Image 8",
+   "options": "<img height=\"200\" src=\"/files/WhatsApp Image 2023-11-07 at 4.37.17 PM.jpeg\" width=\"100%\">"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres == \"20\"",
+   "fieldname": "image_9",
+   "fieldtype": "HTML",
+   "label": "Image 9",
+   "options": "<img height=\"200\" src=\"/files/WhatsApp Image 2023-11-07 at 4.37.24 PM.jpeg\" width=\"100%\">"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres == \"22\"",
+   "fieldname": "image_10",
+   "fieldtype": "HTML",
+   "label": "Image 10",
+   "options": "<img height=\"200\" src=\"/files/WhatsApp Image 2023-11-07 at 4.37.35 PM.jpeg\" width=\"100%\">"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres == \"24\"",
+   "fieldname": "image_11",
+   "fieldtype": "HTML",
+   "label": "Image 11",
+   "options": "<img height=\"200\" src=\"/files/WhatsApp Image 2023-11-07 at 4.37.50 PM.jpeg\" width=\"100%\">"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres == \"26\"",
+   "fieldname": "image_12",
+   "fieldtype": "HTML",
+   "label": "Image 12",
+   "options": "<img height=\"200\" src=\"/files/WhatsApp Image 2023-11-07 at 4.37.59 PM.jpeg\" width=\"100%\">"
+  },
+  {
+   "fieldname": "date_of_purchase",
+   "fieldtype": "Date",
+   "label": "Date of Purchase1"
+  },
+  {
+   "fieldname": "kilometer",
+   "fieldtype": "Small Text",
+   "label": "Kilometer1"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres != \"4\" || doc.no_of_tyres == \"6\"",
+   "fieldname": "date_of_purchase5",
+   "fieldtype": "Date",
+   "label": "Date of Purchase5"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres != \"4\" && doc.no_of_tyres != \"6\" && doc.no_of_tyres != \"8\" ",
+   "fieldname": "date_of_purchase9",
+   "fieldtype": "Date",
+   "label": "Date of Purchase9"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres != \"4\" && doc.no_of_tyres != \"6\" && doc.no_of_tyres != \"8\" && doc.no_of_tyres != \"10\" && doc.no_of_tyres != \"12\"",
+   "fieldname": "date_of_purchase13",
+   "fieldtype": "Date",
+   "label": "Date of Purchase13"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres != \"4\" && doc.no_of_tyres != \"6\" && doc.no_of_tyres != \"8\" && doc.no_of_tyres != \"10\" && doc.no_of_tyres != \"12\"&& doc.no_of_tyres != \"14\" && doc.no_of_tyres != \"16\"",
+   "fieldname": "date_of_purchase17",
+   "fieldtype": "Date",
+   "label": "Date of Purchase17"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres != \"4\" && doc.no_of_tyres != \"6\" && doc.no_of_tyres != \"8\" && doc.no_of_tyres != \"10\" && doc.no_of_tyres != \"12\" && doc.no_of_tyres != \"14\" && doc.no_of_tyres != \"16\" && doc.no_of_tyres != \"18\"&& doc.no_of_tyres != \"20\"",
+   "fieldname": "date_of_purchase21",
+   "fieldtype": "Date",
+   "label": "Date of Purchase21"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres != \"4\" && doc.no_of_tyres != \"6\" && doc.no_of_tyres != \"8\" && doc.no_of_tyres != \"10\" && doc.no_of_tyres != \"12\" && doc.no_of_tyres != \"14\" && doc.no_of_tyres != \"16\" && doc.no_of_tyres != \"18\" && doc.no_of_tyres != \"20\" && doc.no_of_tyres != \"22\" && doc.no_of_tyres != \"24\"",
+   "fieldname": "date_of_purchase25",
+   "fieldtype": "Date",
+   "label": "Date of Purchase25"
+  },
+  {
+   "fieldname": "date_of_purchase2",
+   "fieldtype": "Date",
+   "label": "Date of Purchase2"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres != \"4\" || doc.no_of_tyres == \"6\"",
+   "fieldname": "date_of_purchase6",
+   "fieldtype": "Date",
+   "label": "Date of Purchase6"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres != \"4\" && doc.no_of_tyres != \"6\" && doc.no_of_tyres != \"8\"",
+   "fieldname": "date_of_purchase10",
+   "fieldtype": "Date",
+   "label": "Date of Purchase10"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres != \"4\" && doc.no_of_tyres != \"6\" && doc.no_of_tyres != \"8\" && doc.no_of_tyres != \"10\" && doc.no_of_tyres != \"12\"",
+   "fieldname": "date_of_purchase14",
+   "fieldtype": "Date",
+   "label": "Date of Purchase14"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres != \"4\" && doc.no_of_tyres != \"6\" && doc.no_of_tyres != \"8\" && doc.no_of_tyres != \"10\" && doc.no_of_tyres != \"12\" && doc.no_of_tyres != \"14\" && doc.no_of_tyres != \"16\"",
+   "fieldname": "date_of_purchase18",
+   "fieldtype": "Date",
+   "label": "Date of Purchase18"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres != \"4\" && doc.no_of_tyres != \"6\" && doc.no_of_tyres != \"8\" && doc.no_of_tyres != \"10\" && doc.no_of_tyres != \"12\" && doc.no_of_tyres != \"14\" && doc.no_of_tyres != \"16\" && doc.no_of_tyres != \"18\" && doc.no_of_tyres != \"20\"",
+   "fieldname": "date_of_purchase22",
+   "fieldtype": "Date",
+   "label": "Date of Purchase22"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres != \"4\" && doc.no_of_tyres != \"6\" && doc.no_of_tyres != \"8\" && doc.no_of_tyres != \"10\" && doc.no_of_tyres != \"12\" && doc.no_of_tyres != \"14\" && doc.no_of_tyres != \"16\" && doc.no_of_tyres != \"18\" && doc.no_of_tyres != \"20\" && doc.no_of_tyres != \"22\" && doc.no_of_tyres != \"24\"",
+   "fieldname": "date_of_purchase26",
+   "fieldtype": "Date",
+   "label": "Date of Purchase26"
+  },
+  {
+   "fieldname": "date_of_purchase3",
+   "fieldtype": "Date",
+   "label": "Date of Purchase3"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres != \"4\" && doc.no_of_tyres != \"6\"",
+   "fieldname": "date_of_purchase7",
+   "fieldtype": "Date",
+   "label": "Date of Purchase7"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres != \"4\" && doc.no_of_tyres != \"6\" && doc.no_of_tyres != \"8\" && doc.no_of_tyres != \"10\"",
+   "fieldname": "date_of_purchase11",
+   "fieldtype": "Date",
+   "label": "Date of Purchase11"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres != \"4\" && doc.no_of_tyres != \"6\" && doc.no_of_tyres != \"8\" && doc.no_of_tyres != \"10\" && doc.no_of_tyres != \"12\" && doc.no_of_tyres != \"14\"",
+   "fieldname": "date_of_purchase15",
+   "fieldtype": "Date",
+   "label": "Date of Purchase15"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres != \"4\" && doc.no_of_tyres != \"6\" && doc.no_of_tyres != \"8\" && doc.no_of_tyres != \"10\" && doc.no_of_tyres != \"12\" && doc.no_of_tyres != \"14\" && doc.no_of_tyres != \"16\" && doc.no_of_tyres != \"18\"",
+   "fieldname": "date_of_purchase19",
+   "fieldtype": "Date",
+   "label": "Date of Purchase19"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres != \"4\" && doc.no_of_tyres != \"6\" && doc.no_of_tyres != \"8\" && doc.no_of_tyres != \"10\" && doc.no_of_tyres != \"12\" && doc.no_of_tyres != \"14\" && doc.no_of_tyres != \"16\" && doc.no_of_tyres != \"18\" && doc.no_of_tyres != \"20\" && doc.no_of_tyres != \"22\"",
+   "fieldname": "date_of_purchase23",
+   "fieldtype": "Date",
+   "label": "Date of Purchase23"
+  },
+  {
+   "fieldname": "date_of_purchase4",
+   "fieldtype": "Date",
+   "label": "Date of Purchase4"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres != \"4\" && doc.no_of_tyres != \"6\"",
+   "fieldname": "date_of_purchase8",
+   "fieldtype": "Date",
+   "label": "Date of Purchase8"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres != \"4\" && doc.no_of_tyres != \"6\" && doc.no_of_tyres != \"8\" && doc.no_of_tyres != \"10\"",
+   "fieldname": "date_of_purchase12",
+   "fieldtype": "Date",
+   "label": "Date of Purchase12"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres != \"4\" && doc.no_of_tyres != \"6\" && doc.no_of_tyres != \"8\" && doc.no_of_tyres != \"10\" && doc.no_of_tyres != \"12\" && doc.no_of_tyres != \"14\"",
+   "fieldname": "date_of_purchase16",
+   "fieldtype": "Date",
+   "label": "Date of Purchase16"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres != \"4\" && doc.no_of_tyres != \"6\" && doc.no_of_tyres != \"8\" && doc.no_of_tyres != \"10\" && doc.no_of_tyres != \"12\" && doc.no_of_tyres != \"14\" && doc.no_of_tyres != \"16\" && doc.no_of_tyres != \"18\"",
+   "fieldname": "date_of_purchase20",
+   "fieldtype": "Date",
+   "label": "Date of Purchase20"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres != \"4\" && doc.no_of_tyres != \"6\" && doc.no_of_tyres != \"8\" && doc.no_of_tyres != \"10\" && doc.no_of_tyres != \"12\" && doc.no_of_tyres != \"14\" && doc.no_of_tyres != \"16\" && doc.no_of_tyres != \"18\" && doc.no_of_tyres != \"20\" && doc.no_of_tyres != \"22\"",
+   "fieldname": "date_of_purchase24",
+   "fieldtype": "Date",
+   "label": "Date of Purchase24"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres != \"4\" || doc.no_of_tyres == \"6\"",
+   "fieldname": "kilometer5",
+   "fieldtype": "Small Text",
+   "label": "Kilometer5"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres != \"4\" && doc.no_of_tyres != \"6\" && doc.no_of_tyres != \"8\" ",
+   "fieldname": "kilometer9",
+   "fieldtype": "Small Text",
+   "label": "Kilometer9"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres != \"4\" && doc.no_of_tyres != \"6\" && doc.no_of_tyres != \"8\" && doc.no_of_tyres != \"10\" && doc.no_of_tyres != \"12\"",
+   "fieldname": "kilometer13",
+   "fieldtype": "Small Text",
+   "label": "Kilometer13"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres != \"4\" && doc.no_of_tyres != \"6\" && doc.no_of_tyres != \"8\" && doc.no_of_tyres != \"10\" && doc.no_of_tyres != \"12\"&& doc.no_of_tyres != \"14\" && doc.no_of_tyres != \"16\"",
+   "fieldname": "kilometer17",
+   "fieldtype": "Small Text",
+   "label": "Kilometer17"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres != \"4\" && doc.no_of_tyres != \"6\" && doc.no_of_tyres != \"8\" && doc.no_of_tyres != \"10\" && doc.no_of_tyres != \"12\" && doc.no_of_tyres != \"14\" && doc.no_of_tyres != \"16\" && doc.no_of_tyres != \"18\"&& doc.no_of_tyres != \"20\"",
+   "fieldname": "kilometer21",
+   "fieldtype": "Small Text",
+   "label": "Kilometer21"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres != \"4\" && doc.no_of_tyres != \"6\" && doc.no_of_tyres != \"8\" && doc.no_of_tyres != \"10\" && doc.no_of_tyres != \"12\" && doc.no_of_tyres != \"14\" && doc.no_of_tyres != \"16\" && doc.no_of_tyres != \"18\" && doc.no_of_tyres != \"20\" && doc.no_of_tyres != \"22\" && doc.no_of_tyres != \"24\"",
+   "fieldname": "kilometer25",
+   "fieldtype": "Small Text",
+   "label": "Kilometer25"
+  },
+  {
+   "fieldname": "kilometer2",
+   "fieldtype": "Small Text",
+   "label": "Kilometer2"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres != \"4\" || doc.no_of_tyres == \"6\"",
+   "fieldname": "kilometer6",
+   "fieldtype": "Small Text",
+   "label": "Kilometer6"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres != \"4\" && doc.no_of_tyres != \"6\" && doc.no_of_tyres != \"8\"",
+   "fieldname": "kilometer10",
+   "fieldtype": "Small Text",
+   "label": "Kilometer10"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres != \"4\" && doc.no_of_tyres != \"6\" && doc.no_of_tyres != \"8\" && doc.no_of_tyres != \"10\" && doc.no_of_tyres != \"12\"",
+   "fieldname": "kilometer14",
+   "fieldtype": "Small Text",
+   "label": "Kilometer14"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres != \"4\" && doc.no_of_tyres != \"6\" && doc.no_of_tyres != \"8\" && doc.no_of_tyres != \"10\" && doc.no_of_tyres != \"12\" && doc.no_of_tyres != \"14\" && doc.no_of_tyres != \"16\"",
+   "fieldname": "kilometer18",
+   "fieldtype": "Small Text",
+   "label": "Kilometer18"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres != \"4\" && doc.no_of_tyres != \"6\" && doc.no_of_tyres != \"8\" && doc.no_of_tyres != \"10\" && doc.no_of_tyres != \"12\" && doc.no_of_tyres != \"14\" && doc.no_of_tyres != \"16\" && doc.no_of_tyres != \"18\" && doc.no_of_tyres != \"20\"",
+   "fieldname": "kilometer22",
+   "fieldtype": "Small Text",
+   "label": "Kilometer22"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres != \"4\" && doc.no_of_tyres != \"6\" && doc.no_of_tyres != \"8\" && doc.no_of_tyres != \"10\" && doc.no_of_tyres != \"12\" && doc.no_of_tyres != \"14\" && doc.no_of_tyres != \"16\" && doc.no_of_tyres != \"18\" && doc.no_of_tyres != \"20\" && doc.no_of_tyres != \"22\" && doc.no_of_tyres != \"24\"",
+   "fieldname": "kilometer26",
+   "fieldtype": "Small Text",
+   "label": "Kilometer26"
+  },
+  {
+   "fieldname": "kilometer4",
+   "fieldtype": "Small Text",
+   "label": "Kilometer4"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres != \"4\" && doc.no_of_tyres != \"6\"",
+   "fieldname": "kilometer8",
+   "fieldtype": "Small Text",
+   "label": "Kilometer8"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres != \"4\" && doc.no_of_tyres != \"6\" && doc.no_of_tyres != \"8\" && doc.no_of_tyres != \"10\"",
+   "fieldname": "kilometer12",
+   "fieldtype": "Small Text",
+   "label": "Kilometer12"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres != \"4\" && doc.no_of_tyres != \"6\" && doc.no_of_tyres != \"8\" && doc.no_of_tyres != \"10\" && doc.no_of_tyres != \"12\" && doc.no_of_tyres != \"14\"",
+   "fieldname": "kilometer16",
+   "fieldtype": "Small Text",
+   "label": "Kilometer16"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres != \"4\" && doc.no_of_tyres != \"6\" && doc.no_of_tyres != \"8\" && doc.no_of_tyres != \"10\" && doc.no_of_tyres != \"12\" && doc.no_of_tyres != \"14\" && doc.no_of_tyres != \"16\" && doc.no_of_tyres != \"18\"",
+   "fieldname": "kilometer20",
+   "fieldtype": "Small Text",
+   "label": "Kilometer20"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres != \"4\" && doc.no_of_tyres != \"6\" && doc.no_of_tyres != \"8\" && doc.no_of_tyres != \"10\" && doc.no_of_tyres != \"12\" && doc.no_of_tyres != \"14\" && doc.no_of_tyres != \"16\" && doc.no_of_tyres != \"18\" && doc.no_of_tyres != \"20\" && doc.no_of_tyres != \"22\"",
+   "fieldname": "kilometer24",
+   "fieldtype": "Small Text",
+   "label": "Kilometer24"
+  },
+  {
+   "fieldname": "kilometer3",
+   "fieldtype": "Small Text",
+   "label": "Kilometer3"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres != \"4\" && doc.no_of_tyres != \"6\"",
+   "fieldname": "kilometer7",
+   "fieldtype": "Small Text",
+   "label": "Kilometer7"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres != \"4\" && doc.no_of_tyres != \"6\" && doc.no_of_tyres != \"8\" && doc.no_of_tyres != \"10\"",
+   "fieldname": "kilometer11",
+   "fieldtype": "Small Text",
+   "label": "Kilometer11"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres != \"4\" && doc.no_of_tyres != \"6\" && doc.no_of_tyres != \"8\" && doc.no_of_tyres != \"10\" && doc.no_of_tyres != \"12\" && doc.no_of_tyres != \"14\"",
+   "fieldname": "kilometer15",
+   "fieldtype": "Small Text",
+   "label": "Kilometer15"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres != \"4\" && doc.no_of_tyres != \"6\" && doc.no_of_tyres != \"8\" && doc.no_of_tyres != \"10\" && doc.no_of_tyres != \"12\" && doc.no_of_tyres != \"14\" && doc.no_of_tyres != \"16\" && doc.no_of_tyres != \"18\"",
+   "fieldname": "kilometer19",
+   "fieldtype": "Small Text",
+   "label": "Kilometer19"
+  },
+  {
+   "depends_on": "eval:doc.no_of_tyres != \"4\" && doc.no_of_tyres != \"6\" && doc.no_of_tyres != \"8\" && doc.no_of_tyres != \"10\" && doc.no_of_tyres != \"12\" && doc.no_of_tyres != \"14\" && doc.no_of_tyres != \"16\" && doc.no_of_tyres != \"18\" && doc.no_of_tyres != \"20\" && doc.no_of_tyres != \"22\"",
+   "fieldname": "kilometer23",
+   "fieldtype": "Small Text",
+   "label": "Kilometer23"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2023-12-29 10:56:40.433278",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "Tyre Master",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

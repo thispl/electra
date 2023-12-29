@@ -6,8 +6,9 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "column_break_2",
+  "column_break_1",
   "leave_application",
+  "column_break_2",
   "status",
   "employee_details",
   "emp_no",
@@ -18,6 +19,7 @@
   "resident_id_number",
   "date_of_joining",
   "company",
+  "grade",
   "section_break_5",
   "start",
   "end",
@@ -27,15 +29,14 @@
   "re_join",
   "column_break_10",
   "re_joining_date",
-  "reporting_date",
-  "column_break_22",
   "late_joining_in_days",
+  "column_break_22",
+  "reporting_date",
   "section_break_13",
   "eid_holidays"
  ],
  "fields": [
   {
-   "collapsible": 1,
    "fieldname": "section_break_5",
    "fieldtype": "Section Break",
    "label": "Request Details"
@@ -48,11 +49,12 @@
    "label": "Total Leave in Days"
   },
   {
-   "fetch_from": "leave_application.description",
+   "fetch_from": "leave_application.leave_type",
    "fetch_if_empty": 1,
    "fieldname": "nature_of_leave",
-   "fieldtype": "Data",
-   "label": "Nature of Leave"
+   "fieldtype": "Link",
+   "label": "Nature of Leave",
+   "options": "Leave Type"
   },
   {
    "fieldname": "reporting_date",
@@ -66,23 +68,24 @@
   },
   {
    "fieldname": "late_joining_in_days",
-   "fieldtype": "Read Only",
+   "fieldtype": "Data",
    "label": "Late Joining in Days"
   },
   {
    "fieldname": "section_break_13",
-   "fieldtype": "Section Break"
+   "fieldtype": "Section Break",
+   "hidden": 1
   },
   {
    "fieldname": "eid_holidays",
    "fieldtype": "HTML",
+   "hidden": 1,
    "options": "<b>REMARKS :</b> EXCLUDING 3 DAYS EID HOLIDAYS"
   },
   {
-   "collapsible": 1,
+   "depends_on": "eval:doc.re_join",
    "fieldname": "column_break_10",
-   "fieldtype": "Section Break",
-   "label": "For Office Use"
+   "fieldtype": "Section Break"
   },
   {
    "fieldname": "column_break_3",
@@ -138,7 +141,8 @@
    "fieldname": "status",
    "fieldtype": "Select",
    "label": "Status",
-   "options": "\nRequested\nInitiated\nCompleted\nHold"
+   "options": "\nRequested\nInitiated\nCompleted\nHold",
+   "read_only": 1
   },
   {
    "fetch_from": "leave_application.employee",
@@ -149,7 +153,6 @@
    "options": "Employee"
   },
   {
-   "collapsible": 1,
    "fieldname": "employee_details",
    "fieldtype": "Section Break",
    "label": "Employee Details"
@@ -176,20 +179,34 @@
    "fieldname": "leave_application",
    "fieldtype": "Link",
    "label": "Leave Application",
-   "options": "Leave Application"
+   "options": "Leave Application",
+   "read_only": 1
   },
   {
    "fieldname": "re_joining_date",
    "fieldtype": "Date",
-   "label": "Re Joining Date"
+   "label": "Re Joining Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "emp_no.grade",
+   "fieldname": "grade",
+   "fieldtype": "Data",
+   "label": "Grade",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-11 09:57:52.539455",
+ "modified": "2023-03-01 09:51:34.023156",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Rejoining Form",
+ "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
   {
@@ -207,5 +224,6 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }

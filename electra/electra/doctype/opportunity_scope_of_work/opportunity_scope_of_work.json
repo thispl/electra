@@ -13,6 +13,7 @@
  "fields": [
   {
    "columns": 4,
+   "fetch_from": "msow.desc",
    "fieldname": "msow_desc",
    "fieldtype": "Small Text",
    "in_list_view": 1,
@@ -46,7 +47,7 @@
  ],
  "istable": 1,
  "links": [],
- "modified": "2022-01-02 06:52:57.330639",
+ "modified": "2023-01-11 14:06:55.444661",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Opportunity Scope of Work",
@@ -54,5 +55,6 @@
  "permissions": [],
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }

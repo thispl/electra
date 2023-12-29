@@ -10,6 +10,7 @@
   "barcode",
   "item_code",
   "item_name",
+  "surface_area",
   "col_break1",
   "customer_item_code",
   "section_break_6",
@@ -767,17 +768,24 @@
    "oldfieldname": "page_break",
    "oldfieldtype": "Check",
    "print_hide": 1
+  },
+  {
+   "fieldname": "surface_area",
+   "fieldtype": "Float",
+   "label": "Surface Area"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2022-11-18 12:27:00.470856",
+ "modified": "2023-01-24 09:19:01.700327",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Delivery Note Return Item",
+ "naming_rule": "Random",
  "owner": "Administrator",
  "permissions": [],
  "sort_field": "modified",
- "sort_order": "DESC"
+ "sort_order": "DESC",
+ "states": []
 }

@@ -14,8 +14,12 @@
   "table_5",
   "section_break_8",
   "verified_by",
+  "name1",
+  "designation",
   "column_break_9",
   "department_head_approval",
+  "nam",
+  "department",
   "amended_from"
  ],
  "fields": [
@@ -81,12 +85,37 @@
    "options": "Weekly Vehicle Utilization Report",
    "print_hide": 1,
    "read_only": 1
+  },
+  {
+   "fetch_from": "verified_by.employee_name",
+   "fetch_if_empty": 1,
+   "fieldname": "name1",
+   "fieldtype": "Data",
+   "label": "Name"
+  },
+  {
+   "fetch_from": "verified_by.designation",
+   "fieldname": "designation",
+   "fieldtype": "Data",
+   "label": "Designation"
+  },
+  {
+   "fetch_from": "department_head_approval.employee_name",
+   "fieldname": "nam",
+   "fieldtype": "Data",
+   "label": "Name"
+  },
+  {
+   "fetch_from": "department_head_approval.department",
+   "fieldname": "department",
+   "fieldtype": "Data",
+   "label": "Department"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2022-07-06 14:06:09.213023",
+ "modified": "2023-02-23 13:12:34.171327",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Weekly Vehicle Utilization Report",
@@ -107,5 +136,6 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }

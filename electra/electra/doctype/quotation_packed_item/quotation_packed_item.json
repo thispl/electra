@@ -8,6 +8,7 @@
   "parent_item",
   "item_code",
   "item_name",
+  "surface_area",
   "column_break_4",
   "description",
   "section_break_6",
@@ -188,12 +189,17 @@
    "no_copy": 1,
    "print_hide": 1,
    "read_only": 1
+  },
+  {
+   "fieldname": "surface_area",
+   "fieldtype": "Float",
+   "label": "Surface Area"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2022-10-08 12:06:01.668546",
+ "modified": "2023-01-24 09:26:25.670375",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Quotation Packed Item",
@@ -201,5 +207,6 @@
  "permissions": [],
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }

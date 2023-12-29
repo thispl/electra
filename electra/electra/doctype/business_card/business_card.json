@@ -1,6 +1,6 @@
 {
  "actions": [],
- "autoname": "field:employee_name",
+ "autoname": "ELE/HRA/07/.####",
  "creation": "2021-08-13 15:47:02.335948",
  "doctype": "DocType",
  "editable_grid": 1,
@@ -13,15 +13,15 @@
   "employee_name",
   "desigination",
   "department",
+  "mobile_number",
   "letter_head",
   "column_break_5",
   "resident_id_number",
   "date_of_joining",
   "company__division",
   "company_email",
-  "mobile_number",
   "request_section",
-  "date",
+  "requested_date",
   "column_break_15",
   "no_of_copies",
   "section_break_16",
@@ -34,12 +34,6 @@
   "md"
  ],
  "fields": [
-  {
-   "fieldname": "date",
-   "fieldtype": "Date",
-   "in_list_view": 1,
-   "label": "Requested Date"
-  },
   {
    "fetch_from": "employee_id.employee_name",
    "fieldname": "employee_name",
@@ -177,16 +171,25 @@
   {
    "fieldname": "letter_head",
    "fieldtype": "Link",
+   "hidden": 1,
    "label": "Letter Head",
    "options": "Letter Head"
+  },
+  {
+   "default": "Today",
+   "fieldname": "requested_date",
+   "fieldtype": "Date",
+   "label": "Requested Date",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-10-31 09:31:06.165704",
+ "modified": "2023-05-31 07:56:01.593476",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Business Card",
+ "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
   {
@@ -204,5 +207,6 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }

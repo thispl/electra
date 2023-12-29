@@ -9,9 +9,10 @@ frappe.query_reports["Stock Ledger Report"] = {
 			"label": __("Company"),
 			"fieldtype": "Link",
 			"options": "Company",
-			"default": frappe.defaults.get_user_default("Company"),
+			"default": frappe.defaults.get_user_default("company"),
 			"reqd": 1
 		},
+		
 		{
 			"fieldname":"from_date",
 			"label": __("From Date"),
@@ -59,7 +60,8 @@ frappe.query_reports["Stock Ledger Report"] = {
 			"fieldname":"batch_no",
 			"label": __("Batch No"),
 			"fieldtype": "Link",
-			"options": "Batch"
+			"options": "Batch",
+			"hidden":1
 		},
 		{
 			"fieldname":"brand",
@@ -76,13 +78,15 @@ frappe.query_reports["Stock Ledger Report"] = {
 			"fieldname":"project",
 			"label": __("Project"),
 			"fieldtype": "Link",
-			"options": "Project"
+			"options": "Project",
+			"hidden":1
 		},
 		{
 			"fieldname":"include_uom",
 			"label": __("Include UOM"),
 			"fieldtype": "Link",
-			"options": "UOM"
+			"options": "UOM",
+			"hidden":1
 		}
 	],
 	"formatter": function (value, row, column, data, default_formatter) {

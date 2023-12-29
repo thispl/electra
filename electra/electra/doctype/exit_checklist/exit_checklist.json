@@ -1,5 +1,6 @@
 {
  "actions": [],
+ "autoname": "field:employee_name",
  "creation": "2021-12-17 12:38:48.175852",
  "doctype": "DocType",
  "editable_grid": 1,
@@ -7,18 +8,17 @@
  "field_order": [
   "employee",
   "employee_name",
-  "desigantion",
+  "designation",
   "department",
   "company",
   "sponsor_company",
-  "status",
   "column_break_8",
   "gender",
   "date_of_birth",
   "date_of_joining",
-  "age",
   "grade",
   "resident_id_number",
+  "letter_head",
   "exit_confirmation_section",
   "permit",
   "column_break_17",
@@ -35,73 +35,57 @@
   {
    "fetch_from": "employee.employee_name",
    "fieldname": "employee_name",
-   "fieldtype": "Read Only",
-   "label": "Employee Name"
-  },
-  {
-   "fetch_from": "employee.designation",
-   "fieldname": "desigantion",
-   "fieldtype": "Read Only",
-   "label": "Desigantion"
+   "fieldtype": "Data",
+   "label": "Employee Name",
+   "unique": 1
   },
   {
    "fetch_from": "employee.department",
    "fieldname": "department",
-   "fieldtype": "Read Only",
+   "fieldtype": "Data",
    "label": "Department"
   },
   {
    "fetch_from": "employee.company",
    "fieldname": "company",
-   "fieldtype": "Read Only",
-   "label": "Company"
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company"
   },
   {
    "fetch_from": "employee.sponsor_company",
    "fieldname": "sponsor_company",
-   "fieldtype": "Read Only",
+   "fieldtype": "Data",
    "label": "Sponsor Company"
-  },
-  {
-   "fetch_from": "employee.status",
-   "fieldname": "status",
-   "fieldtype": "Read Only",
-   "label": "Status"
   },
   {
    "fetch_from": "employee.gender",
    "fieldname": "gender",
-   "fieldtype": "Read Only",
+   "fieldtype": "Data",
    "label": "Gender"
   },
   {
    "fetch_from": "employee.date_of_birth",
    "fieldname": "date_of_birth",
-   "fieldtype": "Read Only",
+   "fieldtype": "Date",
    "label": "Date of Birth"
   },
   {
    "fetch_from": "employee.date_of_joining",
    "fieldname": "date_of_joining",
-   "fieldtype": "Read Only",
+   "fieldtype": "Date",
    "label": "Date of Joining"
-  },
-  {
-   "fetch_from": "employee.age",
-   "fieldname": "age",
-   "fieldtype": "Read Only",
-   "label": "Age "
   },
   {
    "fetch_from": "employee.grade",
    "fieldname": "grade",
-   "fieldtype": "Read Only",
+   "fieldtype": "Data",
    "label": "Grade"
   },
   {
    "fetch_from": "employee.resident_id_no",
    "fieldname": "resident_id_number",
-   "fieldtype": "Read Only",
+   "fieldtype": "Data",
    "label": "Resident ID Number"
   },
   {
@@ -126,7 +110,8 @@
   {
    "depends_on": "eval:doc.permit == \"Required\"",
    "fieldname": "attach_18",
-   "fieldtype": "Attach"
+   "fieldtype": "Attach",
+   "label": "Required Document"
   },
   {
    "fieldname": "amended_from",
@@ -136,15 +121,30 @@
    "options": "Exit Checklist",
    "print_hide": 1,
    "read_only": 1
+  },
+  {
+   "fetch_from": "employee.designation",
+   "fieldname": "designation",
+   "fieldtype": "Data",
+   "label": "Designation"
+  },
+  {
+   "fetch_from": "company.default_letter_head",
+   "fieldname": "letter_head",
+   "fieldtype": "Link",
+   "label": "Letter Head",
+   "options": "Letter Head",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2021-12-17 17:53:52.545429",
+ "modified": "2023-05-23 13:58:31.464535",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Exit Checklist",
+ "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [
   {
@@ -162,5 +162,6 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }

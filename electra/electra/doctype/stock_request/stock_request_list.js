@@ -3,7 +3,8 @@ frappe.listview_settings['Stock Request'] = {
         frappe.db.get_list('User Permission', {
             fields: ['for_value'],
             filters: {
-                "allow": 'Company'
+                "allow": 'Company',
+                
             }
         }).then(records => {
             var companies = []

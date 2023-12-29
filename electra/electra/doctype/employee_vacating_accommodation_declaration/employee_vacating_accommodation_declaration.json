@@ -1,6 +1,6 @@
 {
  "actions": [],
- "autoname": "field:employee_name",
+ "autoname": "ELE/HRA/24/.####",
  "creation": "2021-08-14 12:54:41.399169",
  "doctype": "DocType",
  "editable_grid": 1,
@@ -88,7 +88,6 @@
    "options": "\nYes\nNo\nSpecial Approval(Doc Enclosed)"
   },
   {
-   "collapsible": 1,
    "fieldname": "employee_details_section",
    "fieldtype": "Section Break",
    "label": "Employee Details"
@@ -140,7 +139,7 @@
   {
    "fieldname": "html_17",
    "fieldtype": "HTML",
-   "options": "<h4>Self Declaration</h4>\nI hereby understand that I am vacating my company provided accommodation for a shorter duration due to my personal reasons and  I am eligible for a leave out allowance as per the company policy.<br> If I wish to re-possess in the company provided accommodation at the later date , the company shall be verify the availability of bed space  and process my request . If there is no accommodation/bed space available during the time the company shall continue to provide me with leave out allowance as per the company policy"
+   "options": "<h4>Self Declaration</h4>\nI hereby understand that I am vacating my company provided accommodation for a shorter duration due to my personal reasons and  I am eligible for a leave out allowance as per the company policy.If I wish to re-possess in the company provided accommodation at the later date , the company shall be verify the availability of bed space  and process my request . If there is no accommodation/bed space available during the time the company shall continue to provide me with leave out allowance as per the company policy"
   },
   {
    "fetch_from": "emp_id.company",
@@ -162,10 +161,12 @@
   {
    "fieldname": "letter_head",
    "fieldtype": "Link",
+   "hidden": 1,
    "label": "Letter Head",
    "options": "Letter Head"
   },
   {
+   "default": "Today",
    "fieldname": "dec_date",
    "fieldtype": "Date",
    "label": "Date"
@@ -173,10 +174,11 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-10-31 12:35:47.766759",
+ "modified": "2023-05-31 08:12:42.953881",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Employee Vacating Accommodation Declaration",
+ "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
   {
@@ -194,5 +196,6 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }

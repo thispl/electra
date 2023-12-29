@@ -1,0 +1,231 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "LSE-.####",
+ "creation": "2023-11-30 08:30:00.441039",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "employee",
+  "employee_name",
+  "grade",
+  "date_of_joining",
+  "resident_id_number",
+  "resident_id_expiry_date",
+  "column_break_5",
+  "posting_date",
+  "department",
+  "designation",
+  "company",
+  "passport_number",
+  "passport_validation",
+  "section_break_10",
+  "basic",
+  "encashment_days",
+  "column_break_12",
+  "hra",
+  "total",
+  "column_break_14",
+  "allowance",
+  "air_ticket_allowance",
+  "column_break_16",
+  "fixed_total",
+  "total_pay"
+ ],
+ "fields": [
+  {
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Employee",
+   "options": "Employee",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fetch_from": "employee.employee_name",
+   "fieldname": "employee_name",
+   "fieldtype": "Data",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Employee Name",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "employee.grade",
+   "fieldname": "grade",
+   "fieldtype": "Data",
+   "label": "Grade",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "employee.date_of_joining",
+   "fieldname": "date_of_joining",
+   "fieldtype": "Data",
+   "label": "Date of Joining",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "employee.department",
+   "fieldname": "department",
+   "fieldtype": "Data",
+   "label": "Department",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "employee.designation",
+   "fieldname": "designation",
+   "fieldtype": "Data",
+   "label": "Designation",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "employee.company",
+   "fieldname": "company",
+   "fieldtype": "Data",
+   "in_filter": 1,
+   "in_standard_filter": 1,
+   "label": "Company",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_10",
+   "fieldtype": "Section Break",
+   "label": "Salary Details"
+  },
+  {
+   "fetch_from": "employee.basic",
+   "fieldname": "basic",
+   "fieldtype": "Currency",
+   "label": "Basic",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "employee.hra",
+   "fieldname": "hra",
+   "fieldtype": "Currency",
+   "label": "HRA",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "employee._other_allowance",
+   "fieldname": "allowance",
+   "fieldtype": "Currency",
+   "label": "Allowance",
+   "read_only": 1
+  },
+  {
+   "default": "30",
+   "fieldname": "encashment_days",
+   "fieldtype": "Data",
+   "label": "Encashment Days"
+  },
+  {
+   "fieldname": "column_break_12",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_14",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_16",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total",
+   "fieldtype": "Currency",
+   "label": "Total",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "employee.air_ticket_allowance_",
+   "fieldname": "air_ticket_allowance",
+   "fieldtype": "Currency",
+   "label": "Air Ticket Allowance",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_pay",
+   "fieldtype": "Currency",
+   "label": "Total LSE",
+   "read_only": 1
+  },
+  {
+   "fieldname": "fixed_total",
+   "fieldtype": "Currency",
+   "label": "Fixed Total",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "employee.resident_id_no",
+   "fieldname": "resident_id_number",
+   "fieldtype": "Data",
+   "label": "Resident ID Number",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "employee.resident_id_expiry_date",
+   "fieldname": "resident_id_expiry_date",
+   "fieldtype": "Date",
+   "label": "Resident ID Expiry Date",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "employee.passport_number",
+   "fieldname": "passport_number",
+   "fieldtype": "Data",
+   "label": "Passport Number",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "employee.valid_upto",
+   "fieldname": "passport_validation",
+   "fieldtype": "Date",
+   "label": "Passport Validation",
+   "read_only": 1
+  },
+  {
+   "default": "Today",
+   "fieldname": "posting_date",
+   "fieldtype": "Date",
+   "label": "Posting Date",
+   "read_only": 1
+  }
+ ],
+ "hide_toolbar": 1,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2023-11-30 10:08:19.425355",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "Leave Salary Encashment",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

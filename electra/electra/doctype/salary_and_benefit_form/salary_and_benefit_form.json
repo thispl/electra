@@ -1,6 +1,6 @@
 {
  "actions": [],
- "autoname": "field_employee_name",
+ "autoname": "ELE/HRA/17/.####",
  "creation": "2021-08-17 12:48:09.370160",
  "doctype": "DocType",
  "editable_grid": 1,
@@ -23,15 +23,17 @@
   "s_section",
   "column_break_15",
   "basic",
-  "accomodation_allowance",
   "transport_allowance",
+  "hraa",
   "other_allowance",
+  "accomodation_allowance",
   "total",
   "column_break_20",
   "basic_salary",
-  "accomodation_allow",
   "transport_allow",
+  "hra",
   "other_allow",
+  "accomodation_allow",
   "total_new",
   "section_break_26",
   "name_of_appraiser",
@@ -47,7 +49,6 @@
   "section_break_23",
   "data_12",
   "current_salary",
-  "column_break_19",
   "new_job_title",
   "revised_salary",
   "total_salary_increment",
@@ -129,10 +130,6 @@
    "fieldtype": "Table",
    "label": "Current Salary(QR)",
    "options": "Current Salary Table"
-  },
-  {
-   "fieldname": "column_break_19",
-   "fieldtype": "Column Break"
   },
   {
    "fieldname": "revised_salary",
@@ -299,7 +296,7 @@
   {
    "fieldname": "select_23",
    "fieldtype": "Select",
-   "options": "Yes\nNo"
+   "options": "\nYes\nNo"
   },
   {
    "fetch_from": "emp_id.resident_id_no",
@@ -312,7 +309,7 @@
    "fetch_from": "emp_id.basic",
    "fieldname": "basic",
    "fieldtype": "Currency",
-   "label": "Basic"
+   "label": "Basic Salary"
   },
   {
    "default": "0",
@@ -326,6 +323,7 @@
    "fetch_from": "emp_id.transportation",
    "fieldname": "transport_allowance",
    "fieldtype": "Currency",
+   "hidden": 1,
    "label": "Transport Allowance"
   },
   {
@@ -356,19 +354,20 @@
    "default": "0",
    "fieldname": "accomodation_allow",
    "fieldtype": "Currency",
-   "label": "Accomodation Allow"
+   "label": "Accomodation Allowance"
   },
   {
    "default": "0",
    "fieldname": "transport_allow",
    "fieldtype": "Currency",
-   "label": "Transport Allow"
+   "hidden": 1,
+   "label": "Transport Allowance"
   },
   {
    "default": "0",
    "fieldname": "other_allow",
    "fieldtype": "Currency",
-   "label": "Other Allow"
+   "label": "Other Allowance"
   },
   {
    "fieldname": "total_new",
@@ -393,21 +392,36 @@
   {
    "fieldname": "letter_head",
    "fieldtype": "Link",
+   "hidden": 1,
    "label": "Letter Head",
    "options": "Letter Head"
   },
   {
+   "default": "Today",
    "fieldname": "request_date",
    "fieldtype": "Date",
-   "label": "Request Date"
+   "label": "Request Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "hra",
+   "fieldtype": "Currency",
+   "label": "HRA"
+  },
+  {
+   "fetch_from": "emp_id.hra",
+   "fieldname": "hraa",
+   "fieldtype": "Currency",
+   "label": "HRA"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-14 16:10:18.307474",
+ "modified": "2023-12-07 09:40:33.892034",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Salary and Benefit Form",
+ "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
   {
@@ -425,5 +439,6 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }

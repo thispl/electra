@@ -16,13 +16,14 @@ class StockRequest(Document):
             target_warehouse = frappe.db.get_value('Warehouse', {'default_for_stock_transfer':1,'company':self.company}, ["name"])
             icmtc = frappe.new_doc("Stock Transfer")
             icmtc.update({
-                "naming_series":get_series(self.company,"Stock Transfer"),
+                "naming_series":get_series(self.source_company,"Stock Transfer"),
                 "requested_date": self.requested_date,
                 "transferred_date":nowdate(),
                 "raised_by":self.raised_by,
                 "project":self.project,
                 "sales_order":self.sales_order,
                 "target_company": self.company,
+                "to__company":self.company,
                 "source_company":self.source_company,
                 "ic_material_transfer_request":self.name
             })
@@ -41,7 +42,13 @@ class StockRequest(Document):
                 })
             icmtc.flags.ignore_permissions = True
             icmtc.flags.ignore_mandatory = True
+            icmtc.flags.ignore_validate = True
+            icmtc.flags.ignore_links = True
             icmtc.insert()
-            icmtc.save(ignore_permissions=True)
-        
+            # icmtc.save(ignore_permissions=True)
 
+            
+    def on_cancel(self):
+        if frappe.db.exists("Stock Transfer",{"ic_material_transfer_request":self.name}):
+            si = frappe.get_doc('Stock Transfer',{"ic_material_transfer_request":self.name})
+            si.delete(ignore_permissions=True)

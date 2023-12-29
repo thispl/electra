@@ -1,0 +1,456 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "LS.####",
+ "creation": "2023-02-28 08:55:33.562709",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "column_break_2",
+  "eligible_or_not_eligible",
+  "section_break1",
+  "ls",
+  "sd",
+  "section_break_4",
+  "employee_number",
+  "employee_name",
+  "grade",
+  "joining_date",
+  "column_break_8",
+  "department",
+  "designation",
+  "company",
+  "sponser_company",
+  "section_break_8",
+  "type",
+  "section_break_18",
+  "joining_or_last_rejoining_date",
+  "data_27",
+  "date_of_service",
+  "column_break_28",
+  "leave_salary_days",
+  "section_break_24",
+  "basic",
+  "hra",
+  "column_break_16",
+  "allowance",
+  "salary_payable_days",
+  "section_break_21",
+  "ticket_required",
+  "column_break_24",
+  "oneway_or_twoway",
+  "amount",
+  "section_break_25",
+  "salary_and_befefits_section",
+  "salary",
+  "gratuity",
+  "total_earnings",
+  "column_break_23",
+  "leave_salary",
+  "net_pay",
+  "deductions_section",
+  "loan",
+  "advance",
+  "visa",
+  "total_deduction",
+  "column_break_32",
+  "others",
+  "immigration_cost",
+  "air_ticket_expense",
+  "section_break_35",
+  "vacation_start_date",
+  "vacation_end_date",
+  "extend_days",
+  "column_break_48",
+  "vacation_days",
+  "rejoining_date",
+  "extra_days",
+  "section_break_54"
+ ],
+ "fields": [
+  {
+   "default": "Annual Leave",
+   "fieldname": "type",
+   "fieldtype": "Select",
+   "label": "Type",
+   "options": "\nAnnual Leave\nLeave Salary Encashment",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_4",
+   "fieldtype": "Section Break",
+   "label": "Employee Details"
+  },
+  {
+   "fieldname": "employee_number",
+   "fieldtype": "Link",
+   "label": "Employee ",
+   "options": "Employee"
+  },
+  {
+   "fetch_from": "employee_number.employee_name",
+   "fieldname": "employee_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Employee Name",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "employee_number.grade",
+   "fieldname": "grade",
+   "fieldtype": "Data",
+   "label": "Grade",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "employee_number.date_of_joining",
+   "fieldname": "joining_date",
+   "fieldtype": "Date",
+   "label": "Date of Joining",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_8",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "employee_number.department",
+   "fieldname": "department",
+   "fieldtype": "Data",
+   "label": "Department",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "employee_number.designation",
+   "fieldname": "designation",
+   "fieldtype": "Data",
+   "label": "Designation",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_8",
+   "fieldtype": "Section Break"
+  },
+  {
+   "depends_on": "eval:doc.eligible_or_not_eligible != \"Not Eligible\"",
+   "fetch_from": "employee_number.basic",
+   "fetch_if_empty": 1,
+   "fieldname": "basic",
+   "fieldtype": "Currency",
+   "label": "Basic ",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.eligible_or_not_eligible != \"Not Eligible\"",
+   "fetch_from": "employee_number.hra",
+   "fetch_if_empty": 1,
+   "fieldname": "hra",
+   "fieldtype": "Currency",
+   "label": "HRA",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_16",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.eligible_or_not_eligible != \"Not Eligible\"",
+   "fetch_from": "employee_number._other_allowance",
+   "fetch_if_empty": 1,
+   "fieldname": "allowance",
+   "fieldtype": "Currency",
+   "label": "Allowance",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.eligible_or_not_eligible != \"Not Eligible\"",
+   "fieldname": "salary_and_befefits_section",
+   "fieldtype": "Section Break",
+   "label": "Earnings"
+  },
+  {
+   "depends_on": "eval:doc.eligible_or_not_eligible != \"Not Eligible\"",
+   "fieldname": "salary",
+   "fieldtype": "Currency",
+   "label": "Salary",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.eligible_or_not_eligible != \"Not Eligible\"",
+   "fieldname": "column_break_23",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.eligible_or_not_eligible != \"Not Eligible\"",
+   "fieldname": "leave_salary",
+   "fieldtype": "Currency",
+   "label": "Leave Salary",
+   "read_only": 1
+  },
+  {
+   "depends_on": "// eval:doc.type== \"Final Exit\"",
+   "fieldname": "gratuity",
+   "fieldtype": "Currency",
+   "label": "Gratuity"
+  },
+  {
+   "depends_on": "eval:doc.eligible_or_not_eligible != \"Not Eligible\"",
+   "fieldname": "deductions_section",
+   "fieldtype": "Section Break",
+   "hidden": 1,
+   "label": "Deductions"
+  },
+  {
+   "fieldname": "air_ticket_expense",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Air Ticket Expense"
+  },
+  {
+   "fieldname": "column_break_32",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "others",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Others"
+  },
+  {
+   "fieldname": "section_break_35",
+   "fieldtype": "Section Break"
+  },
+  {
+   "depends_on": "eval:doc.eligible_or_not_eligible != \"Not Eligible\"",
+   "fieldname": "net_pay",
+   "fieldtype": "Currency",
+   "label": "Net Pay",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "employee_number.company",
+   "fieldname": "company",
+   "fieldtype": "Data",
+   "label": "Company",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "employee_number.sponsor_company",
+   "fieldname": "sponser_company",
+   "fieldtype": "Data",
+   "label": "Sponser Company",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.eligible_or_not_eligible != \"Not Eligible\"",
+   "fieldname": "salary_payable_days",
+   "fieldtype": "Int",
+   "label": "Salary Payable Days",
+   "mandatory_depends_on": "eval:doc.type == \"Annual Leave\" && doc.type == \"Final Exit\""
+  },
+  {
+   "fieldname": "section_break_21",
+   "fieldtype": "Section Break"
+  },
+  {
+   "depends_on": "eval:doc.eligible_or_not_eligible != \"Not Eligible\" && doc.type != \"Leave Salary Encashment\"",
+   "fieldname": "ticket_required",
+   "fieldtype": "Select",
+   "label": "Ticket Required",
+   "mandatory_depends_on": "eval:doc.type == \"Annual Leave\" && doc.type == \"Final Exit\"",
+   "options": "\nCompany Provided\nSelf Provided"
+  },
+  {
+   "depends_on": "ticket_required ",
+   "fieldname": "amount",
+   "fieldtype": "Currency",
+   "label": "Ticket Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_24",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_25",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "data_27",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "date_of_service",
+   "fieldtype": "Date",
+   "label": "Service End Date"
+  },
+  {
+   "fieldname": "joining_or_last_rejoining_date",
+   "fieldtype": "Date",
+   "label": "Service Start Date"
+  },
+  {
+   "fieldname": "leave_salary_days",
+   "fieldtype": "Data",
+   "label": "Service Days"
+  },
+  {
+   "depends_on": "eval:doc.eligible_or_not_eligible != \"Not Eligible\"",
+   "fieldname": "total_earnings",
+   "fieldtype": "Currency",
+   "label": "Total Earnings",
+   "read_only": 1
+  },
+  {
+   "fieldname": "loan",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Loan"
+  },
+  {
+   "fieldname": "advance",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Advance"
+  },
+  {
+   "fieldname": "visa",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Visa"
+  },
+  {
+   "fieldname": "immigration_cost",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Immigration Cost"
+  },
+  {
+   "fieldname": "total_deduction",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Total Deduction"
+  },
+  {
+   "depends_on": "eval:doc.type== \"Annual Leave\"",
+   "fieldname": "vacation_start_date",
+   "fieldtype": "Date",
+   "label": "Vacation Start Date"
+  },
+  {
+   "depends_on": "eval:doc.type== \"Annual Leave\"",
+   "fieldname": "vacation_days",
+   "fieldtype": "Int",
+   "label": "Vacation Days"
+  },
+  {
+   "default": "0",
+   "depends_on": "eval:doc.type== \"Annual Leave\"",
+   "fieldname": "extend_days",
+   "fieldtype": "Check",
+   "hidden": 1,
+   "label": "Extend Days"
+  },
+  {
+   "depends_on": "eval:doc.type== \"Annual Leave\"",
+   "fieldname": "column_break_48",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.type== \"Annual Leave\"",
+   "fieldname": "vacation_end_date",
+   "fieldtype": "Date",
+   "label": "Vacation End Date"
+  },
+  {
+   "depends_on": "eval:doc.type== \"Annual Leave\" || \"leave Salary Encashment\"",
+   "fieldname": "rejoining_date",
+   "fieldtype": "Date",
+   "label": "Rejoining Date"
+  },
+  {
+   "depends_on": "eval:doc.extend_days",
+   "fieldname": "extra_days",
+   "fieldtype": "Int",
+   "hidden": 1,
+   "label": "Extra Days"
+  },
+  {
+   "fieldname": "section_break_54",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "ls",
+   "fieldtype": "HTML",
+   "label": "LS"
+  },
+  {
+   "fieldname": "section_break1",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_28",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.ticket_required == \"Company Provided\"",
+   "fieldname": "oneway_or_twoway",
+   "fieldtype": "Select",
+   "label": "Oneway or Twoway",
+   "options": "\nOneway\nTwo Way"
+  },
+  {
+   "fieldname": "sd",
+   "fieldtype": "HTML",
+   "label": "SD"
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "date_of_service",
+   "fieldname": "eligible_or_not_eligible",
+   "fieldtype": "Select",
+   "label": "Eligible or Not Eligible",
+   "options": "Eligible\nNot Eligible",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_18",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "section_break_24",
+   "fieldtype": "Section Break"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2023-12-01 08:33:07.952807",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "Leave Salary",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

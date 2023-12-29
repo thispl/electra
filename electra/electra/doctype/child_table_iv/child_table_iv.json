@@ -12,10 +12,9 @@
  "fields": [
   {
    "fieldname": "assessment_criteria",
-   "fieldtype": "Select",
+   "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Assessment Criteria",
-   "options": "\nEducational Qualification\nTechnical Knowledge\nExperience to perform the job\nPersonality & Leadership Qualities\nCommunication Skills"
+   "label": "Assessment Criteria"
   },
   {
    "fieldname": "interviewer",
@@ -33,7 +32,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2021-08-27 15:23:38.395322",
+ "modified": "2023-06-16 08:27:53.907683",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Child Table Iv",
@@ -41,5 +40,6 @@
  "permissions": [],
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }

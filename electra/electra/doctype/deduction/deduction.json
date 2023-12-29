@@ -1,0 +1,47 @@
+{
+ "actions": [],
+ "autoname": "autoincrement",
+ "creation": "2023-12-13 08:50:02.123292",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "deduction_type",
+  "deduction_amount",
+  "deduction_date"
+ ],
+ "fields": [
+  {
+   "fieldname": "deduction_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Deduction Type",
+   "options": "\nDetention Charges\nBrokerage\nOthers\nMaterial Loss\nMaterial Damage\nSweet Water"
+  },
+  {
+   "fieldname": "deduction_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Deduction Amount"
+  },
+  {
+   "fieldname": "deduction_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Deduction Date"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2023-12-13 09:22:18.638063",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "Deduction",
+ "naming_rule": "Autoincrement",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

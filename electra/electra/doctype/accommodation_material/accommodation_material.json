@@ -9,6 +9,7 @@
   "column_break_2",
   "status",
   "employee_details_section",
+  "requested_date",
   "emp_id",
   "emp_name",
   "job__title",
@@ -37,7 +38,8 @@
   "authorisation_of_dept_div_head",
   "column_break_27",
   "hr",
-  "managing_director"
+  "managing_director",
+  "amended_from"
  ],
  "fields": [
   {
@@ -220,16 +222,35 @@
   {
    "fieldname": "letter_head",
    "fieldtype": "Link",
+   "hidden": 1,
    "label": "Letter Head",
    "options": "Letter Head"
+  },
+  {
+   "default": "Today",
+   "fieldname": "requested_date",
+   "fieldtype": "Date",
+   "label": "Requested Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Accommodation Material",
+   "print_hide": 1,
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
+ "is_submittable": 1,
  "links": [],
- "modified": "2022-11-14 17:26:47.344387",
+ "modified": "2023-04-18 09:39:39.445874",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Accommodation Material",
+ "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [
   {
@@ -247,5 +268,6 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }

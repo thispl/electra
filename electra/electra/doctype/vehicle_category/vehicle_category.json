@@ -1,5 +1,6 @@
 {
  "actions": [],
+ "allow_import": 1,
  "autoname": "field:vehicle_category",
  "creation": "2022-07-06 14:24:37.184976",
  "doctype": "DocType",
@@ -18,10 +19,11 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-07-06 14:25:31.228687",
+ "modified": "2023-05-15 16:22:10.036591",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Vehicle Category",
+ "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [
   {
@@ -39,5 +41,6 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }

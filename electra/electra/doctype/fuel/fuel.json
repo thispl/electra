@@ -1,0 +1,53 @@
+{
+ "actions": [],
+ "autoname": "autoincrement",
+ "creation": "2023-12-14 07:05:44.112331",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "fuel_quantity",
+  "party_name",
+  "fuel_rate",
+  "amount"
+ ],
+ "fields": [
+  {
+   "fieldname": "fuel_quantity",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Fuel Quantity"
+  },
+  {
+   "fieldname": "party_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Party Name"
+  },
+  {
+   "fieldname": "fuel_rate",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Fuel Rate"
+  },
+  {
+   "fieldname": "amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Amount"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2023-12-14 07:06:45.845088",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "Fuel",
+ "naming_rule": "Autoincrement",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

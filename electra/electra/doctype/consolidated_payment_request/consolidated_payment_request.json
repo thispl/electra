@@ -1,0 +1,261 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "naming_series:",
+ "creation": "2023-01-10 13:51:59.554309",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "payment_request_type",
+  "transaction_date",
+  "column_break_3",
+  "naming_series",
+  "mode_of_payment",
+  "party_details_section",
+  "supplier",
+  "supplier_currency",
+  "column_break_8",
+  "supplier_group",
+  "exchange_rate",
+  "transaction_details_section",
+  "grand_total",
+  "amount_cc",
+  "chequereference_no",
+  "is_a_subscription",
+  "bank",
+  "column_break_12",
+  "currency",
+  "currency_exchange",
+  "chequereference_date",
+  "bank_account",
+  "section_break_14",
+  "purchase_invoice_list",
+  "payment_amount",
+  "payment_amount_cc",
+  "payment_summary_section",
+  "payment_summary",
+  "remarks_section",
+  "remarks",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "payment_request_type",
+   "fieldtype": "Select",
+   "label": "Payment Request Type",
+   "options": "Outward\nInward"
+  },
+  {
+   "default": "Today",
+   "fieldname": "transaction_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Transaction Date"
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "ACC-CPRQ-.YYYY.-"
+  },
+  {
+   "fieldname": "mode_of_payment",
+   "fieldtype": "Link",
+   "label": "Mode of Payment",
+   "options": "Mode of Payment"
+  },
+  {
+   "fieldname": "party_details_section",
+   "fieldtype": "Section Break",
+   "label": "Party Details"
+  },
+  {
+   "fieldname": "transaction_details_section",
+   "fieldtype": "Section Break",
+   "label": "Transaction Details"
+  },
+  {
+   "fieldname": "grand_total",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Amount",
+   "options": "currency"
+  },
+  {
+   "fieldname": "currency",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Transaction Currency",
+   "options": "Currency"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_a_subscription",
+   "fieldtype": "Check",
+   "label": "Is a Subscription"
+  },
+  {
+   "fieldname": "column_break_12",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_14",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "purchase_invoice_list",
+   "fieldtype": "Table",
+   "label": "Purchase Invoice List",
+   "options": "Purchase Invoice List",
+   "reqd": 1
+  },
+  {
+   "fieldname": "payment_summary_section",
+   "fieldtype": "Section Break",
+   "label": "Payment Summary"
+  },
+  {
+   "fieldname": "payment_summary",
+   "fieldtype": "HTML"
+  },
+  {
+   "fieldname": "supplier",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Supplier",
+   "options": "Supplier"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Consolidated Payment Request",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_8",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "supplier.supplier_group",
+   "fieldname": "supplier_group",
+   "fieldtype": "Read Only",
+   "label": "Supplier Group"
+  },
+  {
+   "fetch_from": "supplier.default_currency",
+   "fieldname": "supplier_currency",
+   "fieldtype": "Read Only",
+   "label": "Supplier Currency"
+  },
+  {
+   "fieldname": "payment_amount",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Payment Amount",
+   "options": "currency"
+  },
+  {
+   "description": "Rate at which customer's currency is converted to company's base currency",
+   "fieldname": "exchange_rate",
+   "fieldtype": "Float",
+   "label": "Exchange Rate",
+   "precision": "9",
+   "read_only": 1
+  },
+  {
+   "fieldname": "payment_amount_cc",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Payment Amount (Company Currency)"
+  },
+  {
+   "description": "Rate at which customer's currency is converted to company's base currency",
+   "fieldname": "currency_exchange",
+   "fieldtype": "Float",
+   "label": "Exchange Rate",
+   "read_only": 1
+  },
+  {
+   "fieldname": "amount_cc",
+   "fieldtype": "Currency",
+   "label": "Amount (Company Currency)",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.mode_of_payment == \"Cheque\"",
+   "fieldname": "chequereference_no",
+   "fieldtype": "Data",
+   "label": "Cheque/Reference No"
+  },
+  {
+   "depends_on": "eval:doc.mode_of_payment == \"Cheque\"",
+   "fieldname": "chequereference_date",
+   "fieldtype": "Date",
+   "label": "Cheque/Reference Date"
+  },
+  {
+   "fieldname": "remarks_section",
+   "fieldtype": "Section Break",
+   "label": "Remarks"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  },
+  {
+   "depends_on": "eval:doc.mode_of_payment == \"Bank Draft\"",
+   "fieldname": "bank",
+   "fieldtype": "Link",
+   "label": "Bank",
+   "options": "Bank"
+  },
+  {
+   "depends_on": "bank",
+   "fieldname": "bank_account",
+   "fieldtype": "Link",
+   "label": "Bank Account",
+   "options": "Bank Account"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [
+  {
+   "link_doctype": "Payment Entry",
+   "link_fieldname": "consolidated_payment_request"
+  }
+ ],
+ "modified": "2023-10-24 11:35:44.977178",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "Consolidated Payment Request",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

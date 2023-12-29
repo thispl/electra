@@ -31,38 +31,38 @@
   "f_manpower",
   "g_tools__equipment__transport",
   "h_others",
-  "section_break_23",
-  "bidding_unit_rate",
+  "budgeted_profit_section",
+  "discount_tab",
+  "lpo_amount",
   "bidding_amount_difference",
-  "adjustable_amount",
-  "column_break_24",
+  "column_break_28",
   "bidding_amount",
   "column_break_26",
+  "discount",
+  "revision",
+  "column_break_24",
   "lpo_unit_rate",
-  "column_break_28",
-  "lpo_amount",
+  "section_break_35",
+  "total_cost",
+  "total_overheads",
+  "column_break_41",
+  "gross_profit_percent",
+  "gross_profit_amount",
+  "column_break_51",
+  "net_profit_percent",
+  "net_profit_amount",
   "total_costs_section",
-  "overhead_amount",
-  "overhead_percent",
-  "column_break_33",
   "business_promotion_amount",
   "business_promotion_percent",
+  "column_break_33",
+  "overhead_amount",
+  "overhead_percent",
   "column_break_29",
   "contigency_amount",
   "contigency_percent",
   "column_break_32",
   "engineering_overhead_amount",
   "engineering_overhead_percent",
-  "section_break_35",
-  "total_cost",
-  "total_overheads",
-  "column_break_41",
-  "net_profit_percent",
-  "net_profit_amount",
-  "column_break_51",
-  "gross_profit_percent",
-  "gross_profit_amount",
-  "budgeted_profit_section",
   "section_break_4",
   "design",
   "design_html",
@@ -127,6 +127,16 @@
   "others_amount",
   "others_amount_with_overheads",
   "others_profit",
+  "tab_break_90",
+  "finished_goods",
+  "finished_goods_html",
+  "finished_goods_cost",
+  "finished_goods_amount",
+  "finished_goods_amount_with_overheads",
+  "finished_goods_profit",
+  "section_break_23",
+  "bidding_unit_rate",
+  "adjustable_amount",
   "amended_from"
  ],
  "fields": [
@@ -257,10 +267,11 @@
   },
   {
    "fieldname": "section_break_4",
-   "fieldtype": "Section Break",
-   "label": "DESIGN"
+   "fieldtype": "Tab Break",
+   "label": "Design"
   },
   {
+   "allow_bulk_edit": 1,
    "fieldname": "design",
    "fieldtype": "Table",
    "options": "PB Items"
@@ -273,18 +284,21 @@
   {
    "fieldname": "design_cost",
    "fieldtype": "Float",
+   "hidden": 1,
    "label": "Design Cost",
    "read_only": 1
   },
   {
    "fieldname": "design_amount",
    "fieldtype": "Currency",
+   "hidden": 1,
    "label": "Design Amount",
    "read_only": 1
   },
   {
    "fieldname": "design_amount_with_overheads",
    "fieldtype": "Currency",
+   "hidden": 1,
    "label": "Design Amount with Overheads",
    "read_only": 1
   },
@@ -296,10 +310,11 @@
   },
   {
    "fieldname": "materials_section",
-   "fieldtype": "Section Break",
-   "label": "MATERIALS"
+   "fieldtype": "Tab Break",
+   "label": "Supply Materials"
   },
   {
+   "allow_bulk_edit": 1,
    "depends_on": "eval:doc.company == 'MEP DIVISION - ELECTRA'",
    "fieldname": "mep_materials",
    "fieldtype": "Table",
@@ -354,6 +369,7 @@
    "label": "Profit Amount"
   },
   {
+   "allow_bulk_edit": 1,
    "depends_on": "eval:doc.company != 'MEP DIVISION - ELECTRA'",
    "fieldname": "materials",
    "fieldtype": "Table",
@@ -368,18 +384,21 @@
    "default": "0",
    "fieldname": "materials_cost",
    "fieldtype": "Float",
+   "hidden": 1,
    "label": "Materials Cost"
   },
   {
    "default": "0",
    "fieldname": "materials_amount",
    "fieldtype": "Currency",
+   "hidden": 1,
    "label": "Materials Amount",
    "read_only": 1
   },
   {
    "fieldname": "materials_amount_with_overheads",
    "fieldtype": "Currency",
+   "hidden": 1,
    "label": "Materials Amount with overheads",
    "read_only": 1
   },
@@ -387,15 +406,17 @@
    "default": "0",
    "fieldname": "materials_profit",
    "fieldtype": "Currency",
+   "hidden": 1,
    "label": "Materials Profit",
    "read_only": 1
   },
   {
    "fieldname": "finishing_work_section",
-   "fieldtype": "Section Break",
-   "label": "FINISHING WORK"
+   "fieldtype": "Tab Break",
+   "label": "Finishing Work"
   },
   {
+   "allow_bulk_edit": 1,
    "fieldname": "finishing_work",
    "fieldtype": "Table",
    "options": "PB Items"
@@ -409,33 +430,38 @@
    "default": "0",
    "fieldname": "finishing_work_cost",
    "fieldtype": "Float",
+   "hidden": 1,
    "label": "Finishing Work Cost"
   },
   {
    "default": "0",
    "fieldname": "finishing_work_amount",
    "fieldtype": "Currency",
+   "hidden": 1,
    "label": "Finishing Work Amount",
    "read_only": 1
   },
   {
    "fieldname": "finishing_work_amount_with_overheads",
    "fieldtype": "Currency",
+   "hidden": 1,
    "label": "Finishing Work Amount with Overheads"
   },
   {
    "default": "0",
    "fieldname": "finishing_work_profit",
    "fieldtype": "Currency",
+   "hidden": 1,
    "label": "Finishing Work Profit",
    "read_only": 1
   },
   {
    "fieldname": "accessories_section",
-   "fieldtype": "Section Break",
-   "label": "ACCESSORIES"
+   "fieldtype": "Tab Break",
+   "label": "Accessories"
   },
   {
+   "allow_bulk_edit": 1,
    "fieldname": "bolts_accessories",
    "fieldtype": "Table",
    "options": "PB Items"
@@ -449,6 +475,7 @@
    "default": "0",
    "fieldname": "accessories_cost",
    "fieldtype": "Float",
+   "hidden": 1,
    "label": "Accessories Cost",
    "read_only": 1
   },
@@ -456,11 +483,13 @@
    "default": "0",
    "fieldname": "accessories_amount",
    "fieldtype": "Currency",
+   "hidden": 1,
    "label": "Accessories Amount"
   },
   {
    "fieldname": "accessories_amount_with_overheads",
    "fieldtype": "Currency",
+   "hidden": 1,
    "label": "Accessories Amount with Overheads",
    "read_only": 1
   },
@@ -468,15 +497,17 @@
    "default": "0",
    "fieldname": "accessories_profit",
    "fieldtype": "Currency",
+   "hidden": 1,
    "label": "Accessories Profit",
    "read_only": 1
   },
   {
    "fieldname": "installation_section",
-   "fieldtype": "Section Break",
-   "label": "INSTALLATION"
+   "fieldtype": "Tab Break",
+   "label": "Installation"
   },
   {
+   "allow_bulk_edit": 1,
    "fieldname": "installation",
    "fieldtype": "Table",
    "options": "PB Items"
@@ -490,6 +521,7 @@
    "default": "0",
    "fieldname": "installation_cost",
    "fieldtype": "Float",
+   "hidden": 1,
    "label": "Installation Cost",
    "read_only": 1
   },
@@ -497,11 +529,13 @@
    "default": "0",
    "fieldname": "installation_amount",
    "fieldtype": "Currency",
+   "hidden": 1,
    "label": "Installation Amount"
   },
   {
    "fieldname": "installation_amount_with_overheads",
    "fieldtype": "Currency",
+   "hidden": 1,
    "label": "Installation Amount with Overheads",
    "read_only": 1
   },
@@ -514,10 +548,11 @@
   },
   {
    "fieldname": "manpower_section",
-   "fieldtype": "Section Break",
-   "label": "MANPOWER"
+   "fieldtype": "Tab Break",
+   "label": "Manpower"
   },
   {
+   "allow_bulk_edit": 1,
    "fieldname": "manpower",
    "fieldtype": "Table",
    "options": "PB Items Manpower"
@@ -531,6 +566,7 @@
    "default": "0",
    "fieldname": "manpower_cost",
    "fieldtype": "Float",
+   "hidden": 1,
    "label": "Manpower Cost",
    "read_only": 1
   },
@@ -538,12 +574,14 @@
    "default": "0",
    "fieldname": "manpower_amount",
    "fieldtype": "Currency",
+   "hidden": 1,
    "label": "Manpower Amount",
    "read_only": 1
   },
   {
    "fieldname": "manpower_amount_with_overheads",
    "fieldtype": "Currency",
+   "hidden": 1,
    "label": "Manpower Amount with Overheads",
    "read_only": 1
   },
@@ -551,15 +589,17 @@
    "default": "0",
    "fieldname": "manpower_profit",
    "fieldtype": "Currency",
+   "hidden": 1,
    "label": "Manpower Profit",
    "read_only": 1
   },
   {
    "fieldname": "heavy_equipments_section",
-   "fieldtype": "Section Break",
-   "label": " TOOLS / EQUIPMENT / TRANSPORT / OTHERS"
+   "fieldtype": "Tab Break",
+   "label": "Heavy Equipments"
   },
   {
+   "allow_bulk_edit": 1,
    "fieldname": "heavy_equipments",
    "fieldtype": "Table",
    "options": "PB Items"
@@ -573,6 +613,7 @@
    "default": "0",
    "fieldname": "heavy_equipments_cost",
    "fieldtype": "Float",
+   "hidden": 1,
    "label": "Heavy Equipments Cost",
    "read_only": 1
   },
@@ -580,11 +621,13 @@
    "default": "0",
    "fieldname": "heavy_equipments_amount",
    "fieldtype": "Currency",
+   "hidden": 1,
    "label": "Heavy Equipments Amount"
   },
   {
    "fieldname": "heavy_equipments_amount_with_overheads",
    "fieldtype": "Currency",
+   "hidden": 1,
    "label": "Heavy Equipments Amount with Overheads",
    "read_only": 1
   },
@@ -592,15 +635,17 @@
    "default": "0",
    "fieldname": "heavy_equipments_profit",
    "fieldtype": "Currency",
+   "hidden": 1,
    "label": "Heavy Equipments Profit",
    "read_only": 1
   },
   {
    "fieldname": "others_section",
-   "fieldtype": "Section Break",
-   "label": "SUBCONTRACT"
+   "fieldtype": "Tab Break",
+   "label": "Subcontract"
   },
   {
+   "allow_bulk_edit": 1,
    "fieldname": "others",
    "fieldtype": "Table",
    "options": "PB Items"
@@ -614,6 +659,7 @@
    "default": "0",
    "fieldname": "others_cost",
    "fieldtype": "Float",
+   "hidden": 1,
    "label": "Subcontract Cost",
    "read_only": 1
   },
@@ -621,22 +667,26 @@
    "default": "0",
    "fieldname": "others_amount",
    "fieldtype": "Currency",
+   "hidden": 1,
    "label": "Subcontract Amount",
    "read_only": 1
   },
   {
    "fieldname": "others_amount_with_overheads",
    "fieldtype": "Currency",
+   "hidden": 1,
    "label": "Subcontract Amount with Overheads",
    "read_only": 1
   },
   {
    "fieldname": "others_profit",
    "fieldtype": "Currency",
+   "hidden": 1,
    "label": "Subcontract Profit",
    "read_only": 1
   },
   {
+   "depends_on": "eval:doc.company !=\"MEP DIVISION - ELECTRA\"",
    "fieldname": "contigency_percent",
    "fieldtype": "Percent",
    "label": "Contigency Percent",
@@ -649,12 +699,14 @@
    "options": "Project Budget"
   },
   {
+   "depends_on": "eval:doc.company !=\"MEP DIVISION - ELECTRA\"",
    "fieldname": "overhead_percent",
    "fieldtype": "Percent",
    "label": "Overhead Percent",
    "read_only": 1
   },
   {
+   "depends_on": "eval:doc.company !=\"MEP DIVISION - ELECTRA\"",
    "fieldname": "overhead_amount",
    "fieldtype": "Currency",
    "label": "Overhead Amount"
@@ -679,6 +731,7 @@
    "fieldtype": "Column Break"
   },
   {
+   "depends_on": "eval:doc.company !=\"MEP DIVISION - ELECTRA\"",
    "fieldname": "contigency_amount",
    "fieldtype": "Currency",
    "label": "Contigency Amount"
@@ -688,12 +741,14 @@
    "fieldtype": "Column Break"
   },
   {
+   "depends_on": "eval:doc.company !=\"MEP DIVISION - ELECTRA\"",
    "fieldname": "engineering_overhead_percent",
    "fieldtype": "Percent",
    "label": "Engineering Overhead Percent",
    "read_only": 1
   },
   {
+   "depends_on": "eval:doc.company !=\"MEP DIVISION - ELECTRA\"",
    "fieldname": "engineering_overhead_amount",
    "fieldtype": "Currency",
    "label": "Engineering Overhead Amount"
@@ -732,12 +787,14 @@
   {
    "fieldname": "gross_profit_percent",
    "fieldtype": "Percent",
-   "label": "Gross Profit Percent"
+   "label": "Gross Profit Percent",
+   "read_only": 1
   },
   {
    "fieldname": "gross_profit_amount",
    "fieldtype": "Currency",
-   "label": "Gross Profit Amount"
+   "label": "Gross Profit Amount",
+   "read_only": 1
   },
   {
    "fieldname": "total_costs_section",
@@ -760,7 +817,7 @@
   {
    "fieldname": "lpo_amount",
    "fieldtype": "Currency",
-   "label": "LPO Amount"
+   "label": "Sales Order (LPO) Amount"
   },
   {
    "fieldname": "column_break_33",
@@ -768,7 +825,8 @@
   },
   {
    "fieldname": "section_break_23",
-   "fieldtype": "Section Break"
+   "fieldtype": "Tab Break",
+   "label": "Total Budget"
   },
   {
    "fieldname": "sales_order",
@@ -779,6 +837,7 @@
   {
    "fieldname": "bidding_unit_rate",
    "fieldtype": "Currency",
+   "hidden": 1,
    "label": "Bidding Unit Rate"
   },
   {
@@ -815,21 +874,86 @@
    "default": "0",
    "fieldname": "amount_disbursed",
    "fieldtype": "Check",
+   "hidden": 1,
    "label": "Amount Disbursed"
   },
   {
    "fieldname": "budgeted_profit_section",
    "fieldtype": "Section Break",
    "label": "Budgeted Profit"
+  },
+  {
+   "depends_on": "eval:doc.company == \"ENGINEERING DIVISION - ELECTRA\"",
+   "fieldname": "tab_break_90",
+   "fieldtype": "Tab Break",
+   "label": "Finished Goods"
+  },
+  {
+   "fieldname": "finished_goods_html",
+   "fieldtype": "HTML",
+   "label": "Finished Goods HTML"
+  },
+  {
+   "fieldname": "finished_goods_cost",
+   "fieldtype": "Float",
+   "hidden": 1,
+   "label": "Finished Goods Cost",
+   "read_only": 1
+  },
+  {
+   "allow_bulk_edit": 1,
+   "fieldname": "finished_goods",
+   "fieldtype": "Table",
+   "options": "PB FG Items"
+  },
+  {
+   "fieldname": "finished_goods_amount",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Finished Goods Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "finished_goods_amount_with_overheads",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Finished Goods Amount with Overheads",
+   "read_only": 1
+  },
+  {
+   "fieldname": "finished_goods_profit",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Finished Goods Profit",
+   "read_only": 1
+  },
+  {
+   "fieldname": "discount_tab",
+   "fieldtype": "Tab Break",
+   "label": "Total Budget"
+  },
+  {
+   "fieldname": "discount",
+   "fieldtype": "Currency",
+   "label": "Discount"
+  },
+  {
+   "depends_on": "revision",
+   "fieldname": "revision",
+   "fieldtype": "Select",
+   "label": "Revision",
+   "options": "\nPB - Revision\nSO - Revision",
+   "read_only": 1
   }
  ],
  "hide_toolbar": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-09-27 18:16:45.463915",
+ "modified": "2023-11-15 07:27:46.942899",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "PB SOW",
+ "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
   {
@@ -845,5 +969,6 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }

@@ -1,0 +1,48 @@
+{
+ "actions": [],
+ "creation": "2023-12-14 08:28:56.397222",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "retention_terms",
+  "percentage",
+  "value"
+ ],
+ "fields": [
+  {
+   "fieldname": "retention_terms",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Retention Terms",
+   "options": "Payment Term"
+  },
+  {
+   "fieldname": "percentage",
+   "fieldtype": "Percent",
+   "in_list_view": 1,
+   "label": "Percentage"
+  },
+  {
+   "fieldname": "value",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Value",
+   "options": "Sales Order"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2023-12-14 08:28:56.397222",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "Retention Sales Order",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

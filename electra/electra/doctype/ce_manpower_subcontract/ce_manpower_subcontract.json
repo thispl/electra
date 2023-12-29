@@ -9,10 +9,12 @@
   "ssow",
   "item",
   "item_name",
+  "column_break_5",
   "item_group",
   "description",
   "unit",
   "qty",
+  "column_break_10",
   "unit_price",
   "rate_with_overheads",
   "amount",
@@ -102,6 +104,7 @@
    "fieldtype": "Currency",
    "in_list_view": 1,
    "label": "Selling Price",
+   "precision": "4",
    "read_only": 1
   },
   {
@@ -111,12 +114,20 @@
    "in_list_view": 1,
    "label": "SP Amount",
    "read_only": 1
+  },
+  {
+   "fieldname": "column_break_5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_10",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2022-04-18 12:57:34.109141",
+ "modified": "2023-02-24 16:19:28.517089",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "CE MANPOWER SUBCONTRACT",
@@ -124,5 +135,6 @@
  "permissions": [],
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }

@@ -20,12 +20,17 @@
   "transferred_by",
   "confirmed_by",
   "sales_order",
+  "internal_purchase_invoice",
   "section_break_4",
   "items",
   "items_html",
   "section_break_2",
   "target_company",
+  "column_break_20",
   "source_company",
+  "from__company",
+  "section_break_21",
+  "remarks",
   "letter_head",
   "default_target_warehouse",
   "amended_from"
@@ -95,7 +100,8 @@
    "fieldname": "target_company",
    "fieldtype": "Link",
    "in_list_view": 1,
-   "label": "Target Company",
+   "in_standard_filter": 1,
+   "label": "To Company",
    "options": "Company",
    "reqd": 1
   },
@@ -122,6 +128,7 @@
    "options": "ELE-STC-.YYYY-"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "letter_head",
    "fieldtype": "Link",
    "label": "Letter Head",
@@ -133,6 +140,7 @@
    "label": "Transferred_by"
   },
   {
+   "depends_on": "eval:doc.docstatus == 1",
    "fieldname": "confirmed_by",
    "fieldtype": "Read Only",
    "label": "Confirmed By"
@@ -146,8 +154,7 @@
   {
    "fieldname": "confirmed_date",
    "fieldtype": "Date",
-   "label": "Confirmed Date",
-   "read_only": 1
+   "label": "Confirmed Date"
   },
   {
    "fieldname": "data_7",
@@ -155,17 +162,46 @@
   },
   {
    "fieldname": "source_company",
-   "fieldtype": "Data",
-   "label": "Source Company"
+   "fieldtype": "Link",
+   "ignore_user_permissions": 1,
+   "label": "From Company",
+   "options": "Company"
+  },
+  {
+   "fieldname": "internal_purchase_invoice",
+   "fieldtype": "Read Only",
+   "label": "Internal Purchase Invoice"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  },
+  {
+   "fieldname": "section_break_21",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_20",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "from__company",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "in_standard_filter": 1,
+   "label": "From  Company",
+   "options": "\nKINGFISHER TRADING AND CONTRACTING COMPANY\nAl - Shaghairi Trading and Contracting Company W.L.L (ELECTRA)\nMARAZEEM SECURITY SERVICES\nKINGFISHER - TRANSPORTATION\nMARAZEEM SECURITY SERVICES - SHOWROOM\nMARAZEEM SECURITY SERVICES - HO\nMEP DIVISION - ELECTRA\nENGINEERING DIVISION - ELECTRA\nINTERIOR DIVISION - ELECTRA\nINDUSTRIAL TOOLS DIVISION\nKINGFISHER - SHOWROOM\nSTEEL DIVISION - ELECTRA\nELECTRICAL DIVISION - ELECTRA\nTRADING DIVISION - ELECTRA\nELECTRA - BARWA SHOWROOM\nELECTRA  - NAJMA SHOWROOM\nELECTRA - ALKHOR SHOWROOM\nELECTRA - BINOMRAN SHOWROOM"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2022-08-23 15:17:57.287880",
+ "modified": "2023-12-20 09:10:08.081625",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Stock Confirmation",
+ "naming_rule": "By \"Naming Series\" field",
  "owner": "Administrator",
  "permissions": [
   {
@@ -186,6 +222,6 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
- "title_field": "target_company",
+ "states": [],
  "track_changes": 1
 }

@@ -1,0 +1,285 @@
+{
+ "_comments": "[{\"comment\": \"Action Failed<br><br><pre><code>Traceback (most recent call last):\\n  File \\\"apps/frappe/frappe/mod...\", \"by\": \"Administrator\", \"name\": \"e94267849f\"}, {\"comment\": \"Action Failed<br><br><pre><code>Traceback (most recent call last):\\n  File \\\"apps/frappe/frappe/mod...\", \"by\": \"Administrator\", \"name\": \"655a6b25be\"}]",
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:employee_name",
+ "creation": "2023-03-02 12:28:05.083338",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "hrd_remarks",
+  "column_break_2",
+  "hod_remarks",
+  "column_break_4",
+  "hr_manager_remarks",
+  "section_break_6",
+  "type_of_request",
+  "column_break_8",
+  "leave_application",
+  "rejoining_date",
+  "section_break_4",
+  "employee_number",
+  "employee_name",
+  "grade",
+  "joining_date",
+  "sponsor_company",
+  "designation",
+  "column_break_18",
+  "request_date",
+  "department",
+  "company",
+  "letter_head",
+  "resident_id_numberqid_number",
+  "hod",
+  "ticket_required",
+  "section_break_8",
+  "leave_start_date",
+  "column_break_15",
+  "leave_end_date",
+  "column_break_19",
+  "leave_days",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "depends_on": "eval:doc.type_of_request",
+   "fieldname": "section_break_4",
+   "fieldtype": "Section Break",
+   "label": "Employee Details"
+  },
+  {
+   "fieldname": "employee_number",
+   "fieldtype": "Link",
+   "label": "Employee Number",
+   "options": "Employee",
+   "read_only_depends_on": "eval:doc.type_of_request == \"Annual Leave\""
+  },
+  {
+   "fetch_from": "employee_number.employee_name",
+   "fieldname": "employee_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Employee Name",
+   "read_only": 1,
+   "unique": 1
+  },
+  {
+   "fetch_from": "employee_number.grade",
+   "fieldname": "grade",
+   "fieldtype": "Data",
+   "label": "Grade",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "employee_number.date_of_joining",
+   "fieldname": "joining_date",
+   "fieldtype": "Date",
+   "label": "Joining Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_8",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "employee_number.department",
+   "fieldname": "department",
+   "fieldtype": "Data",
+   "label": "Department",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "employee_number.designation",
+   "fieldname": "designation",
+   "fieldtype": "Data",
+   "label": "Designation",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.type_of_request == \"Annual Leave\"",
+   "fieldname": "section_break_8",
+   "fieldtype": "Section Break",
+   "label": "Other Details"
+  },
+  {
+   "fetch_from": "employee_number.company",
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "employee_number.resident_id_no",
+   "fieldname": "resident_id_numberqid_number",
+   "fieldtype": "Data",
+   "label": "Resident ID Number(QID Number)",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "employee_number.sponsor_company",
+   "fieldname": "sponsor_company",
+   "fieldtype": "Data",
+   "label": "Sponsor Company",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.type_of_request == \"Annual Leave\"",
+   "fetch_from": "leave_application.from_date",
+   "fieldname": "leave_start_date",
+   "fieldtype": "Date",
+   "label": "Leave Start Date ",
+   "mandatory_depends_on": "eval:doc.type_of_request == \"Annual Leave\"",
+   "read_only_depends_on": "eval:doc.type_of_request == \"Annual Leave\""
+  },
+  {
+   "fieldname": "column_break_15",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.type_of_request == \"Annual Leave\"",
+   "fetch_from": "leave_application.to_date",
+   "fieldname": "leave_end_date",
+   "fieldtype": "Date",
+   "label": "Leave End Date",
+   "mandatory_depends_on": "eval:doc.type_of_request == \"Annual Leave\"",
+   "read_only_depends_on": "eval:doc.type_of_request == \"Annual Leave\""
+  },
+  {
+   "depends_on": "eval:doc.employee",
+   "fieldname": "rejoining_date",
+   "fieldtype": "Date",
+   "label": "Rejoining Date ",
+   "mandatory_depends_on": "eval:doc.type_of_request == \"Annual Leave\""
+  },
+  {
+   "depends_on": "eval:doc.type_of_request == \"Annual Leave\"",
+   "fetch_from": "leave_application.total_leave_days",
+   "fieldname": "leave_days",
+   "fieldtype": "Data",
+   "label": "Leave Days",
+   "mandatory_depends_on": "eval:doc.type_of_request == \"Annual Leave\"",
+   "read_only_depends_on": "eval:doc.type_of_request == \"Annual Leave\""
+  },
+  {
+   "fieldname": "column_break_19",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Today",
+   "fieldname": "request_date",
+   "fieldtype": "Date",
+   "label": "Request Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Leave Salary  and Final Exit Request",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.type_of_request == \"Annual Leave\"",
+   "fieldname": "leave_application",
+   "fieldtype": "Link",
+   "label": "Leave Application",
+   "mandatory_depends_on": "eval:doc.type_of_request == \"Annual Leave\"",
+   "options": "Leave Application",
+   "read_only_depends_on": "eval:doc.type_of_request == \"Annual Leave\""
+  },
+  {
+   "fieldname": "type_of_request",
+   "fieldtype": "Select",
+   "label": "Type of Request",
+   "options": "\nAnnual Leave\nLeave Salary Encashment\nFinal Exitment"
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "depends_on": "eval:doc.employee_number",
+   "fieldname": "hod",
+   "fieldtype": "Check",
+   "label": "HOD",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.type_of_request == \"Annual Leave\"",
+   "fetch_from": "leave_application.ticket_required",
+   "fieldname": "ticket_required",
+   "fieldtype": "Select",
+   "label": "Ticket Required",
+   "options": "\nCompany Provided\nSelf Provided",
+   "read_only_depends_on": "eval:doc.type_of_request == \"Annual Leave\""
+  },
+  {
+   "depends_on": "eval:doc.company",
+   "fetch_from": "company.default_letter_head",
+   "fieldname": "letter_head",
+   "fieldtype": "Link",
+   "label": "Letter Head",
+   "options": "Letter Head",
+   "read_only": 1
+  },
+  {
+   "fieldname": "hrd_remarks",
+   "fieldtype": "Data",
+   "label": "HRD Remarks"
+  },
+  {
+   "fieldname": "hod_remarks",
+   "fieldtype": "Data",
+   "label": "HOD Remarks"
+  },
+  {
+   "fieldname": "column_break_4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "hr_manager_remarks",
+   "fieldtype": "Data",
+   "label": "HR Manager Remarks"
+  },
+  {
+   "fieldname": "section_break_6",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_18",
+   "fieldtype": "Column Break"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2023-11-30 16:05:43.653171",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "Leave Salary  and Final Exit Request",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

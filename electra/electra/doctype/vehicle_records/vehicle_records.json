@@ -1,5 +1,6 @@
 {
  "actions": [],
+ "autoname": "field:vehicle",
  "creation": "2021-08-13 16:21:57.165276",
  "doctype": "DocType",
  "editable_grid": 1,
@@ -34,14 +35,16 @@
   "sticker_section",
   "sticker_required",
   "sticker_approval",
-  "sticker_no_of_days",
   "column_break_27",
   "sticker_status",
+  "sticker_no_of_days",
   "tracking_system_section",
   "device_status",
+  "column_break_35",
   "gps_sim_no",
   "data_33",
   "disposal_permit_required",
+  "column_break_39",
   "disposal_permit_expiry"
  ],
  "fields": [
@@ -79,9 +82,10 @@
    "options": "Company"
   },
   {
-   "fetch_from": "vehicle.vehicle_number",
+   "fetch_from": "vehicle.name_of_vehicle",
    "fieldname": "vehicle_no",
    "fieldtype": "Data",
+   "hidden": 1,
    "label": "Vehicle no",
    "read_only": 1
   },
@@ -200,7 +204,7 @@
   },
   {
    "fieldname": "date_of_issue",
-   "fieldtype": "Data",
+   "fieldtype": "Date",
    "label": "Date of issue"
   },
   {
@@ -244,21 +248,31 @@
    "fieldname": "vehicle",
    "fieldtype": "Link",
    "label": "Vehicle",
-   "options": "Vehicle"
+   "options": "Vehicle",
+   "unique": 1
   },
   {
    "fetch_from": "vehicle.model",
    "fieldname": "vehicle_model",
    "fieldtype": "Data",
    "label": "Model"
+  },
+  {
+   "fieldname": "column_break_35",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_39",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-07-06 13:57:45.950371",
+ "modified": "2023-02-27 07:41:41.549754",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Vehicle Records",
+ "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [
   {
@@ -276,5 +290,6 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }

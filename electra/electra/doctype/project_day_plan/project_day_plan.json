@@ -32,16 +32,19 @@
   {
    "fieldname": "project_day_plan_list",
    "fieldtype": "Table",
+   "ignore_user_permissions": 1,
    "label": "Project Day Plan List",
    "options": "Project Day Plan List"
   },
   {
    "fieldname": "project_day_plan_employee",
    "fieldtype": "Table",
+   "ignore_user_permissions": 1,
    "label": "Project Day Plan Employee",
-   "options": "Project Day Plan Employee"
+   "options": "Project Day Plan Child"
   },
   {
+   "default": "Today",
    "fieldname": "plan_date",
    "fieldtype": "Date",
    "label": "Plan Date"
@@ -92,11 +95,17 @@
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
- "links": [],
- "modified": "2022-10-17 07:38:12.010410",
+ "links": [
+  {
+   "link_doctype": "Project Day Plan Timesheet",
+   "link_fieldname": "project_day_plan"
+  }
+ ],
+ "modified": "2022-12-16 10:22:33.418300",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Project Day Plan",
+ "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
   {
@@ -114,5 +123,6 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }

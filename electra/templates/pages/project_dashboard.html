@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/assets/electra/css/alt/adminlte.components.min.css">
+  <!-- <link rel="stylesheet" href="/assets/electra/css/alt/adminlte.core.min.css"> -->
+  <link rel="stylesheet" href="/assets/electra/css/ionicons.min.css">
+  <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="/assets/electra/css/alt/adminlte.pages.min.css">
+  <link rel="stylesheet" href="/assets/electra/css/alt/adminlte.plugins.min.css">
+  <link rel="stylesheet" href="/assets/electra/css/alt/adminlte.extra-components.min.css">
+  <link rel="stylesheet" href="/assets/electra/css/all.min.css">
+
+  <script src="/assets/electra/js/adminlte.min.js"></script>
+</head>
+<style>
+  .body {font-family: 'Soleto';}
+  .inner{color: white;}
+  .title{color:floralwhite}
+  .far{color:white}
+</style>
+
+<body>
+  <div class="row">
+    <div class="col-lg-3 col-4">
+
+      <div class="small-box bg-info shadow-lg" >
+        <div class="inner">
+          <h3 class="title">{{val}}</h3>
+          <p>Contract Value</p>
+          <!-- <p>{{so}}</p> -->
+        </div>
+        <div class="icon">
+          <i class="fas fa-shopping-cart  fa-sm fa-spin" ></i>
+        </div>
+        
+        <a href=/app/project-budget/{{project_budget}} class="small-box-footer">
+          More info <i class="fas fa-arrow-circle-right"></i>
+        </a>
+      </div>
+    </div>
+
+
+    <div class="col-lg-3 col-6">
+
+      <div class="small-box bg-danger shadow-lg">
+        <div class="inner">
+          <h3 class="title">{{total_cost}}</h3>
+          <p>Total Cost of the Project</p>
+        </div>
+        <div class="icon">
+          <i class="fas fa-money-check-alt fa-spin"></i>
+        </div>
+        <a href=/app/project-budget/{{project_budget}} class="small-box-footer">
+          More info <i class="fas fa-arrow-circle-right"></i>
+        </a>
+      </div>
+    </div>
+
+    
+
+   <div class="col-lg-3 col-4">
+
+      <div class="small-box bg-success shadow-lg">
+        <div class="inner">
+          <h3 class="title">{{bid}}<sup style="font-size: 20px"></sup></h3>
+          <p>Revised Contract Value</p>
+          
+        </div>
+        <div class="icon">
+          <i class="fas fa-comments-dollar fa-spin"></i>
+        </div>
+        <a href=/app/sales-order/{{so}} class="small-box-footer">
+          More info <i class="fas fa-arrow-circle-right"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+   
+  <div class="row">
+  <div class="col-lg-3 col-4">
+
+    <div class="small-box bg-danger shadow-lg">
+      <div class="inner">
+        <h3 class="title">{{gross_profit}}</h3>
+        <p>Total Gross Profit</p>
+      </div>
+      <div class="icon">
+        <i class="fas fa-money-check-alt fa-spin"></i>
+      </div>
+      <a href=/app/project-budget/{{project_budget}} class="small-box-footer">
+        More info <i class="fas fa-arrow-circle-right"></i>
+      </a>
+    </div>
+  </div>
+  <div class="col-lg-3 col-6">
+
+    <div class="small-box bg-danger shadow-lg">
+      <div class="inner">
+        <h3 class="title">{{profit}}</h3>
+        <p>Total % of G.P</p>
+      </div>
+      <div class="icon">
+        <i class="fas fa-money-check-alt fa-spin"></i>
+      </div>
+      <a href=/app/project-budget/{{project_budget}} class="small-box-footer">
+        More info <i class="fas fa-arrow-circle-right"></i>
+      </a>
+    </div>
+  </div>
+  <div class="col-lg-3 col-4">
+
+    <div class="small-box bg-primary shadow-lg">
+      <div class="inner">
+        <h3 class="title">{{to_complete}}<sup style="font-size: 20px"></sup></h3>
+        <p>Value to be Completed</p>
+       
+      </div>
+      <div class="icon">
+        <i class="fas fa-line-chart fa-spin"></i>
+       
+      </div>
+      <a href="#" class="small-box-footer">
+        More info <i class="fas fa-arrow-circle-right"></i>
+      </a>
+    </div>
+  </div>
+</div>
+
+  <div class="row">
+    <div class="col-md-3 col-sm-6 col-12">
+      <div class="info-box bg-info">
+        <span class="info-box-icon"><i class="far fa-bookmark"></i></span>
+        <div class="info-box-content">
+          <span class="inner info-box-text"><b>Estimated Profit Margin</b></span>
+          <span class="info-box-number">{{net_profit_amount}}</span>
+          <!-- <div class="progress">
+            <div class="progress-bar" style="width: 70%"></div>
+          </div>
+          <span class="progress-description">
+            70% Increase in 30 Days
+          </span> -->
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="col-md-3 col-sm-6 col-12">
+      <div class="info-box bg-success">
+        <span class="info-box-icon"><i class="far fa-thumbs-up"></i></span>
+        <div class="info-box-content">
+          <span class="inner info-box-text"><b>Percentage to be Delivered</b></span>
+          <span class="info-box-number">{{deliver}}</span>
+          <div class="progress">
+            <div class="progress-bar" style=width:{{deliver}}></div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    
+
+    <!-- <div class="col-md-3 col-sm-6 col-12">
+      <div class="info-box bg-danger">
+        <span class="inner info-box-icon"><i class="fas fa-comments"></i></span>
+        <div class="info-box-content">
+          <span class="inner info-box-text"><b>Percentage To be Completed</b></span>
+          <span class="info-box-number">{{perc}}</span>
+          <div class="progress">
+            <div class="progress-bar" style=width:{{perc}}></div>
+          </div>
+        </div>
+
+      </div>
+
+    </div> -->
+
+    <div class="col-md-3 col-sm-6 col-12">
+      <div class="info-box bg-primary">
+        <span class="inner info-box-icon"><i class="fas fa-coins"></i></span>
+        <div class="info-box-content">
+          <span class="inner info-box-text"><b>Materials To be Supplied</b></span>
+          <span class="inner info-box-number">{{to_supply}}</span>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="col-md-3 col-sm-6 col-12">
+      <div class="info-box shadow-lg">
+          <span class="info-box-icon bg-info"><i class="far fa-envelope"></i></span>
+        <div class="info-box-content">
+          <span class="info-box-text"><b>Pending Installation Quantity</b></span>
+            <span class="info-box-number">{{pending_task_qty}}&nbsp;sqm</span>
+          
+        </div>
+      </div>
+    </div> 
+  
+    
+    <div class="col-md-3 col-sm-6 col-12">
+      <div class="info-box shadow-lg">
+          <span class="info-box-icon bg-info"><i class="far fa-envelope"></i></span>
+        <div class="info-box-content">
+          <span class="info-box-text"><b>Task Completed Percentage</b></span>
+            <span class="info-box-number">{{complete_qty}}&nbsp;%</span>
+          
+        
+      </div>
+    </div> 
+  </div>
+
+    <div class="col-md-3 col-sm-6 col-12">
+      <div class="info-box shadow-lg">
+          <span class="info-box-icon bg-info"><i class="far fa-envelope"></i></span>
+        <div class="info-box-content">
+          <span class="info-box-text"><b>Task Not Complete</b></span>
+            <span class="info-box-number">{{not_complete}}&nbsp;%</span>
+          
+      </div>
+    </div> 
+  </div>
+
+
+    
+ </div>
+
+</body>

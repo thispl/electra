@@ -1,5 +1,6 @@
 {
  "actions": [],
+ "allow_import": 1,
  "allow_rename": 1,
  "autoname": "field:master_scope_of_work",
  "creation": "2022-01-02 06:50:35.827500",
@@ -8,7 +9,8 @@
  "engine": "InnoDB",
  "field_order": [
   "master_scope_of_work",
-  "desc"
+  "desc",
+  "company"
  ],
  "fields": [
   {
@@ -23,14 +25,21 @@
    "fieldname": "desc",
    "fieldtype": "Small Text",
    "label": "Desc"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-03-11 16:29:46.355374",
+ "modified": "2023-12-29 07:59:24.800113",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Master Scope of Work",
+ "naming_rule": "By fieldname",
  "nsm_parent_field": "parent_scope_of_work",
  "owner": "Administrator",
  "permissions": [
@@ -51,5 +60,6 @@
  "search_fields": "desc",
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }

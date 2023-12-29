@@ -10,7 +10,7 @@ from erpnext.accounts.doctype.sales_invoice.sales_invoice import get_mode_of_pay
 class ICMaterialTransferAcknowledge(Document):
     def on_submit(self):
         source_company = frappe.get_value("IC Material Transfer Request",self.ic_material_transfer_request,"source_company")
-        mpinfo = get_mode_of_payment_info("Wire Transfer",self.target_company)
+        mpinfo = get_mode_of_payment_info("Wire Transfer - CBQ-4020",self.target_company)
         if len(mpinfo) > 0:
             default_account = mpinfo[0]['default_account']
         if self.workflow_state == 'Material Recieved':
@@ -20,11 +20,11 @@ class ICMaterialTransferAcknowledge(Document):
             pi.cost_center = erpnext.get_default_cost_center(self.target_company)
             pi.update_stock = 1
             pi.is_paid = 1
-            pi.mode_of_payment = "Wire Transfer"
+            pi.mode_of_payment = "Wire Transfer - CBQ-4020"
             pi.paid_amount = pi.rounded_total
             pi.cash_bank_account = default_account
             for item in self.items:
-                lvr = get_last_valuation_rate(item.item_code)
+                lvr = get_last_valuation_rate(item.item_code,source_company)
                 pi.append("items",{
                     "item_code" : item.item_code,
                     "qty" : item.qty,

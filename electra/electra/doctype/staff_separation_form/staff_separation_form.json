@@ -1,6 +1,6 @@
 {
  "actions": [],
- "autoname": "SSF.####",
+ "autoname": "ELE/HRA/14/.####",
  "creation": "2021-08-17 13:48:56.063921",
  "doctype": "DocType",
  "editable_grid": 1,
@@ -29,7 +29,6 @@
   "other_reasons",
   "attach",
   "column_break_18",
-  "last_working_days",
   "authorized_by_1",
   "hr_use_only_section",
   "legal_entitlements",
@@ -143,11 +142,6 @@
    "label": "Other Reasons(Enclose documents)"
   },
   {
-   "fieldname": "last_working_days",
-   "fieldtype": "Data",
-   "label": "Last Working Day"
-  },
-  {
    "description": "Dept./ Div. Manager",
    "fieldname": "authorized_by_1",
    "fieldtype": "Data",
@@ -251,10 +245,11 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2021-09-08 07:33:10.332071",
+ "modified": "2023-09-26 12:27:40.632406",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Staff Separation Form",
+ "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
   {
@@ -272,5 +267,6 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }

@@ -1,0 +1,128 @@
+{
+ "actions": [],
+ "autoname": "autoincrement",
+ "creation": "2023-10-30 10:21:32.946227",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "name1",
+  "customer",
+  "bill_no",
+  "company",
+  "date",
+  "chequereference_no",
+  "column_break_7",
+  "outstanding_amount",
+  "outstanding_amount_company_currency",
+  "receivable_amount",
+  "receivable_amount_company_currency",
+  "grand_total",
+  "chequereference_date",
+  "type",
+  "project_number",
+  "project_name"
+ ],
+ "fields": [
+  {
+   "fieldname": "name1",
+   "fieldtype": "Data",
+   "label": "Name"
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Customer"
+  },
+  {
+   "fieldname": "bill_no",
+   "fieldtype": "Data",
+   "label": "Bill No"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Company",
+   "options": "Company"
+  },
+  {
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Date"
+  },
+  {
+   "fieldname": "chequereference_no",
+   "fieldtype": "Data",
+   "label": "Cheque/Reference No"
+  },
+  {
+   "fieldname": "column_break_7",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "outstanding_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Outstanding Amount"
+  },
+  {
+   "fieldname": "outstanding_amount_company_currency",
+   "fieldtype": "Currency",
+   "label": "Outstanding Amount (Company Currency)"
+  },
+  {
+   "fieldname": "receivable_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Receivable Amount"
+  },
+  {
+   "fieldname": "receivable_amount_company_currency",
+   "fieldtype": "Currency",
+   "label": "Receivable Amount (Company Currency)"
+  },
+  {
+   "fieldname": "grand_total",
+   "fieldtype": "Currency",
+   "label": "Grand Total"
+  },
+  {
+   "fieldname": "chequereference_date",
+   "fieldtype": "Date",
+   "label": "Cheque/Reference Date"
+  },
+  {
+   "fieldname": "type",
+   "fieldtype": "Read Only",
+   "label": "Type "
+  },
+  {
+   "fieldname": "project_number",
+   "fieldtype": "Link",
+   "label": "Project Number",
+   "options": "Project"
+  },
+  {
+   "fetch_from": "project_number.project_name",
+   "fieldname": "project_name",
+   "fieldtype": "Data",
+   "label": "Project Name"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2023-10-30 10:24:39.602596",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "Order Invoice List",
+ "naming_rule": "Autoincrement",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

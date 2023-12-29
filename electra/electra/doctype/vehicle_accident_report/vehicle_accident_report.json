@@ -38,7 +38,8 @@
   "attach",
   "for_office_use",
   "small_text_27",
-  "html_38"
+  "html_38",
+  "amended_from"
  ],
  "fields": [
   {
@@ -56,13 +57,15 @@
    "fetch_from": "emp_id.department",
    "fieldname": "dept",
    "fieldtype": "Data",
-   "label": "Depatment"
+   "label": "Depatment",
+   "read_only": 1
   },
   {
    "fetch_from": "emp_id.designation",
    "fieldname": "designation",
    "fieldtype": "Data",
-   "label": "Designation"
+   "label": "Designation",
+   "read_only": 1
   },
   {
    "fieldname": "column_break_5",
@@ -71,7 +74,8 @@
   {
    "fieldname": "date",
    "fieldtype": "Date",
-   "label": "Date "
+   "label": "Date of Joining",
+   "read_only": 1
   },
   {
    "fieldname": "emp_id",
@@ -82,10 +86,12 @@
    "reqd": 1
   },
   {
-   "fetch_from": "emp_id.qid_id_",
+   "fetch_from": "emp_id.resident_id_no",
+   "fetch_if_empty": 1,
    "fieldname": "qid_no",
-   "fieldtype": "Int",
-   "label": "QID No"
+   "fieldtype": "Data",
+   "label": "QID Number",
+   "read_only": 1
   },
   {
    "fieldname": "vehicle_information",
@@ -111,19 +117,22 @@
    "fetch_from": "plate_no.make",
    "fieldname": "make",
    "fieldtype": "Data",
-   "label": "Make"
+   "label": "Make",
+   "read_only": 1
   },
   {
    "fetch_from": "plate_no.expiry_of_istimara",
    "fieldname": "istimara_expiry",
    "fieldtype": "Data",
-   "label": "Istimara Expiry"
+   "label": "Istimara Expiry",
+   "read_only": 1
   },
   {
    "fetch_from": "emp_id.employee_name",
    "fieldname": "current_responsibility",
    "fieldtype": "Data",
-   "label": "Current Responsibility"
+   "label": "Current Responsibility",
+   "read_only": 1
   },
   {
    "fieldname": "vehicle_accident_information_section",
@@ -200,7 +209,8 @@
    "fetch_from": "plate_no.division",
    "fieldname": "division_of_vehicle",
    "fieldtype": "Data",
-   "label": "Division of Vehicle"
+   "label": "Division of Vehicle",
+   "read_only": 1
   },
   {
    "fieldname": "for_office_use",
@@ -212,7 +222,8 @@
    "fetch_if_empty": 1,
    "fieldname": "company",
    "fieldtype": "Data",
-   "label": "Company"
+   "label": "Company",
+   "read_only": 1
   },
   {
    "fieldname": "letter_head",
@@ -225,14 +236,25 @@
    "fieldname": "remarks",
    "fieldtype": "Small Text",
    "label": "Remarks"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Vehicle Accident Report",
+   "print_hide": 1,
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
+ "is_submittable": 1,
  "links": [],
- "modified": "2022-10-31 17:52:48.055789",
+ "modified": "2023-09-18 15:48:03.450554",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Vehicle Accident Report",
+ "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
   {
@@ -250,5 +272,6 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }

@@ -1,5 +1,6 @@
 {
  "actions": [],
+ "autoname": "ELE/HRA/09/.####",
  "creation": "2021-08-25 11:35:38.550636",
  "doctype": "DocType",
  "editable_grid": 1,
@@ -171,10 +172,11 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2021-08-25 13:58:18.773052",
+ "modified": "2023-05-31 07:57:38.967733",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Performance Appraisal Form",
+ "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
   {
@@ -192,5 +194,6 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }

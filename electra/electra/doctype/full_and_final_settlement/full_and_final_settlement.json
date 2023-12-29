@@ -1,6 +1,6 @@
 {
  "actions": [],
- "autoname": "field:employee_name",
+ "autoname": "ELE-HRA-06-.##",
  "creation": "2022-09-12 08:29:15.558041",
  "doctype": "DocType",
  "editable_grid": 1,
@@ -33,24 +33,26 @@
   "month_allowance",
   "food_allowance_",
   "prod_incentive",
+  "prodallowance",
   "arrears",
   "overtime_earnings",
   "monthly_deduction",
   "payroll_total",
-  "prodallowance",
   "ot_incentive",
   "section_break_32",
   "leaves_encashed",
   "employment_duration",
   "total_worked",
-  "eligible_gratuity",
-  "leave_pay",
-  "column_break_38",
   "gratuity_amount",
   "additions",
   "air_ticket_fare",
   "air_ticket_deduction",
   "loanother_deduction",
+  "eligible_gratuity",
+  "loan",
+  "loan_gratuity",
+  "leave_pay",
+  "column_break_38",
   "leave_paygratuity_total",
   "section_break_45",
   "check_46",
@@ -66,6 +68,7 @@
   {
    "fieldname": "resignation_form",
    "fieldtype": "Link",
+   "hidden": 1,
    "label": "Resignation form",
    "options": "Resignation Form"
   },
@@ -108,7 +111,8 @@
   {
    "fieldname": "total_working_days",
    "fieldtype": "Int",
-   "label": "Total Working Days"
+   "label": "Total Working Days",
+   "read_only": 1
   },
   {
    "fieldname": "column_break_9",
@@ -124,7 +128,8 @@
    "fetch_from": "employee.basic",
    "fieldname": "basic_salary",
    "fieldtype": "Currency",
-   "label": "Basic Salary"
+   "label": "Basic Salary",
+   "read_only": 1
   },
   {
    "fieldname": "amended_from",
@@ -151,7 +156,8 @@
    "fetch_from": "employee.gross_salary",
    "fieldname": "gross_pay",
    "fieldtype": "Currency",
-   "label": "Gross Pay"
+   "label": "Gross Pay",
+   "read_only": 1
   },
   {
    "fieldname": "pay_roll_details_section",
@@ -161,12 +167,14 @@
   {
    "fieldname": "pay_start_date",
    "fieldtype": "Date",
-   "label": "Pay Start Date"
+   "label": "Pay Start Date",
+   "read_only": 1
   },
   {
    "fieldname": "pay_end_date",
    "fieldtype": "Date",
-   "label": "Pay End Date"
+   "label": "Pay End Date",
+   "read_only": 1
   },
   {
    "fieldname": "total_salary",
@@ -176,12 +184,12 @@
   {
    "fieldname": "normal_over_time",
    "fieldtype": "Int",
-   "label": "Normal Over Time"
+   "label": "NOT Hrs"
   },
   {
    "fieldname": "ot_amount",
-   "fieldtype": "Currency",
-   "label": "OT Amount"
+   "fieldtype": "Int",
+   "label": "HOT Hrs"
   },
   {
    "fieldname": "column_break_22",
@@ -200,6 +208,7 @@
   {
    "fieldname": "prod_incentive",
    "fieldtype": "Currency",
+   "hidden": 1,
    "label": "Prod Incentive"
   },
   {
@@ -230,6 +239,7 @@
   {
    "fieldname": "ot_incentive",
    "fieldtype": "Currency",
+   "hidden": 1,
    "label": "OT Incentive"
   },
   {
@@ -239,26 +249,32 @@
   {
    "fieldname": "leaves_encashed",
    "fieldtype": "Date",
+   "hidden": 1,
    "label": "Leaves Encashed"
   },
   {
    "fieldname": "employment_duration",
    "fieldtype": "Data",
+   "hidden": 1,
    "label": "Employment Duration"
   },
   {
    "fieldname": "total_worked",
    "fieldtype": "Data",
+   "hidden": 1,
    "label": "Total Worked "
   },
   {
    "fieldname": "eligible_gratuity",
    "fieldtype": "Data",
+   "hidden": 1,
    "label": "Eligible Gratuity"
   },
   {
+   "fetch_from": "loan.total_payable_amount",
    "fieldname": "leave_pay",
    "fieldtype": "Currency",
+   "hidden": 1,
    "label": "Leave Pay"
   },
   {
@@ -277,7 +293,6 @@
    "label": "Additions"
   },
   {
-   "fetch_from": "employee.air_ticket_allowance_",
    "fieldname": "air_ticket_fare",
    "fieldtype": "Currency",
    "label": "Air Ticket Fare"
@@ -290,12 +305,12 @@
   {
    "fieldname": "loanother_deduction",
    "fieldtype": "Currency",
-   "label": "Loan/Other Deduction"
+   "label": "Other Deduction"
   },
   {
    "fieldname": "leave_paygratuity_total",
    "fieldtype": "Currency",
-   "label": "Leave Pay/Gratuity Total"
+   "label": "Total Pay"
   },
   {
    "fieldname": "section_break_45",
@@ -304,11 +319,13 @@
   {
    "default": "0",
    "fieldname": "check_46",
-   "fieldtype": "Check"
+   "fieldtype": "Check",
+   "hidden": 1
   },
   {
    "fieldname": "confirmation",
    "fieldtype": "HTML",
+   "hidden": 1,
    "options": "<b>Confirmation: </b>I confirm that I have gone through the above calculations and found correct and received the above full and final\nsettlement for my services with Electra. I also confirm that I do not have any financial or\nnon-financial claim pending with the company.\n\n\n"
   },
   {
@@ -325,15 +342,29 @@
    "fieldname": "hot_amount",
    "fieldtype": "Currency",
    "label": "HOT Amount"
+  },
+  {
+   "fetch_from": "loan.loan_amount",
+   "fieldname": "loan_gratuity",
+   "fieldtype": "Float",
+   "label": "Loan Deduction"
+  },
+  {
+   "fieldname": "loan",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Loan",
+   "options": "Loan Application"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2022-09-12 15:11:00.787018",
+ "modified": "2023-12-08 16:18:40.400241",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Full and Final Settlement",
+ "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
   {
@@ -351,5 +382,6 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }

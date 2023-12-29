@@ -29,6 +29,8 @@
   "gross_profit_percent",
   "gross_profit_amount",
   "column_break_11",
+  "discount_tolerance",
+  "discount_tolerance_amount",
   "unit",
   "qty",
   "column_break_19",
@@ -62,7 +64,10 @@
    "fieldname": "estimate",
    "fieldtype": "Button",
    "in_list_view": 1,
-   "label": "Estimate"
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Estimate",
+   "options": "<button class=\"btn btn-primary btn-sm\" type=\"button\">Small button</button>\n"
   },
   {
    "fieldname": "section_break_5",
@@ -135,7 +140,7 @@
    "fieldname": "total_bidding_price",
    "fieldtype": "Currency",
    "in_list_view": 1,
-   "label": "Total Bidding Price",
+   "label": "Bidding Price",
    "read_only": 1
   },
   {
@@ -219,12 +224,24 @@
   {
    "fieldname": "column_break_17",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "discount_tolerance_amount",
+   "fieldtype": "Currency",
+   "label": "Discount Tolerance Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "discount_tolerance",
+   "fieldtype": "Percent",
+   "label": "Discount Tolerance %",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2022-08-09 09:58:54.903188",
+ "modified": "2023-03-03 18:59:17.658302",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "CE Master Scope of Work",
@@ -232,5 +249,6 @@
  "permissions": [],
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }

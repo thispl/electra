@@ -1,6 +1,6 @@
 {
  "actions": [],
- "autoname": "field:candidate_name",
+ "autoname": "ELE/HRA/11/.####",
  "creation": "2021-08-17 09:49:56.841092",
  "doctype": "DocType",
  "editable_grid": 1,
@@ -8,7 +8,7 @@
  "field_order": [
   "candidate_name",
   "position_applied",
-  "department_1",
+  "department",
   "column_break_4",
   "interview_date",
   "interview_type",
@@ -16,6 +16,9 @@
   "ratings_section",
   "child_table",
   "total_score",
+  "interviewer__1_total",
+  "column_break_14",
+  "interviewer_hod_total",
   "column_break_31",
   "remarks_1",
   "name1",
@@ -69,13 +72,6 @@
    "label": "Position Applied"
   },
   {
-   "fetch_from": "candidate_name.department",
-   "fieldname": "department_1",
-   "fieldtype": "Read Only",
-   "in_list_view": 1,
-   "label": "Department"
-  },
-  {
    "fieldname": "column_break_4",
    "fieldtype": "Column Break"
   },
@@ -103,6 +99,7 @@
   {
    "fieldname": "total_score",
    "fieldtype": "Data",
+   "hidden": 1,
    "label": "Total Score"
   },
   {
@@ -309,14 +306,35 @@
    "fieldname": "interview_date",
    "fieldtype": "Read Only",
    "label": "Interview Date"
+  },
+  {
+   "fieldname": "department",
+   "fieldtype": "Link",
+   "label": "Department",
+   "options": "Department"
+  },
+  {
+   "fieldname": "interviewer__1_total",
+   "fieldtype": "Int",
+   "label": "Interviewer  1 Total"
+  },
+  {
+   "fieldname": "column_break_14",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "interviewer_hod_total",
+   "fieldtype": "Data",
+   "label": "Interviewer-HOD Total"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2021-09-18 14:18:49.966588",
+ "modified": "2023-06-16 09:00:40.411050",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Interview Evaluation Form",
+ "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
   {
@@ -334,5 +352,6 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }

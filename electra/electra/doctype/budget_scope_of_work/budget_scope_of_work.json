@@ -16,9 +16,11 @@
   "column_break_8",
   "gross_profit_percent",
   "gross_profit_amount",
+  "discount",
   "column_break_11",
   "contigency_percent",
   "contigency",
+  "revision",
   "column_break_14",
   "engineering_overhead",
   "total_amount_as_engineering_overhead",
@@ -179,12 +181,23 @@
    "fieldname": "gross_profit_amount",
    "fieldtype": "Currency",
    "label": "Gross Profit Amount"
+  },
+  {
+   "fieldname": "discount",
+   "fieldtype": "Currency",
+   "label": "Discount"
+  },
+  {
+   "fieldname": "revision",
+   "fieldtype": "Select",
+   "label": "Revision",
+   "options": "\nPB - Revision\nSO - Revision"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2022-07-02 17:17:45.312060",
+ "modified": "2023-02-24 18:15:21.255787",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Budget Scope of Work",
@@ -192,5 +205,6 @@
  "permissions": [],
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }

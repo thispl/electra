@@ -9,16 +9,18 @@
   "ssow",
   "worker",
   "total_workers",
+  "column_break_5",
   "unit_price",
   "rate_with_overheads",
   "working_hours",
+  "column_break_9",
   "days",
   "amount",
   "amount_with_overheads"
  ],
  "fields": [
   {
-   "columns": 1,
+   "columns": 2,
    "fieldname": "worker",
    "fieldtype": "Link",
    "in_list_view": 1,
@@ -54,9 +56,9 @@
    "label": "Days"
   },
   {
-   "columns": 2,
+   "columns": 1,
    "fieldname": "amount",
-   "fieldtype": "Float",
+   "fieldtype": "Currency",
    "in_list_view": 1,
    "label": "Amount"
   },
@@ -80,6 +82,7 @@
    "fieldtype": "Currency",
    "in_list_view": 1,
    "label": "Selling Price",
+   "precision": "4",
    "read_only": 1
   },
   {
@@ -89,12 +92,20 @@
    "in_list_view": 1,
    "label": "Selling Amount",
    "read_only": 1
+  },
+  {
+   "fieldname": "column_break_5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_9",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2022-09-14 15:45:11.109640",
+ "modified": "2023-03-03 09:58:23.963697",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "CE INSTALLATION MANPOWER",
@@ -102,5 +113,6 @@
  "permissions": [],
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }

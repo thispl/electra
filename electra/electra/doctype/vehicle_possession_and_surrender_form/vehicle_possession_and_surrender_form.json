@@ -13,13 +13,13 @@
   "name1",
   "job_title",
   "dept",
+  "type_of_file",
   "column_break_6",
-  "resident_id_number",
   "date",
+  "resident_id_number",
+  "date_of_joining",
   "company",
   "letter_head",
-  "section_break_9",
-  "type_of_file",
   "section_break_11",
   "plate",
   "reading",
@@ -46,12 +46,6 @@
   "html_40"
  ],
  "fields": [
-  {
-   "fetch_from": "emp_no.date_of_joining",
-   "fieldname": "date",
-   "fieldtype": "Read Only",
-   "label": "Date of Joining"
-  },
   {
    "fieldname": "emp_no",
    "fieldtype": "Link",
@@ -83,19 +77,17 @@
    "label": "Department"
   },
   {
-   "fieldname": "section_break_9",
-   "fieldtype": "Section Break"
-  },
-  {
+   "depends_on": "eval:doc.emp_no",
    "fieldname": "type_of_file",
    "fieldtype": "Select",
    "label": "Type of Action",
-   "options": "Possession\nSurrender"
+   "options": "\nPossession\nSurrender"
   },
   {
+   "depends_on": "eval:doc.type_of_file==\"Possession\"",
    "fieldname": "section_break_11",
    "fieldtype": "Section Break",
-   "label": "Required details"
+   "label": "Required details - Possession"
   },
   {
    "fetch_from": "plate.vehicle_number",
@@ -107,6 +99,7 @@
    "options": "Vehicle"
   },
   {
+   "depends_on": "eval:doc.emp_no",
    "fieldname": "possession_date",
    "fieldtype": "Date",
    "label": "Date"
@@ -132,9 +125,10 @@
    "label": "Time"
   },
   {
-   "depends_on": "eval:doc.type_of_file==\"SURRENDERING OF VEHICLE\"",
+   "depends_on": "eval:doc.type_of_file==\"Surrender\"",
    "fieldname": "section_break_23",
-   "fieldtype": "Section Break"
+   "fieldtype": "Section Break",
+   "label": "Required details - Surrender"
   },
   {
    "fieldname": "plate_no2",
@@ -197,6 +191,7 @@
    "options": "\nRequested\nInitiated\nCompleted\nHold"
   },
   {
+   "depends_on": "eval:doc.type_of_file",
    "fieldname": "for_office_use_section",
    "fieldtype": "Section Break",
    "label": "For Office Use"
@@ -243,22 +238,37 @@
    "fieldname": "letter_head",
    "fieldtype": "Link",
    "label": "Letter Head",
-   "options": "Letter Head"
+   "options": "Letter Head",
+   "read_only": 1
   },
   {
    "fetch_from": "plate.last_odometer",
    "fetch_if_empty": 1,
    "fieldname": "reading",
    "fieldtype": "Float",
-   "label": "Odometer Reading"
+   "label": "Odometer Reading",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "emp_no.date_of_joining",
+   "fieldname": "date_of_joining",
+   "fieldtype": "Read Only",
+   "label": "Date of Joining"
+  },
+  {
+   "default": "Today",
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "label": "Date"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-06 17:25:50.900437",
+ "modified": "2023-02-23 16:34:34.955298",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Vehicle Possession and Surrender Form",
+ "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
   {
@@ -276,6 +286,7 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "title_field": "name1",
  "track_changes": 1
 }

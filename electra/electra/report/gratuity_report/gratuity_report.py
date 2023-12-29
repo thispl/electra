@@ -37,9 +37,11 @@ def calculate_gratuity(filters):
 		# frappe.errprint([diff.years , ' years, ', diff.months, ' months and ', diff.days, ' days'])
 		yos = cstr(diff.years) + ' years, ' + cstr(diff.months) +' months and ' + cstr(diff.days) + ' days'
 		
+
 		exp_years = diff.years
 		exp_month = diff.months
 		exp_days = diff.days
+		total_days = (exp_years * 365) + (exp_month * 30) + exp_days
 
 		if(yos <= "5 years, 0 months and 0 days"):
 		# frappe.errprint(yos)
@@ -47,21 +49,24 @@ def calculate_gratuity(filters):
 			basic_salary = frappe.db.get_value('Employee',emp.name,'basic')
 
 			# frappe.errprint(basic_salary)
-			per_day_basic = basic_salary / 30
+			# per_day_basic = basic_salary / 30
 			
-			gratuity_per_year = per_day_basic * 21
+			# gratuity_per_year = per_day_basic * 21
 
-			gratuity_per_month = gratuity_per_year / 12
+			# gratuity_per_month = gratuity_per_year / 12
 
-			gratuity_per_day = gratuity_per_month / 30
+			# gratuity_per_day = gratuity_per_month / 30
 
-			earned_gpy = gratuity_per_year * exp_years
+			# earned_gpy = gratuity_per_year * exp_years
 
-			earned_gpm = gratuity_per_month  * exp_month
+			# earned_gpm = gratuity_per_month  * exp_month
 
-			earned_gpd = gratuity_per_day * exp_days
+			# earned_gpd = gratuity_per_day * exp_days
 			
-			total_gratuity = earned_gpy + earned_gpm + earned_gpd
+			# total_gratuity = earned_gpy + earned_gpm + earned_gpd
+
+			per_day_basic = (basic_salary / 30 * 21) /365
+			total_gratuity = per_day_basic * total_days
 			
 			row = [emp.name,emp.employee_name,emp.date_of_joining,yos,total_gratuity]
 			if diff.years > 1:
@@ -76,44 +81,46 @@ def calculate_gratuity(filters):
 			basic_salary = frappe.db.get_value('Employee',emp.name,'basic')
 
 			# frappe.errprint(basic_salary)
-			per_day_basic = basic_salary / 30
+			# per_day_basic = basic_salary / 30
 			
-			gratuity_per_year = per_day_basic * 30
+			# gratuity_per_year = per_day_basic * 30
 
-			gratuity_per_month = gratuity_per_year / 12
+			# gratuity_per_month = gratuity_per_year / 12
 
-			gratuity_per_day = gratuity_per_month / 30
+			# gratuity_per_day = gratuity_per_month / 30
 
-			earned_gpy = gratuity_per_year * tot
+			# earned_gpy = gratuity_per_year * tot
 
-			earned_gpm = gratuity_per_month  * exp_month
+			# earned_gpm = gratuity_per_month  * exp_month
 
-			earned_gpd = gratuity_per_day * exp_days
+			# earned_gpd = gratuity_per_day * exp_days
 			
-			total_gratuity = earned_gpy + earned_gpm + earned_gpd
+			# total_gratuity = earned_gpy + earned_gpm + earned_gpd
 
 
-			#other than five years
+			# #other than five years
 
-			p_per_day_basic = basic_salary / 30
+			# p_per_day_basic = basic_salary / 30
 			
-			p_gratuity_per_year = p_per_day_basic * 21
+			# p_gratuity_per_year = p_per_day_basic * 21
 
-			p_gratuity_per_month = p_gratuity_per_year / 12
+			# p_gratuity_per_month = p_gratuity_per_year / 12
 
-			p_gratuity_per_day = p_gratuity_per_month / 30
+			# p_gratuity_per_day = p_gratuity_per_month / 30
 
-			p_earned_gpy = p_gratuity_per_year * 5
+			# p_earned_gpy = p_gratuity_per_year * 5
 
-			p_earned_gpm = p_gratuity_per_month  * 0
+			# p_earned_gpm = p_gratuity_per_month  * 0
 
-			p_earned_gpd = p_gratuity_per_day * 0
+			# p_earned_gpd = p_gratuity_per_day * 0
 			
-			p_total_gratuity = p_earned_gpy + p_earned_gpm + p_earned_gpd
+			# p_total_gratuity = p_earned_gpy + p_earned_gpm + p_earned_gpd
 
-			total = p_total_gratuity + total_gratuity
+			# total = p_total_gratuity + total_gratuity
+			per_day_basi = (basic_salary / 30 * 21) /365
+			total_gratuit = per_day_basi * total_days
 			
-			row = [emp.name,emp.employee_name,emp.date_of_joining,yos,total]
+			row = [emp.name,emp.employee_name,emp.date_of_joining,yos,total_gratuit]
 			if diff.years > 1:
 				data.append(row)
 

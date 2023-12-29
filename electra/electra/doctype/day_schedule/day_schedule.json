@@ -11,7 +11,10 @@
   "schedule_date",
   "schedule",
   "amended_from",
-  "project"
+  "project",
+  "staff",
+  "supervisor",
+  "worker"
  ],
  "fields": [
   {
@@ -23,6 +26,7 @@
   {
    "fieldname": "customer",
    "fieldtype": "Link",
+   "hidden": 1,
    "label": "Customer",
    "options": "Customer"
   },
@@ -49,17 +53,37 @@
   {
    "fieldname": "project",
    "fieldtype": "Link",
+   "hidden": 1,
    "label": "Project",
    "options": "Project"
+  },
+  {
+   "fieldname": "staff",
+   "fieldtype": "Int",
+   "hidden": 1,
+   "label": "Staff"
+  },
+  {
+   "fieldname": "supervisor",
+   "fieldtype": "Int",
+   "hidden": 1,
+   "label": "Supervisor"
+  },
+  {
+   "fieldname": "worker",
+   "fieldtype": "Int",
+   "hidden": 1,
+   "label": "Worker"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2022-11-07 11:33:19.675234",
+ "modified": "2023-09-26 15:56:51.772358",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Day Schedule",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {
@@ -76,9 +100,22 @@
    "share": 1,
    "submit": 1,
    "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Projects Manager",
+   "share": 1,
+   "write": 1
   }
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }

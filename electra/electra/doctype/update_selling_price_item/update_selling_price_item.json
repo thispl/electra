@@ -7,6 +7,7 @@
  "field_order": [
   "item_code",
   "item_name",
+  "surface_area",
   "selling_price",
   "update",
   "item_marked"
@@ -41,12 +42,17 @@
    "fieldtype": "Link",
    "label": "Item Marked",
    "options": "Item Price"
+  },
+  {
+   "fieldname": "surface_area",
+   "fieldtype": "Float",
+   "label": "Surface Area"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2022-11-18 12:25:58.458335",
+ "modified": "2023-01-24 09:19:34.261914",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Update Selling Price Item",
@@ -54,5 +60,6 @@
  "permissions": [],
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }

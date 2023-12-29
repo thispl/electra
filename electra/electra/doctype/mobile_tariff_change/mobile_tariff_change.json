@@ -1,6 +1,6 @@
 {
  "actions": [],
- "autoname": "field:employee_name",
+ "autoname": "ELE/HRA/27/.####",
  "creation": "2021-08-14 13:37:55.945773",
  "doctype": "DocType",
  "editable_grid": 1,
@@ -87,6 +87,7 @@
    "fieldtype": "Column Break"
   },
   {
+   "default": "Today",
    "fieldname": "date",
    "fieldtype": "Date",
    "label": "Date"
@@ -98,19 +99,20 @@
    "label": "Date of Joining"
   },
   {
-   "collapsible": 1,
    "fieldname": "request_section",
    "fieldtype": "Section Break",
    "label": "Request Details"
   },
   {
    "fetch_from": "emp_id.service_provider",
+   "fetch_if_empty": 1,
    "fieldname": "service_provider",
    "fieldtype": "Data",
    "label": "Service provider"
   },
   {
    "fetch_from": "emp_id.mobile_number",
+   "fetch_if_empty": 1,
    "fieldname": "service_no",
    "fieldtype": "Int",
    "label": "Service Number",
@@ -118,15 +120,19 @@
   },
   {
    "fetch_from": "emp_id.current_plan",
+   "fetch_if_empty": 1,
    "fieldname": "current_plan",
    "fieldtype": "Data",
-   "label": "Current Plan"
+   "label": "Current Plan",
+   "reqd": 1
   },
   {
    "fetch_from": "emp_id.current_benefits",
+   "fetch_if_empty": 1,
    "fieldname": "benefits",
    "fieldtype": "Data",
-   "label": "Current Benefits"
+   "label": "Current Benefits",
+   "reqd": 1
   },
   {
    "fieldname": "section_break_19",
@@ -142,17 +148,20 @@
   {
    "fieldname": "plan_name",
    "fieldtype": "Data",
-   "label": "Plan Name"
+   "label": "Plan Name",
+   "reqd": 1
   },
   {
    "fieldname": "amount_3",
    "fieldtype": "Int",
-   "label": "Proposed Amount"
+   "label": "Proposed Amount",
+   "reqd": 1
   },
   {
    "fieldname": "plan_activation_date",
    "fieldtype": "Date",
-   "label": "Plan Activation Date"
+   "label": "Plan Activation Date",
+   "reqd": 1
   },
   {
    "fieldname": "comments",
@@ -166,10 +175,10 @@
   {
    "fieldname": "amount_2",
    "fieldtype": "Data",
-   "label": "Current Amount"
+   "label": "Current Amount",
+   "reqd": 1
   },
   {
-   "collapsible": 1,
    "fieldname": "employee_details",
    "fieldtype": "Section Break",
    "label": "Employee Details"
@@ -226,12 +235,14 @@
   {
    "fieldname": "plan_amount",
    "fieldtype": "Data",
-   "label": "Plan Amount"
+   "label": "Plan Amount",
+   "reqd": 1
   },
   {
    "fieldname": "plan_benefits",
    "fieldtype": "Data",
-   "label": "Plan Benefits"
+   "label": "Plan Benefits",
+   "reqd": 1
   },
   {
    "fieldname": "section_break_25",
@@ -276,20 +287,23 @@
   {
    "fieldname": "proposed_plan",
    "fieldtype": "Data",
-   "label": "Proposed Plan"
+   "label": "Proposed Plan",
+   "reqd": 1
   },
   {
    "fieldname": "proposed_benefits",
    "fieldtype": "Data",
-   "label": "Proposed Benefits"
+   "label": "Proposed Benefits",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-01 07:35:17.775871",
+ "modified": "2023-08-31 13:01:05.783744",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Mobile Tariff Change",
+ "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
   {
@@ -307,5 +321,6 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }

@@ -66,9 +66,11 @@
    "fetch_from": "emp_id.date_of_joining",
    "fieldname": "doj",
    "fieldtype": "Date",
-   "label": "Date of Joining"
+   "label": "Date of Joining",
+   "read_only": 1
   },
   {
+   "default": "Today",
    "fieldname": "date_of_evaluation",
    "fieldtype": "Date",
    "label": "Date of Evaluation"
@@ -178,10 +180,11 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-10-28 15:38:05.644976",
+ "modified": "2023-12-07 07:39:17.020778",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Staff Skill Mapping Form",
+ "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [
   {
@@ -199,5 +202,6 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }

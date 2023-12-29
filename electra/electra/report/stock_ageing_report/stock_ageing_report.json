@@ -1,5 +1,5 @@
 {
- "add_total_row": 0,
+ "add_total_row": 1,
  "columns": [],
  "creation": "2022-03-15 08:04:24.624220",
  "disable_prepared_report": 0,
@@ -10,7 +10,7 @@
  "idx": 0,
  "is_standard": "Yes",
  "letter_head": "Al - Shaghairi Trading and Contracting Company W.L.L (ELECTRA)",
- "modified": "2022-03-15 08:04:24.624220",
+ "modified": "2023-07-18 10:19:44.273567",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Stock Ageing Report",

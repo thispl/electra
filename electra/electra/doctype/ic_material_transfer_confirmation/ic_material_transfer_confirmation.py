@@ -9,7 +9,7 @@ from erpnext.accounts.doctype.sales_invoice.sales_invoice import get_mode_of_pay
 class ICMaterialTransferConfirmation(Document):
     def on_submit(self):
         source_company = frappe.get_value("IC Material Transfer Request",self.ic_material_transfer_request,"source_company")
-        mpinfo = get_mode_of_payment_info("Wire Transfer",source_company)
+        mpinfo = get_mode_of_payment_info("Wire Transfer - CBQ-4020",source_company)
         if len(mpinfo) > 0:
             default_account = mpinfo[0]['default_account']
         if self.workflow_state == 'Transfer Confirmed':
@@ -21,7 +21,7 @@ class ICMaterialTransferConfirmation(Document):
             si.is_pos = 1
             si.pos_profile = source_company
             for item in self.items:
-                lvr = get_last_valuation_rate(item.item_code)
+                lvr = get_last_valuation_rate(item.item_code,source_company)
                 si.append("items",{
                     "item_code" : item.item_code,
                     "qty" : item.qty,
@@ -33,7 +33,7 @@ class ICMaterialTransferConfirmation(Document):
                 })
             si.insert()
             si.append("payments",{
-                    "mode_of_payment" : "Wire Transfer",
+                    "mode_of_payment" : "Wire Transfer - CBQ-4020",
                     "amount" : si.rounded_total,
                     "account" : default_account
                 })

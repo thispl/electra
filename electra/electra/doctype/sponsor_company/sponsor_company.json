@@ -205,6 +205,7 @@
   {
    "fieldname": "sponsor_company_name",
    "fieldtype": "Link",
+   "ignore_user_permissions": 1,
    "label": "Sponsor Company Title",
    "options": "Company"
   },
@@ -215,10 +216,11 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-04-10 10:25:41.197329",
+ "modified": "2022-11-24 13:19:12.741058",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Sponsor Company",
+ "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [
   {
@@ -236,5 +238,6 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }

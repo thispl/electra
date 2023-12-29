@@ -1,6 +1,6 @@
 {
  "actions": [],
- "autoname": "field:name1",
+ "autoname": "ELE/HRA/19/.####",
  "creation": "2021-08-12 11:34:46.018472",
  "doctype": "DocType",
  "editable_grid": 1,
@@ -226,6 +226,7 @@
    "fieldtype": "Column Break"
   },
   {
+   "default": "Today",
    "fieldname": "date",
    "fieldtype": "Date",
    "label": "Date of Evaluation"
@@ -295,10 +296,11 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-10-31 08:33:22.869398",
+ "modified": "2023-05-31 08:06:39.170500",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Staff Disciplinary Action Form",
+ "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
   {
@@ -315,5 +317,6 @@
   }
  ],
  "sort_field": "modified",
- "sort_order": "DESC"
+ "sort_order": "DESC",
+ "states": []
 }

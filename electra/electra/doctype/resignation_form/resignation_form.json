@@ -17,16 +17,15 @@
   "passport_number",
   "resignation_type",
   "column_break_11",
-  "date_of_change",
   "session_user",
-  "requested_relieving_date",
+  "request_relieving_date",
   "reason",
   "section_break_16",
   "hods_relieving_date",
   "new_qid_no",
   "column_break_19",
   "approved_relieving_date",
-  "actual_relieving_date",
+  "date_of_change",
   "amended_from"
  ],
  "fields": [
@@ -116,21 +115,10 @@
    "read_only": 1
   },
   {
-   "default": "Today",
-   "fieldname": "date_of_change",
-   "fieldtype": "Date",
-   "label": "Date"
-  },
-  {
    "fieldname": "session_user",
    "fieldtype": "Data",
    "label": "Session User",
    "read_only": 1
-  },
-  {
-   "fieldname": "requested_relieving_date",
-   "fieldtype": "Date",
-   "label": "Requested Relieving Date"
   },
   {
    "fieldname": "reason",
@@ -164,18 +152,24 @@
    "label": "Approved Relieving Date"
   },
   {
-   "fieldname": "actual_relieving_date",
+   "fieldname": "date_of_change",
    "fieldtype": "Date",
    "label": "Actual Relieving Date"
+  },
+  {
+   "fieldname": "request_relieving_date",
+   "fieldtype": "Date",
+   "label": "Requested Relieving Date"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2022-09-12 08:05:29.811074",
+ "modified": "2023-11-13 09:23:00.163228",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Resignation Form",
+ "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [
   {
@@ -193,5 +187,6 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }

@@ -27,7 +27,7 @@ frappe.ui.form.LinkSelector.prototype.make = function() {
 			// fields.push({
 			// 		fieldtype: "Column Break", fieldname: "col_1"})
 			fields.push({
-					fieldtype: "Data", fieldname: "name", label: __("Name")})
+					fieldtype: "Data", fieldname: "name", label: __("Item Code")})
 			fields.push({
 					fieldtype: "Column Break", fieldname: "col_2"})
 			fields.push({
@@ -63,20 +63,20 @@ frappe.ui.form.LinkSelector.prototype.make = function() {
 
 	
 		if(jQuery.inArray(this.doctype, search_docs) !== -1){
-			console.log("---------e.which-----------")
+			// console.log("---------e.which-----------")
 			if (this.name)
 				this.dialog.fields_dict.name.set_input(this.name);
 			if (this.description)
 				this.dialog.fields_dict.description.set_input(this.description);
 			this.dialog.get_input("name").on("keydown", function (e) {
-				console.log(e.which)
+				// console.log(e.which)
 				// if (e.which === 13) {
 					me.start = 0;
 					me.search();
 				// }
 			});
 			this.dialog.get_input("description").on("keydown", function (e) {
-				console.log(e.which)
+				// console.log(e.which)
 				// if (e.which === 13) {
 					me.start = 0;
 					me.search();
@@ -213,7 +213,7 @@ frappe.ui.form.LinkSelector.prototype.search = function() {
 	}
 
 frappe.ui.form.LinkSelector.prototype.set_in_grid = function(value) {
-	console.log("--setingrid--")
+	// console.log("--setingrid--")
 	var me = this, updated = false;
 		var d = null;
 		if (this.qty_fieldname) {
@@ -221,7 +221,7 @@ frappe.ui.form.LinkSelector.prototype.set_in_grid = function(value) {
 				fieldname: "qty", fieldtype: "Float", label: "Qty",
 				"default": 1, reqd: 1
 			}, function (data) {
-				console.log(data)
+				// console.log(data)
 				$.each(me.target.frm.doc[me.target.df.fieldname] || [], function (i, d) {
 					if (d[me.fieldname] === value) {
 						frappe.model.set_value(d.doctype, d.name, me.qty_fieldname, data.qty);
@@ -479,7 +479,7 @@ frappe.link_searchs = function (doctype, args, name_data, description_data, call
 		type: "GET",
 		args: args,
 		callback: function (r) {
-			console.log(r)
+			// console.log(r)
 			callback && callback(r);
 		},
 		btn: btn

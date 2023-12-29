@@ -6,6 +6,8 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+  "section_break_3",
+  "html_2",
   "section_break_1",
   "naming_series",
   "cost_estimation",
@@ -20,25 +22,33 @@
   "ce_scope_of_work_section",
   "master_scope_of_work",
   "section_break_26",
-  "total_cost_of_the_project",
-  "column_break_25",
-  "total_bidding_price",
-  "column_break_28",
-  "total_business_promotion",
+  "discount_tolerance",
   "column_break_30",
+  "discount_tolerance_amount",
+  "discount_upto",
+  "10",
+  "sow_discount_tolerance_",
+  "column_break_23",
+  "sow_discount_tolerance_amount",
+  "sow_discount_amount_upto",
   "total_overheads",
+  "section_break_27",
+  "tct",
   "total_cost_section",
   "total_overhead",
   "engineering_overhead",
   "contigency_percent",
   "gross_profit_percent",
   "net_profit_percent",
+  "total_business_promotion",
   "column_break_21",
   "total_amount_as_overhead",
   "total_amount_as_engineering_overhead",
   "contigency",
   "gross_profit_amount",
   "net_profit_amount",
+  "total_cost_of_the_project",
+  "total_bidding_price",
   "applicable_sections_section",
   "a_design",
   "b_materials",
@@ -49,59 +59,62 @@
   "i_manpower",
   "f_tools__equipment__transport",
   "g_others",
-  "design_calculation_section",
+  "sow_tab",
   "design_calculation",
   "design_cost",
   "design_amount",
   "design_amount_with_overheads",
   "design_profit",
-  "materials_section",
   "materials",
   "materials_cost",
   "materials_amount",
   "materials_amount_with_overheads",
   "materials_profit",
-  "finishing_work_section",
   "finishing_work",
   "finishing_work_cost",
   "finishing_work_amount",
   "finishing_work_amount_with_overheads",
   "finishing_work_profit",
-  "bolts_accessories_section",
   "bolts_accessories",
   "accessories_cost",
   "accessories_amount",
   "accessories_amount_with_overheads",
   "accessories_profit",
-  "fabrication_installation_section",
   "installation",
   "installation_cost",
   "installation_amount",
   "installation_amount_with_overheads",
   "installation_profit",
-  "manpower_section",
-  "manpower",
   "manpower_cost",
   "manpower_amount",
   "manpower_amount_with_overheads",
   "manpower_profit",
-  "heavy_equipments_section",
   "heavy_equipments",
   "heavy_equipments_cost",
   "heavy_equipments_amount",
   "heavy_equipments_amount_with_overheads",
   "heavy_equipments_profit",
-  "manpower_subcontract_section",
   "manpower_subcontract",
   "others_cost",
   "others_amount",
   "others_amount_with_overheads",
   "others_profit",
+  "finished_goods",
+  "finished_goods_cost",
+  "finished_goods_amount",
+  "finished_goods_amount_with_overheads",
+  "finished_goods_profit",
+  "finished_goods_qty_total",
+  "finished_goods_cost_price",
+  "finished_goods_selling_price",
+  "manpower",
   "more_information_section",
   "remarks",
   "opportunity",
   "project_budget",
-  "amended_from"
+  "amended_from",
+  "column_break_108",
+  "quotation"
  ],
  "fields": [
   {
@@ -125,7 +138,8 @@
    "fieldtype": "Link",
    "in_standard_filter": 1,
    "label": "Company",
-   "options": "Company"
+   "options": "Company",
+   "reqd": 1
   },
   {
    "fieldname": "column_break_8",
@@ -144,87 +158,44 @@
    "reqd": 1
   },
   {
-   "collapsible": 1,
-   "depends_on": "eval:doc.__islocal != 1",
-   "fieldname": "design_calculation_section",
-   "fieldtype": "Section Break",
-   "label": "DESIGN"
-  },
-  {
    "fieldname": "design_calculation",
    "fieldtype": "Table",
+   "label": "Design",
    "options": "CE DESIGN CALCULATION",
    "read_only": 1
   },
   {
-   "collapsible": 1,
-   "depends_on": "eval:doc.__islocal != 1",
-   "fieldname": "materials_section",
-   "fieldtype": "Section Break",
-   "label": "MATERIALS"
-  },
-  {
    "fieldname": "materials",
    "fieldtype": "Table",
+   "label": "Supply Materials",
    "options": "CE MATERIALS",
    "read_only": 1
   },
   {
-   "collapsible": 1,
-   "depends_on": "eval:doc.__islocal != 1",
-   "fieldname": "finishing_work_section",
-   "fieldtype": "Section Break",
-   "label": "FINISHING WORK"
-  },
-  {
    "fieldname": "finishing_work",
    "fieldtype": "Table",
+   "label": "Finishing Work",
    "options": "CE FINISHING WORK",
    "read_only": 1
   },
   {
-   "collapsible": 1,
-   "depends_on": "eval:doc.__islocal != 1",
-   "fieldname": "bolts_accessories_section",
-   "fieldtype": "Section Break",
-   "label": "ACCESSORIES"
-  },
-  {
    "fieldname": "bolts_accessories",
    "fieldtype": "Table",
+   "label": "Accessories",
    "options": "CE BOLTS ACCESSORIES",
    "read_only": 1
   },
   {
-   "collapsible": 1,
-   "depends_on": "eval:doc.__islocal != 1",
-   "fieldname": "fabrication_installation_section",
-   "fieldtype": "Section Break",
-   "label": "INSTALLATION"
-  },
-  {
-   "collapsible": 1,
-   "depends_on": "eval:doc.__islocal != 1",
-   "fieldname": "heavy_equipments_section",
-   "fieldtype": "Section Break",
-   "label": "TOOLS / EQUIPMENT / TRANSPORT / OTHERS"
-  },
-  {
    "fieldname": "heavy_equipments",
    "fieldtype": "Table",
+   "label": "Heavy Equipments",
    "options": "CE HEAVY EQUIPMENTS",
    "read_only": 1
   },
   {
-   "collapsible": 1,
-   "depends_on": "eval:doc.__islocal != 1",
-   "fieldname": "manpower_subcontract_section",
-   "fieldtype": "Section Break",
-   "label": "SUBCONTRACT"
-  },
-  {
    "fieldname": "manpower_subcontract",
    "fieldtype": "Table",
+   "label": "Subcontract",
    "options": "CE MANPOWER SUBCONTRACT",
    "read_only": 1
   },
@@ -237,7 +208,8 @@
    "fieldname": "cost_estimation_for",
    "fieldtype": "Select",
    "label": "Cost Estimation For",
-   "options": "\nLead\nCustomer"
+   "options": "\nLead\nCustomer",
+   "reqd": 1
   },
   {
    "fieldname": "lead_customer",
@@ -245,7 +217,8 @@
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Lead Customer",
-   "options": "cost_estimation_for"
+   "options": "cost_estimation_for",
+   "reqd": 1
   },
   {
    "fieldname": "opportunity",
@@ -277,7 +250,7 @@
    "default": "0",
    "fieldname": "b_materials",
    "fieldtype": "Check",
-   "label": "MATERIALS"
+   "label": "SUPPLY MATERIALS"
   },
   {
    "default": "0",
@@ -346,13 +319,6 @@
    "label": "MANPOWER"
   },
   {
-   "collapsible": 1,
-   "depends_on": "eval:doc.__islocal != 1",
-   "fieldname": "manpower_section",
-   "fieldtype": "Section Break",
-   "label": "MANPOWER"
-  },
-  {
    "fieldname": "total_overhead",
    "fieldtype": "Percent",
    "label": "OVERHEAD %",
@@ -399,10 +365,6 @@
    "read_only": 1
   },
   {
-   "fieldname": "column_break_28",
-   "fieldtype": "Column Break"
-  },
-  {
    "fieldname": "total_overheads",
    "fieldtype": "Currency",
    "hidden": 1,
@@ -432,10 +394,6 @@
   },
   {
    "fieldname": "column_break_30",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "column_break_25",
    "fieldtype": "Column Break"
   },
   {
@@ -553,6 +511,7 @@
   {
    "fieldname": "installation",
    "fieldtype": "Table",
+   "label": "Installation",
    "options": "CE FABRICATION INSTALLATION",
    "read_only": 1
   },
@@ -580,6 +539,7 @@
   {
    "fieldname": "manpower",
    "fieldtype": "Table",
+   "label": "Manpower",
    "options": "CE INSTALLATION MANPOWER",
    "read_only": 1
   },
@@ -711,19 +671,156 @@
   {
    "allow_on_submit": 1,
    "fieldname": "project_budget",
-   "fieldtype": "Link",
+   "fieldtype": "Data",
    "hidden": 1,
-   "label": "Project Budget",
-   "options": "Project Budget"
+   "label": "Project Budget"
+  },
+  {
+   "fieldname": "finished_goods",
+   "fieldtype": "Table",
+   "label": "Finished Goods",
+   "options": "CE FINISHED GOODS",
+   "read_only": 1
+  },
+  {
+   "fieldname": "finished_goods_cost",
+   "fieldtype": "Currency",
+   "label": "Finished Goods Cost"
+  },
+  {
+   "fieldname": "finished_goods_amount",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Finished Goods Amount"
+  },
+  {
+   "fieldname": "finished_goods_amount_with_overheads",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Finished Goods Amount with Overheads"
+  },
+  {
+   "fieldname": "finished_goods_profit",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Finished Goods Profit"
+  },
+  {
+   "fieldname": "finished_goods_qty_total",
+   "fieldtype": "Int",
+   "label": "Finished Goods Qty Total"
+  },
+  {
+   "fieldname": "finished_goods_cost_price",
+   "fieldtype": "Int",
+   "label": "Finished Goods Cost Price"
+  },
+  {
+   "fieldname": "finished_goods_selling_price",
+   "fieldtype": "Int",
+   "label": "Finished Goods Selling Price"
+  },
+  {
+   "fieldname": "html_2",
+   "fieldtype": "HTML",
+   "options": "<h6 style=\"color: red;\"><b>Alert:</b>.Please save the CESOW and submit the <b>Cost Estimation</b></h6>"
+  },
+  {
+   "fieldname": "section_break_3",
+   "fieldtype": "Section Break"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "discount_tolerance",
+   "fieldtype": "Percent",
+   "label": "Discount Tolerance %"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "discount_tolerance_amount",
+   "fieldtype": "Currency",
+   "label": "Discount Tolerance Amount"
+  },
+  {
+   "fieldname": "sow_tab",
+   "fieldtype": "Tab Break",
+   "label": "Project Material"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "discount_upto",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Discount Amount Upto"
+  },
+  {
+   "fieldname": "10",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "sow_discount_tolerance_",
+   "fieldtype": "Percent",
+   "label": "SoW Discount Tolerance %",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_23",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "sow_discount_tolerance_amount",
+   "fieldtype": "Currency",
+   "label": "SoW Discount Tolerance Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "sow_discount_amount_upto",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "SoW Discount Amount Upto"
+  },
+  {
+   "fieldname": "tct",
+   "fieldtype": "HTML",
+   "label": "TCT"
+  },
+  {
+   "fieldname": "section_break_27",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_108",
+   "fieldtype": "Column Break"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "quotation",
+   "fieldtype": "Data",
+   "label": "Quotation",
+   "permlevel": 2
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
- "links": [],
- "modified": "2022-11-08 12:08:51.497494",
+ "links": [
+  {
+   "link_doctype": "Quotation",
+   "link_fieldname": "cost_estimation"
+  },
+  {
+   "link_doctype": "Project Budget",
+   "link_fieldname": "cost_estimation"
+  },
+  {
+   "link_doctype": "Sales Order",
+   "link_fieldname": "cost_estimation"
+  }
+ ],
+ "modified": "2023-11-02 10:29:27.226033",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Cost Estimation",
+ "naming_rule": "By \"Naming Series\" field",
  "owner": "Administrator",
  "permissions": [
   {
@@ -789,5 +886,6 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }
