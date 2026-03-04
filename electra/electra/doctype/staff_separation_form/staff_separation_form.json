@@ -6,8 +6,8 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "employee_name",
   "emp_no",
+  "employee_name",
   "job_title",
   "dept",
   "column_break_5",
@@ -52,8 +52,9 @@
   },
   {
    "fieldname": "emp_no",
-   "fieldtype": "Data",
-   "label": "Emp No"
+   "fieldtype": "Link",
+   "label": "Emp No",
+   "options": "Employee"
   },
   {
    "fieldname": "job_title",
@@ -245,7 +246,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-09-26 12:27:40.632406",
+ "modified": "2024-04-30 09:20:58.840406",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Staff Separation Form",

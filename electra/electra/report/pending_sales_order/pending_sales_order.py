@@ -6,39 +6,39 @@ from frappe.utils import flt
 import erpnext
 
 def execute(filters=None):
-	columns = get_columns(filters)
-	data = get_data(filters)
-	return columns, data
+    columns = get_columns(filters)
+    data = get_data(filters)
+    return columns, data
 
 def get_columns(filters):
-	columns = []
-	columns += [
-		_("Sales Order") + ":Link/Sales Order:200",
-		_("Date") + ":Date/:110",
-		_("Customer") + ":Link/Customer:200",
-		_("L.P.O.No") + ":Data/ :200",
-		# _("Net Amount") + ":Currency/:100",
-		_("Order Qty") + ":Float/:100",
-		_("Delivered Qty") + ":Float/:100",
-		_("Balance") + ":Float/:100",
-		_("Cost") + ":Currency/:100",
-		_("Value") + ":Currency/:100",
-		# _("Profit") + ":Currency/:100" ,
-		# _("Percentage") + ":Percentage/:100"
-	]
-	return columns
+    columns = []
+    columns += [
+        _("Sales Order") + ":Link/Sales Order:200",
+        _("Date") + ":Date/:110",
+        _("Customer") + ":Link/Customer:200",
+        _("L.P.O.No") + ":Data/ :200",
+        _("Order Qty") + ":Data/:100",
+        _("Delivered Qty") + ":Data/:100",
+        _("Balance") + ":Data/:100",
+        _("Cost") + ":Currency/:100",
+        _("Value") + ":Currency/:100",
+    ]
+    return columns
+
+
 def get_data(filters):
 	data = []
 	total = 0
-	sa = frappe.db.sql(""" select parent,qty,delivered_qty,rate from `tabSales Order Item` where `tabSales Order Item`.item_code = '%s' """ %(filters.item_code),as_dict=True)
-	for i in sa:
-		if i.qty == i.delivered_qty:
-			pass
-		else:
-			sb = frappe.get_doc("Sales Order", i.parent)
-			bal = i.qty - i.delivered_qty
-			if sb.docstatus == 1:
-				total = bal * i.rate
-				row = [i.parent,sb.transaction_date,sb.customer,sb.po_no,i.qty,i.delivered_qty,bal,i.rate,total]
+	sa = frappe.get_list("Sales Order", {"transaction_date": ('between', (filters.from_date, filters.to_date)), "status": ('!=', "Closed"),"docstatus":1}, ["name", "transaction_date", "customer", "po_no"])
+	for so in sa:
+		sb = frappe.get_all("Sales Order Item", {"parent": so.name, "item_code": filters.item_code}, ["qty", "delivered_qty", "rate"])
+		for j in sb:
+			if j.qty == j.delivered_qty:
+				continue
+			else:
+				bal = j.qty - j.delivered_qty
+				total = bal * j.rate
+				row = [so.name, so.transaction_date, so.customer,so.po_no,round(j.qty,2), round(j.delivered_qty,2),round(bal,2), round(j.rate,2), round(total,2)]
 				data.append(row)
-	return data	
+
+	return data

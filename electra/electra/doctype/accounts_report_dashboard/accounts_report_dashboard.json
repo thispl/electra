@@ -1,0 +1,141 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-02-01 08:06:11.191462",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "report",
+  "print",
+  "download",
+  "from_date",
+  "to_date",
+  "account",
+  "sales_person_user",
+  "customer",
+  "company",
+  "company_multiselect",
+  "project",
+  "so_no",
+  "currency",
+  "letter_head"
+ ],
+ "fields": [
+  {
+   "depends_on": "eval:doc.report != \"Accounts Receivable Aging Report\" && doc.report !=\"Accounts Receivable Report\"",
+   "fieldname": "from_date",
+   "fieldtype": "Date",
+   "label": "From Date",
+   "mandatory_depends_on": "eval:doc.report=='Statement of Account'"
+  },
+  {
+   "depends_on": "eval:doc.report != \"Accounts Receivable Aging Report\" && doc.report !=\"Accounts Receivable Report\"",
+   "fieldname": "to_date",
+   "fieldtype": "Date",
+   "label": "To Date",
+   "mandatory_depends_on": "eval:doc.report=='Statement of Account'"
+  },
+  {
+   "depends_on": "eval:doc.report != \"Sales Person Wise Income Report\" && doc.report!='Statement of Account' &&doc.report!='Statement of Account Excel Report' && doc.report !=\"Accounts Receivable Aging Report\" && doc.report != \"Receipt Report\" && doc.report !=\"Accounts Ledger Summary Report\" && doc.report !=\"Accounts Receivable Report\"",
+   "fieldname": "account",
+   "fieldtype": "Link",
+   "label": "Account",
+   "options": "Account"
+  },
+  {
+   "fieldname": "report",
+   "fieldtype": "Select",
+   "label": "Report",
+   "options": "\nGroup Summary Report\nCustomer Ledger Report\nLedger Summary Report\nSales Person Wise Income Report\nAccounts Receivable Report\nAccounts Ledger Summary Report\nStatement of Account\nAccounts Receivable Aging Report\nReceipt Report"
+  },
+  {
+   "depends_on": "eval:doc.report != \"Sales Person Wise Income Report\" && doc.report !=\"Accounts Receivable Report\" && doc.report !=\"Accounts Receivable Aging Report\" && doc.report != \"Group Summary Report\"",
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "mandatory_depends_on": "eval:doc.report=='Statement of Account'",
+   "options": "Company"
+  },
+  {
+   "depends_on": "eval:doc.report == \"Sales Person Wise Income Report\" || doc.report!='Statement of Account' && doc.report!='Statement of Account Excel Report' && doc.report !=\"Accounts Receivable Report\" && doc.report !=\"Accounts Receivable Aging Report\" && doc.report != \"Receipt Report\" && doc.report !=\"Accounts Ledger Summary Report\" && doc.report != \"Group Summary Report\"",
+   "fieldname": "company_multiselect",
+   "fieldtype": "Table MultiSelect",
+   "label": "Company",
+   "options": "Company Multiselect"
+  },
+  {
+   "fieldname": "print",
+   "fieldtype": "Button",
+   "label": "Print"
+  },
+  {
+   "fieldname": "download",
+   "fieldtype": "Button",
+   "label": "Download"
+  },
+  {
+   "depends_on": "eval:doc.report == \"Sales Person Wise Income Report\" || doc.report!='Statement of Account' && doc.report !=\"Accounts Receivable Report\" && doc.report !=\"Accounts Receivable Aging Report\" && doc.report != \"Receipt Report\" && doc.report !=\"Accounts Ledger Summary Report\" && doc.report!='Statement of Account Excel Report' && doc.report != \"Group Summary Report\" ",
+   "fieldname": "sales_person_user",
+   "fieldtype": "Link",
+   "label": "Sales Person User",
+   "options": "Sales Person"
+  },
+  {
+   "depends_on": "eval:doc.report!=\"Sales Person Wise Income Report\" && doc.report != \"Salary Register\" && doc.report == \"Customer Ledger Report\" && doc.report != \"Receipt Report\" ||doc.report == \"Sales Person Wise Income Report\" ||doc.report ==\"Accounts Ledger Summary Report\" || doc.report=='Statement of Account' || doc.report=='Statement of Account Excel Report' || doc.report ==\"Accounts Receivable Aging Report\" && doc.report!=\"Sales Person Wise Income Report\"",
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Customer"
+  },
+  {
+   "depends_on": "eval:doc.report ==\"Accounts Receivable Report\" && doc.report !=\"Accounts Receivable Aging Report\" && doc.report != \"Receipt Report\" && doc.report !=\"Accounts Ledger Summary Report\"",
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "label": "Project",
+   "options": "Project"
+  },
+  {
+   "depends_on": "eval:doc.report ==\"Accounts Receivable Report\" && doc.report !=\"Accounts Receivable Aging Report\" && doc.report != \"Receipt Report\" && doc.report !=\"Accounts Ledger Summary Report\"",
+   "fieldname": "so_no",
+   "fieldtype": "Link",
+   "label": "Sales Order",
+   "options": "Sales Order"
+  },
+  {
+   "depends_on": "doc.report !=\"Accounts Receivable Report\" && doc.report!=\"Sales Person Wise Income Report\"",
+   "fieldname": "currency",
+   "fieldtype": "Link",
+   "label": "Currency",
+   "options": "Currency"
+  },
+  {
+   "fieldname": "letter_head",
+   "fieldtype": "Link",
+   "label": "Letter Head",
+   "options": "Letter Head"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2024-03-18 15:07:27.897650",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "Accounts Report Dashboard",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

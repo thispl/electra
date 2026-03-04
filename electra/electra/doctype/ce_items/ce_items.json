@@ -40,7 +40,8 @@
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Item Code",
-   "options": "Item"
+   "options": "Item",
+   "reqd": 1
   },
   {
    "columns": 2,
@@ -60,6 +61,7 @@
   {
    "columns": 1,
    "fetch_from": "item.stock_uom",
+   "fetch_if_empty": 1,
    "fieldname": "unit",
    "fieldtype": "Link",
    "in_list_view": 1,
@@ -157,7 +159,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-02-25 08:36:51.283352",
+ "modified": "2024-04-15 07:45:30.493949",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "CE Items",

@@ -15,6 +15,7 @@
   "cost_estimation_for",
   "lead_customer",
   "lead_customer_name",
+  "customer",
   "column_break_8",
   "date_of_estimation",
   "company",
@@ -52,6 +53,7 @@
   "applicable_sections_section",
   "a_design",
   "b_materials",
+  "j_raw",
   "c_finishing_work",
   "d_accessories",
   "column_break_22",
@@ -65,6 +67,10 @@
   "design_amount",
   "design_amount_with_overheads",
   "design_profit",
+  "raw_materials",
+  "raw_materials_cost",
+  "raw_materials_amount",
+  "raw_materials_amount_with_overheads",
   "materials",
   "materials_cost",
   "materials_amount",
@@ -154,6 +160,7 @@
    "fieldname": "project_name",
    "fieldtype": "Data",
    "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Title of Project",
    "reqd": 1
   },
@@ -165,11 +172,11 @@
    "read_only": 1
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "materials",
    "fieldtype": "Table",
    "label": "Supply Materials",
-   "options": "CE MATERIALS",
-   "read_only": 1
+   "options": "CE MATERIALS"
   },
   {
    "fieldname": "finishing_work",
@@ -207,6 +214,7 @@
   {
    "fieldname": "cost_estimation_for",
    "fieldtype": "Select",
+   "in_standard_filter": 1,
    "label": "Cost Estimation For",
    "options": "\nLead\nCustomer",
    "reqd": 1
@@ -215,7 +223,6 @@
    "fieldname": "lead_customer",
    "fieldtype": "Dynamic Link",
    "in_list_view": 1,
-   "in_standard_filter": 1,
    "label": "Lead Customer",
    "options": "cost_estimation_for",
    "reqd": 1
@@ -796,8 +803,51 @@
    "allow_on_submit": 1,
    "fieldname": "quotation",
    "fieldtype": "Data",
-   "label": "Quotation",
-   "permlevel": 2
+   "label": "Quotation"
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "in_standard_filter": 1,
+   "label": "Customer",
+   "options": "Customer",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "depends_on": "eval:doc.company==\"ENGINEERING DIVISION-ELECTRA\"",
+   "fieldname": "j_raw",
+   "fieldtype": "Check",
+   "label": "RAW MATERIALS"
+  },
+  {
+   "depends_on": "raw_materials",
+   "fieldname": "raw_materials",
+   "fieldtype": "Table",
+   "label": "Raw Materials",
+   "options": "CE MATERIALS"
+  },
+  {
+   "fieldname": "raw_materials_cost",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Raw Materials Cost",
+   "read_only": 1
+  },
+  {
+   "fieldname": "raw_materials_amount",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Raw Materials Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "raw_materials_amount_with_overheads",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Raw Materials Amount with overheads",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
@@ -816,7 +866,7 @@
    "link_fieldname": "cost_estimation"
   }
  ],
- "modified": "2023-11-02 10:29:27.226033",
+ "modified": "2026-01-29 13:21:16.484421",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Cost Estimation",

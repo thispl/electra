@@ -100,14 +100,12 @@
   {
    "fieldname": "time_to_finish_work",
    "fieldtype": "Int",
-   "label": "Time to Finish work(Days)",
-   "reqd": 1
+   "label": "Time to Finish work(Days)"
   },
   {
    "fieldname": "work_finished_date",
    "fieldtype": "Date",
-   "label": "Work Finished Date",
-   "reqd": 1
+   "label": "Work Finished Date"
   },
   {
    "fieldname": "vehicle_handover_date",
@@ -136,6 +134,7 @@
    "fieldtype": "Column Break"
   },
   {
+   "fetch_from": ".last_odometer",
    "fieldname": "last_kilometer",
    "fieldtype": "Data",
    "label": "Last Kilometer"
@@ -269,7 +268,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-11-15 07:35:23.813116",
+ "modified": "2024-02-21 07:07:03.463596",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Vehicle Maintenance Check List",

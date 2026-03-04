@@ -33,7 +33,8 @@
   "column_break_22",
   "reporting_date",
   "section_break_13",
-  "eid_holidays"
+  "eid_holidays",
+  "amended_from"
  ],
  "fields": [
   {
@@ -94,7 +95,7 @@
   {
    "fetch_from": "emp_no.employee_name",
    "fieldname": "employee_name",
-   "fieldtype": "Read Only",
+   "fieldtype": "Data",
    "in_list_view": 1,
    "label": "Employee Name"
   },
@@ -145,14 +146,6 @@
    "read_only": 1
   },
   {
-   "fetch_from": "leave_application.employee",
-   "fetch_if_empty": 1,
-   "fieldname": "emp_no",
-   "fieldtype": "Link",
-   "label": "Employee ID",
-   "options": "Employee"
-  },
-  {
    "fieldname": "employee_details",
    "fieldtype": "Section Break",
    "label": "Employee Details"
@@ -176,11 +169,13 @@
    "label": "Designation"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "leave_application",
    "fieldtype": "Link",
    "label": "Leave Application",
    "options": "Leave Application",
-   "read_only": 1
+   "read_only": 1,
+   "reqd": 1
   },
   {
    "fieldname": "re_joining_date",
@@ -193,16 +188,35 @@
    "fieldtype": "Column Break"
   },
   {
-   "fetch_from": "emp_no.grade",
+   "fetch_from": "emp_no.custom_employee_grade",
    "fieldname": "grade",
    "fieldtype": "Data",
    "label": "Grade",
    "read_only": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Rejoining Form",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fetch_from": "leave_application.employee",
+   "fetch_if_empty": 1,
+   "fieldname": "emp_no",
+   "fieldtype": "Link",
+   "label": "Employee ID",
+   "options": "Employee"
   }
  ],
  "index_web_pages_for_search": 1,
+ "is_submittable": 1,
  "links": [],
- "modified": "2023-03-01 09:51:34.023156",
+ "modified": "2025-06-06 13:40:42.497729",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Rejoining Form",

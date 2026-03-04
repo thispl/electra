@@ -25,6 +25,7 @@
   "d_accessories",
   "i_finished_goods",
   "column_break_10",
+  "j_raw",
   "e_installation",
   "f_manpower",
   "g_tools__equipment__transport",
@@ -51,6 +52,13 @@
   "materials_amount",
   "materials_amount_with_overheads",
   "materials_profit",
+  "raw_materials_tab",
+  "raw_materials",
+  "raw_materials_html",
+  "raw_materials_cost",
+  "raw_materials_amount",
+  "raw_materials_amount_with_overheads",
+  "raw_materials_profit",
   "finishing_work_section",
   "finishing_work",
   "finishing_work_html",
@@ -129,7 +137,12 @@
   "discount_section",
   "discount_tolerance_",
   "column_break_123",
-  "discount_tolerance_amount"
+  "discount_tolerance_amount",
+  "round_off_section",
+  "targeted_estimation",
+  "column_break_wovr",
+  "roundoff_adjustment",
+  "adjust"
  ],
  "fields": [
   {
@@ -147,8 +160,7 @@
    "fieldname": "msow",
    "fieldtype": "Link",
    "label": "MSOW ID",
-   "options": "Master Scope of Work",
-   "read_only": 1
+   "options": "Master Scope of Work"
   },
   {
    "fieldname": "ssow",
@@ -430,8 +442,7 @@
    "depends_on": "eval:doc.company !=\"MEP DIVISION - ELECTRA\"",
    "fieldname": "total_amount_as_overhead",
    "fieldtype": "Currency",
-   "label": "Overhead Amount",
-   "read_only": 1
+   "label": "Overhead Amount"
   },
   {
    "depends_on": "eval:doc.company !=\"MEP DIVISION - ELECTRA\"",
@@ -934,12 +945,85 @@
    "fieldname": "discount_tolerance_amount",
    "fieldtype": "Currency",
    "label": "Discount Tolerance Amount"
+  },
+  {
+   "fieldname": "round_off_section",
+   "fieldtype": "Section Break",
+   "label": "Round Off"
+  },
+  {
+   "description": "The permissible limit is\u00a0+/- 1 QAR",
+   "fieldname": "targeted_estimation",
+   "fieldtype": "Currency",
+   "label": "Targeted Estimation"
+  },
+  {
+   "fieldname": "roundoff_adjustment",
+   "fieldtype": "Currency",
+   "label": "Roundoff Adjustment"
+  },
+  {
+   "fieldname": "column_break_wovr",
+   "fieldtype": "Column Break"
+  },
+  {
+   "description": "Round Off value will be adjusted in Net Profit",
+   "fieldname": "adjust",
+   "fieldtype": "Button",
+   "label": "Adjust"
+  },
+  {
+   "default": "0",
+   "depends_on": "eval:doc.company==\"ENGINEERING DIVISION - ELECTRA\"",
+   "fieldname": "j_raw",
+   "fieldtype": "Check",
+   "label": "RAW MATERIALS"
+  },
+  {
+   "depends_on": "eval:doc.j_raw==1",
+   "fieldname": "raw_materials_tab",
+   "fieldtype": "Tab Break",
+   "label": "Raw Materials"
+  },
+  {
+   "fieldname": "raw_materials",
+   "fieldtype": "Table",
+   "label": "RAW MATERIALS",
+   "options": "CE Items"
+  },
+  {
+   "depends_on": "raw_materials",
+   "fieldname": "raw_materials_html",
+   "fieldtype": "HTML",
+   "label": "Raw Materials HTML"
+  },
+  {
+   "depends_on": "raw_materials",
+   "fieldname": "raw_materials_cost",
+   "fieldtype": "Float",
+   "label": "Raw Materials Cost"
+  },
+  {
+   "depends_on": "raw_materials",
+   "fieldname": "raw_materials_amount",
+   "fieldtype": "Currency",
+   "label": "Raw Materials Amount"
+  },
+  {
+   "fieldname": "raw_materials_amount_with_overheads",
+   "fieldtype": "Currency",
+   "label": "Raw Materials Amount with overheads"
+  },
+  {
+   "fieldname": "raw_materials_profit",
+   "fieldtype": "Currency",
+   "label": "Raw Materials Profit"
   }
  ],
  "hide_toolbar": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-11-09 15:24:02.321502",
+ "modified": "2025-04-08 12:09:01.701461",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "CE SOW",

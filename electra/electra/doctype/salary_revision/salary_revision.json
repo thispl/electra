@@ -150,7 +150,7 @@
    "read_only": 1
   },
   {
-   "fetch_from": "employee.grade",
+   "fetch_from": "employee.custom_employee_grade",
    "fieldname": "grade",
    "fieldtype": "Data",
    "label": "Grade",
@@ -283,7 +283,8 @@
    "depends_on": "eval:doc.salary_revision_status == 'Permanent'",
    "fieldname": "effective_date",
    "fieldtype": "Date",
-   "label": "Effective Date"
+   "label": "Effective Date",
+   "reqd": 1
   },
   {
    "fieldname": "salary_revision_status",
@@ -556,7 +557,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-06-25 09:36:04.694253",
+ "modified": "2024-01-15 14:35:55.096094",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Salary Revision",

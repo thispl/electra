@@ -23,6 +23,17 @@ frappe.ui.form.on('Norden Product Search', {
 				})
 			}
 		})
+		frappe.call({
+			method:"electra.utils.get_norden_item_without_cost",
+			args:{
+				item:frm.doc.item,
+			},
+			callback(r){
+				$.each(r.message,function(i,d){
+					frm.fields_dict.html1.$wrapper.empty().append(d)
+				})
+			}
+		})
 	},
 });
 

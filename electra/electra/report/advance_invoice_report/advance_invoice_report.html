@@ -1,0 +1,50 @@
+<h2 class="text-center">{%= __("Advance Invoice Report") %}</h2>
+<style>
+	@media print {
+		.print-button {
+			display: none;
+		}
+	}
+</style>
+<script>
+	function printPage() {
+		window.print();
+	}
+</script>
+<body onload="setTimeout(printPage, 1)">
+<div class="text-center">
+	<button class="print-button" onclick="printPage()">Print</button>
+</div>
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<th style="width: 12%; white-space: nowrap;">{%= __("Advance Invoice") %}</th>
+			<th style="width: 15%; white-space: nowrap;">{%= __("Posting Date") %}</th>
+			<th style="width: 25%; white-space: nowrap;">{%= __("Sales Order") %}</th>
+			<th style="width: 15%; white-space: nowrap;">{%= __("Customer") %}</th>
+			<th style="width: 15%; white-space: nowrap;">{%= __("Sales Person") %}</th>
+			<th style="width: 18%; white-space: nowrap;">{%= __("Company") %}</th>
+			<th style="width: 25%; white-space: nowrap;">{%= __("Project") %}</th>
+			<th style="width: 15%; ">{%= __("Bidding Price") %}</th>
+			<th style="width: 15%; ">{%= __("Advance Amount") %}</th>
+			<th style="width: 15%; ">{%= __("Outstanding Amount") %}</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for(var i=0, l=data.length; i<l; i++) { %}
+			<tr>
+				<td style="white-space: nowrap;">{%= data[i].advance_invoice %}</td>
+				<td style="white-space: nowrap;">{%= frappe.datetime.str_to_user(data[i].posting_date) %}</td>
+				<td >{%= data[i].sales_order %}</td>
+				<td >{%= data[i].customer %}</td>
+				<td >{%= data[i].sales_person %}</td>
+				<td >{%= data[i].company %}</td>
+				<td style="white-space: nowrap;">{%= data[i].project %}</td>
+				<td style="white-space: nowrap;">{%= Math.ceil(parseFloat(data[i].bidding_price) * 100) / 100 %}</td>
+				<td style="white-space: nowrap;">{%= Math.ceil(parseFloat(data[i].advance_amount) * 100) / 100 %}</td>
+				<td style="white-space: nowrap;">{%= Math.ceil(parseFloat(data[i].outstanding_amount) * 100) / 100 %}</td>
+			</tr>
+		{% } %}
+	</tbody>
+	
+</table>

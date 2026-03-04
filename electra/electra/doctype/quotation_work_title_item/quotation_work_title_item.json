@@ -34,6 +34,7 @@
    "fieldtype": "Column Break"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "quantity",
    "fieldtype": "Float",
    "in_list_view": 1,
@@ -52,6 +53,7 @@
    "options": "UOM"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "amount",
    "fieldtype": "Currency",
    "in_list_view": 1,
@@ -73,7 +75,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-02-24 16:55:19.114099",
+ "modified": "2024-08-02 07:57:30.580840",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Quotation Work Title Item",

@@ -8,21 +8,31 @@
  "field_order": [
   "follow_up_for",
   "lead_customer",
-  "column_break_3",
+  "quotation",
   "status",
+  "visit_status",
+  "column_break_3",
+  "call_status",
+  "company",
+  "validation_status",
   "account_manager",
+  "sales_person",
+  "sales_person_name",
+  "visitiing_date",
   "section_break_5",
   "customer_info",
   "basic_details_section",
   "organization_name",
   "person_name",
   "email_address",
-  "industry",
   "column_break_11",
+  "industry",
   "territory",
   "custom_group",
   "billing_currency",
   "market_segment",
+  "address_line_1",
+  "address_line_2",
   "follow_up_details_section",
   "next_contact_date",
   "next_contact_by",
@@ -31,6 +41,7 @@
  ],
  "fields": [
   {
+   "fetch_from": "quotation.quotation_to",
    "fieldname": "follow_up_for",
    "fieldtype": "Select",
    "in_list_view": 1,
@@ -48,7 +59,7 @@
    "fieldtype": "Select",
    "in_list_view": 1,
    "label": "Status",
-   "options": "Lead\nOpen\nReplied\nOpportunity\nQuotation\nLost Quotation\nInterested\nConverted\nDo Not Contact"
+   "options": "\nLead\nOpen\nReplied\nOpportunity\nQuotation\nLost Quotation\nInterested\nConverted\nDo Not Contact"
   },
   {
    "fieldname": "basic_details_section",
@@ -64,6 +75,7 @@
   {
    "fieldname": "person_name",
    "fieldtype": "Data",
+   "in_list_view": 1,
    "label": "Person Name"
   },
   {
@@ -76,9 +88,11 @@
    "fetch_from": "lead_customer.industry",
    "fieldname": "industry",
    "fieldtype": "Data",
+   "hidden": 1,
    "label": "Industry"
   },
   {
+   "fetch_from": "quotation.territory",
    "fieldname": "territory",
    "fieldtype": "Link",
    "label": "Territory",
@@ -87,12 +101,14 @@
   {
    "fieldname": "custom_group",
    "fieldtype": "Link",
+   "hidden": 1,
    "label": "Custom Group",
    "options": "Customer Group"
   },
   {
    "fieldname": "billing_currency",
    "fieldtype": "Link",
+   "hidden": 1,
    "label": "Billing Currency",
    "options": "Currency"
   },
@@ -100,6 +116,7 @@
    "fetch_from": "lead_customer.market_segment",
    "fieldname": "market_segment",
    "fieldtype": "Data",
+   "hidden": 1,
    "label": "Market Segment"
   },
   {
@@ -118,6 +135,7 @@
   {
    "fieldname": "account_manager",
    "fieldtype": "Link",
+   "hidden": 1,
    "label": "Account Manager",
    "options": "User"
   },
@@ -149,15 +167,83 @@
   {
    "fieldname": "to_discuss",
    "fieldtype": "Small Text",
+   "in_list_view": 1,
    "label": "To Discuss"
+  },
+  {
+   "fieldname": "call_status",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Call Status",
+   "options": "\nEffective\nNon Effective"
+  },
+  {
+   "fetch_from": "quotation.company",
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company"
+  },
+  {
+   "fieldname": "visit_status",
+   "fieldtype": "Select",
+   "label": "Visit Status",
+   "options": "\nVisited\nNot Visited"
+  },
+  {
+   "fieldname": "validation_status",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Validation Status",
+   "options": "\nValid\nInvalid\nDormant"
+  },
+  {
+   "fetch_from": "quotation.customer_address",
+   "fieldname": "address_line_1",
+   "fieldtype": "Data",
+   "label": "Address Line 1"
+  },
+  {
+   "fieldname": "address_line_2",
+   "fieldtype": "Data",
+   "label": "Address Line 2"
+  },
+  {
+   "fieldname": "quotation",
+   "fieldtype": "Link",
+   "label": "Quotation",
+   "options": "Quotation"
+  },
+  {
+   "fetch_from": ".converted_by",
+   "fieldname": "sales_person",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Sales Person",
+   "options": "User"
+  },
+  {
+   "fetch_from": "sales_person.full_name",
+   "fieldname": "sales_person_name",
+   "fieldtype": "Link",
+   "label": "Sales Person Name",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "visitiing_date",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "Visiting Date and Time"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2021-11-16 15:21:00.687173",
+ "modified": "2025-02-19 10:54:33.322885",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Sales Follow UP",
+ "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
   {
@@ -175,6 +261,6 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
- "title_field": "organization_name",
+ "states": [],
  "track_changes": 1
 }

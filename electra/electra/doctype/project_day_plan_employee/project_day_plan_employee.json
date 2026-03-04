@@ -36,7 +36,8 @@
    "ignore_user_permissions": 1,
    "in_list_view": 1,
    "label": "Employee",
-   "options": "Employee"
+   "options": "Employee",
+   "reqd": 1
   },
   {
    "fetch_from": "employee.employee_name",
@@ -57,33 +58,33 @@
   },
   {
    "columns": 1,
-   "default": "0",
    "fieldname": "from_time",
    "fieldtype": "Time",
    "label": "From Time"
   },
   {
    "columns": 1,
-   "default": "0",
    "fieldname": "to_time",
    "fieldtype": "Time",
    "label": "To Time"
   },
   {
    "columns": 1,
-   "default": "0",
+   "default": "8",
    "fieldname": "total_working_hours",
-   "fieldtype": "Time",
+   "fieldtype": "Select",
    "in_list_view": 1,
-   "label": "WH"
+   "label": "WH",
+   "options": "\n6\n8"
   },
   {
    "columns": 1,
    "default": "0",
    "fieldname": "ot",
-   "fieldtype": "Time",
+   "fieldtype": "Select",
    "in_list_view": 1,
-   "label": "OT"
+   "label": "OT",
+   "options": "\n0\n0.5\n1\n1.5\n2\n2.5\n3\n3.5\n4\n4.5\n5\n5.5\n6\n6.5\n7\n7.5\n8\n8.5\n9\n9.5\n10\n10.5\n11\n11.5\n12\n12.5\n13\n13.5\n14\n14.5\n15\n15.5"
   },
   {
    "fieldname": "column_break_3",
@@ -127,7 +128,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-11-20 08:28:29.965396",
+ "modified": "2025-08-05 12:32:49.065225",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Project Day Plan Employee",

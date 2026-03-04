@@ -19,7 +19,12 @@
   "rate",
   "amount",
   "rate_with_overheads",
-  "amount_with_overheads"
+  "amount_with_overheads",
+  "docname",
+  "work_title",
+  "delivered_qty",
+  "billed_qty",
+  "pb_doctype"
  ],
  "fields": [
   {
@@ -126,12 +131,37 @@
    "fieldtype": "Currency",
    "label": "Estimated Amount",
    "read_only": 1
+  },
+  {
+   "fieldname": "docname",
+   "fieldtype": "Read Only",
+   "label": "Docname"
+  },
+  {
+   "fieldname": "work_title",
+   "fieldtype": "Read Only",
+   "label": "Work Title"
+  },
+  {
+   "fieldname": "delivered_qty",
+   "fieldtype": "Float",
+   "label": "Delivered Qty"
+  },
+  {
+   "fieldname": "billed_qty",
+   "fieldtype": "Float",
+   "label": "Billed Qty"
+  },
+  {
+   "fieldname": "pb_doctype",
+   "fieldtype": "Data",
+   "label": "PB Doctype"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2022-09-15 12:16:33.494818",
+ "modified": "2024-06-14 19:07:14.322117",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "PB Items Manpower",
@@ -139,5 +169,6 @@
  "permissions": [],
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }

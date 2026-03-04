@@ -4,20 +4,7 @@
 
 frappe.query_reports["Stock Confirmation Report"] = {
 	"filters": [
-		{
-			"fieldname": "source_company",
-			"label": __("From Company"),
-			"fieldtype": "Link",
-			"width": "80",
-			"options": "Company"
-		},
-		{
-			"fieldname": "target_company",
-			"label": __(" To Company"),
-			"fieldtype": "Link",
-			"width": "80",
-			"options": "Company"
-		},
+		
 		{
 			"fieldname": "from_date",
 			"label": __("From Date"),
@@ -33,6 +20,29 @@ frappe.query_reports["Stock Confirmation Report"] = {
 			"width": "80",
 		
 		},
+		{
+			"fieldname": "source_company",
+			"label": __("From Company"),
+			"fieldtype": "Link",
+			"width": "80",
+			"options": "Company"
+		},
+		{
+			"fieldname": "target_company",
+			"label": __(" To Company"),
+			"fieldtype": "Link",
+			"width": "80",
+			"options": "Company"
+		},
+		{
+			"fieldname": "is_checked",
+			"label": __("All Companies"),
+			"fieldtype": "Check",
+			"default": 0, 
+			"width": "100px",
+			// "reqd":1,
+
+		}
 		
 	]
 };

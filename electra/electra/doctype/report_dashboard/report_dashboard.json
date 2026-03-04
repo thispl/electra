@@ -16,44 +16,52 @@
   "company",
   "sales_person_user",
   "project",
+  "so_no",
   "account",
-  "company_multiselect"
+  "company_multiselect",
+  "grade",
+  "status",
+  "currency",
+  "sales_person_name",
+  "fiscal_year",
+  "month",
+  "january"
  ],
  "fields": [
   {
    "fieldname": "report",
    "fieldtype": "Select",
    "label": "Report",
-   "options": "\nSalary Register\nWorking Progress Report\nCustomer Ledger Report\nLedger Summary Report\nSales Person Wise Income Report\nWork Order vs Material Request vs Stock Detailed Report\nWork Order vs Material Request vs Stock Brief Report\nBudgeted vs Actual Report\nAccounts Ledger Summary Report"
+   "options": "\nSalary Register\nGroup Summary Report\nWorking Progress Report\nCustomer Ledger Report\nLedger Summary Report\nSales Person Wise Income Report\nAccounts Receivable Report\nWork Order vs Material Request vs Stock Detailed Report\nWork Order vs Material Request vs Stock Brief Report\nBudgeted vs Actual Report\nEstimated vs Actual Report\nAccounts Ledger Summary Report\nMonthly Salary Register Print\nProject Details Report\nEmployee Timesheet Summary - Project\nEmployee Timesheet Summary - Employee\nTarget Vs Achievement Report"
   },
   {
-   "depends_on": "eval:doc.report !=\"Work Order vs Material Request vs Stock Brief Report\" && doc.report != \"Work Order vs Material Request vs Stock Detailed Report\"  && doc.report !=\"Budgeted vs Actual Report\"",
+   "depends_on": "eval:doc.report !=\"Accounts Receivable Report\"  && doc.report != \"Estimated vs Actual Report\" && doc.report !=\"Work Order vs Material Request vs Stock Brief Report\" && doc.report != \"Work Order vs Material Request vs Stock Detailed Report\"  && doc.report !=\"Budgeted vs Actual Report\" && doc.report !=\"Target Vs Achievement Report\"",
    "fieldname": "from_date",
    "fieldtype": "Date",
    "label": "From Date"
   },
   {
-   "depends_on": "eval:doc.report !=\"Work Order vs Material Request vs Stock Brief Report\" && doc.report != \"Work Order vs Material Request vs Stock Detailed Report\"  && doc.report !=\"Budgeted vs Actual Report\" && doc.report !=\"Accounts Ledger Summary Report\"",
+   "depends_on": "eval:doc.report !=\"Accounts Receivable Report\"  && doc.report != \"Estimated vs Actual Report\" && doc.report !=\"Work Order vs Material Request vs Stock Brief Report\" && doc.report != \"Work Order vs Material Request vs Stock Detailed Report\"  && doc.report !=\"Budgeted vs Actual Report\" && doc.report !=\"Accounts Ledger Summary Report\" && doc.report !=\"Target Vs Achievement Report\"",
    "fieldname": "to_date",
    "fieldtype": "Date",
    "label": "To Date"
   },
   {
-   "depends_on": "eval:doc.report !=\"Sales Person Wise Income Report\" && doc.report !=\"Work Order vs Material Request vs Stock Brief Report\"  && doc.report != \"Work Order vs Material Request vs Stock Detailed Report\"  && doc.report !=\"Budgeted vs Actual Report\" && doc.report != \"Ledger Summary Report\"",
+   "depends_on": "eval:doc.report !=\"Accounts Receivable Report\"  && doc.report != \"Estimated vs Actual Report\"  && doc.report !=\"Sales Person Wise Income Report\" && doc.report !=\"Work Order vs Material Request vs Stock Brief Report\"  && doc.report != \"Work Order vs Material Request vs Stock Detailed Report\"  && doc.report !=\"Budgeted vs Actual Report\" && doc.report != \"Ledger Summary Report\"&& doc.report !=\"Project Details Report\" && doc.report !=\"Employee Timesheet Summary - Employee\" && doc.report !=\"Employee Timesheet Summary - Project\" && doc.report !=\"Target Vs Achievement Report\"",
    "fieldname": "division",
    "fieldtype": "Link",
    "label": "Division",
    "options": "Company"
   },
   {
-   "depends_on": "eval:doc.report !=\"Sales Person Wise Income Report\" && doc.report !=\"Work Order vs Material Request vs Stock Brief Report\" && doc.report != \"Work Order vs Material Request vs Stock Detailed Report\" && doc.report !=\"Budgeted vs Actual Report\" && doc.report != \"Ledger Summary Report\"",
+   "depends_on": "eval:doc.report != \"Salary Register\"  && doc.report != \"Estimated vs Actual Report\" && doc.report !=\"Monthly Salary Register Print\" && doc.report !=\"Accounts Receivable Report\" && doc.report !=\"Sales Person Wise Income Report\" && doc.report !=\"Work Order vs Material Request vs Stock Brief Report\" && doc.report != \"Work Order vs Material Request vs Stock Detailed Report\" && doc.report !=\"Budgeted vs Actual Report\" && doc.report != \"Ledger Summary Report\" && doc.report !=\"Project Details Report\" && doc.report !=\"Employee Timesheet Summary - Employee\" && doc.report !=\"Employee Timesheet Summary - Project\" && doc.report !=\"Target Vs Achievement Report\"",
    "fieldname": "department",
    "fieldtype": "Link",
    "label": "Department",
    "options": "Department"
   },
   {
-   "depends_on": "eval:doc.report !=\"Sales Person Wise Income Report\" && doc.report !=\"Work Order vs Material Request vs Stock Brief Report\"  && doc.report != \"Work Order vs Material Request vs Stock Detailed Report\" && doc.report !=\"Budgeted vs Actual Report\" && doc.report !=\"Ledger Summary Report\"",
+   "depends_on": "eval:doc.report !=\"Sales Person Wise Income Report\" && doc.report != \"Estimated vs Actual Report\" && doc.report !=\"Work Order vs Material Request vs Stock Brief Report\"  && doc.report != \"Work Order vs Material Request vs Stock Detailed Report\" && doc.report !=\"Budgeted vs Actual Report\" && doc.report !=\"Ledger Summary Report\"",
    "fieldname": "download",
    "fieldtype": "Button",
    "label": "Download"
@@ -65,52 +73,108 @@
    "label": "Print"
   },
   {
-   "depends_on": "eval:doc.report == \"Customer Ledger Report\" ||doc.report == \"Sales Person Wise Income Report\" ||doc.report ==\"Accounts Ledger Summary Report\"",
+   "depends_on": "eval:doc.report != \"Salary Register\" && doc.report == \"Customer Ledger Report\" ||doc.report == \"Sales Person Wise Income Report\" ||doc.report ==\"Accounts Ledger Summary Report\" && doc.report !=\"Target Vs Achievement Report\"",
    "fieldname": "customer",
    "fieldtype": "Link",
    "label": "Customer",
    "options": "Customer"
   },
   {
-   "depends_on": "eval:doc.report == \"Work Order vs Material Request vs Stock Brief Report\" || doc.report == \"Work Order vs Material Request vs Stock Detailed Report\"  || doc.report ==\"Budgeted vs Actual Report\"",
+   "depends_on": "eval:doc.report != \"Salary Register\" && doc.report ==\"Accounts Receivable Report\" || doc.report == \"Work Order vs Material Request vs Stock Brief Report\" || doc.report == \"Work Order vs Material Request vs Stock Detailed Report\"  || doc.report ==\"Budgeted vs Actual Report\" || doc.report ==\"Project Details Report\"  || doc.report == \"Estimated vs Actual Report\" && doc.report !=\"Target Vs Achievement Report\"",
    "fieldname": "project",
    "fieldtype": "Link",
    "label": "Project",
    "options": "Project"
   },
   {
+   "depends_on": "eval:doc.report != \"Salary Register\" && doc.report != \"Salary Register\" && doc.report ==\"Accounts Receivable Report\" || doc.report == \"Work Order vs Material Request vs Stock Brief Report\" || doc.report == \"Work Order vs Material Request vs Stock Detailed Report\"  || doc.report !=\"Budgeted vs Actual Report\" ||doc.report ==\"Ledger Summary Report\" && doc.report !=\"Target Vs Achievement Report\"",
    "fieldname": "account",
    "fieldtype": "Link",
-   "hidden": 1,
    "label": "Account",
    "options": "Account"
   },
   {
-   "depends_on": "eval:doc.report ==\"Sales Person Wise Income Report\"",
+   "depends_on": "eval:doc.report != \"Salary Register\" && doc.report ==\"Sales Person Wise Income Report\" && doc.report !=\"Target Vs Achievement Report\"",
    "fieldname": "sales_person_user",
    "fieldtype": "Link",
    "label": "Sales Person User",
    "options": "Sales Person"
   },
   {
+   "depends_on": "eval:doc.report != \"Salary Register\" && doc.report !=\"Accounts Receivable Report\" && doc.report !=\"Accounts Receivable Report\" && doc.report !=\"Sales Person Wise Income Report\" && doc.report !=\"Work Order vs Material Request vs Stock Brief Report\" && doc.report != \"Work Order vs Material Request vs Stock Detailed Report\" && doc.report !=\"Budgeted vs Actual Report\" && doc.report != \"Ledger Summary Report\"",
    "fieldname": "company",
    "fieldtype": "Link",
    "label": "Company",
    "options": "Company"
   },
   {
-   "depends_on": "eval:doc.report !=\"Accounts Ledger Summary Report\"",
+   "depends_on": "eval:doc.report != \"Salary Register\" && doc.report !=\"Monthly Salary Register Print\" && doc.report !=\"Accounts Receivable Report\" && doc.report !=\"Accounts Ledger Summary Report\"&& doc.report !=\"Project Details Report\" && doc.report !=\"Employee Timesheet Summary - Employee\" && doc.report !=\"Employee Timesheet Summary - Project\" && doc.report !=\"Target Vs Achievement Report\" && doc.report !=\"Budgeted vs Actual Report\"",
    "fieldname": "company_multiselect",
    "fieldtype": "Table MultiSelect",
    "label": "Company",
    "options": "Company Multiselect"
+  },
+  {
+   "depends_on": "eval:doc.report != \"Salary Register\" && doc.report !=\"Monthly Salary Register Print\"&& doc.report !=\"Project Details Report\" && doc.report !=\"Employee Timesheet Summary - Employee\" && doc.report !=\"Employee Timesheet Summary - Project\" && doc.report !=\"Target Vs Achievement Report\"",
+   "fieldname": "so_no",
+   "fieldtype": "Link",
+   "label": "Sales Order",
+   "options": "Sales Order"
+  },
+  {
+   "depends_on": "eval:doc.report ==\"Monthly Salary Register Print\" && doc.report !=\"Target Vs Achievement Report\"",
+   "fieldname": "grade",
+   "fieldtype": "Link",
+   "label": "Grade",
+   "options": "Employee Grade"
+  },
+  {
+   "depends_on": "eval:doc.report ==\"Monthly Salary Register Print\" && doc.report !=\"Target Vs Achievement Report\"",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "\nDraft\nSubmitted\nCancelled"
+  },
+  {
+   "depends_on": "eval:doc.report ==\"Monthly Salary Register Print\" && doc.report !=\"Target Vs Achievement Report\"",
+   "fieldname": "currency",
+   "fieldtype": "Link",
+   "label": "Currency",
+   "options": "Currency"
+  },
+  {
+   "depends_on": "eval:doc.report ==\"Target Vs Achievement Report\"",
+   "fieldname": "sales_person_name",
+   "fieldtype": "Link",
+   "label": "Sales Person",
+   "options": "Sales Person"
+  },
+  {
+   "depends_on": "eval:doc.report ==\"Target Vs Achievement Report\"",
+   "fieldname": "fiscal_year",
+   "fieldtype": "Link",
+   "label": "Year",
+   "options": "Fiscal Year"
+  },
+  {
+   "depends_on": "eval:doc.report ==\"Target Vs Achievement Report\"",
+   "fieldname": "month",
+   "fieldtype": "Select",
+   "label": "Month",
+   "options": "January\nFebruary\nMarch\nApril\nMay\nJune\nJuly\nAugust\nSeptember\nOctober\nNovember\nDecember"
+  },
+  {
+   "fieldname": "january",
+   "fieldtype": "Date",
+   "hidden": 1,
+   "label": "January"
   }
  ],
  "hide_toolbar": 1,
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2023-12-11 12:25:46.722434",
+ "modified": "2024-12-10 18:54:26.530912",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Report Dashboard",

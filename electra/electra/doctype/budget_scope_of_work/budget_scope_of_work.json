@@ -57,11 +57,13 @@
    "fieldtype": "Section Break"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "total_overhead",
    "fieldtype": "Percent",
    "label": "Overhead %"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "total_amount_as_overhead",
    "fieldtype": "Currency",
    "label": "Total Overhead",
@@ -76,12 +78,14 @@
    "fieldtype": "Column Break"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "contigency_percent",
    "fieldtype": "Percent",
    "label": "Contigency %",
    "read_only": 1
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "contigency",
    "fieldtype": "Currency",
    "label": "Total Contigency",
@@ -92,12 +96,14 @@
    "fieldtype": "Column Break"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "engineering_overhead",
    "fieldtype": "Percent",
    "label": "Engineering Overhead %",
    "read_only": 1
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "total_amount_as_engineering_overhead",
    "fieldtype": "Currency",
    "label": "Total Engineering Overhead",
@@ -108,18 +114,21 @@
    "fieldtype": "Section Break"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "total_cost",
    "fieldtype": "Currency",
    "label": "Total Cost of SoW",
    "read_only": 1
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "total_overheads",
    "fieldtype": "Currency",
    "label": "Total Overheads",
    "read_only": 1
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "total_business_promotion",
    "fieldtype": "Currency",
    "label": "Total Business Promotion",
@@ -141,6 +150,7 @@
    "label": "Qty"
   },
   {
+   "allow_on_submit": 1,
    "columns": 1,
    "fieldname": "unit_price",
    "fieldtype": "Currency",
@@ -149,6 +159,7 @@
    "read_only": 1
   },
   {
+   "allow_on_submit": 1,
    "columns": 1,
    "fieldname": "total_bidding_price",
    "fieldtype": "Currency",
@@ -163,21 +174,25 @@
    "label": "Budget"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "net_profit_percent",
    "fieldtype": "Percent",
-   "label": "Net Profit Percent"
+   "label": "Net Profit %"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "net_profit_amount",
    "fieldtype": "Currency",
    "label": "Net Profit Amount"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "gross_profit_percent",
    "fieldtype": "Percent",
-   "label": "Gross Profit Percent"
+   "label": "Gross Profit %"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "gross_profit_amount",
    "fieldtype": "Currency",
    "label": "Gross Profit Amount"
@@ -197,7 +212,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-02-24 18:15:21.255787",
+ "modified": "2025-10-15 15:50:54.394180",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Budget Scope of Work",

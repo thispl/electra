@@ -38,6 +38,10 @@ class VehiclePossessionandSurrenderForm(Document):
 	@frappe.whitelist()
 	def on_submit(self):
 		vehicle = frappe.get_doc("Vehicle",{'name':self.plate or self.plate_no2})
+		if self.type_of_action == "Surrender":
+			vehicle.last_odometer = self.odometer_reading2
+		elif self.type_of_action == "Possession":
+			vehicle.last_odometer = self.reading
 		vehicle.append('record',{
 			"type":self.type_of_file,
 			"employee":self.emp_no,

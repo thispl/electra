@@ -38,16 +38,15 @@
   {
    "columns": 1,
    "fieldname": "ssow",
-   "fieldtype": "Link",
+   "fieldtype": "Data",
    "hidden": 1,
    "in_list_view": 1,
-   "label": "SSoW ID",
-   "options": "Scope of Work"
+   "label": "SSoW ID"
   }
  ],
  "istable": 1,
  "links": [],
- "modified": "2023-01-11 14:06:55.444661",
+ "modified": "2023-12-30 10:31:02.010870",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Opportunity Scope of Work",

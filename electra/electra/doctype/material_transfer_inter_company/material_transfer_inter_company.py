@@ -67,3 +67,15 @@ def get_material_transfer_warehouse(company):
     for wh in warehouses:
         wh_list.append(wh['name'])
     return wh_list[0]
+
+@frappe.whitelist()
+def get_sales_invoice(item_code, source_warehouse):
+    item = frappe.get_value("Item", {'name':item_code}, 'item_name')
+    query = frappe.db.sql("""SELECT
+                          actual_qty, warehouse, stock_uom, stock_value
+                          FROM tabBin 
+                          WHERE item_code = '%s  and warehouse = %s"""
+                          %(item_code, source_warehouse), as_dict=True)
+    if query:
+        return query[0]
+    else: return 0

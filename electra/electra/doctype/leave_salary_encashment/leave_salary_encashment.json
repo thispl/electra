@@ -57,7 +57,7 @@
    "read_only": 1
   },
   {
-   "fetch_from": "employee.grade",
+   "fetch_from": "employee.custom_employee_grade",
    "fieldname": "grade",
    "fieldtype": "Data",
    "label": "Grade",
@@ -205,7 +205,7 @@
  "hide_toolbar": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-11-30 10:08:19.425355",
+ "modified": "2024-01-25 12:15:04.931625",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Leave Salary Encashment",

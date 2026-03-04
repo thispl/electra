@@ -1,0 +1,23 @@
+{
+ "add_total_row": 1,
+ "columns": [],
+ "creation": "2025-09-16 09:24:35.766566",
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [],
+ "idx": 0,
+ "is_standard": "Yes",
+ "json": "{}",
+ "letterhead": null,
+ "modified": "2025-09-18 14:44:48.978150",
+ "modified_by": "jenisha.p@groupteampro.com",
+ "module": "Electra",
+ "name": "Work in Progress Report with To Filter",
+ "owner": "jenisha.p@groupteampro.com",
+ "prepared_report": 0,
+ "ref_doctype": "Project Budget",
+ "report_name": "Work in Progress Report with To Filter",
+ "report_type": "Script Report",
+ "roles": []
+}

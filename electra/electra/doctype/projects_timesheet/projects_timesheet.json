@@ -1,6 +1,8 @@
 {
  "actions": [],
- "autoname": "PDPTS.####",
+ "allow_import": 1,
+ "allow_rename": 1,
+ "autoname": "naming_series:",
  "creation": "2022-12-16 09:53:46.964441",
  "default_view": "List",
  "doctype": "DocType",
@@ -19,6 +21,7 @@
   "project_day_plan_employee",
   "section_break_9",
   "created_by",
+  "naming_series",
   "column_break_11",
   "approved_by",
   "amended_from"
@@ -29,10 +32,11 @@
    "fieldtype": "Section Break"
   },
   {
-   "default": "Today",
    "fieldname": "plan_date",
    "fieldtype": "Date",
-   "label": "Worked Date"
+   "in_list_view": 1,
+   "label": "Worked Date",
+   "reqd": 1
   },
   {
    "fieldname": "column_break_3",
@@ -53,6 +57,7 @@
    "fieldtype": "Section Break"
   },
   {
+   "allow_bulk_edit": 1,
    "fieldname": "project_day_plan_employee",
    "fieldtype": "Table",
    "ignore_user_permissions": 1,
@@ -110,16 +115,25 @@
    "label": "Project",
    "options": "Project",
    "read_only_depends_on": "day_plan"
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Naming Series",
+   "no_copy": 1,
+   "options": "\nMEP-DPT-.YY.MM.DD.-\nINT-DPT-.YY.MM.DD.-\nENG-DPT-.YY.MM.DD.-",
+   "set_only_once": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-12-20 18:32:27.259626",
+ "modified": "2025-10-27 17:42:46.851744",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Projects Timesheet",
- "naming_rule": "Expression (old style)",
+ "naming_rule": "By \"Naming Series\" field",
  "owner": "Administrator",
  "permissions": [
   {

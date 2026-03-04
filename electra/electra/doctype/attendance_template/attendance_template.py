@@ -45,7 +45,7 @@ def add_data(w, args):
 
 @frappe.whitelist()
 def get_data(args):
-	employees = frappe.db.sql("""select * from `tabAttendance` where attendance_date between '%s' and '%s' and company = '%s' and docstatus = 0 ORDER BY employee,attendance_date ASC """%(args.from_date,args.to_date,args.company),as_dict= True)
+	employees = frappe.db.sql("""select * from `tabAttendance` where attendance_date between '%s' and '%s' and company = '%s' and docstatus = 0 and leave_application IS NULL ORDER BY employee,attendance_date ASC """%(args.from_date,args.to_date,args.company),as_dict= True)
 	data = []
 	for emp in employees:
 		format_date = formatdate(emp.attendance_date, "dd-mm-yyyy")
@@ -82,22 +82,19 @@ def enqueue_create_attendance(from_date,to_date,company):
 
 @frappe.whitelist()    
 def create_attendance(from_date,to_date,company):
-	frappe.errprint("HI")
 	dates = get_dates(from_date,to_date)
 	for date in dates:
 		employee = frappe.db.get_all('Employee',{'status':'Active','date_of_joining':['<=',from_date],'company':company},['*'])
 		for emp in employee:
-			hh = check_holiday(date,emp.name)
-			if not hh:
-				if not frappe.db.exists('Attendance',{'attendance_date':date,'employee':emp.name,'docstatus':('!=','2')}):
-					att = frappe.new_doc('Attendance')
-					att.employee = emp.name
-					att.status = 'Absent'
-					att.attendance_date = date
-					att.company = emp.company
-					att.save(ignore_permissions=True)
-					frappe.db.commit() 
-					print(date)  
+			if not frappe.db.exists('Attendance',{'attendance_date':date,'employee':emp.name,'docstatus':('!=','2')}):
+				att = frappe.new_doc('Attendance')
+				att.employee = emp.name
+				att.status = 'Absent'
+				att.attendance_date = date
+				att.company = emp.company
+				att.save(ignore_permissions=True)
+				frappe.db.commit() 
+				print(date)  
 
 def get_dates(from_date,to_date):
 	no_of_days = date_diff(add_days(to_date, 1), from_date)
@@ -117,6 +114,22 @@ def check_holiday(date,emp):
 
 @frappe.whitelist()    
 def enqueue_upload(attach):
+	filepath = get_file(attach)
+	pps = read_csv_content(filepath[1])
+	for pp in pps:
+		if pp[0] != 'ID':
+			if pp[4] not in ["Present","Absent"]:
+				frappe.throw(_("Please check the {0} Attendance Status on {1}").format(pp[1],pp[3]))
+	for pp in pps:
+		if pp[0] != 'ID':
+			if not frappe.db.exists('Attendance',{'name':pp[0],'docstatus':('in',['0','1'])}):
+				frappe.throw(_("Attendance is not available for the Employee {0} on {1}").format(pp[2],pp[3]))
+	for pp in pps:
+		if pp[0] != 'ID':
+			frappe.errprint(pp[1])
+			if not frappe.db.exists('Employee',{'name':pp[1],'status':'Active'}):
+				frappe.throw(_("Kindly Check the Employee {0} Status").format(pp[1]))
+				
 	frappe.enqueue(
 		att_upload, # python function or a module path as string
 		queue="long", # one of short, default, long
@@ -134,15 +147,13 @@ def att_upload(attach):
 	pps = read_csv_content(filepath[1])
 	for pp in pps:
 		if pp[0] != 'ID':
-			if pp[4] not in ["Present","Absent"]:
-				frappe.throw(_("Please check the {0} Attendance Status on {0}").format(pp[1],pp[3]))
-	for pp in pps:
-		if pp[0] != 'ID':
 			att = frappe.get_doc('Attendance',{'name':pp[0]})
 			att.status = pp[4]
 			att.save(ignore_permissions=True)
 			att.submit()
-			frappe.db.commit() 
+			frappe.db.commit()
+	
+			 
 		
 
 # @frappe.whitelist()    

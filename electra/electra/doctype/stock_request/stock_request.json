@@ -18,6 +18,7 @@
   "company",
   "parent_company",
   "sales_order",
+  "sales_invoice",
   "transfer_incharge_user",
   "section_break_4",
   "items",
@@ -35,6 +36,7 @@
   {
    "fieldname": "requested_date",
    "fieldtype": "Date",
+   "in_standard_filter": 1,
    "label": "Requested Date"
   },
   {
@@ -176,13 +178,19 @@
    "hidden": 1,
    "in_standard_filter": 1,
    "label": "From Company",
-   "options": "\nKINGFISHER TRADING AND CONTRACTING COMPANY\nAl - Shaghairi Trading and Contracting Company W.L.L (ELECTRA)\nMARAZEEM SECURITY SERVICES\nKINGFISHER - TRANSPORTATION\nMARAZEEM SECURITY SERVICES - SHOWROOM\nMARAZEEM SECURITY SERVICES - HO\nMEP DIVISION - ELECTRA\nENGINEERING DIVISION - ELECTRA\nINTERIOR DIVISION - ELECTRA\nINDUSTRIAL TOOLS DIVISION\nKINGFISHER - SHOWROOM\nSTEEL DIVISION - ELECTRA\nELECTRICAL DIVISION - ELECTRA\nTRADING DIVISION - ELECTRA\nELECTRA - BARWA SHOWROOM\nELECTRA  - NAJMA SHOWROOM\nELECTRA - ALKHOR SHOWROOM\nELECTRA - BINOMRAN SHOWROOM"
+   "options": "\nKINGFISHER TRADING AND CONTRACTING COMPANY\nAl - Shaghairi Trading and Contracting Company W.L.L (ELECTRA)\nMARAZEEM SECURITY SERVICES\nKINGFISHER - TRANSPORTATION\nMARAZEEM SECURITY SERVICES - SHOWROOM\nMARAZEEM SECURITY SERVICES - HO\nMEP DIVISION - ELECTRA\nENGINEERING DIVISION - ELECTRA\nINTERIOR DIVISION - ELECTRA\nINDUSTRIAL TOOLS DIVISION\nKINGFISHER - SHOWROOM\nSTEEL DIVISION - ELECTRA\nELECTRICAL DIVISION - ELECTRA\nTRADING DIVISION - ELECTRA\nELECTRA - BARWA SHOWROOM\nELECTRA  - NAJMA SHOWROOM\nELECTRA - ALKHOR SHOWROOM\nELECTRA - BINOMRAN SHOWROOM\nELECTRA - FIRE ALARM AND PUBLIC ADDRESS\nELECTRA - UPS DIVISION"
+  },
+  {
+   "fieldname": "sales_invoice",
+   "fieldtype": "Link",
+   "label": "Sales Invoice",
+   "options": "Sales Invoice"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-12-20 12:30:55.960833",
+ "modified": "2026-01-12 12:24:55.467597",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Stock Request",
@@ -208,6 +216,5 @@
  "sort_field": "naming_series",
  "sort_order": "DESC",
  "states": [],
- "title_field": "from__company",
  "track_changes": 1
 }

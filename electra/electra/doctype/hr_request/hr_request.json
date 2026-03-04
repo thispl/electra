@@ -62,7 +62,7 @@
    "reqd": 1
   },
   {
-   "fetch_from": "emp_id.scheduled_confirmation_date",
+   "fetch_from": "emp_id.date_of_joining",
    "fieldname": "date_of_join",
    "fieldtype": "Read Only",
    "label": "Date of Joining"
@@ -203,7 +203,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-06-16 11:58:17.723394",
+ "modified": "2026-01-20 13:27:12.540969",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "HR Request",

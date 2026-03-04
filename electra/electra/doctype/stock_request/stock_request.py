@@ -9,6 +9,11 @@ from frappe.utils import nowdate, get_last_day, getdate, add_days, add_years
 class StockRequest(Document):
     def validate(self):
         self.transfer_incharge_user = frappe.get_value('Company',self.source_company,'sales_coordinator')
+        if self.project:
+            # warehouse = frappe.db.get_value("Warehouse", {"warehouse_name": ("like", self.project)}, 'name')
+            warehouse =frappe.db.sql("""select name from `tabWarehouse` where warehouse_name like %s""",(f"%{self.project}%",),as_dict=True)
+            self.custom_project_warehouse = warehouse[0].name
+            # frappe.errprint(warehouse[0].name)
 
     def on_update(self):
         from electra.utils import get_series
@@ -25,7 +30,8 @@ class StockRequest(Document):
                 "target_company": self.company,
                 "to__company":self.company,
                 "source_company":self.source_company,
-                "ic_material_transfer_request":self.name
+                "ic_material_transfer_request":self.name,
+                "project_warehouse":self.custom_project_warehouse
             })
             for item in self.items:
                 icmtc.append("items",{
@@ -52,3 +58,9 @@ class StockRequest(Document):
         if frappe.db.exists("Stock Transfer",{"ic_material_transfer_request":self.name}):
             si = frappe.get_doc('Stock Transfer',{"ic_material_transfer_request":self.name})
             si.delete(ignore_permissions=True)
+            
+@frappe.whitelist()
+def so_order_type(so):
+    if so:
+        order_type = frappe.db.get_value("Sales Order", so, "order_type")
+        return order_type

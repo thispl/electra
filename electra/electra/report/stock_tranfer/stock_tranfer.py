@@ -40,7 +40,7 @@ def get_data(filters):
 			if sa:
 				for i in sa:
 					amt = frappe.db.get_value('Sales Invoice',{'stock_transfer_numner':i.name},['grand_total'])
-					row = [i.transferred_date,i.ic_material_transfer_request,i.name,i.source_company,i.target_company,i.workflow_state,i.remarks,amt]
+					row = [i.transferred_date,i.ic_material_transfer_request,i.name,i.source_company,i.target_company,i.workflow_state,i.remarks,round(amt,2)]
 					data.append(row)
 			return data
 	else:
@@ -58,7 +58,7 @@ def get_data(filters):
 			if sa:
 				for i in sa:
 					amt = frappe.db.get_value('Sales Invoice',{'stock_transfer_numner':i.name},['grand_total'])
-					row = [i.transferred_date,i.ic_material_transfer_request,i.name,i.source_company,i.target_company,i.workflow_state,i.remarks,amt]
+					row = [i.transferred_date,i.ic_material_transfer_request,i.name,i.source_company,i.target_company,i.workflow_state,i.remarks,round(amt,2)]
 					data.append(row)
 			return data
 	

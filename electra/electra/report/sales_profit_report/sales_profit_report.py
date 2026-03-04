@@ -31,12 +31,13 @@ def execute(filters=None):
 def get_invoice_data(filters):
     data =[]
     total_calc = 0
+    dis_amount = 0
     total_add = 0
     grand_total = 0
     total_percentage = 0
     count = 0
     conditions = build_conditions(filters)
-    query = """SELECT * FROM `tabSales Invoice` WHERE {conditions} and status != 'Return' AND is_internal_customer = 0""".format(conditions=conditions)
+    query = """SELECT * FROM `tabSales Invoice` WHERE {conditions} and stock_transfer != 'Stock Transfer' AND is_internal_customer = 0 """.format(conditions=conditions)
     sales = frappe.db.sql(query, as_dict=True)
     for i in sales:
         if i.docstatus ==1:
@@ -48,26 +49,27 @@ def get_invoice_data(filters):
             cal =0
             for child in dn.items:
                 add += child.qty * child.valuation_rate
-            calc = i.grand_total - add
-            if calc >=0 :
-                cal =calc
+            calc = i.base_grand_total - add
+            # if calc >=0 :
+            cal =calc
             total_calc += cal
-            if i.grand_total > 0:
-                prof = (calc / i.grand_total) * 100
-                if prof >= 0:
-                    pro = prof
-            row = [i.name,i.posting_date,i.customer,i.sales_person_user,i.discount_amount,i.grand_total,add,cal,round(pro,2),i.invoice_type,i.status,emp_name]
+            if i.base_grand_total > 0:
+                prof = (calc / i.base_grand_total) * 100
+                # if prof >= 0:
+                pro = prof
+            row = [i.name,i.posting_date,i.customer,i.sales_person_user,round(i.discount_amount,2),round(i.base_grand_total,2),round(add,2),round(cal,2),round(pro,2),i.invoice_type,i.status,emp_name]
             if i.customer != "Miscellaneous Customer (SAMPLE)":
                 count +=1
                 total_percentage +=prof
                 total_add += add
-                grand_total += i.grand_total
+                grand_total += i.base_grand_total
+                dis_amount += i.discount_amount
             data.append(row)
     if count !=0:
-        prc = total_percentage/count
+        prc = (total_calc/grand_total)*100
     else:
         prc=0
-    to = ["TOTAL","","","","",grand_total,total_add,total_calc,round(prc,2),"","",""]
+    to = ["TOTAL","","","",round(dis_amount,2),round(grand_total,2),round(total_add,2),round(total_calc,2),round(prc,2),"","",""]
     data.append(to)
     return data
 

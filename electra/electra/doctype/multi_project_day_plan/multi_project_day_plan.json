@@ -1,6 +1,7 @@
 {
  "actions": [],
- "autoname": "PDP.####",
+ "allow_rename": 1,
+ "autoname": "naming_series:",
  "creation": "2022-10-12 12:54:27.409839",
  "doctype": "DocType",
  "editable_grid": 1,
@@ -19,6 +20,7 @@
   "section_break_9",
   "created_by",
   "created_by_name",
+  "naming_series",
   "column_break_11",
   "approved_by",
   "approved_by_name",
@@ -122,6 +124,15 @@
    "fieldtype": "Table",
    "label": "Project Day Plan Driver",
    "options": "Project Day Plan Driver"
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Naming Series",
+   "no_copy": 1,
+   "options": "\nINT-DP-.YY.MM.DD.-\nENG-DP-.YY.MM.DD.-\nMEP-DP-.YY.MM.DD.-",
+   "set_only_once": 1
   }
  ],
  "index_web_pages_for_search": 1,
@@ -132,11 +143,11 @@
    "link_fieldname": "multi_project_day_plan"
   }
  ],
- "modified": "2023-12-20 18:31:42.458784",
+ "modified": "2025-04-04 13:06:46.524916",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Multi Project Day Plan",
- "naming_rule": "Expression (old style)",
+ "naming_rule": "By \"Naming Series\" field",
  "owner": "Administrator",
  "permissions": [
   {
@@ -155,5 +166,7 @@
  "sort_field": "name",
  "sort_order": "DESC",
  "states": [],
- "track_changes": 1
+ "track_changes": 1,
+ "track_seen": 1,
+ "track_views": 1
 }

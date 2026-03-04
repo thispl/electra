@@ -128,6 +128,7 @@
    "fieldname": "supplier",
    "fieldtype": "Link",
    "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Supplier",
    "options": "Supplier"
   },
@@ -160,6 +161,7 @@
    "fieldname": "payment_amount",
    "fieldtype": "Currency",
    "hidden": 1,
+   "in_standard_filter": 1,
    "label": "Payment Amount",
    "options": "currency"
   },
@@ -235,7 +237,7 @@
    "link_fieldname": "consolidated_payment_request"
   }
  ],
- "modified": "2023-10-24 11:35:44.977178",
+ "modified": "2024-01-18 13:01:57.833061",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Consolidated Payment Request",

@@ -1,19 +1,13 @@
 {
- "_comments": "[{\"comment\": \"Action Failed<br><br><pre><code>Traceback (most recent call last):\\n  File \\\"apps/frappe/frappe/mod...\", \"by\": \"Administrator\", \"name\": \"e94267849f\"}, {\"comment\": \"Action Failed<br><br><pre><code>Traceback (most recent call last):\\n  File \\\"apps/frappe/frappe/mod...\", \"by\": \"Administrator\", \"name\": \"655a6b25be\"}]",
  "actions": [],
  "allow_rename": 1,
- "autoname": "field:employee_name",
+ "autoname": "ELE/HRA/31/.##",
  "creation": "2023-03-02 12:28:05.083338",
  "default_view": "List",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "hrd_remarks",
-  "column_break_2",
-  "hod_remarks",
-  "column_break_4",
-  "hr_manager_remarks",
   "section_break_6",
   "type_of_request",
   "column_break_8",
@@ -40,6 +34,17 @@
   "leave_end_date",
   "column_break_19",
   "leave_days",
+  "leave_details_section",
+  "last_rejoin_date",
+  "column_break_r1jo",
+  "last_leave_salary_received_date",
+  "column_break_etg1",
+  "last_date_of_service",
+  "column_break_gzd5",
+  "total_leave_taken",
+  "remarks_section_section",
+  "hod_remarks",
+  "hr_manager_remarks",
   "amended_from"
  ],
  "fields": [
@@ -62,11 +67,10 @@
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "Employee Name",
-   "read_only": 1,
-   "unique": 1
+   "read_only": 1
   },
   {
-   "fetch_from": "employee_number.grade",
+   "fetch_from": "employee_number.custom_employee_grade",
    "fieldname": "grade",
    "fieldtype": "Data",
    "label": "Grade",
@@ -126,7 +130,7 @@
    "read_only": 1
   },
   {
-   "depends_on": "eval:doc.type_of_request == \"Annual Leave\"",
+   "depends_on": "eval:doc.type_of_request == \"Annual Vacation\"",
    "fetch_from": "leave_application.from_date",
    "fieldname": "leave_start_date",
    "fieldtype": "Date",
@@ -139,7 +143,7 @@
    "fieldtype": "Column Break"
   },
   {
-   "depends_on": "eval:doc.type_of_request == \"Annual Leave\"",
+   "depends_on": "eval:doc.type_of_request == \"Annual Vacation\"",
    "fetch_from": "leave_application.to_date",
    "fieldname": "leave_end_date",
    "fieldtype": "Date",
@@ -148,14 +152,14 @@
    "read_only_depends_on": "eval:doc.type_of_request == \"Annual Leave\""
   },
   {
-   "depends_on": "eval:doc.employee",
+   "depends_on": "eval:doc.type_of_request == \"Annual Leave\"",
    "fieldname": "rejoining_date",
    "fieldtype": "Date",
    "label": "Rejoining Date ",
    "mandatory_depends_on": "eval:doc.type_of_request == \"Annual Leave\""
   },
   {
-   "depends_on": "eval:doc.type_of_request == \"Annual Leave\"",
+   "depends_on": "eval:doc.type_of_request == \"Annual Vacation\"",
    "fetch_from": "leave_application.total_leave_days",
    "fieldname": "leave_days",
    "fieldtype": "Data",
@@ -196,15 +200,11 @@
    "fieldname": "type_of_request",
    "fieldtype": "Select",
    "label": "Type of Request",
-   "options": "\nAnnual Leave\nLeave Salary Encashment\nFinal Exitment"
-  },
-  {
-   "fieldname": "column_break_2",
-   "fieldtype": "Column Break"
+   "options": "\nAnnual Vacation\nLeave Salary Encashment\nEnd of Service"
   },
   {
    "default": "0",
-   "depends_on": "eval:doc.employee_number",
+   "depends_on": "eval:doc.employee_number ",
    "fieldname": "hod",
    "fieldtype": "Check",
    "label": "HOD",
@@ -229,22 +229,15 @@
    "read_only": 1
   },
   {
-   "fieldname": "hrd_remarks",
-   "fieldtype": "Data",
-   "label": "HRD Remarks"
-  },
-  {
+   "depends_on": "eval:doc.workflow_state==\"Pending for HOD\"",
    "fieldname": "hod_remarks",
-   "fieldtype": "Data",
+   "fieldtype": "Small Text",
    "label": "HOD Remarks"
   },
   {
-   "fieldname": "column_break_4",
-   "fieldtype": "Column Break"
-  },
-  {
+   "depends_on": "eval:doc.workflow_state==\"Pending for HR Department\"",
    "fieldname": "hr_manager_remarks",
-   "fieldtype": "Data",
+   "fieldtype": "Small Text",
    "label": "HR Manager Remarks"
   },
   {
@@ -254,16 +247,60 @@
   {
    "fieldname": "column_break_18",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "remarks_section_section",
+   "fieldtype": "Section Break",
+   "label": "Remarks Section"
+  },
+  {
+   "depends_on": "eval:doc.employee_number",
+   "fieldname": "leave_details_section",
+   "fieldtype": "Section Break",
+   "label": "Leave Details"
+  },
+  {
+   "fieldname": "last_rejoin_date",
+   "fieldtype": "Date",
+   "label": "Last Rejoin Date"
+  },
+  {
+   "fieldname": "column_break_r1jo",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "last_date_of_service",
+   "fieldtype": "Date",
+   "label": "Last Date of Service",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_gzd5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_leave_taken",
+   "fieldtype": "Data",
+   "label": "Total Leave taken"
+  },
+  {
+   "fieldname": "last_leave_salary_received_date",
+   "fieldtype": "Date",
+   "label": "Last Leave Salary Received Date"
+  },
+  {
+   "fieldname": "column_break_etg1",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-11-30 16:05:43.653171",
+ "modified": "2024-10-30 13:38:55.558358",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Leave Salary  and Final Exit Request",
- "naming_rule": "By fieldname",
+ "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
   {

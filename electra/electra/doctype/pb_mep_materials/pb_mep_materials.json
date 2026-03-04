@@ -25,7 +25,12 @@
   "unit_price",
   "amount",
   "rate_with_overheads",
-  "amount_with_overheads"
+  "amount_with_overheads",
+  "docname",
+  "work_title",
+  "billed_qty",
+  "delivered_qty",
+  "pb_doctype"
  ],
  "fields": [
   {
@@ -78,6 +83,7 @@
   {
    "columns": 1,
    "fetch_from": "item.stock_uom",
+   "fetch_if_empty": 1,
    "fieldname": "unit",
    "fieldtype": "Link",
    "in_list_view": 1,
@@ -96,8 +102,7 @@
    "fieldname": "vr",
    "fieldtype": "Currency",
    "in_list_view": 1,
-   "label": "Cost",
-   "read_only": 1
+   "label": "Cost"
   },
   {
    "fieldname": "cost_with_transfer_percent",
@@ -128,8 +133,7 @@
    "fieldname": "cost",
    "fieldtype": "Currency",
    "in_list_view": 1,
-   "label": "Trf. Cost",
-   "read_only": 1
+   "label": "Trf. Cost"
   },
   {
    "columns": 1,
@@ -176,12 +180,37 @@
    "fieldtype": "Currency",
    "label": "Estimated Cost",
    "read_only": 1
+  },
+  {
+   "fieldname": "docname",
+   "fieldtype": "Data",
+   "label": "Docname"
+  },
+  {
+   "fieldname": "work_title",
+   "fieldtype": "Read Only",
+   "label": "Work Title"
+  },
+  {
+   "fieldname": "billed_qty",
+   "fieldtype": "Float",
+   "label": "Billed Qty"
+  },
+  {
+   "fieldname": "delivered_qty",
+   "fieldtype": "Float",
+   "label": "Delivered Qty"
+  },
+  {
+   "fieldname": "pb_doctype",
+   "fieldtype": "Data",
+   "label": "PB Doctype"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2022-10-11 16:56:09.703145",
+ "modified": "2025-06-07 12:14:58.127977",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "PB MEP Materials",
@@ -189,5 +218,6 @@
  "permissions": [],
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }

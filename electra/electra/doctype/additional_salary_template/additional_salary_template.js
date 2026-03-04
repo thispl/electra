@@ -18,6 +18,7 @@ frappe.ui.form.on('Additional Salary Template', {
 			args: {
 				filename: frm.doc.upload,
 				payroll_date: frm.doc.payroll_date,
+				company:frm.doc.company
 			},
 			freeze: true,
 			freeze_message: 'Creating Additional Salary....',

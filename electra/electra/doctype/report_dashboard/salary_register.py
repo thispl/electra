@@ -41,14 +41,16 @@ def make_xlsx(data, sheet_name=None, wb=None, column_widths=None):
     if args.division:
         salary_slip = frappe.get_all("Salary Slip",{'company':args.division},['*'])
         if salary_slip:
-            frappe.log_error(title='123',message = salary_slip)
             total_salary = frappe.db.get_value('Salary Slip',{'company':args.division,'start_date':args.from_date},['sum(net_pay)'])
             count = frappe.db.count('Salary Slip',{'company':args.division,'start_date':args.from_date})
             employer_id = frappe.db.get_value('Company',{'name':args.division},['employer_id'])
-            date = nowdate()
+            date = datetime.now()
             time = nowtime()
+            from_date_str = args.from_date
+            from_date_obj = datetime.strptime(from_date_str, "%Y-%m-%d")
+            formatted_from_date = from_date_obj.strftime("%d-%m-%Y")
             ws.append(['Employer ID','File Creation Date','File Creation Time','Payer EID','Payer QID','Payer Bank Short Name','Payer IBAN','Salary Year and Month','Total Salaries','Total Records','SIF Version'])
-            ws.append([employer_id,date,time,employer_id,'','CBQ','QA76CBQA000000004020436181001',args.from_date,total_salary,count,''])
+            ws.append([employer_id,date.strftime("%d-%m-%Y"),time,employer_id,'','CBQ','QA76CBQA000000004020436181001',formatted_from_date,total_salary,count,''])
             ws.append(['Record Sequence','Employee QID','Employee Visa ID','Employee Name','Employee BAnk Short Name','Employee Account','Salary Frequency','No of Working Days','Net Pay','Basic Salary','Extra Hours','Extra Income','Deductions','Payment Type','Notes / Comments',])
             i = 1
             for s in salary_slip :
@@ -77,7 +79,6 @@ def make_xlsx(data, sheet_name=None, wb=None, column_widths=None):
                 com = c.name
                 salary_slip = frappe.get_all("Salary Slip",{'company':com},['*'])
                 if salary_slip:
-                    frappe.log_error(title='abc',message = salary_slip)
                     total_salary = frappe.db.get_value('Salary Slip',{'company':com,'start_date':args.from_date},['sum(net_pay)'])
                     count = frappe.db.count('Salary Slip',{'company':com,'start_date':args.from_date})
                     employer_id = frappe.db.get_value('Company',{'name':com},['employer_id'])

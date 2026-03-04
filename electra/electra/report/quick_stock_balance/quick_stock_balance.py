@@ -35,6 +35,7 @@ SLEntry = Dict[str, Any]
 
 
 def execute(filters: Optional[StockBalanceFilter] = None):
+	frappe.log_error("Quick", filters)
 	is_reposting_item_valuation_in_progress()
 	if not filters:
 		filters = {}
@@ -56,7 +57,7 @@ def execute(filters: Optional[StockBalanceFilter] = None):
 	# if no stock ledger entry found return
 	if not sle:
 		return columns, []
-
+	frappe.log_error("electra", sle)
 	iwb_map = get_item_warehouse_map(filters, sle)
 	item_map = get_item_details(items, sle, filters)
 	item_reorder_detail_map = get_item_reorder_details(item_map.keys())
@@ -68,24 +69,29 @@ def execute(filters: Optional[StockBalanceFilter] = None):
 
 	to_date = filters.get("to_date")
 
+	# Consolidate quantities of the same item across different warehouses
+	consolidated_data = {}
 	for group_by_key in iwb_map:
 		item = group_by_key[1]
-		warehouse = group_by_key[2]
 		company = group_by_key[0]
 
 		if item_map.get(item):
 			qty_dict = iwb_map[group_by_key]
+			if qty_dict.get("bal_qty", 0) == 0:
+				continue
 			item_reorder_level = 0
 			item_reorder_qty = 0
+			warehouse = group_by_key[2]
 			if item + warehouse in item_reorder_detail_map:
 				item_reorder_level = item_reorder_detail_map[item + warehouse]["warehouse_reorder_level"]
 				item_reorder_qty = item_reorder_detail_map[item + warehouse]["warehouse_reorder_qty"]
-
 			report_data = {
 				"currency": company_currency,
 				"item_code": item,
 				"warehouse": warehouse,
 				"company": company,
+				"item_name": item_map[item].get("item_name"),  # Ensure item name is included
+				"stock_uom": item_map[item].get("stock_uom",""),
 				"reorder_level": item_reorder_level,
 				"reorder_qty": item_reorder_qty,
 			}
@@ -109,11 +115,38 @@ def execute(filters: Optional[StockBalanceFilter] = None):
 					stock_ageing_data["latest_age"] = date_diff(to_date, fifo_queue[-1][1])
 
 				report_data.update(stock_ageing_data)
-
 			data.append(report_data)
 
+	# Consolidate quantities across warehouses for each item
+	consolidated_data = {}
+	for record in data:
+		company = record['company']
+		item_code = record['item_code']
+		key = (company, item_code)
+
+		if key not in consolidated_data:
+			consolidated_data[key] = {'total_bal_qty': 0.0, 'total_bal_val': 0.0, 'item_name': record['item_name'],'stock_uom': record['stock_uom']}
+
+		consolidated_data[key]['total_bal_qty'] += record['bal_qty']
+		consolidated_data[key]['total_bal_val'] += record['bal_val']
+
+	result = [
+		{
+			'company': company,
+			'item_code': item_code,
+			'item_name': data['item_name'],  # Include item name in the result
+			'stock_uom': data['stock_uom'],
+			'bal_qty': data['total_bal_qty'],
+			'bal_val': data['total_bal_val'],
+			'val_rate': data['total_bal_val'] / data['total_bal_qty']
+		}
+		for (company, item_code), data in consolidated_data.items()
+	]
+
 	add_additional_uom_columns(columns, data, include_uom, conversion_factors)
-	return columns, data
+	return columns, result
+
+
 
 
 def get_columns(filters: StockBalanceFilter):
@@ -127,6 +160,13 @@ def get_columns(filters: StockBalanceFilter):
 			"width": 160,
 		},
 		{"label": _("Item Name"), "fieldname": "item_name", "width": 710},
+		{
+			"label": _("UOM"),
+			"fieldname": "stock_uom",
+			"fieldtype": "Link",
+			"options": "UOM",
+			"width": 90,
+		},
 		# {
 		# 	"label": _("Item Group"),
 		# 	"fieldname": "item_group",
@@ -168,14 +208,17 @@ def get_columns(filters: StockBalanceFilter):
 				"fieldname": "bal_qty",
 				"fieldtype": "Float",
 				"width": 120,
-				"convertible": "qty",
+				"precision": 2,
+				"convertible": "qty"
 			},
+
 			{
 				"label": _("Cost"),
 				"fieldname": "val_rate",
 				"fieldtype": "Currency",
 				"width": 120,
 				"convertible": "rate",
+				"precision": 2,
 				"options": "currency",
 			},
 			{
@@ -183,6 +226,7 @@ def get_columns(filters: StockBalanceFilter):
 				"fieldname": "bal_val",
 				"fieldtype": "Currency",
 				"width": 120,
+				"precision": 2,
 				"options": "currency",
 			},
 			# {
@@ -285,7 +329,7 @@ def apply_conditions(query, filters):
 
 def get_stock_ledger_entries(filters: StockBalanceFilter, items: List[str]) -> List[SLEntry]:
 	sle = frappe.qb.DocType("Stock Ledger Entry")
-
+	excluded_warehouse= ['Work In Progress - EED', 'Work In Progress - INE', 'Work In Progress - MEP']
 	query = (
 		frappe.qb.from_(sle)
 		.select(
@@ -303,7 +347,9 @@ def get_stock_ledger_entries(filters: StockBalanceFilter, items: List[str]) -> L
 			sle.stock_value,
 			sle.batch_no,
 		)
-		.where((sle.docstatus < 2) & (sle.is_cancelled == 0))
+		.where((sle.docstatus < 2) & (sle.is_cancelled == 0)
+		# Added by Nandini
+		  & (~sle.warehouse.isin(excluded_warehouse)))
 		.orderby(CombineDatetime(sle.posting_date, sle.posting_time))
 		.orderby(sle.creation)
 		.orderby(sle.actual_qty)
@@ -383,7 +429,12 @@ def get_item_warehouse_map(filters: StockBalanceFilter, sle: List[SLEntry]):
 		qty_dict.val_rate = d.valuation_rate
 		qty_dict.bal_qty += qty_diff
 		qty_dict.bal_val += value_diff
+  
+		# qty_dict.val_rate = frappe.db.get_value("Bin",{"item_code": d.item_code,"warehouse": ("not like", "%Work In Progress%"),"valuation_rate":("!=",0)},["valuation_rate"]) or 0
 
+		# qty_dict.bal_qty += qty_diff
+		# qty_dict.bal_val = qty_dict.bal_qty * qty_dict.val_rate
+	
 	iwb_map = filter_items_with_no_transactions(iwb_map, float_precision, inventory_dimensions)
 
 	return iwb_map

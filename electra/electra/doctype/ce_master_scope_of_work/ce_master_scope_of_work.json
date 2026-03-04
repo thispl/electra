@@ -36,7 +36,8 @@
   "column_break_19",
   "unit_price",
   "total_bidding_price",
-  "optional"
+  "optional",
+  "cesow"
  ],
  "fields": [
   {
@@ -200,7 +201,7 @@
   {
    "fieldname": "net_profit_percent",
    "fieldtype": "Percent",
-   "label": "Net Profit Percent",
+   "label": "Net Profit %",
    "read_only": 1
   },
   {
@@ -212,7 +213,7 @@
   {
    "fieldname": "gross_profit_percent",
    "fieldtype": "Percent",
-   "label": "Gross Profit Percent",
+   "label": "Gross Profit %",
    "read_only": 1
   },
   {
@@ -236,12 +237,19 @@
    "fieldtype": "Percent",
    "label": "Discount Tolerance %",
    "read_only": 1
+  },
+  {
+   "fieldname": "cesow",
+   "fieldtype": "Link",
+   "label": "CESOW",
+   "options": "CE SOW",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-03-03 18:59:17.658302",
+ "modified": "2025-03-21 10:13:12.632706",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "CE Master Scope of Work",

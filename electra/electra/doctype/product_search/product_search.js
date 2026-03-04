@@ -6,24 +6,55 @@ frappe.ui.form.on('Product Search', {
 		if(frm.doc.item_code){
 		frm.call('get_data').then(r=>{
 			if (r.message) {
+				if(frappe.user.has_role != "Purchase User"){
 				frm.fields_dict.html.$wrapper.empty().append(r.message)
+				}
 				frm.call('get_pod').then(r=>{
 					frm.fields_dict.pod.$wrapper.empty().append(r.message)
 				})
 			}
 		})	
-			
 		frm.call('get_data_perm').then(j=>{
 			if (j.message) {
 				frm.fields_dict.perm.$wrapper.empty().append(j.message)
 			}
+			
 		})
+		frappe.call({
+			method:"electra.utils.get_norden_item",
+			args:{
+				item:frm.doc.item_code,
+			},
+			callback(r){
+				$.each(r.message,function(i,d){
+					frm.fields_dict.html_3.$wrapper.empty().append(d)
+				})
+			}
+		})
+		frappe.call({
+			method:"electra.utils.get_norden_item_without_cost",
+			args:{
+				item:frm.doc.item_code,
+			},
+			callback(r){
+				$.each(r.message,function(i,d){
+					frm.fields_dict.html_4.$wrapper.empty().append(d)
+				})
+			}
+		})
+		
 	}	
+	},
+	norden_item_code(frm){
+		
 	},
 	onload(frm){
 		var user_id = frappe.session.user
-		console.log(user_id)
-		if(user_id == "anoop@marazeemqatar.com"){
+		if(user_id == "asim@electraqatar.com"){
+			console.log('hod')
+			
+		}
+		else if(user_id == "anoop@marazeemqatar.com"){
 			frm.set_query('item_code', function(doc) {
 				return {
 					filters: {
@@ -158,4 +189,11 @@ frappe.ui.form.on('Product Search', {
 			})
 		}
     },
+	refresh(frm){
+		frm.set_query('norden_item_code',{
+			filters:{
+				'brand':"NORDEN"
+			}
+		})
+	}
 })

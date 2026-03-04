@@ -16,6 +16,7 @@
    "label": "Series Settings"
   },
   {
+   "allow_bulk_edit": 1,
    "fieldname": "company_series",
    "fieldtype": "Table",
    "label": "Company Series",
@@ -26,7 +27,7 @@
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2022-01-02 04:50:41.516786",
+ "modified": "2024-02-23 11:55:53.973664",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "General Settings",
@@ -45,5 +46,6 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }

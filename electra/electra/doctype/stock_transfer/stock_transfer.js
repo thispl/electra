@@ -24,14 +24,14 @@ frappe.ui.form.on('Stock Transfer', {
 			}
 			isFocus = false;
 		});
-		frm.add_custom_button(__("Temp SC"), function () {
-			frm.call('on_submit')
-			.then(r=>{
-				console.log('done')
-			})
+		// frm.add_custom_button(__("Temp SC"), function () {
+		// 	frm.call('on_submit')
+		// 	.then(r=>{
+		// 		console.log('done')
+		// 	})
 
 
-		})
+		// })
 		frm.trigger('print')
 		if (frm.doc.company) {
 			frm.trigger("set_series")
@@ -85,7 +85,7 @@ frappe.ui.form.on('Stock Transfer', {
 	},
 	source_company(frm){
 	    if (frm.doc.source_company == "MARAZEEM SECURITY SERVICES" || frm.doc.source_company == "MARAZEEM SECURITY SERVICES - SHOWROOM" || frm.doc.source_company == "MARAZEEM SECURITY SERVICES - HO") {
-			frm.set_value('letter_head', "MARAZEEM SECURITY SERVICES")
+			frm.set_value('letter_head', "Marazeem with Footer Text")
 		}
 		if (frm.doc.source_company == "KINGFISHER TRADING AND CONTRACTING COMPANY" || frm.doc.source_company == "KINGFISHER - TRANSPORTATION" || frm.doc.source_company == "KINGFISHER - SHOWROOM") {
 			frm.set_value('letter_head', "KINGFISHER TRADING AND CONTRACTING COMPANY")

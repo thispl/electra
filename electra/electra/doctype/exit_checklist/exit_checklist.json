@@ -1,6 +1,6 @@
 {
  "actions": [],
- "autoname": "field:employee_name",
+ "autoname": "Exit-.#####",
  "creation": "2021-12-17 12:38:48.175852",
  "doctype": "DocType",
  "editable_grid": 1,
@@ -36,8 +36,7 @@
    "fetch_from": "employee.employee_name",
    "fieldname": "employee_name",
    "fieldtype": "Data",
-   "label": "Employee Name",
-   "unique": 1
+   "label": "Employee Name"
   },
   {
    "fetch_from": "employee.department",
@@ -77,7 +76,7 @@
    "label": "Date of Joining"
   },
   {
-   "fetch_from": "employee.grade",
+   "fetch_from": "employee.custom_employee_grade",
    "fieldname": "grade",
    "fieldtype": "Data",
    "label": "Grade"
@@ -140,11 +139,11 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-05-23 13:58:31.464535",
+ "modified": "2024-04-16 15:13:21.996145",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Exit Checklist",
- "naming_rule": "By fieldname",
+ "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
   {

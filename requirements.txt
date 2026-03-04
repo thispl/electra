@@ -6,4 +6,3 @@ weasyprint
 reportlab
 tqdm
 PyPDF2
-admin-lte

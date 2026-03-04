@@ -12,6 +12,7 @@
   "work_order_no",
   "vehicle_number",
   "delivery_date",
+  "trip_type",
   "column_break_5",
   "driver_name",
   "driver",
@@ -86,8 +87,7 @@
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Vehicle Number",
-   "options": "Vehicle",
-   "reqd": 1
+   "options": "Vehicle"
   },
   {
    "fieldname": "driver_name",
@@ -95,8 +95,7 @@
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Driver Name",
-   "options": "Employee",
-   "reqd": 1
+   "options": "Employee"
   },
   {
    "fieldname": "reference_no",
@@ -104,11 +103,13 @@
    "label": "Reference No"
   },
   {
+   "depends_on": "eval:doc.company ==\"KINGFISHER - TRANSPORTATION\"",
    "fieldname": "transport_tab",
    "fieldtype": "Tab Break",
    "label": "Transport"
   },
   {
+   "depends_on": "eval:doc.company ==\"KINGFISHER - TRANSPORTATION\"",
    "fieldname": "point_type",
    "fieldtype": "Select",
    "hidden": 1,
@@ -120,137 +121,159 @@
    "fieldtype": "Column Break"
   },
   {
+   "depends_on": "eval:doc.company ==\"KINGFISHER - TRANSPORTATION\"",
    "fieldname": "location",
    "fieldtype": "Data",
    "hidden": 1,
    "label": "Location"
   },
   {
+   "depends_on": "eval:doc.company ==\"KINGFISHER - TRANSPORTATION\"",
    "fieldname": "destination",
    "fieldtype": "Table",
    "label": "Destination",
    "options": "Destination"
   },
   {
+   "depends_on": "eval:doc.company ==\"KINGFISHER - TRANSPORTATION\"",
    "fieldname": "source_address",
    "fieldtype": "Data",
    "hidden": 1,
    "label": "Source Address"
   },
   {
+   "depends_on": "eval:doc.company ==\"KINGFISHER - TRANSPORTATION\"",
    "fieldname": "halt_address",
    "fieldtype": "Data",
    "hidden": 1,
    "label": "Halt Address"
   },
   {
+   "depends_on": "eval:doc.company ==\"KINGFISHER - TRANSPORTATION\"",
    "fieldname": "destination_address",
    "fieldtype": "Data",
    "hidden": 1,
    "label": "Destination Address"
   },
   {
+   "depends_on": "eval:doc.company ==\"KINGFISHER - TRANSPORTATION\"",
    "fieldname": "distance_map",
    "fieldtype": "Data",
    "hidden": 1,
    "label": "Distance Map"
   },
   {
+   "depends_on": "eval:doc.company ==\"KINGFISHER - TRANSPORTATION\"",
    "fieldname": "load_this",
    "fieldtype": "Button",
    "hidden": 1,
    "label": "Show Map and Distance"
   },
   {
+   "depends_on": "eval:doc.company ==\"KINGFISHER - TRANSPORTATION\"",
    "fieldname": "section_break_19",
    "fieldtype": "Section Break",
    "label": "Client Freight"
   },
   {
+   "depends_on": "eval:doc.company ==\"KINGFISHER - TRANSPORTATION\"",
    "fieldname": "billing",
    "fieldtype": "Link",
    "label": "Billing",
    "options": "UOM"
   },
   {
-   "depends_on": "eval:doc.billing && doc.billing != \"Fixed\"",
+   "depends_on": "eval:doc.billing && doc.billing != \"Fixed\" && doc.company ==\"KINGFISHER - TRANSPORTATION\"",
    "fieldname": "rate_per_trip",
    "fieldtype": "Currency",
    "label": "Rate Per Trip"
   },
   {
-   "depends_on": "billing",
+   "depends_on": "billing && doc.company ==\"KINGFISHER - TRANSPORTATION\"",
    "fieldname": "total_amount",
    "fieldtype": "Currency",
    "label": "Total Amount"
   },
   {
-   "depends_on": "eval:doc.billing && doc.billing != \"Fixed\"",
+   "depends_on": "eval:doc.billing && doc.billing != \"Fixed\" && doc.company ==\"KINGFISHER - TRANSPORTATION\"",
    "fieldname": "total_trip1",
    "fieldtype": "Int",
    "label": "Total Trip"
   },
   {
+   "depends_on": "eval:doc.company ==\"KINGFISHER - TRANSPORTATION\"",
    "fieldname": "section_break_10",
    "fieldtype": "Section Break"
   },
   {
+   "depends_on": "eval:doc.company ==\"KINGFISHER - TRANSPORTATION\"",
    "fieldname": "schedule_date__time",
    "fieldtype": "Datetime",
    "label": "Schedule Date & Time"
   },
   {
+   "depends_on": "eval:doc.company ==\"KINGFISHER - TRANSPORTATION\"",
    "fieldname": "point_of_contact_name",
    "fieldtype": "Data",
    "label": "Point Of Contact (Name)"
   },
   {
+   "depends_on": "eval:doc.company ==\"KINGFISHER - TRANSPORTATION\"",
    "fieldname": "point_of_contact_mobile",
    "fieldtype": "Int",
    "label": "Point Of Contact (Mobile)"
   },
   {
+   "depends_on": "eval:doc.company ==\"KINGFISHER - TRANSPORTATION\"",
    "fieldname": "driver_allowance_section",
    "fieldtype": "Section Break",
    "label": "Driver Allowance"
   },
   {
+   "depends_on": "eval:doc.company ==\"KINGFISHER - TRANSPORTATION\"",
    "fieldname": "name1",
    "fieldtype": "Link",
    "label": "Name",
    "options": "Employee"
   },
   {
+   "depends_on": "eval:doc.company ==\"KINGFISHER - TRANSPORTATION\"",
    "fieldname": "allowance",
    "fieldtype": "Currency",
    "label": "Allowance"
   },
   {
+   "depends_on": "eval:doc.company ==\"KINGFISHER - TRANSPORTATION\"",
    "fieldname": "payment_mode",
    "fieldtype": "Select",
    "label": "Payment Mode",
    "options": "\nMonthly\nKING FISHER TRADG & CONTG CO\nPetty Cash\nUndeposited Funds"
   },
   {
+   "depends_on": "eval:doc.company ==\"KINGFISHER - TRANSPORTATION\"",
    "fieldname": "transaction_date",
    "fieldtype": "Date",
    "label": "Transaction Date"
   },
   {
+   "depends_on": "eval:doc.company ==\"KINGFISHER - TRANSPORTATION\"",
    "fieldname": "column_break_29",
    "fieldtype": "Column Break"
   },
   {
+   "depends_on": "eval:doc.company ==\"KINGFISHER - TRANSPORTATION\"",
    "fieldname": "description",
    "fieldtype": "Small Text",
    "label": "Description"
   },
   {
+   "depends_on": "eval:doc.company ==\"KINGFISHER - TRANSPORTATION\"",
    "fieldname": "trip_documents",
    "fieldtype": "Attach",
    "label": "Trip Documents"
   },
   {
+   "depends_on": "eval:doc.company ==\"KINGFISHER - TRANSPORTATION\"",
    "fieldname": "column_break_23",
    "fieldtype": "Column Break"
   },
@@ -337,8 +360,7 @@
    "fieldname": "delivery_date",
    "fieldtype": "Date",
    "in_list_view": 1,
-   "label": "Delivery Date",
-   "reqd": 1
+   "label": "Delivery Date"
   },
   {
    "fieldname": "from_location",
@@ -355,6 +377,7 @@
    "fieldtype": "Section Break"
   },
   {
+   "depends_on": "eval:doc.company ==\"KINGFISHER - TRANSPORTATION\"",
    "fieldname": "break",
    "fieldtype": "Column Break"
   },
@@ -379,15 +402,21 @@
    "label": "Total"
   },
   {
+   "depends_on": "eval:doc.company ==\"KINGFISHER - TRANSPORTATION\"",
    "fieldname": "total_hours",
    "fieldtype": "Float",
    "label": "Total Hours"
+  },
+  {
+   "fieldname": "trip_type",
+   "fieldtype": "Data",
+   "label": "Trip Type"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-12-28 22:46:08.009385",
+ "modified": "2024-04-02 14:46:12.203297",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Trip",

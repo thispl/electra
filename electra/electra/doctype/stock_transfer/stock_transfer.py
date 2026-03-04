@@ -25,7 +25,7 @@ class StockTransfer(Document):
         from electra.utils import get_series
         source_company = frappe.get_value("Stock Request",self.ic_material_transfer_request,"source_company")
         sales_person = frappe.get_value("Sales Order",self.sales_order,"sales_person_user")
-        mpinfo = get_mode_of_payment_info("Wire Transfer - CBQ-4020",source_company)
+        mpinfo = get_mode_of_payment_info("Bank Transfer - CBQ-4020",source_company)
         default_account = ''
         if len(mpinfo) > 0:
             default_account = mpinfo[0]['default_account']
@@ -41,31 +41,9 @@ class StockTransfer(Document):
             si.stock_transfer_numner = self.name
             si.sales_person_user = sales_person
             si.stock_transfer = "Stock Transfer"
+            si.debit_to = frappe.db.get_value("Account",{"company":source_company,"account_number":"1321","disabled":0},["name"])
             # si.is_pos = 1
             # si.pos_profile = source_company
-            for item in self.items:
-                lvr = get_last_valuation_rate(item.item_code,source_company)
-                frappe.errprint(lvr)
-                si.append("items",{
-                    "item_code" : item.item_code,
-                    "income_account" : 'Sales - Stock Transfer - ' + frappe.get_value('Company',self.source_company,'abbr'),
-                    "qty" : item.qty,
-                    "rate": lvr,
-                    "price_list_rate": lvr,
-                    "warehouse": item.s_warehouse,
-                    "project":item.project,
-                    "cost_center": erpnext.get_default_cost_center(source_company),
-                })
-            si.insert(ignore_permissions=True)
-            si.append("payments",{
-                    "mode_of_payment" : "Wire Transfer - CBQ-4020",
-                    "amount" : si.rounded_total,
-                    "account" : default_account
-                })
-            si.paid_amount = si.rounded_total
-            si.letter_head = get_default_letter_head(source_company)
-            si.submit()
-            self.internal_sales_invoice = si.name
 
             target_warehouse = frappe.db.get_value('Warehouse', {'default_for_stock_transfer':1,'company': self.target_company }, ["name"])
             icmta = frappe.new_doc("Stock Confirmation")
@@ -85,12 +63,26 @@ class StockTransfer(Document):
                 "ic_material_transfer_request":self.ic_material_transfer_request,
                 "ic_material_transfer_confirmation":self.name
             })
+            
             for item in self.items:
+                lvr = get_last_valuation_rate(item.item_code,source_company)
+                si.append("items",{
+                    "item_code" : item.item_code,
+                    "income_account" : 'Sales - Stock Transfer - ' + frappe.get_value('Company',self.source_company,'abbr'),
+                    "qty" : item.qty,
+                    "rate": lvr,
+                    "price_list_rate": lvr,
+                    "warehouse": item.s_warehouse,
+                    "project":item.project,
+                    "cost_center": erpnext.get_default_cost_center(source_company),
+                })
+            
                 icmta.append("items",{
                     "item_code": item.item_code,
                     "item_name": item.item_name,
                     "qty": item.qty,
                     "uom": item.uom,
+                    "rate": lvr,
                     "project": item.project,
                     "description": item.description,
                     "item_group": item.item_group,
@@ -101,7 +93,17 @@ class StockTransfer(Document):
             icmta.flags.ignore_permissions = True
             icmta.flags.ignore_mandatory = True
             icmta.insert()
-
+            si.append("payments",{
+                    "mode_of_payment" : "Bank Transfer - CBQ-4020",
+                    "amount" : si.rounded_total,
+                    "account" : default_account
+                })
+            si.paid_amount = si.rounded_total
+            si.letter_head = get_default_letter_head(source_company)
+            si.insert(ignore_permissions=True)
+            self.internal_sales_invoice = si.name
+            si.submit()
+            
 def on_cancel(self):
     if self.internal_sales_invoice:
         si = frappe.get_doc('Sales Invoice',self.internal_sales_invoice)

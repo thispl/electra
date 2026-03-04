@@ -31,14 +31,14 @@ class VehicleMaintenanceCheckList(Document):
 			"remarks":self.hr_manager,
 			"document":self.name
 		})
-		vehicle.save(ignore_permissions = True)
+		vehicle.save(ignore_permissions=True)
 		frappe.db.commit()
 
 
 @frappe.whitelist()
 def register_no(register_no):
 	frappe.errprint("hi")
-	vehicle = frappe.db.sql("""SELECT work_finished_date, present_kilometer FROM `tabVehicle Maintenance Check List` WHERE register_no = '%s' """ % register_no, as_dict=True)[0] or "-"
+	vehicle = frappe.db.sql("""SELECT work_finished_date, present_kilometer FROM `tabVehicle Maintenance Check List` WHERE register_no = '%s' ORDER BY creation DESC LIMIT 1""" % register_no, as_dict=True)[0] or "-"
 	return vehicle
 	
 

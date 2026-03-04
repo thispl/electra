@@ -7,6 +7,7 @@ from frappe import _
 from frappe.utils import flt
 import erpnext
 from frappe.utils import formatdate
+from frappe.utils import cstr, cint, getdate, get_last_day, get_first_day, add_days,date_diff
 
 def execute(filters=None):
 
@@ -37,7 +38,6 @@ def execute(filters=None):
 			frappe.db.get_value('Employee',ss.employee,'_other_allowance'),
 			frappe.db.get_value('Employee',ss.employee,'transportation'),
 			sum_emp['total'] or "-",
-			ss.total_working_days,
 		]
 
 		if ss.branch is not None:
@@ -51,19 +51,13 @@ def execute(filters=None):
 
 		row +=[
 				ss.absent_days or 0,
-				# int(frappe.get_value('Salary Detail',{'salary_component':"Basic",'parent':ss.name},["amount"]) or 0),
-				# int(frappe.get_value('Salary Detail',{'salary_component':"House Rental Allowance",'parent':ss.name},["amount"]) or 0),
-				# int(frappe.get_value('Salary Detail',{'salary_component':"Other Allowance",'parent':ss.name},["amount"]) or 0),
-				# int(frappe.get_value('Salary Detail',{'salary_component':"Transportation",'parent':ss.name},["amount"]) or 0),
 				int(frappe.get_value('Additional Salary',{'salary_component':"NOT Hours",'employee':ss.employee,'docstatus':1},['not_hours']) or 0),
 				int(frappe.get_value('Additional Salary',{'salary_component':"HOT Hours",'employee':ss.employee,'docstatus':1},['hot_hours']) or 0),
-				# ss.not_hours or 0,
-				# ss.hot_hours or 0,
 				int(frappe.get_value('Salary Detail',{'salary_component':"NOT Hours",'parent':ss.name},["amount"]) or 0),
 				int(frappe.get_value('Salary Detail',{'salary_component':"HOT Hours",'parent':ss.name},["amount"]) or 0),
 				int(frappe.get_value('Salary Detail',{'salary_component':"Previous Month Additionals",'parent':ss.name},["amount"]) or 0),
+				((sum_emp['total'])/ss.total_working_days)*ss.absent_days,
 				int(frappe.get_value('Salary Detail',{'salary_component':"Others Additions",'parent':ss.name},["amount"]) or 0)]
-
 		if currency == company_currency:
 			row += [int(flt(ss.gross_pay)) * int(flt(ss.exchange_rate))]
 		else:
@@ -73,22 +67,14 @@ def execute(filters=None):
 				frappe.get_value('Salary Detail',{'salary_component':"Loan Deduction",'parent':ss.name},["amount"]) or 0,
 				frappe.get_value('Salary Detail',{'salary_component':"Other/ Advance Deduction",'parent':ss.name},["amount"]) or 0,
 				frappe.get_value('Salary Detail',{'salary_component':"Mess Advance",'parent':ss.name},["amount"]) or 0,
-				frappe.get_value('Salary Detail',{'salary_component':"Previous Month Abs Detection",'parent':ss.name},["amount"]) or 0
-				]
+			]
 		
 		if currency == company_currency:
 			row += [
 				int(flt(ss.net_pay)) * int(flt(ss.exchange_rate)),
 			]
 		else:
-			row += [
-				int(ss.net_pay) or "-",
-			]
-
-		row +=[
-			frappe.db.get_value('Additional Salary',{'employee':ss.employee,"salary_component":"Previous Month Abs Detection","payroll_date":ss.start_date},['Remarks']) or "-"
-		]
-
+			row += [int(ss.net_pay) or "-",]
 		data.append(row)
 	return columns, data
 
@@ -96,13 +82,11 @@ def get_columns(salary_slips):
 	columns = [
 		_("Employee") + "::100",
 		_("Employee Name") + "::130",
-		_("Fixed Basic(QR)") + "::150",
-		_("Fixed HRA(QR)") + "::140",
-		_("Fixed Other Allowance(QR)") + "::200",
-		_("Fixed Transportation Allowance(QR)") + "::250",
-		_("Fixed Total(QR)") + "::150",
-		_("Working Days") + ":Data:140",
-		
+		_("Basic") + "::150",
+		_("HRA") + "::140",
+		_("Other Allowance") + "::200",
+		_("Transportation Allowance") + "::250",
+		_("Total") + "::150",
 	]
 	salary_components = {_("Earning"): [], _("Deduction"): []}
 
@@ -119,25 +103,18 @@ def get_columns(salary_slips):
 	columns = (
 		columns
 		+ [_("Absent Days") + ":Data:140"]
-		# + [_("Basic(QR)") + "::110"]
-		# + [_("House Rental Allowance(QR)") + "::250"]
-		# + [_("Transportation(QR)") + "::150"]
-		# + [_("Other Allowance(QR)") + "::180"]
 		+ [_("NOT Hours") + ":Float:120"]
 		+ [_("HOT Hours") + ":Float:120"]
-		+ [_("NOT Amount(QR)") + "::160"]
-		+ [_("HOT Amount(QR)") + "::160"]
-		+ [_("Previous Month Additionals(QR)") + "::160"]
-		+ [_("Others Additions(QR)") + "::180"]
-		+ [_("Gross Pay(QR)") + "::150"]
-		+ [_("Loan Deduction(QR)") + "::150"]
-		+ [_("Other/ Advance Deduction(QR)") + "::250"]
-		+ [_("Mess Advance(QR)") + "::150"]
-		+ [_("Previous Month Abs Detection") + "::260"]
-		+ [
-			_("Net Pay(QR)") + "::150",
-		]
-		+ [_("Remarks") + "::260"]
+		+ [_("NOT Amount") + "::160"]
+		+ [_("HOT Amount") + "::160"]
+		+ [_("Previous Month Additionals") + "::160"]
+		+ [_("Cuurent Month Abs Month Deduction") + "::160"]
+		+ [_("Others Additions") + "::180"]
+		+ [_("Gross Pay") + "::150"]
+		+ [_("Loan Deduction") + "::150"]
+		+ [_("Other/ Advance Deduction") + "::250"]
+		+ [_("Mess Advance") + "::150"]
+		+ [_("Net Pay") + "::150"]
 	)
 	return columns, salary_components[_("Earning")], salary_components[_("Deduction")]
 
@@ -212,3 +189,11 @@ def get_ss_ded_map(salary_slips, currency, company_currency):
 		else:
 			ss_ded_map[d.parent][d.salary_component] += flt(d.amount)
 	return ss_ded_map
+
+@frappe.whitelist()
+def get_to_date(from_date):
+	return get_last_day(from_date)
+
+@frappe.whitelist()
+def get_diff_date(from_date,to_date):
+	return date_diff(to_date,from_date)+1

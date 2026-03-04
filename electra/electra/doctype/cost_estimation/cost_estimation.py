@@ -8,16 +8,19 @@ from math import floor
 
 class CostEstimation(Document):
 	def validate(self):
-		master_sow = self.master_scope_of_work
-		for msow in master_sow:
-			if msow.msow:
-				if frappe.db.exists('Master Scope of Work',msow.msow):
-					msow_id = frappe.get_doc("Master Scope of Work",msow.msow)
-				else:
-					msow_id = frappe.new_doc("Master Scope of Work")
-				msow_id.master_scope_of_work = msow.msow
-				msow_id.desc = msow.msow_desc
-				msow_id.save(ignore_permissions=True)
+		if self.master_scope_of_work:
+			master_sow = self.master_scope_of_work
+			for msow in master_sow:
+				if msow.msow:
+					if frappe.db.exists('Master Scope of Work',msow.msow):
+						msow_id = frappe.get_doc("Master Scope of Work",msow.msow)
+					else:
+						msow_id = frappe.new_doc("Master Scope of Work")
+					msow_id.master_scope_of_work = msow.msow
+					msow_id.desc = msow.msow_desc
+					msow_id.save(ignore_permissions=True)
+		
+
 
 @frappe.whitelist()
 def round(n, decimals=0):
@@ -63,8 +66,11 @@ def get_data(tc,ec,cp,gpp,tcc,tec,cpc,gppc,tcp,tpb,dp,dpc,cmp,netp,neta):
 		data += "<tr><td colspan = 2 style ='text-align:center;border:1px solid black'><b>E</b></td><td colspan = 12 style ='text-align:left;border:1px solid black'><b>Total Overhead</b>(B+C+D)</td><td colspan = 6 style ='text-align:center;border:1px solid black'>QAR  %s</td></tr>"%(round(float(tot),2))
 		data += "<tr><td colspan = 2 style ='text-align:center;border:1px solid black'><b>F</b></td><td colspan = 6 style ='text-align:left;border:1px solid black'><b>Gross Profit</b></td><td colspan = 6 style ='text-align:center;border:1px solid black'>%s</td><td colspan = 6 style ='text-align:center;border:1px solid black'>QAR    %s</td></tr>"%(round(float(gpp), 2),round(float(gppc), 2))
 		data += "<tr><td colspan = 2 style ='text-align:center;border:1px solid black'><b>G</b></td><td colspan = 6 style ='text-align:left;border:1px solid black'><b>Discount</b></td><td colspan = 6 style ='text-align:center;border:1px solid black'>%s</td><td colspan = 6 style ='text-align:center;border:1px solid black'>QAR    %s</td></tr>"%(round(float(dp), 2),round(float(dpc), 2))
-		data += "<tr><td colspan = 2 style ='text-align:center;border:1px solid black'><b>H</b></td><td colspan = 6 style ='text-align:left;border:1px solid black'><b>Net Profit</b></td><td colspan = 6 style ='text-align:center;border:1px solid black'>%s<td colspan = 6 style ='text-align:center;border:1px solid black'>QAR    %s</td></tr>"%(round(float(netp),2),round(float(neta), 2))
+		data += "<tr><td colspan = 2 style ='text-align:center;border:1px solid black'><b>H</b></td><td colspan = 6 style ='text-align:left;border:1px solid black'><b>Profit Added</b></td><td colspan = 6 style ='text-align:center;border:1px solid black'>%s<td colspan = 6 style ='text-align:center;border:1px solid black'>QAR    %s</td></tr>"%(round(float(netp),2),round(float(neta), 2))
 		data += "<tr><td colspan = 2 style ='text-align:center;border:1px solid black'><b>I</b></td><td colspan = 12 style ='text-align:left;border:1px solid black'><b>Total Business Promotion</b></td><td colspan = 6 style ='text-align:center;border:1px solid black'>QAR  %s</td></tr>"%(round(float(tpb), 2))
 		data += "<tr><td colspan = 2 style ='text-align:center;border:1px solid black;border-right-color:#878f99;background-color:#878f99'><td colspan = 12 style ='color:white;text-align:center;border:1px solid black;background-color:#878f99;color:white;font-weight:bold;'>Total Bidding Price(A+E+H+I)</td><td colspan = 6 style ='color:white;background-color:#878f99;text-align:center;border:1px solid black;color:white;font-weight:bold;'>QAR  %s</td></tr>"%(round(float(eng), 2))
+		net_profit = (float(neta)/float(eng)) * 100
+		data += "<tr><td colspan = 2 style ='text-align:center;border:1px solid black;border-right-color:#878f99;'><td colspan = 12 style ='color:black;text-align:center;border:1px solid black;color:black;font-weight:bold;'>Net Profit</td><td colspan = 6 style ='color:white;text-align:center;border:1px solid black;color:green;font-weight:bold;'>%s %%</td></tr>"%(round(net_profit, 2))
+
 		data += "</table>"
 	return data

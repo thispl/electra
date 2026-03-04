@@ -1,0 +1,84 @@
+<style>
+	@media print {
+		.print-button {
+			display: none;
+			font-size:9px
+		}
+	}
+</style>
+<script>
+	function printPage() {
+		window.print();
+	}
+</script>
+<body onload="setTimeout(printPage, 1)">
+
+<h3 style="margin-bottom: 10px;">Quick Stock Balance</h3>
+
+<hr>
+
+<table style="width: 100%; margin-bottom: 15px; border-collapse: collapse;">
+	<tr>
+		<td style="width: 20%; font-weight: bold;">Company</td>
+		<td style="width: 80%;">: {%= filters.company %}</td>
+	</tr>
+	<tr>
+	<td style="font-weight: bold;">From Date</td>
+	<td>: {%= frappe.datetime.str_to_user(filters.from_date) %}</td>
+</tr>
+<tr>
+	<td style="font-weight: bold;">To Date</td>
+	<td>: {%= frappe.datetime.str_to_user(filters.to_date) %}</td>
+</tr>
+
+</table>
+
+<hr>
+
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<th style="width: 5%; white-space: nowrap;">{%= __("#") %}</th>
+			<th style="width: 15%; white-space: nowrap;">{%= __("Item") %}</th>
+			<th style="width: 5%; white-space: nowrap;">{%= __("Item Name") %}</th>
+			<th style="width: 15%; white-space: nowrap;">{%= __("UOM") %}</th>
+			<th style="width: 5%; white-space: nowrap;">{%= __("Qty") %}</th>
+			<th style="width: 10%; white-space: nowrap;">{%= __("Cost") %}</th>
+			<th style="width: 10%; white-space: nowrap;">{%= __("Value") %}</th>
+			
+		</tr>
+	</thead>
+	<tbody>
+		<tbody>
+	{% for(var i=0, l=data.length; i<l; i++) { %}
+		<tr style = "font-size:11px">
+			<td style="white-space: nowrap;">{%= i + 1 %}</td>
+			<td >{%= data[i].item_code %}</td>
+			<td style="width: 5%;">{%= data[i].item_name %}</td>
+			<td>{%= data[i].stock_uom %}</td>
+			<td style="width: 5%;">
+                {%= Number(data[i].bal_qty || 0).toFixed(2) %}
+            </td>
+
+			<td>
+                {%= frappe.format(data[i].val_rate, {
+                    fieldtype: "Currency",
+                    options: data[i].currency || "QAR",
+                    precision: 2
+                }) %}
+            </td>
+			<td>
+                {%= frappe.format(data[i].bal_val, {
+                    fieldtype: "Currency",
+                    options: data[i].currency,
+                    precision: 2
+                }) %}
+            </td>
+
+		</tr>
+	{% } %}
+</tbody>
+
+	</tbody>
+	
+</table>

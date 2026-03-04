@@ -17,6 +17,7 @@
   "transferred_by",
   "sales_order",
   "internal_sales_invoice",
+  "project_warehouse",
   "section_break_4",
   "items",
   "items_html",
@@ -146,6 +147,8 @@
   {
    "fieldname": "transferred_date",
    "fieldtype": "Date",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Transferred Date"
   },
   {
@@ -180,13 +183,20 @@
    "hidden": 1,
    "in_standard_filter": 1,
    "label": "To  Company",
-   "options": "\nKINGFISHER TRADING AND CONTRACTING COMPANY\nAl - Shaghairi Trading and Contracting Company W.L.L (ELECTRA)\nMARAZEEM SECURITY SERVICES\nKINGFISHER - TRANSPORTATION\nMARAZEEM SECURITY SERVICES - SHOWROOM\nMARAZEEM SECURITY SERVICES - HO\nMEP DIVISION - ELECTRA\nENGINEERING DIVISION - ELECTRA\nINTERIOR DIVISION - ELECTRA\nINDUSTRIAL TOOLS DIVISION\nKINGFISHER - SHOWROOM\nSTEEL DIVISION - ELECTRA\nELECTRICAL DIVISION - ELECTRA\nTRADING DIVISION - ELECTRA\nELECTRA - BARWA SHOWROOM\nELECTRA  - NAJMA SHOWROOM\nELECTRA - ALKHOR SHOWROOM\nELECTRA - BINOMRAN SHOWROOM"
+   "options": "\nKINGFISHER TRADING AND CONTRACTING COMPANY\nAl - Shaghairi Trading and Contracting Company W.L.L (ELECTRA)\nMARAZEEM SECURITY SERVICES\nKINGFISHER - TRANSPORTATION\nMARAZEEM SECURITY SERVICES - SHOWROOM\nELECTRA - UPS DIVISION\nELECTRA - FIRE ALARM AND PUBLIC ADDRESS\nMARAZEEM SECURITY SERVICES - HO\nMEP DIVISION - ELECTRA\nENGINEERING DIVISION - ELECTRA\nINTERIOR DIVISION - ELECTRA\nINDUSTRIAL TOOLS DIVISION\nKINGFISHER - SHOWROOM\nSTEEL DIVISION - ELECTRA\nELECTRICAL DIVISION - ELECTRA\nTRADING DIVISION - ELECTRA\nELECTRA - BARWA SHOWROOM\nELECTRA  - NAJMA SHOWROOM\nELECTRA - ALKHOR SHOWROOM\nELECTRA - BINOMRAN SHOWROOM"
+  },
+  {
+   "fieldname": "project_warehouse",
+   "fieldtype": "Link",
+   "label": "Project Warehouse",
+   "options": "Warehouse",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-12-20 12:30:04.296789",
+ "modified": "2026-01-12 12:23:10.838334",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Stock Transfer",

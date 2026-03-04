@@ -14,9 +14,44 @@
   "department",
   "column_break_4",
   "resident_id_no",
-  "date_of_joining",
   "company",
   "type",
+  "section_break_g4mn",
+  "basic",
+  "column_break_3a02",
+  "allowance",
+  "column_break_dffb",
+  "total",
+  "section_break_bmyo",
+  "from_date",
+  "to_date",
+  "leave_days",
+  "rejoin_date",
+  "column_break_1a8l",
+  "date_of_joining",
+  "last_dos",
+  "period",
+  "salary_and_benefits_section",
+  "salary_days",
+  "salary_amount",
+  "not",
+  "not_amount",
+  "hot_hours",
+  "hot_amount",
+  "column_break_zy2m",
+  "leave_salary_days",
+  "leave_salary_amount",
+  "gratuity",
+  "gratuity_amount",
+  "other_amount",
+  "total_amount",
+  "deductions_section",
+  "loans",
+  "visa",
+  "dedution_total",
+  "column_break_7jn5",
+  "air_ticket",
+  "others",
   "site_store_clearance",
   "equipments",
   "tools",
@@ -64,7 +99,6 @@
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": " Employee Name",
-   "options": "Name",
    "read_only": 1,
    "unique": 1
   },
@@ -226,8 +260,9 @@
   {
    "fetch_from": "employee_no.date_of_joining",
    "fieldname": "date_of_joining",
-   "fieldtype": "Read Only",
-   "label": "Date of Joining"
+   "fieldtype": "Date",
+   "label": "Date of Joining",
+   "read_only": 1
   },
   {
    "fetch_from": "employee_no.company",
@@ -353,12 +388,194 @@
    "fieldtype": "Date",
    "label": "Requested Date",
    "read_only": 1
+  },
+  {
+   "fieldname": "section_break_g4mn",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_3a02",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_dffb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_bmyo",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "rejoin_date",
+   "fieldtype": "Date",
+   "label": "Last Rejoin Date"
+  },
+  {
+   "fieldname": "last_dos",
+   "fieldtype": "Date",
+   "label": "Last Date of Service"
+  },
+  {
+   "fieldname": "period",
+   "fieldtype": "Data",
+   "label": "Last Period of Service"
+  },
+  {
+   "fieldname": "column_break_1a8l",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "from_date",
+   "fieldtype": "Date",
+   "label": "Leave Start Date"
+  },
+  {
+   "fieldname": "to_date",
+   "fieldtype": "Date",
+   "label": "Leave End Date"
+  },
+  {
+   "fieldname": "leave_days",
+   "fieldtype": "Data",
+   "label": "Total Leave Taken"
+  },
+  {
+   "depends_on": "eval:doc.employee_no",
+   "fetch_from": "employee_no.basic",
+   "fieldname": "basic",
+   "fieldtype": "Data",
+   "label": "Basic",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.employee_no",
+   "fetch_from": "employee_no._other_allowance",
+   "fieldname": "allowance",
+   "fieldtype": "Data",
+   "label": "Allowance",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.employee_no",
+   "fieldname": "total",
+   "fieldtype": "Data",
+   "label": "Total",
+   "read_only": 1
+  },
+  {
+   "fieldname": "salary_and_benefits_section",
+   "fieldtype": "Section Break",
+   "label": "Salary and Benefits"
+  },
+  {
+   "fieldname": "salary_days",
+   "fieldtype": "Data",
+   "label": "Salary Days"
+  },
+  {
+   "fieldname": "salary_amount",
+   "fieldtype": "Data",
+   "label": "Salary Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "not",
+   "fieldtype": "Data",
+   "label": "NOT Hours"
+  },
+  {
+   "fieldname": "not_amount",
+   "fieldtype": "Data",
+   "label": "NOT Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "hot_hours",
+   "fieldtype": "Data",
+   "label": "HOT Hours"
+  },
+  {
+   "fieldname": "hot_amount",
+   "fieldtype": "Data",
+   "label": "HOT Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_zy2m",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "leave_salary_days",
+   "fieldtype": "Data",
+   "label": "Leave Salary Days"
+  },
+  {
+   "fieldname": "leave_salary_amount",
+   "fieldtype": "Data",
+   "label": "Leave Salary Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "gratuity",
+   "fieldtype": "Data",
+   "label": "Gratuity Days"
+  },
+  {
+   "fieldname": "gratuity_amount",
+   "fieldtype": "Data",
+   "label": "Gratuity Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "other_amount",
+   "fieldtype": "Currency",
+   "label": "Other Benefits Amount"
+  },
+  {
+   "fieldname": "total_amount",
+   "fieldtype": "Data",
+   "label": "Total Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "deductions_section",
+   "fieldtype": "Section Break",
+   "label": "Deductions"
+  },
+  {
+   "fieldname": "loans",
+   "fieldtype": "Currency",
+   "label": "Loans and Advances"
+  },
+  {
+   "fieldname": "visa",
+   "fieldtype": "Currency",
+   "label": "Visa and Immigration Cost"
+  },
+  {
+   "fieldname": "dedution_total",
+   "fieldtype": "Data",
+   "label": "Total of Deduction"
+  },
+  {
+   "fieldname": "column_break_7jn5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "air_ticket",
+   "fieldtype": "Currency",
+   "label": "Air Ticket Expense"
+  },
+  {
+   "fieldname": "others",
+   "fieldtype": "Currency",
+   "label": "Others"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-05-31 14:54:36.620445",
+ "modified": "2024-04-05 10:20:18.823750",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Vacation Final Exit Form",

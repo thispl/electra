@@ -50,6 +50,12 @@ frappe.query_reports["Monthly Salary Register"] = {
 			"options":["Draft", "Submitted", "Cancelled"],
 			"default": "Draft",
 			"width": "100px"
+		},
+		{
+			"fieldname":"total_no_of_working_days",
+			"label":__("Total No of Working Days"),
+			"fieldtype":"Data",
+			"read_only":1,
 		}
 	],
 };

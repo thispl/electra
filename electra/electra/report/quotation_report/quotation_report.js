@@ -18,12 +18,28 @@ frappe.query_reports["Quotation Report"] = {
 			"label": __("From Date"),
 			"fieldtype": "Date",
 			"width": "100px",
+			"default": frappe.datetime.year_start(),
+			"reqd": 1
 		},
 		{
 			"fieldname":"to_date",
 			"label": __("To Date"),
 			"fieldtype": "Date",
 			"width": "100px",
+			"default": frappe.datetime.year_end(),
+			"reqd": 1
+		},
+		{
+			"fieldname":"customer",
+			"label": __("Customer"),
+			"fieldtype": "Link",
+			"options": "Customer",
+		},
+		{
+			"fieldname":"sales_person",
+			"label": __("Sales Person"),
+			"fieldtype": "Link",
+			"options": "Sales Person",
 		},
 		{
 			"fieldname":"docstatus",
@@ -39,17 +55,46 @@ frappe.query_reports["Quotation Report"] = {
 			"options":["","Sales","Project"],
 			"width": "100px"
 		},
-		{
-			"fieldname":"valid_from_date",
-			"label": __("Valid From Date"),
-			"fieldtype": "Date",
-			"width": "100px",
-		},
-		{
-			"fieldname":"valid_to_date",
-			"label": __("Valid To Date"),
-			"fieldtype": "Date",
-			"width": "100px",
-		},
+		// {
+		// 	"fieldname":"valid_from_date",
+		// 	"label": __("Valid From Date"),
+		// 	"fieldtype": "Date",
+		// 	"width": "100px",
+		// },
+		// {
+		// 	"fieldname":"valid_to_date",
+		// 	"label": __("Valid To Date"),
+		// 	"fieldtype": "Date",
+		// 	"width": "100px",
+		// },
+		// {
+		// 	"fieldname":"amount_from",
+		// 	"label": __("Amount From"),
+		// 	"fieldtype": "Currency",
+		// },
+		// {
+		// 	"fieldname":"amount_to",
+		// 	"label": __("Amount To"),
+		// 	"fieldtype": "Currency",
+		// },
+        {
+            "fieldname": "amount_condition",
+            "label": __("Select"),
+            "fieldtype": "Select",
+            "options": [">", "<", "=", "between"],
+            "default": ">",
+            "reqd": 1
+        },
+        {
+            "fieldname": "amount_from",
+            "label": __("Amount From"),
+            "fieldtype": "Currency",
+        },
+        {
+            "fieldname": "amount_to",
+            "label": __("Amount To"),
+            "fieldtype": "Currency",
+            "depends_on": "eval: doc.amount_condition == 'between'",
+        },
 	]
 };

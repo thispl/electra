@@ -2,15 +2,15 @@
  "add_total_row": 0,
  "columns": [],
  "creation": "2023-07-07 18:51:09.927299",
- "disable_prepared_report": 0,
  "disabled": 0,
  "docstatus": 0,
  "doctype": "Report",
  "filters": [],
- "idx": 0,
+ "idx": 6,
  "is_standard": "Yes",
  "letter_head": "Footer",
- "modified": "2023-07-07 18:51:09.927299",
+ "letterhead": null,
+ "modified": "2024-02-05 18:54:53.819551",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Total Stock Summary Report",
@@ -37,6 +37,12 @@
   },
   {
    "role": "Sales Executive - KINGFISHER"
+  },
+  {
+   "role": "HOD"
+  },
+  {
+   "role": "Sales Executive"
   }
  ]
 }

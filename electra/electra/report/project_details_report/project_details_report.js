@@ -55,3 +55,4 @@ frappe.query_reports["Project Details Report"] = {
 		},
 	]
 };
+

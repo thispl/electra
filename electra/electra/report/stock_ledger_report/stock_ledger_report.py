@@ -60,7 +60,8 @@ def execute(filters=None):
         from_company  = get_from_company(sle.voucher_type,sle.voucher_no)
         customer = get_customer(sle.voucher_type,sle.voucher_no)
         sle.update({
-            "voucher_number": voucher_no,
+            "voucher_number": voucher_no[0],
+            "voucher_type":voucher_no[1],
             "from_company": from_company,
             "to_company": to_company,
             "customer":customer
@@ -76,7 +77,7 @@ def execute(filters=None):
 
     update_included_uom_in_report(columns, data, include_uom, conversion_factors)
     if opening_row:
-        to = {'item_code':'Total','in_qty':inqty,'out_qty':outqty,'qty_after_transaction':tot}
+        to = {'item_code':_("'Total'"),'in_qty':inqty,'out_qty':outqty,'qty_after_transaction':tot}
         data.append(to)
     return columns, data
 
@@ -103,15 +104,15 @@ def update_available_serial_nos(available_serial_nos, sle):
 
 def get_columns():
     columns = [
-        # {"label": _("Date"), "fieldname": "date", "fieldtype": "Datetime", "width": 150},
+        {"label": _("Date"), "fieldname": "date", "fieldtype": "Datetime", "width": 150},
         {"label": _("Item Code"), "fieldname": "item_code", "fieldtype": "Link", "options": "Item", "width": 100},
         {"label": _("Item Name"), "fieldname": "item_name", "width": 100},
         {"label": _("Stock UOM"), "fieldname": "stock_uom", "fieldtype": "Link", "options": "UOM", "width": 90},
         {"label": _("In Qty"), "fieldname": "in_qty", "fieldtype": "Float", "width": 80, "convertible": "qty"},
         {"label": _("Out Qty"), "fieldname": "out_qty", "fieldtype": "Float", "width": 80, "convertible": "qty"},
         {"label": _("Balance Qty"), "fieldname": "qty_after_transaction", "fieldtype": "Float", "width": 100, "convertible": "qty"},
-        {"label": _("Customer Name"), "fieldname": "customer", "fieldtype": "link", "width": 100},
-        {"label": _("Voucher Number"), "fieldname": "voucher_number", "fieldtype": "Data", "width": 100},
+        {"label": _("Customer Name"), "fieldname": "customer", "fieldtype": "link", "width": 300},
+        {"label": _("Voucher Number"), "fieldname": "voucher_number", "fieldtype": "Dynamic Link","options":"voucher_type", "width": 200},
         {"label": _("From Company"), "fieldname": "from_company", "fieldtype": "Data", "width": 100},
         {"label": _("To Company"), "fieldname": "to_company", "fieldtype": "Data", "width": 100},
         {"label": _("Warehouse"), "fieldname": "warehouse", "fieldtype": "Link", "options": "Warehouse", "width": 150},
@@ -122,7 +123,7 @@ def get_columns():
         # {"label": _("Valuation Rate"), "fieldname": "valuation_rate", "fieldtype": "Currency", "width": 110, "options": "Company:company:default_currency", "convertible": "rate"},
         # {"label": _("Balance Value"), "fieldname": "stock_value", "fieldtype": "Currency", "width": 110, "options": "Company:company:default_currency"},
         {"label": _("Voucher Type"), "fieldname": "voucher_type", "width": 110},
-        {"label": _("Voucher Number"), "fieldname": "voucher_number", "fieldtype": "Data", "width": 100},
+        {"label": _("Voucher Number"), "fieldname": "voucher_number", "fieldtype": "Dynamic Link","options":"voucher_type", "width": 200},
         {"label": _("Batch"), "fieldname": "batch_no", "fieldtype": "Link", "options": "Batch", "width": 100},
         {"label": _("Serial No"), "fieldname": "serial_no", "fieldtype": "Link", "options": "Serial No", "width": 100},
         {"label": _("Balance Serial No"), "fieldname": "balance_serial_no", "width": 100},
@@ -158,8 +159,10 @@ def get_stock_ledger_entries(filters, items):
             stock_value_difference
         FROM
             `tabStock Ledger Entry` sle
-        WHERE
-            company = %(company)s
+        WHERE 
+            /* Added by Nandini */
+            warehouse NOT IN ('Work In Progress - EED','Work In Progress - INE','Work In Progress - MEP')
+              AND company = %(company)s
                 AND is_cancelled = 0 AND posting_date BETWEEN %(from_date)s AND %(to_date)s
                 {sle_conditions}
                 {item_conditions_sql}
@@ -173,15 +176,34 @@ def get_stock_ledger_entries(filters, items):
 def get_voucher_number(voucher_type,voucher_no):
     if voucher_type == "Purchase Invoice":
         voucher_number = frappe.db.get_value("Purchase Invoice", {'name':voucher_no,'is_internal_supplier':1},[ "confirmation_number"])
+        # voucher_name ="Stock Confirmation"
         if not voucher_number:
             voucher_number = voucher_no
+            voucher_name = voucher_type
+        else:
+            if frappe.db.exists('Stock Confirmation', {'name':voucher_number,'docstatus':1}):
+                voucher_number = frappe.db.get_value("Purchase Invoice", {'name':voucher_no,'is_internal_supplier':1},[ "confirmation_number"])
+                voucher_name ="Stock Confirmation"
+            else:
+                voucher_number = voucher_no
+                voucher_name = voucher_type
     elif voucher_type == "Sales Invoice":
         voucher_number = frappe.db.get_value("Sales Invoice",{'name':voucher_no,'is_internal_customer':1},[ "stock_transfer_numner"])
+        # voucher_name = "Stock Transfer"
         if not voucher_number:
             voucher_number = voucher_no
+            voucher_name = voucher_type
+        else:
+            if frappe.db.exists('Stock Transfer', {'name':voucher_number,'docstatus':1}):
+                voucher_number = frappe.db.get_value("Sales Invoice",{'name':voucher_no,'is_internal_customer':1},[ "stock_transfer_numner"])
+                voucher_name ="Stock Transfer"
+            else:
+                voucher_number = voucher_no
+                voucher_name = voucher_type
     else:
         voucher_number = voucher_no
-    return voucher_number
+        voucher_name = voucher_type
+    return voucher_number , voucher_name
 
 def get_from_company(voucher_type,voucher_no):
     from_company = ''
@@ -189,13 +211,19 @@ def get_from_company(voucher_type,voucher_no):
     if voucher_type == "Purchase Invoice":
         voucher_number = frappe.db.get_value("Purchase Invoice", {'name':voucher_no,'is_internal_supplier':1},[ "confirmation_number"])
         if voucher_number:
-            from_company = frappe.db.get_value('Stock Confirmation', voucher_number, ['source_company'])
+            if frappe.db.exists('Stock Confirmation', {'name':voucher_number,'docstatus':1}):
+                from_company = frappe.db.get_value('Stock Confirmation', {'name':voucher_number,'docstatus':1}, ['source_company'])
+            else:
+                from_company = "NA"
         if not voucher_number:
             from_company = "NA"
     elif voucher_type == "Sales Invoice":
         voucher_number = frappe.db.get_value("Sales Invoice",{'name':voucher_no,'is_internal_customer':1},[ "stock_transfer_numner"])
         if voucher_number:
-            from_company = frappe.db.get_value('Stock Transfer', voucher_number, ['source_company'])
+            if frappe.db.exists('Stock Transfer', {'name':voucher_number,'docstatus':1}):
+                from_company = frappe.db.get_value('Stock Transfer', {'name':voucher_number,'docstatus':1}, ['source_company'])
+            else:
+                from_company = "NA"
         if not voucher_number:
             from_company = "NA"
     else:
@@ -209,13 +237,19 @@ def get_to_company(voucher_type,voucher_no):
     if voucher_type == "Purchase Invoice":
         voucher_number = frappe.db.get_value("Purchase Invoice", {'name':voucher_no,'is_internal_supplier':1},[ "confirmation_number"])
         if voucher_number:
-            to_company = frappe.db.get_value('Stock Confirmation', voucher_number, ['target_company'])
+            if frappe.db.exists('Stock Confirmation', {'name':voucher_number,'docstatus':1}):
+                to_company = frappe.db.get_value('Stock Confirmation', {'name':voucher_number,'docstatus':1}, ['target_company'])
+            else:
+                from_company = "NA"
         if not voucher_number:
             to_company = "NA"
     elif voucher_type == "Sales Invoice":
         voucher_number = frappe.db.get_value("Sales Invoice",{'name':voucher_no,'is_internal_customer':1},[ "stock_transfer_numner"])
         if voucher_number:
-            to_company = frappe.db.get_value('Stock Transfer', voucher_number, ['target_company'])
+            if frappe.db.exists('Stock Transfer', {'name':voucher_number,'docstatus':1}):
+                to_company = frappe.db.get_value('Stock Transfer', {'name':voucher_number,'docstatus':1}, ['target_company'])
+            else:
+                to_company = "NA"
         if not voucher_number:
             to_company = "NA"
     else:

@@ -323,7 +323,6 @@
    "fetch_from": "emp_id.transportation",
    "fieldname": "transport_allowance",
    "fieldtype": "Currency",
-   "hidden": 1,
    "label": "Transport Allowance"
   },
   {
@@ -360,7 +359,6 @@
    "default": "0",
    "fieldname": "transport_allow",
    "fieldtype": "Currency",
-   "hidden": 1,
    "label": "Transport Allowance"
   },
   {
@@ -417,7 +415,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-12-07 09:40:33.892034",
+ "modified": "2024-01-16 10:52:18.834933",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Salary and Benefit Form",

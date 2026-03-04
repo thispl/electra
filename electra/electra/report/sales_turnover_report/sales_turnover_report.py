@@ -8,145 +8,146 @@ from frappe.utils import flt
 import erpnext
 import datetime
 import calendar
-
+from erpnext.accounts.report.financial_statements import (
+	get_columns,
+	get_data,
+	get_filtered_list_for_consolidated_report,
+	get_period_list,
+)
 def execute(filters=None):
 	columns = get_columns(filters)
 	data = get_data(filters)
 	return columns, data
 def get_columns(filters):
-    months = [
-        _("January"), _("February"), _("March"), _("April"), _("May"), _("June"),_("July"), _("August"), _("September"), _("October"), _("November"), _("December"), _("Overall")
-    ]
-    columns = []
-    for month in months:
-        columns += [
-            month + "(Sales):Currency/:140",
-            month + " (Stock Transfer):Currency/:140",
-		month + " (Project):Currency/:140",
-        ]
-    columns.insert(0, _("Company") + ":Link/Company:300")
-    return columns
+	months = [
+		_("January"), _("February"), _("March"), _("April"), _("May"), _("June"),_("July"), _("August"), _("September"), _("October"), _("November"), _("December"), _("Overall")
+	]
+	columns = []
+	for month in months:
+		columns += [
+			month + ":Currency/:140",
+			
+		]
+	columns.insert(0, _("Company") + ":Link/Company:300")
+	return columns
 
 
+
+import calendar
+from datetime import datetime
 
 def get_data(filters):
-	year = filters.year
-	data = []
-	row = []
-	comp = frappe.db.sql(""" select name from `tabCompany`""",as_dict=True)
+	year = int(filters.year)
+	current_date = datetime.today()
+	comp = frappe.db.sql("SELECT name FROM `tabCompany`", as_dict=True)
 	result = []
 
-	for j in comp:
-		january = frappe.db.sql(""" SELECT SUM(grand_total) AS grand_total,
-		SUM(CASE WHEN stock_transfer is null and order_type != 'Project' THEN grand_total ELSE 0 END) AS normal, 
-		SUM(CASE WHEN stock_transfer = "Stock Transfer" THEN grand_total ELSE 0 END) AS stock, 
-		SUM(CASE WHEN order_type = 'Project' THEN grand_total ELSE 0 END) AS project
-		FROM `tabSales Invoice` WHERE posting_date between '%s' and '%s' and company = '%s' and docstatus = 1 """%((str(year)+"-01-01"),(str(year)+"-01-31"),j.name),as_dict=True)
-		for jan in january:
-			row = [j.name,jan.normal,jan.stock,jan.project]
-		
-		february = frappe.db.sql(""" SELECT SUM(grand_total) AS grand_total,
-		SUM(CASE WHEN stock_transfer is null and order_type != 'Project' THEN grand_total ELSE 0 END) AS normal, 
-		SUM(CASE WHEN stock_transfer = "Stock Transfer" THEN grand_total ELSE 0 END) AS stock, 
-		SUM(CASE WHEN order_type = 'Project' THEN grand_total ELSE 0 END) AS project
-		FROM `tabSales Invoice` WHERE posting_date between '%s' and '%s' and company = '%s' and docstatus = 1 """%((str(year)+"-02-01"),(str(year)+"-02-28"),j.name),as_dict=True)
-		for feb in february:
-			row += [feb.normal,feb.stock,feb.project]
+	for company in comp:
+		row = [company.name]
+		monthly_incomes = []
+		total = 0
 
-		
-		march = frappe.db.sql(""" SELECT SUM(grand_total) AS grand_total,
-		SUM(CASE WHEN stock_transfer is null and order_type != 'Project' THEN grand_total ELSE 0 END) AS normal, 
-		SUM(CASE WHEN stock_transfer = "Stock Transfer" THEN grand_total ELSE 0 END) AS stock, 
-		SUM(CASE WHEN order_type = 'Project' THEN grand_total ELSE 0 END) AS project
-		FROM `tabSales Invoice` WHERE posting_date between '%s' and '%s' and company = '%s' and docstatus = 1 """%((str(year)+"-03-01"),(str(year)+"-03-31"),j.name),as_dict=True)
-		for mar in march:
-			row += [mar.normal,mar.stock,mar.project]
+		for month in range(1, 13):
+			start_date = f"{year}-{month:02d}-01"
+			end_day = calendar.monthrange(year, month)[1]
+			end_date = f"{year}-{month:02d}-{end_day}"
 
-		april = frappe.db.sql(""" SELECT SUM(grand_total) AS grand_total,
-		SUM(CASE WHEN stock_transfer is null and order_type != 'Project' THEN grand_total ELSE 0 END) AS normal, 
-		SUM(CASE WHEN stock_transfer = "Stock Transfer" THEN grand_total ELSE 0 END) AS stock, 
-		SUM(CASE WHEN order_type = 'Project' THEN grand_total ELSE 0 END) AS project
-		FROM `tabSales Invoice` WHERE posting_date between '%s' and '%s' and company = '%s' and docstatus = 1 """%((str(year)+"-04-01"),(str(year)+"-04-30"),j.name),as_dict=True)
-		for apr in april:
-			row += [apr.normal,apr.stock,apr.project]
-		
-		may = frappe.db.sql(""" SELECT SUM(grand_total) AS grand_total,
-		SUM(CASE WHEN stock_transfer is null and order_type != 'Project' THEN grand_total ELSE 0 END) AS normal, 
-		SUM(CASE WHEN stock_transfer = "Stock Transfer" THEN grand_total ELSE 0 END) AS stock, 
-		SUM(CASE WHEN order_type = 'Project' THEN grand_total ELSE 0 END) AS project
-		FROM `tabSales Invoice` WHERE posting_date between '%s' and '%s' and company = '%s' and docstatus = 1 """%((str(year)+"-05-01"),(str(year)+"-05-31"),j.name),as_dict=True)
-		for ma in may:
-			row += [ma.normal,ma.stock,ma.project]
+			if datetime(year, month, 1) > current_date:
+				income = 0
+			else:
+				income = get_income_amount(start_date, end_date, company.name, year)
 
-		june = frappe.db.sql(""" SELECT SUM(grand_total) AS grand_total,
-		SUM(CASE WHEN stock_transfer is null and order_type != 'Project' THEN grand_total ELSE 0 END) AS normal, 
-		SUM(CASE WHEN stock_transfer = "Stock Transfer" THEN grand_total ELSE 0 END) AS stock, 
-		SUM(CASE WHEN order_type = 'Project' THEN grand_total ELSE 0 END) AS project
-		FROM `tabSales Invoice` WHERE posting_date between '%s' and '%s' and company = '%s' and docstatus = 1 """%((str(year)+"-06-01"),(str(year)+"-06-30"),j.name),as_dict=True)
-		for jun in june:
-			row += [jun.normal,jun.stock,jun.project]
-
-		july = frappe.db.sql(""" SELECT SUM(grand_total) AS grand_total,
-		SUM(CASE WHEN stock_transfer is null and order_type != 'Project' THEN grand_total ELSE 0 END) AS normal, 
-		SUM(CASE WHEN stock_transfer = "Stock Transfer" THEN grand_total ELSE 0 END) AS stock, 
-		SUM(CASE WHEN order_type = 'Project' THEN grand_total ELSE 0 END) AS project
-		FROM `tabSales Invoice` WHERE posting_date between '%s' and '%s' and company = '%s' and docstatus = 1 """%((str(year)+"-07-01"),(str(year)+"-07-31"),j.name),as_dict=True)
-		for jul in july:
-			row += [jul.normal,jul.stock,jul.project]
-
-		august = frappe.db.sql(""" SELECT SUM(grand_total) AS grand_total,
-		SUM(CASE WHEN stock_transfer is null and order_type != 'Project' THEN grand_total ELSE 0 END) AS normal, 
-		SUM(CASE WHEN stock_transfer = "Stock Transfer" THEN grand_total ELSE 0 END) AS stock, 
-		SUM(CASE WHEN order_type = 'Project' THEN grand_total ELSE 0 END) AS project
-		FROM `tabSales Invoice` WHERE posting_date between '%s' and '%s' and company = '%s' and docstatus = 1 """%((str(year)+"-08-01"),(str(year)+"-08-31"),j.name),as_dict=True)
-		for aug in august:
-			row += [aug.normal,aug.stock,aug.project]
-
-		september = frappe.db.sql(""" SELECT SUM(grand_total) AS grand_total,
-		SUM(CASE WHEN stock_transfer is null and order_type != 'Project' THEN grand_total ELSE 0 END) AS normal, 
-		SUM(CASE WHEN stock_transfer = "Stock Transfer" THEN grand_total ELSE 0 END) AS stock, 
-		SUM(CASE WHEN order_type = 'Project' THEN grand_total ELSE 0 END) AS project
-		FROM `tabSales Invoice` WHERE posting_date between '%s' and '%s' and company = '%s' and docstatus = 1 """%((str(year)+"-09-01"),(str(year)+"-09-30"),j.name),as_dict=True)
-		for sep in september:
-			row += [sep.normal,sep.stock,sep.project]
+			monthly_incomes.append(income)
+			total += income
+		if total > 0:
+			row += monthly_incomes + [total]
+			result.append(row)
+	return result
 
 
-		october = frappe.db.sql(""" SELECT SUM(grand_total) AS grand_total,
-		SUM(CASE WHEN stock_transfer is null and order_type != 'Project' THEN grand_total ELSE 0 END) AS normal, 
-		SUM(CASE WHEN stock_transfer = "Stock Transfer" THEN grand_total ELSE 0 END) AS stock, 
-		SUM(CASE WHEN order_type = 'Project' THEN grand_total ELSE 0 END) AS project
-		FROM `tabSales Invoice` WHERE posting_date between '%s' and '%s' and company = '%s' and docstatus = 1 """%((str(year)+"-10-01"),(str(year)+"-10-31"),j.name),as_dict=True)
-		for oct in october:
-			row += [oct.normal,oct.stock,oct.project]
-
-		november = frappe.db.sql(""" SELECT SUM(grand_total) AS grand_total,
-		SUM(CASE WHEN stock_transfer is null and order_type != 'Project' THEN grand_total ELSE 0 END) AS normal, 
-		SUM(CASE WHEN stock_transfer = "Stock Transfer" THEN grand_total ELSE 0 END) AS stock, 
-		SUM(CASE WHEN order_type = 'Project' THEN grand_total ELSE 0 END) AS project
-		FROM `tabSales Invoice` WHERE posting_date between '%s' and '%s' and company = '%s' and docstatus = 1 """%((str(year)+"-11-01"),(str(year)+"-11-30"),j.name),as_dict=True)
-		for nov in november:
-			row += [nov.normal,nov.stock,nov.project]
-
-
-		december = frappe.db.sql(""" SELECT SUM(grand_total) AS grand_total,
-		SUM(CASE WHEN stock_transfer is null and order_type != 'Project' THEN grand_total ELSE 0 END) AS normal, 
-		SUM(CASE WHEN stock_transfer = "Stock Transfer" THEN grand_total ELSE 0 END) AS stock, 
-		SUM(CASE WHEN order_type = 'Project' THEN grand_total ELSE 0 END) AS project
-		FROM `tabSales Invoice` WHERE posting_date between '%s' and '%s' and company = '%s' and docstatus = 1 """%((str(year)+"-12-01"),(str(year)+"-12-31"),j.name),as_dict=True)
-		for dec in december:
-			row += [dec.normal,dec.stock,dec.project]
-		
-		overall = frappe.db.sql(""" SELECT SUM(grand_total) AS grand_total,
-		SUM(CASE WHEN stock_transfer is null and order_type != 'Project' THEN grand_total ELSE 0 END) AS normal, 
-		SUM(CASE WHEN stock_transfer = "Stock Transfer" THEN grand_total ELSE 0 END) AS stock, 
-		SUM(CASE WHEN order_type = 'Project' THEN grand_total ELSE 0 END) AS project
-		FROM `tabSales Invoice` WHERE posting_date between '%s' and '%s' and company = '%s' and docstatus = 1 """%((str(year)+"-01-01"),(str(year)+"-12-31"),j.name),as_dict=True)
-		for ove in overall:
-			row += [ove.normal,ove.stock,ove.project]
-
-
-			data.append(row)
-		
-	return data
-
+class DotDict(dict):
+	"""Enables both dot notation and .get() on a dict."""
+	def __getattr__(self, name):
+		return self.get(name, None)
 	
+	def __setattr__(self, name, value):
+		self[name] = value
+		
+@frappe.whitelist()
+def get_income_amount(from_date, to_date, company ,year):
+	filters = DotDict({'company': company, 'filter_based_on': 'Date Range', 'period_start_date': from_date, 'period_end_date': to_date, 'from_fiscal_year': year, 'to_fiscal_year': year, 'periodicity': 'Monthly', 'cost_center': [], 'project': [], 'accumulated_values': 1})
+	period_list = get_period_list(
+		filters.from_fiscal_year,
+		filters.to_fiscal_year,
+		filters.period_start_date,
+		filters.period_end_date,
+		filters.filter_based_on,
+		filters.periodicity,
+		company=filters.company,
+	)
+	income = erpnext.accounts.report.financial_statements.get_data(
+		filters.company,
+		"Income",
+		"Credit",
+		period_list,
+		filters=filters,
+		accumulated_values=filters.accumulated_values,
+		ignore_closing_entries=True,
+		ignore_accumulated_values_for_fy=True,
+	)
+	total_income = 0.0
+	stock_transfer = 0.0
+	other_income = 0.0
+
+	for row in income:
+		if row.get("account_name") == "Total Income (Credit)":
+			total_income = row.get("total", 0.0)
+			break
+	
+	for row in income:
+		if row.get("account_name") == "Sales - Stock Transfer":
+			stock_transfer = row.get("total", 0.0)
+			break
+	
+	for row in income:
+		if row.get("account_name") == "Other Income":
+			other_income = row.get("total", 0.0)
+			break
+
+	return total_income - stock_transfer - other_income or 0
+
+@frappe.whitelist()
+def test_check():
+	company = "TRADING DIVISION - ELECTRA"
+	from_date = "2025-01-01"
+	to_date = "2025-01-31"
+	year = "2025"
+	filters = DotDict({'company': company, 'filter_based_on': 'Date Range', 'period_start_date': from_date, 'period_end_date': to_date, 'from_fiscal_year': year, 'to_fiscal_year': year, 'periodicity': 'Monthly', 'cost_center': [], 'project': [], 'accumulated_values': 1})
+	period_list = get_period_list(
+		filters.from_fiscal_year,
+		filters.to_fiscal_year,
+		filters.period_start_date,
+		filters.period_end_date,
+		filters.filter_based_on,
+		filters.periodicity,
+		company=filters.company,
+	)
+	income = erpnext.accounts.report.financial_statements.get_data(
+		filters.company,
+		"Income",
+		"Credit",
+		period_list,
+		filters=filters,
+		accumulated_values=filters.accumulated_values,
+		ignore_closing_entries=True,
+		ignore_accumulated_values_for_fy=True,
+	)
+	return income
+	# total_income = 0.0
+
+	# for row in income:
+	# 	if row.get("account_name") == "Total Income (Credit)":
+	# 		total_income = row.get("total", 0.0)
+	# 		break
+
+	# return total_income

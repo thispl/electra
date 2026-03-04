@@ -36,7 +36,7 @@
    "read_only": 1
   },
   {
-   "fetch_from": "employee.grade",
+   "fetch_from": "employee.custom_employee_grade",
    "fieldname": "grade",
    "fieldtype": "Data",
    "in_list_view": 1,
@@ -60,7 +60,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2021-11-22 12:39:16.405040",
+ "modified": "2024-01-25 12:08:54.244081",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Day Plan Employee",
@@ -68,5 +68,6 @@
  "permissions": [],
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }

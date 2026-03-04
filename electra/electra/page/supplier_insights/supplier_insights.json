@@ -1,0 +1,22 @@
+{
+ "content": null,
+ "creation": "2025-06-19 18:52:26.938230",
+ "docstatus": 0,
+ "doctype": "Page",
+ "idx": 0,
+ "modified": "2025-06-19 18:54:06.797301",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "supplier-insights",
+ "owner": "Administrator",
+ "page_name": "supplier-insights",
+ "roles": [
+  {
+   "role": "Purchase Master Manager"
+  }
+ ],
+ "script": null,
+ "standard": "Yes",
+ "style": null,
+ "system_page": 0
+}

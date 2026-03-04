@@ -50,30 +50,57 @@ frappe.ui.form.on('Multi Project Day Plan', {
 //     },
 	onload(frm) {
 		if (frm.doc.__islocal) {
-		    frm.trigger('company')
+            if (frm.doc.company) {
+		        frm.trigger('company')
+            }
 		}
 		
 	    
     },
-    company(frm){
-        var company = frm.doc.company
-		frappe.db.get_list('Project', {
-			fields:['project_name','name'],
-			filters: {
-				status: 'Open',
-				company
-			},
-		    }).then(records => {
-				frm.clear_table("project_day_plan_list")
-			$.each(records, function (i, r) {
-				frm.add_child("project_day_plan_list", {
-					'project': r.name,
-					'project_name':r.project_name
-				})
-				frm.refresh_field("project_day_plan_list")
-		})
-		})
+    company(frm) {  
+        frappe.call({
+            method: 'electra.electra.doctype.multi_project_day_plan.multi_project_day_plan.get_project_details',
+            args: {
+                "company": frm.doc.company
+            },
+            callback: function(r) {
+                frm.clear_table("project_day_plan_list");
+                $.each(r.message, function (i, r) {
+                    frm.add_child("project_day_plan_list", {
+                        'project': r.project,
+                        'project_name': r.project_name,
+                        'sales_order': r.sales_order,
+                    });
+                });
+                frm.refresh_field("project_day_plan_list");
+            }
+        });
     }
+    // company(frm) {
+    //     var company = frm.doc.company;    
+    //     frappe.call({
+    //         method: 'frappe.client.get_list',
+    //         args: {
+    //             doctype: 'Project',
+    //             fields: ['project_name', 'name'],
+    //             filters: {
+    //                 status: 'Open',
+    //                 company: company
+    //             },
+    //             limit_page_length: 0 
+    //         },
+    //         callback: function(r) {
+    //             frm.clear_table("project_day_plan_list");
+    //             $.each(r.message, function (i, r) {
+    //                 frm.add_child("project_day_plan_list", {
+    //                     'project': r.name,
+    //                     'project_name': r.project_name,
+    //                 });
+    //             });
+    //             frm.refresh_field("project_day_plan_list");
+    //         }
+    //     });
+    // }
 })
 
 frappe.ui.form.on('Project Day Plan List', {
@@ -88,6 +115,12 @@ frappe.ui.form.on('Project Day Plan List', {
                     options: 'Project',
                     default: row.project,
                     fieldname: 'project',
+                },
+                {
+                    label: 'Sales Order',
+                    fieldtype: 'Data',
+                    default: row.sales_order,
+                    fieldname: 'sales_order',
                 },
                 {
                     label: 'Project Name',
@@ -111,28 +144,37 @@ frappe.ui.form.on('Project Day Plan List', {
         dialog.show();
     },
 });
-
-var allSelectedEmployees = [];
-
 function addSelectedEmployees(dialog, frm, row) {
     let values = dialog.get_values();
-
     if (values) {
         var project = values['project'];
-        var project_name = values['project_name'];
-    
+        var project_name = values['project_name'];    
+        var sales_order = values['sales_order'];    
         var selectedEmployees = [];
+        var existingEmployees = [];
+        var duplicateEmployees = [];
+        
+        $.each(frm.doc.project_day_plan_employee,function(i,row){
+            if (!existingEmployees[row.project]) {
+                existingEmployees[row.project] = [];
+            }
+            existingEmployees[row.project].push(row.employee);
+        });
 
+        $.each(values['employee'], function (i, k) {
+            var employeeID = k.employee;
+            if (existingEmployees[project] && existingEmployees[project].includes(employeeID)) {
+                duplicateEmployees.push(employeeID);
+            } else {
+                selectedEmployees.push(employeeID);
+            }
+        });
+
+        if (duplicateEmployees.length > 0) {
+            frappe.msgprint(__("Employee selected multiple time for the same project."));
+            return;
+        }
         function processEmployee(employee) {
-            if (allSelectedEmployees.includes(employee)) {
-                frappe.msgprint('Employee ' + employee + ' is already selected for another project.');
-                return;
-            }
-            if (selectedEmployees.includes(employee)) {
-                frappe.msgprint('Employee ' + employee + ' is already selected for this project.');
-                return;
-            }
-
             frappe.call({
                 method: 'electra.custom.update_emp_value',
                 args: {
@@ -143,35 +185,26 @@ function addSelectedEmployees(dialog, frm, row) {
                         var employeeName = r.message[0];
                         var designation = r.message[1];
                         var grade = r.message[2];
-
-                        // if (!(designation === "Supervisor" || designation === "Sr. Supervisor" || grade === "NON STAFF")) {
-                            frm.add_child("project_day_plan_employee", {
-                                'employee': employee,
-                                'project_name': project_name,
-                                'employee_name': employeeName,
-                                'project': project,
-                                'lunch_break': '1:00'
-                            });
-                            frm.refresh_field("project_day_plan_employee");
-                            selectedEmployees.push(employee);
-                            allSelectedEmployees.push(employee);
-                    //     } else {
-                    //         frappe.msgprint('Employee ' + employee + ' does not meet the criteria (Supervisor or Sr. Supervisor designation, or Non Staff grade).');
-                    //     }
-                    // } else {
-                    //     frappe.msgprint('Error fetching employee details for ' + employee);
+                        frm.add_child("project_day_plan_employee", {
+                            'employee': employee,
+                            'project_name': project_name,
+                            'sales_order': sales_order,
+                            'employee_name': employeeName,
+                            'project': project,
+                            'lunch_break': '1:00'
+                        });
+                        frm.refresh_field("project_day_plan_employee");
                     }
                 }
             });
         }
-        $.each(values['employee'], function (i, k) {
-            processEmployee(k.employee);
+        $.each(selectedEmployees, function (i, employeeID) {
+            processEmployee(employeeID);
         });
     }
 
     dialog.hide();
 }
-
 
 frappe.ui.form.on('Project Day Plan Child', {
     employee:function(frm,cdt,cdn){

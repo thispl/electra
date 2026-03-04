@@ -87,7 +87,7 @@
    "label": "Age"
   },
   {
-   "fetch_from": "employee_id.grade",
+   "fetch_from": "employee_id.custom_employee_grade",
    "fieldname": "grade",
    "fieldtype": "Data",
    "label": "Grade"
@@ -140,7 +140,7 @@
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2021-12-11 07:50:39.296977",
+ "modified": "2024-01-25 12:09:37.755241",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Employee Master Record",
@@ -159,5 +159,6 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }

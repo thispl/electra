@@ -16,6 +16,13 @@ class ExternalProviderEvaluationForm(Document):
 			eval_period = epe['evaluation_period']
 			# if self.actual_score > int(range_from) and self.actual_score < int(range_to):
 			# 	self.re_evaluation_date = add_months(today(),int(eval_period))
+	
+	def on_submit(self):
+		if self.approval_status == 'Approved':
+			if frappe.db.exists('Supplier',self.external_provider):
+				supplier = frappe.get_doc("Supplier", self.external_provider)
+				supplier.approved_supplier = 1
+				supplier.db_update()
 
 		
 		

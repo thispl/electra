@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_import": 1,
+ "allow_rename": 1,
  "autoname": "field:customer",
  "creation": "2021-11-10 09:04:51.839561",
  "doctype": "DocType",
@@ -20,10 +21,11 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2021-11-10 09:12:23.390838",
+ "modified": "2024-09-18 12:12:55.134824",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Customer Name",
+ "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [
   {
@@ -42,5 +44,6 @@
  "quick_entry": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }

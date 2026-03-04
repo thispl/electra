@@ -38,7 +38,10 @@ def execute(filters=None):
 		latest_vr = frappe.db.sql("""
 			SELECT valuation_rate as vr
 			FROM `tabStock Ledger Entry`
-			WHERE item_code = %s AND warehouse = %s AND is_cancelled != 1
+			WHERE 
+				/* Added by Nandini */ 
+				warehouse NOT IN ('Work In Progress - EED','Work In Progress - INE','Work In Progress - MEP') 
+				AND item_code = %s AND warehouse = %s AND is_cancelled != 1 
 		""", (details.name, source_warehouse), as_dict=True)
 
 		if len(latest_vr) > 0:
@@ -48,7 +51,10 @@ def execute(filters=None):
 			l_vr = frappe.db.sql("""
 				SELECT valuation_rate as vr
 				FROM `tabStock Ledger Entry`
-				WHERE item_code = %s AND is_cancelled != 1
+				WHERE 
+					/* Added by Nandini */ 
+					warehouse NOT IN ('Work In Progress - EED','Work In Progress - INE','Work In Progress - MEP')
+					AND item_code = %s AND is_cancelled != 1
 			""", (details.name,), as_dict=True)
 
 			for item in l_vr:
@@ -275,7 +281,10 @@ def get_stock_ledger_entries(filters):
 		from `tabStock Ledger Entry` sle,
 			(select name, item_name, description, stock_uom, brand, item_group, valuation_rate
 				from `tabItem` {item_conditions}) item
-		where item_code = item.name and
+		where 
+			/* Added by Nandini */ 
+			warehouse not in ('Work In Progress - EED','Work In Progress - INE','Work In Progress - MEP') and
+			item_code = item.name and
 			company = %(company)s and
 			posting_date <= %(to_date)s and
 			is_cancelled != 1

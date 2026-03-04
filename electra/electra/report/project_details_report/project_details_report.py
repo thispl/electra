@@ -18,17 +18,17 @@ def execute(filters=None):
 def get_columns(filters):
     columns = []
     columns += [
-        _("Customer") + ":Link/Customer:170",
-        _("Order Reference") + ":Link/Sales Order:170",
-        _("Project Reference") + ":Link/Project:170",
-        _("Order Value") + ":Currency/:110",
-        _("Invoice Value Till Date") + ":Currency/:110",
-        _("Cost Till Date") + ":Currency/:110",
-        _("Gross Profit") + ":Currency/:110",
-        _("% Of G.P") + ":Percentage/:110",
-        _("Balance to Invoice") + ":Currency/:110",
-        _("Total Collection") + ":Currency/:110",
-        _("O/S Receipts") + ":Currency/:110",
+        _("Customer") + ":Link/Customer:200",
+        _("Order Reference") + ":Link/Sales Order:200",
+        _("Project Reference") + ":Link/Project:200",
+        _("Order Value") + ":Float/:160",
+        _("Invoice Value Till Date") + ":Float/:180",
+        _("Cost Till Date") + ":Float/:160",
+        _("Gross Profit") + ":Float/:160",
+        _("% Of G.P") + ":Percentage/:100",
+        _("Balance to Invoice") + ":Float/:170",
+        _("Total Collection") + ":Float/:160",
+        _("O/S Receipts") + ":Float/:160",
         
     ]
     return columns
@@ -51,7 +51,7 @@ def get_data(filters):
         """ % conditions, filters, as_dict=True)
     
     for i in pb:
-        lead_customer = frappe.db.get_value("Cost Estimation",{'name':i.cost_estimation},['lead_customer'])
+        lead_customer = frappe.db.get_value("Cost Estimation",{'name':i.cost_estimation, 'docstatus': 1},['lead_customer'])
         
         sales = frappe.db.get_value("Project",{'budgeting':i.name},['sales_order'])
         
@@ -67,22 +67,23 @@ def get_data(filters):
         else:
             project = frappe.db.get_value("Project",{'budgeting':i.name},['name'])
         if project:
-            sales_ord = frappe.db.sql("""select grand_total as grand_total from `tabSales Order` where project = '%s' """%(project),as_dict = True)[0]			
+            sales_ord = frappe.db.sql("""select grand_total as grand_total from `tabSales Order` where project = '%s' and docstatus = 1 """%(project),as_dict = True)[0]			
             if not sales_ord["grand_total"]:
                 sales_ord["grand_total"] = 0
                 
-            sales_in = frappe.db.sql(""" select sum(total) as total from `tabSales Invoice` where project = '%s' """%(project),as_dict=True)[0]
+            sales_in = frappe.db.sql(""" select sum(grand_total) as total from `tabSales Invoice` where project = '%s' and docstatus = 1 """%(project),as_dict=True)[0]
             if not sales_in["total"]:
                 sales_in["total"] = 0
-                frappe.errprint(type(sales_in["total"]))
-                frappe.errprint(sales_in["total"])
-            prev_revenue = frappe.db.sql(""" select sum(paid_amount) as amt from `tabPayment Entry` where project = '%s' """%(project),as_dict=True)[0]
+                # frappe.errprint(type(sales_in["total"]))
+                # frappe.errprint(sales_in["total"])
+            prev_revenue = frappe.db.sql(""" select sum(paid_amount) as amt from `tabPayment Entry` where project = '%s' and docstatus = 1 """%(project),as_dict=True)[0]
             if not prev_revenue["amt"]:
                 prev_revenue["amt"] = 0
-            frappe.errprint(type(prev_revenue["amt"]))
-            frappe.errprint(prev_revenue["amt"])
+            # frappe.errprint(type(prev_revenue["amt"]))
+            # frappe.errprint(prev_revenue["amt"])
             tot = 0
-            dn_list = frappe.db.get_list("Delivery Note",{'project':project})
+            
+            dn_list = frappe.db.get_list("Delivery Note",{'project':project, 'docstatus': 1})
             if dn_list:
                 for d_list in dn_list:
                     dn = frappe.get_doc("Delivery Note",d_list.name)
@@ -92,7 +93,15 @@ def get_data(filters):
                         if val is not None:
                             total = val * d.qty
                             tot+=total
-            row = [lead_customer,sales,project,sales_ord["grand_total"],sales_in["total"],tot,i.gross_profit_amount,i.gross_profit_percent,(sales_ord["grand_total"] - sales_in["total"]),prev_revenue["amt"],(sales_in["total"] - prev_revenue["amt"])]
+            gross_profit_amount=sales_in["total"]-tot
+            if gross_profit_amount>0:
+                gross_profit_per=(gross_profit_amount/sales_in["total"])*100
+            else:
+                gross_profit_per=0
+            row = [lead_customer,sales,project,format_decimals(sales_ord["grand_total"]),format_decimals(sales_in["total"]),format_decimals(tot),format_decimals(gross_profit_amount),format_decimals(gross_profit_per),format_decimals(sales_ord["grand_total"] - sales_in["total"]),format_decimals(prev_revenue["amt"]),format_decimals(sales_in["total"] - prev_revenue["amt"])]
             data.append(row)
     return data                       
     
+def format_decimals(value):
+    result = round(value, 2)
+    return result   

@@ -9,7 +9,9 @@
  "field_order": [
   "item",
   "section_break_4",
-  "html"
+  "html",
+  "section_break_q3hg",
+  "html1"
  ],
  "fields": [
   {
@@ -19,6 +21,7 @@
    "options": "Item"
   },
   {
+   "depends_on": "eval:!frappe.user.has_role(\"Norden Product Search\")",
    "fieldname": "html",
    "fieldtype": "HTML",
    "label": "HTML"
@@ -26,13 +29,23 @@
   {
    "fieldname": "section_break_4",
    "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "section_break_q3hg",
+   "fieldtype": "Section Break"
+  },
+  {
+   "depends_on": "eval:frappe.user.has_role(\"Norden Product Search\")",
+   "fieldname": "html1",
+   "fieldtype": "HTML",
+   "label": "HTML1"
   }
  ],
  "hide_toolbar": 1,
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2023-03-15 08:50:16.873157",
+ "modified": "2024-05-03 14:19:29.919397",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Norden Product Search",

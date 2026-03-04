@@ -49,7 +49,7 @@ frappe.ui.form.on('Day Plan Timesheet', {
 				doctype: "Employee",
 				order_by: "employee_name",
 				filters: {'status':'Active','company':frm.doc.company},
-				fields: ["name","employee_name","designation","grade","cell_number"],
+				fields: ["name","employee_name","designation","custom_employee_grade","cell_number"],
 			},
 			callback: function(r) {
 				if(r.message) {

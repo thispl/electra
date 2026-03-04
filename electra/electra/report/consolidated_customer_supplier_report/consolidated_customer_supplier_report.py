@@ -41,7 +41,10 @@ def get_data(filters):
                 if filters.customer:
                     gle = frappe.db.sql("""select account, sum(debit) as opening_debit, sum(credit) as opening_credit from `tabGL Entry` where company = '%s'	and (posting_date < '%s' or (ifnull(is_opening, 'No') = 'Yes' and posting_date >= '%s')) and party =  '%s' and is_cancelled = 0  """%(c,filters.from_date,filters.to_date,filters.customer),as_dict=True)
                 else:
-                    gle = frappe.db.sql("""select account, sum(debit) as opening_debit, sum(credit) as opening_credit from `tabGL Entry` where company = '%s'	and (posting_date < '%s' or (ifnull(is_opening, 'No') = 'Yes' and posting_date >= '%s')) and party_type =  '%s' and is_cancelled = 0  """%(c,filters.from_date,filters.to_date,filters.party_type),as_dict=True)
+                    query = """select account, sum(debit) as opening_debit, sum(credit) as opening_credit from `tabGL Entry` where company = '%s'	and (posting_date < '%s' or (ifnull(is_opening, 'No') = 'Yes' and posting_date >= '%s')) and party_type =  '%s' and is_cancelled = 0  """%(c,filters.from_date,filters.to_date,filters.party_type)
+                    frappe.errprint(query)
+                    gle = frappe.db.sql(query,as_dict=True)
+           
             elif filters.party_type == "Supplier":
                 if filters.supplier:
                     gle = frappe.db.sql("""select account, sum(debit) as opening_debit, sum(credit) as opening_credit from `tabGL Entry` where company = '%s'	and (posting_date < '%s' or (ifnull(is_opening, 'No') = 'Yes' and posting_date >= '%s')) and party =  '%s' and is_cancelled = 0  """%(c,filters.from_date,filters.to_date,filters.supplier),as_dict=True)

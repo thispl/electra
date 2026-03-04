@@ -23,7 +23,7 @@ frappe.query_reports["Stock Transfer Report"] = {
 			"options": "Company",
 			"reqd":1,
 			get_data: function(txt) {
-				return frappe.db.get_link_options('Company');
+				return frappe.db.get_link_options('Company',txt);
 			}
 		},
 		{
@@ -38,7 +38,7 @@ frappe.query_reports["Stock Transfer Report"] = {
 		},
 		{
 			"fieldname": "is_checked",
-			"label": __("Is Checked"),
+			"label": __("All Companies"),
 			"fieldtype": "Check",
 			"default": 0, 
 			"width": "100px",
@@ -54,6 +54,7 @@ function getCompanies() {
 		method:"electra.custom.get_company",
 		callback: function(r){
 			if (r.message) {
+				console.log(r.message)
 				let options = r.message.map((c) => ({
 					"value": c.name,
 					"label": __(c.name),

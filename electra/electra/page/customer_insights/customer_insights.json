@@ -1,0 +1,22 @@
+{
+ "content": null,
+ "creation": "2025-06-19 18:47:05.215247",
+ "docstatus": 0,
+ "doctype": "Page",
+ "idx": 0,
+ "modified": "2025-06-19 18:54:16.545389",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "customer-insights",
+ "owner": "Administrator",
+ "page_name": "customer-insights",
+ "roles": [
+  {
+   "role": "Sales Master Manager"
+  }
+ ],
+ "script": null,
+ "standard": "Yes",
+ "style": null,
+ "system_page": 0
+}

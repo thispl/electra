@@ -4,15 +4,21 @@
 
 frappe.query_reports["Pending Sales Order"] = {
 	"filters": [
-		// {
-		// 	"fieldname":"company",
-		// 	"label": __("Company"),
-		// 	"fieldtype": "Link",
-		// 	"options": "Company",
-		// 	"default": frappe.defaults.get_user_default("Company"),
-		// 	"width": "100px",
-		// 	"reqd": 1
-		// },
+		{
+			"fieldname":"from_date",
+			"label": __("From Date"),
+			"fieldtype": "Date",
+			// "options": "Item",
+			"width": "100px",
+			"reqd": 1
+		},
+		{
+			"fieldname":"to_date",
+			"label": __("To Date"),
+			"fieldtype": "Date",
+			"width": "100px",
+			"reqd": 1
+		},
 		{
 			"fieldname":"item_code",
 			"label": __("Item"),
@@ -21,8 +27,21 @@ frappe.query_reports["Pending Sales Order"] = {
 			"width": "100px",
 			"reqd": 1
 		},
-
-
+		// {
+		// 	"fieldname":"customer",
+		// 	"label": __("Customer"),
+		// 	"fieldtype": "Link",
+		// 	"options": "Customer",
+		// 	"width": "100px",
+		// },
+		// {
+		// 	"fieldname":"sales_person",
+		// 	"label": __("Sales Person"),
+		// 	"fieldtype": "Link",
+		// 	"options": "Sales Person",
+		// 	"width": "100px",
+		// 	// "reqd": 1
+		// },
 
 	]
 };

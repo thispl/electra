@@ -21,6 +21,7 @@
   "confirmed_by",
   "sales_order",
   "internal_purchase_invoice",
+  "project_warehouse",
   "section_break_4",
   "items",
   "items_html",
@@ -191,13 +192,21 @@
    "hidden": 1,
    "in_standard_filter": 1,
    "label": "From  Company",
-   "options": "\nKINGFISHER TRADING AND CONTRACTING COMPANY\nAl - Shaghairi Trading and Contracting Company W.L.L (ELECTRA)\nMARAZEEM SECURITY SERVICES\nKINGFISHER - TRANSPORTATION\nMARAZEEM SECURITY SERVICES - SHOWROOM\nMARAZEEM SECURITY SERVICES - HO\nMEP DIVISION - ELECTRA\nENGINEERING DIVISION - ELECTRA\nINTERIOR DIVISION - ELECTRA\nINDUSTRIAL TOOLS DIVISION\nKINGFISHER - SHOWROOM\nSTEEL DIVISION - ELECTRA\nELECTRICAL DIVISION - ELECTRA\nTRADING DIVISION - ELECTRA\nELECTRA - BARWA SHOWROOM\nELECTRA  - NAJMA SHOWROOM\nELECTRA - ALKHOR SHOWROOM\nELECTRA - BINOMRAN SHOWROOM"
+   "options": "\nKINGFISHER TRADING AND CONTRACTING COMPANY\nAl - Shaghairi Trading and Contracting Company W.L.L (ELECTRA)\nMARAZEEM SECURITY SERVICES\nKINGFISHER - TRANSPORTATION\nMARAZEEM SECURITY SERVICES - SHOWROOM\nMARAZEEM SECURITY SERVICES - HO\nMEP DIVISION - ELECTRA\nENGINEERING DIVISION - ELECTRA\nINTERIOR DIVISION - ELECTRA\nINDUSTRIAL TOOLS DIVISION\nKINGFISHER - SHOWROOM\nSTEEL DIVISION - ELECTRA\nELECTRICAL DIVISION - ELECTRA\nTRADING DIVISION - ELECTRA\nELECTRA - BARWA SHOWROOM\nELECTRA  - NAJMA SHOWROOM\nELECTRA - ALKHOR SHOWROOM\nELECTRA - UPS DIVISION\nELECTRA - FIRE ALARM AND PUBLIC ADDRESS\nELECTRA - BINOMRAN SHOWROOM"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "project_warehouse",
+   "fieldtype": "Link",
+   "label": "Project Warehouse",
+   "options": "Warehouse",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-12-20 09:10:08.081625",
+ "modified": "2026-01-13 14:58:52.554835",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Stock Confirmation",

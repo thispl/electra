@@ -104,8 +104,7 @@
   {
    "fieldname": "days_left",
    "fieldtype": "Int",
-   "label": "Days Left",
-   "read_only": 1
+   "label": "Days Left"
   },
   {
    "fieldname": "status",
@@ -224,7 +223,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-18 16:23:56.111337",
+ "modified": "2024-07-22 11:53:52.674603",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Legal Compliance Monitor",

@@ -25,7 +25,6 @@ PDF_CONTENT_ERRORS = [
 
 
 def get_electra_pdf(html, options=None, output: PdfWriter | None = None,doctype=None):
-	frappe.log_error(doctype)
 	html = scrub_urls(html)
 	html, options = prepare_options(html, options)
 

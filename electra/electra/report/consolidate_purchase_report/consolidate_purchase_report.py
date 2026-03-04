@@ -14,27 +14,28 @@ def get_columns(filters):
 	columns = []
 	columns += [
 		_("Company") + ":Data/:450",
-		_("Invoice QAR Value") + ":Float/:150",
-		_("Overhead Cost") + ":Float/:150",
-		_("Total Purchase") + ":Float/:150",
+		_("Invoice QAR Value") + ":Currency/:150",
+		_("Overhead Cost") + ":Currency/:150",
+		_("Total Purchase") + ":Currency/:150",
 	]
 	return columns
 
 def get_data(filters):
     data = []
     row_data = {}
-
+    count = 0
     purchase_invoice = frappe.db.get_all(
         "Purchase Invoice",
         {
             "posting_date": ('between', (filters.from_date, filters.to_date)),
             "stock_confirmation": ('not in',("Stock Confirmation")),
+            "custom_is_internal":0,
             "status": ('not in', ["Cancelled", "Draft"])
         },
         ['*']
     )
-
     for i in purchase_invoice:
+        count+=1
         company = i.company
         if company not in row_data:
             row_data[company] = {
@@ -46,7 +47,7 @@ def get_data(filters):
         gt = frappe.get_doc("Purchase Invoice", i.name)
         for j in gt.items[:1]:
             lc = frappe.db.sql(
-                """select sum(`tabLanded Cost Item`.applicable_charges) as pd from `tabLanded Cost Voucher`
+                """select total_taxes_and_charges, sum(`tabLanded Cost Item`.applicable_charges) as pd from `tabLanded Cost Voucher`
                 left join `tabLanded Cost Item` on `tabLanded Cost Voucher`.name = `tabLanded Cost Item`.parent
                 where `tabLanded Cost Item`.receipt_document = '%s' and `tabLanded Cost Voucher`.docstatus =1 """ % (
                     j.purchase_receipt), as_dict=True)
@@ -59,9 +60,10 @@ def get_data(filters):
                         p = 0
             else:
                 p = 0
-            tot = round((i.base_net_total + (p)), 3)
+            value = lc[0].total_taxes_and_charges if lc and lc[0].total_taxes_and_charges is not None else 0
+            tot = round((i.base_net_total + (value)), 3)
             row_data[company]["Invoice QAR Value"] += round(i.base_net_total, 3)
-            row_data[company]["Overhead Cost"] += round(p, 3)
+            row_data[company]["Overhead Cost"] += round(value, 3)
             row_data[company]["Total Purchase"] += round(tot, 3)
     for company, values in row_data.items():
         row = [company, round(values["Invoice QAR Value"],2), round(values["Overhead Cost"],2), round(values["Total Purchase"],2)]

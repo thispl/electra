@@ -3,6 +3,96 @@
 
 frappe.ui.form.on('PB SOW', {
 
+	validate_mandatory(frm){
+		if(frm.doc.mep_materials){
+			$.each(frm.doc.mep_materials,function(i,j){
+				if(j.unit_price == 0){
+					frappe.msgprint("Selling Price should not be Zero in <b>Row # "+j.idx+"</b> in <b>Supply Materials</b>")
+					frappe.validated =false
+				}
+			})
+		}
+		if(frm.doc.materials){
+			$.each(frm.doc.materials,function(i,j){
+				if(j.rate_with_overheads == 0){
+					frappe.msgprint("Selling Price should not be Zero in <b>Row # "+j.idx+"</b> in <b>Materials</b>")
+					frappe.validated =false
+				}
+			})
+		}
+		if(frm.doc.raw_materials){
+			$.each(frm.doc.raw_materials,function(i,j){
+				if(j.rate_with_overheads == 0){
+					frappe.msgprint("Selling Price should not be Zero in <b>Row # "+j.idx+"</b> in <b>Materials</b>")
+					frappe.validated =false
+				}
+			})
+		}
+		if(frm.doc.design){
+			$.each(frm.doc.design,function(i,j){
+				if(j.rate_with_overheads == 0){
+					frappe.msgprint("Selling Price should not be Zero in <b>Row # "+j.idx+"</b> in <b>Design</b>")
+					frappe.validated =false
+				}
+			})
+		}
+		if(frm.doc.finishing_work){
+			$.each(frm.doc.finishing_work,function(i,j){
+				if(j.rate_with_overheads == 0){
+					frappe.msgprint("Selling Price should not be Zero in <b>Row # "+j.idx+"</b> in <b>Finishing Work</b>")
+					frappe.validated =false
+				}
+			})
+		}
+		if(frm.doc.bolts_accessories){
+			$.each(frm.doc.bolts_accessories,function(i,j){
+				if(j.rate_with_overheads == 0){
+					frappe.msgprint("Selling Price should not be Zero in <b>Row # "+j.idx+"</b> in <b>Accessories</b>")
+					frappe.validated =false
+				}
+			})
+		}
+		if(frm.doc.installation){
+			$.each(frm.doc.installation,function(i,j){
+				if(j.rate_with_overheads == 0){
+					frappe.msgprint("Selling Price should not be Zero in <b>Row # "+j.idx+"</b> in <b>Installation</b>")
+					frappe.validated =false
+				}
+			})
+		}
+		if(frm.doc.manpower){
+			$.each(frm.doc.manpower,function(i,j){
+				if(j.rate_with_overheads == 0){
+					frappe.msgprint("Selling Price should not be Zero in <b>Row # "+j.idx+"</b> in <b>Manpower</b>")
+					frappe.validated =false
+				}
+			})
+		}
+		if(frm.doc.others){
+			$.each(frm.doc.others,function(i,j){
+				if(j.rate_with_overheads == 0){
+					frappe.msgprint("Selling Price should not be Zero in <b>Row # "+j.idx+"</b> in <b>Subcontract</b>")
+					frappe.validated =false
+				}
+			})
+		}
+		if(frm.doc.finished_goods){
+			$.each(frm.doc.finished_goods,function(i,j){
+				if(j.unit_price == 0){
+					frappe.msgprint("Selling Price should not be Zero in <b>Row # "+j.idx+"</b> in <b>Finished Goods</b>")
+					frappe.validated =false
+				}
+			})
+		}
+		if(frm.doc.heavy_equipments){
+			$.each(frm.doc.heavy_equipments,function(i,j){
+				if(j.rate_with_overheads == 0){
+					frappe.msgprint("Selling Price should not be Zero in <b>Row # "+j.idx+"</b> in <b>Heavy Equipments</b>")
+					frappe.validated =false
+				}
+			})
+		}
+	},
 	on_submit(frm) {
 		if (Math.floor(frm.doc.lpo_amount) !== Math.floor(frm.doc.bidding_amount)) {
 			frappe.msgprint("Bidding Amount should be equal to LPO")
@@ -31,6 +121,9 @@ frappe.ui.form.on('PB SOW', {
 			total_spa += d.transfer_cost_amount
 		})
 		$.each(frm.doc.materials, function (i, d) {
+			total_spa += d.amount
+		})
+		$.each(frm.doc.raw_materials, function (i, d) {
 			total_spa += d.amount
 		})
 		$.each(frm.doc.finishing_work, function (i, d) {
@@ -63,6 +156,11 @@ frappe.ui.form.on('PB SOW', {
 		// materials
 		var dt_name = frm.doc.materials
 		var dt_field = "materials"
+		calculate_selling_price(frm, dt_name, dt_field, total_additions, total_spa)
+
+		// raw materials
+		var dt_name = frm.doc.raw_materials
+		var dt_field = "raw_materials"
 		calculate_selling_price(frm, dt_name, dt_field, total_additions, total_spa)
 
 		// MEP materials
@@ -108,7 +206,25 @@ frappe.ui.form.on('PB SOW', {
 
 	},
 	refresh(frm) {
-		frm.disable_save() 
+		frappe.call({
+			'method': 'frappe.client.get',
+			args: {
+				doctype: 'Project Budget',
+				filters: {
+					"name": frm.doc.project_budget
+				},
+				fields: ['*']
+			},
+			callback: function (r) {
+				if (r.message.docstatus==1) {
+					frm.fields.forEach(function(field) {
+						frm.set_df_property(field.df.fieldname, "read_only", 1);
+					});					
+				}
+				
+			}
+		})
+		
 		frm.page.set_primary_action(__("Save"), function () {
 			frappe.run_serially([
 				() => frm.save(),
@@ -116,9 +232,30 @@ frappe.ui.form.on('PB SOW', {
 				() => frm.save()
 			])
 		});
+		frm.trigger("get_html_view")
 		frm.add_custom_button(__('Back'),
 			function () {
-				window.location.href = "/app/project-budget/" + frm.doc.project_budget;
+				if(frm.doc.budgeted_bidding_amount_difference){
+					if(Math.round(frm.doc.budgeted_bidding_amount_difference)==0){
+						frappe.run_serially([
+							() => frm.save(),
+							() => frm.save(),
+							() => frm.save()
+						])
+						window.location.href = "/app/project-budget/" + frm.doc.project_budget;
+					}
+					else{
+						frappe.throw("Please check the Budgeted Bidding Amount Difference: <b>"+frm.doc.budgeted_bidding_amount_difference+"</b>")
+					}
+				}
+				else{
+					frappe.run_serially([
+						() => frm.save(),
+						() => frm.save(),
+						() => frm.save()
+					])
+					window.location.href = "/app/project-budget/" + frm.doc.project_budget;
+				}
 			});
 		// if(frm.doc.company == 'MEP DIVISION - ELECTRA'){
 		if (frm.doc.docstatus != 1) {
@@ -137,6 +274,13 @@ frappe.ui.form.on('PB SOW', {
 			// ])
 			// });
 		}
+		history.pushState(null, document.title, location.href);
+		window.onpopstate = function (event) {
+			if (frm.doc.budgeted_bidding_amount_difference && Math.round(frm.doc.budgeted_bidding_amount_difference) !== 0) {
+				history.pushState(null, document.title, location.href); 
+				frappe.throw("Please check the Budgeted Bidding Amount Difference: <b>" + frm.doc.budgeted_bidding_amount_difference + "</b>");
+			}
+		};
 
 
 
@@ -165,7 +309,26 @@ frappe.ui.form.on('PB SOW', {
 	},
 
 	onload(frm) {
-		
+		frappe.db.get_value('Project Budget',frm.doc.project_budget, 'docstatus')
+					.then(r => {
+						if(r.message.docstatus == 0){
+							frappe.db.get_value('CE SOW',{"cost_estimation":frm.doc.cost_estimation,"msow":frm.doc.msow}, 'name')
+								.then(r => {
+									if(!r.message){
+										frm.set_df_property('a_design', "read_only", 0);
+										frm.set_df_property('j_raw', "read_only", 0);
+										frm.set_df_property('b_materials', "read_only", 0);
+										frm.set_df_property('c_finishing_work', "read_only", 0);
+										frm.set_df_property('d_accessories', "read_only", 0);
+										frm.set_df_property('e_installation', "read_only", 0);
+										frm.set_df_property('f_manpower', "read_only", 0);
+										frm.set_df_property('g_tools__equipment__transport', "read_only", 0);
+										frm.set_df_property('h_others', "read_only", 0);
+									}
+								})
+						}
+
+		})
 		frappe.dom.freeze(__("Calculating..."));
 		
 		frappe.call({
@@ -204,6 +367,7 @@ frappe.ui.form.on('PB SOW', {
 					}
 				}
 			})
+
 			frappe.call({
 				'method': 'electra.utils.get_ce_sow',
 				args: {
@@ -221,291 +385,337 @@ frappe.ui.form.on('PB SOW', {
 			})
 
 		}
+		
 		if (frm.doc.__islocal) {
-			frappe.call({
-				'method': 'frappe.client.get',
-				args: {
-					'doctype': 'CE SOW',
-					'filters': {
-						'cost_estimation': frm.doc.cost_estimation,
-						'msow': frm.doc.msow
-					},
-					'fields': ['*']
+			frappe.db.get_value(
+				'CE SOW',
+				{
+					cost_estimation: frm.doc.cost_estimation,
+					msow: frm.doc.msow
 				},
-				callback: function (r) {
-					if (r.message) {
-						frm.set_value("overhead_percent", r.message.total_overhead)
-						frm.set_value("engineering_overhead_percent", r.message.engineering_overhead)
-						frm.set_value("contigency_percent", r.message.contigency_percent)
-						frm.set_value("business_promotion_percent", r.message.business_promotion_percent)
-						frm.set_value("pb_business_promotion_percent", r.message.business_promotion_percent)
-						frm.set_value("business_promotion_amount", r.message.business_promotion_amount)
-						frm.set_value("pb_business_promotion_amount", r.message.business_promotion_amount)
+				'name'
+			).then(r => {
+				if (r.message && r.message.name) {
 
-						frm.set_value("overhead_amount", r.message.total_amount_as_overhead)
+					frappe.call({
+						'method': 'frappe.client.get',
+						args: {
+							'doctype': 'CE SOW',
+							'filters': {
+								'cost_estimation': frm.doc.cost_estimation,
+								'msow': frm.doc.msow
+							},
+							'fields': ['*']
+						},
+						callback: function (r) {
+							
+							if (r.message) {
+								frm.set_value("c_finishing_work", r.message.c_finishing_work)
+								frm.set_value("a_design", r.message.a_design)
+								frm.set_value("b_materials", r.message.b_materials)
+								frm.set_value("d_accessories", r.message.d_accessories)
+								frm.set_value("e_installation", r.message.e_installation)
+								frm.set_value("f_manpower", r.message.f_manpower)
+								frm.set_value("g_tools__equipment__transport", r.message.g_tools__equipment__transport)
+								frm.set_value("h_others", r.message.h_others)
+								frm.set_value("overhead_percent", r.message.total_overhead)
+								frm.set_value("engineering_overhead_percent", r.message.engineering_overhead)
+								frm.set_value("contigency_percent", r.message.contigency_percent)
+								frm.set_value("business_promotion_percent", r.message.business_promotion_percent)
+								frm.set_value("pb_business_promotion_percent", r.message.business_promotion_percent)
+								frm.set_value("business_promotion_amount", r.message.business_promotion_amount)
+								frm.set_value("pb_business_promotion_amount", r.message.business_promotion_amount)
 
-						frm.set_value("pb_overhead_amount", r.message.total_amount_as_overhead)
-						frm.set_value("engineering_overhead_amount", r.message.total_amount_as_engineering_overhead)
+								frm.set_value("overhead_amount", r.message.total_amount_as_overhead)
 
-						frm.set_value("pb_engineering_overhead_amount", r.message.total_amount_as_engineering_overhead)
-						frm.set_value("contigency_amount", r.message.contigency)
+								frm.set_value("pb_overhead_amount", r.message.total_amount_as_overhead)
+								frm.set_value("engineering_overhead_amount", r.message.total_amount_as_engineering_overhead)
 
-						frm.set_value("pb_contigency_amount", r.message.contigency)
-						frm.set_value("total_cost", r.message.total_cost)
-						frm.set_value("total_overheads", r.message.total_overheads)
-						frm.set_value("pb_total_overheads", r.message.total_overheads)
-						frm.set_value("net_profit_percent", r.message.net_profit_percent)
-						frm.set_value("pb_net_profit_percent", r.message.net_profit_percent)
+								frm.set_value("pb_engineering_overhead_amount", r.message.total_amount_as_engineering_overhead)
+								frm.set_value("contigency_amount", r.message.contigency)
 
-						frm.set_value("pb_net_profit_amount", r.message.net_profit_amount)
+								frm.set_value("pb_contigency_amount", r.message.contigency)
+								frm.set_value("total_cost", r.message.total_cost)
+								frm.set_value("total_overheads", r.message.total_overheads)
+								frm.set_value("pb_total_overheads", r.message.total_overheads)
+								frm.set_value("net_profit_percent", r.message.net_profit_percent)
+								frm.set_value("pb_net_profit_percent", r.message.net_profit_percent)
 
-						frm.set_value("net_profit_amount", r.message.net_profit_amount)
-						frm.set_value("mep_net_profit_percent", r.message.mep_net_profit_percent)
-						frm.set_value("mep_net_profit_amount", r.message.mep_net_profit_amount)
+								frm.set_value("pb_net_profit_amount", r.message.net_profit_amount)
 
-						frm.set_value("pb_mep_net_profit_percent", r.message.mep_net_profit_percent)
-						frm.set_value("pb_mep_net_profit_amount", r.message.mep_net_profit_amount)
-						frm.set_value("gross_profit_percent", r.message.gross_profit_percent)
-						frm.set_value("gross_profit_amount", r.message.gross_profit_amount)
+								frm.set_value("net_profit_amount", r.message.net_profit_amount)
+								frm.set_value("mep_net_profit_percent", r.message.mep_net_profit_percent)
+								frm.set_value("mep_net_profit_amount", r.message.mep_net_profit_amount)
 
-						frm.clear_table("design")
-						$.each(r.message.design, function (i, c) {
-							frm.add_child('design', {
-								'msow': c.msow,
-								'ssow': c.ssow,
-								'item_group': c.item_group,
-								'item': c.item,
-								'item_name': c.item_name,
-								'description': c.description,
-								'unit': c.unit,
-								'qty': c.qty,
-								'cost': c.cost,
-								'unit_price': c.unit_price,
-								'cost_amount': c.cost_amount,
-								'rate_with_overheads': c.rate_with_overheads,
-								'amount_with_overheads': c.amount_with_overheads,
-								'amount': c.amount,
-								'estimated_cost': c.unit_price,
-								'estimated_amount': c.amount
-							})
-						})
-						frm.refresh_field('design')
+								frm.set_value("pb_mep_net_profit_percent", r.message.mep_net_profit_percent)
+								frm.set_value("pb_mep_net_profit_amount", r.message.mep_net_profit_amount)
+								frm.set_value("gross_profit_percent", r.message.gross_profit_percent)
+								frm.set_value("gross_profit_amount", r.message.gross_profit_amount)
 
-						frm.clear_table("materials")
-						$.each(r.message.materials, function (i, c) {
-							frm.add_child('materials', {
-								'msow': c.msow,
-								'ssow': c.ssow,
-								'item_group': c.item_group,
-								'item': c.item,
-								'item_name': c.item_name,
-								'description': c.description,
-								'cost': c.cost,
-								'unit': c.unit,
-								'qty': c.qty,
-								'unit_price': c.unit_price,
-								'cost_amount': c.cost_amount,
-								'rate_with_overheads': c.rate_with_overheads,
-								'amount_with_overheads': c.amount_with_overheads,
-								'amount': c.amount,
-								'estimated_cost': c.unit_price,
-								'estimated_amount': c.amount
-							})
-						})
-						frm.refresh_field('materials')
+								frm.clear_table("design")
+								$.each(r.message.design, function (i, c) {
+									frm.add_child('design', {
+										'msow': c.msow,
+										'ssow': c.ssow,
+										'item_group': c.item_group,
+										'item': c.item,
+										'item_name': c.item_name,
+										'description': c.description,
+										'unit': c.unit,
+										'qty': c.qty,
+										'cost': c.cost,
+										'unit_price': c.unit_price,
+										'cost_amount': c.cost_amount,
+										'rate_with_overheads': c.rate_with_overheads,
+										'amount_with_overheads': c.amount_with_overheads,
+										'amount': c.amount,
+										'estimated_cost': c.unit_price,
+										'estimated_amount': c.amount
+									})
+								})
+								frm.refresh_field('design')
 
-						$.each(r.message.mep_materials, function (i, c) {
-							frm.add_child('mep_materials', {
-								'msow': c.msow,
-								'ssow': c.ssow,
-								'item_group': c.item_group,
-								'item': c.item,
-								'item_name': c.item_name,
-								'description': c.description,
-								'unit': c.unit,
-								'qty': c.qty,
-								'vr': c.vr,
-								'cost_with_transfer_percent': c.cost_with_transfer_percent,
-								'vr_with_tr_percent': c.vr_with_tr_percent,
-								'transfer_charges': c.transfer_charges,
-								'transfer_amount': c.transfer_amount,
-								'cost': c.cost,
-								'transfer_cost_amount': c.transfer_cost_amount,
-								'unit_price': c.unit_price,
-								'rate_with_overheads': c.rate_with_overheads,
-								'amount_with_overheads': c.amount_with_overheads,
-								'amount': c.amount,
-								'estimated_cost': c.unit_price,
-								'estimated_amount': c.amount
-							})
-						})
-						frm.refresh_field('mep_materials')
+								frm.clear_table("materials")
+								$.each(r.message.materials, function (i, c) {
+									frm.add_child('materials', {
+										'msow': c.msow,
+										'ssow': c.ssow,
+										'item_group': c.item_group,
+										'item': c.item,
+										'item_name': c.item_name,
+										'description': c.description,
+										'cost': c.cost,
+										'unit': c.unit,
+										'qty': c.qty,
+										'unit_price': c.unit_price,
+										'cost_amount': c.cost_amount,
+										'rate_with_overheads': c.rate_with_overheads,
+										'amount_with_overheads': c.amount_with_overheads,
+										'amount': c.amount,
+										'estimated_cost': c.unit_price,
+										'estimated_amount': c.amount
+									})
+								})
+								frm.refresh_field('materials')
 
-						frm.clear_table("finishing_work")
-						$.each(r.message.finishing_work, function (i, c) {
-							frm.add_child('finishing_work', {
-								'msow': c.msow,
-								'ssow': c.ssow,
-								'item_group': c.item_group,
-								'item': c.item,
-								'item_name': c.item_name,
-								'description': c.description,
-								'unit': c.unit,
-								'qty': c.qty,
-								'cost': c.cost,
-								'unit_price': c.unit_price,
-								'cost_amount': c.cost_amount,
-								'rate_with_overheads': c.rate_with_overheads,
-								'amount_with_overheads': c.amount_with_overheads,
-								'amount': c.amount,
-								'estimated_cost': c.unit_price,
-								'estimated_amount': c.amount
-							})
-						})
-						frm.refresh_field('finishing_work')
+								frm.clear_table("raw_materials")
+								$.each(r.message.raw_materials, function (i, c) {
+									frm.add_child('raw_materials', {
+										'msow': c.msow,
+										'ssow': c.ssow,
+										'item_group': c.item_group,
+										'item': c.item,
+										'item_name': c.item_name,
+										'description': c.description,
+										'cost': c.cost,
+										'unit': c.unit,
+										'qty': c.qty,
+										'unit_price': c.unit_price,
+										'cost_amount': c.cost_amount,
+										'rate_with_overheads': c.rate_with_overheads,
+										'amount_with_overheads': c.amount_with_overheads,
+										'amount': c.amount,
+										'estimated_cost': c.unit_price,
+										'estimated_amount': c.amount
+									})
+								})
+								frm.refresh_field('raw_materials')
 
-						frm.clear_table("bolts_accessories")
-						$.each(r.message.bolts_accessories, function (i, c) {
-							frm.add_child('bolts_accessories', {
-								'msow': c.msow,
-								'ssow': c.ssow,
-								'item_group': c.item_group,
-								'item': c.item,
-								'item_name': c.item_name,
-								'description': c.description,
-								'unit': c.unit,
-								'qty': c.qty,
-								'cost': c.cost,
-								'unit_price': c.unit_price,
-								'cost_amount': c.cost_amount,
-								'rate_with_overheads': c.rate_with_overheads,
-								'amount_with_overheads': c.amount_with_overheads,
-								'amount': c.amount,
-								'estimated_cost': c.unit_price,
-								'estimated_amount': c.amount
-							})
-						})
-						frm.refresh_field('bolts_accessories')
+								$.each(r.message.mep_materials, function (i, c) {
+									frm.add_child('mep_materials', {
+										'msow': c.msow,
+										'ssow': c.ssow,
+										'item_group': c.item_group,
+										'item': c.item,
+										'item_name': c.item_name,
+										'description': c.description,
+										'unit': c.unit,
+										'qty': c.qty,
+										'vr': c.vr,
+										'cost_with_transfer_percent': c.cost_with_transfer_percent,
+										'vr_with_tr_percent': c.vr_with_tr_percent,
+										'transfer_charges': c.transfer_charges,
+										'transfer_amount': c.transfer_amount,
+										'cost': c.cost,
+										'transfer_cost_amount': c.transfer_cost_amount,
+										'unit_price': c.unit_price,
+										'rate_with_overheads': c.rate_with_overheads,
+										'amount_with_overheads': c.amount_with_overheads,
+										'amount': c.amount,
+										'estimated_cost': c.unit_price,
+										'estimated_amount': c.amount
+									})
+								})
+								frm.refresh_field('mep_materials')
 
-						frm.clear_table("installation")
-						$.each(r.message.installation, function (i, c) {
-							frm.add_child('installation', {
-								'msow': c.msow,
-								'ssow': c.ssow,
-								'item_group': c.item_group,
-								'item': c.item,
-								'item_name': c.item_name,
-								'description': c.description,
-								'unit': c.unit,
-								'qty': c.qty,
-								'cost': c.cost,
-								'unit_price': c.unit_price,
-								'cost_amount': c.cost_amount,
-								'rate_with_overheads': c.rate_with_overheads,
-								'amount_with_overheads': c.amount_with_overheads,
-								'amount': c.amount,
-								'estimated_cost': c.unit_price,
-								'estimated_amount': c.amount
-							})
-						})
-						frm.refresh_field('installation')
+								frm.clear_table("finishing_work")
+								$.each(r.message.finishing_work, function (i, c) {
+									frm.add_child('finishing_work', {
+										'msow': c.msow,
+										'ssow': c.ssow,
+										'item_group': c.item_group,
+										'item': c.item,
+										'item_name': c.item_name,
+										'description': c.description,
+										'unit': c.unit,
+										'qty': c.qty,
+										'cost': c.cost,
+										'unit_price': c.unit_price,
+										'cost_amount': c.cost_amount,
+										'rate_with_overheads': c.rate_with_overheads,
+										'amount_with_overheads': c.amount_with_overheads,
+										'amount': c.amount,
+										'estimated_cost': c.unit_price,
+										'estimated_amount': c.amount
+									})
+								})
+								frm.refresh_field('finishing_work')
 
-						frm.clear_table("manpower")
-						$.each(r.message.manpower, function (i, c) {
-							frm.add_child('manpower', {
-								'msow': c.msow,
-								'ssow': c.ssow,
-								'rate': c.rate,
-								'worker': c.worker,
-								'total_workers': c.total_workers,
-								'unit_price': c.unit_price,
-								'working_hours': c.working_hours,
-								'days': c.days,
-								'cost': c.cost,
-								'cost_amount': c.cost_amount,
-								'rate_with_overheads': c.rate_with_overheads,
-								'amount_with_overheads': c.amount_with_overheads,
-								'amount': c.amount,
-								'estimated_cost': c.unit_price,
-								'estimated_amount': c.amount
-							})
-						})
-						frm.refresh_field('manpower')
+								frm.clear_table("bolts_accessories")
+								$.each(r.message.bolts_accessories, function (i, c) {
+									frm.add_child('bolts_accessories', {
+										'msow': c.msow,
+										'ssow': c.ssow,
+										'item_group': c.item_group,
+										'item': c.item,
+										'item_name': c.item_name,
+										'description': c.description,
+										'unit': c.unit,
+										'qty': c.qty,
+										'cost': c.cost,
+										'unit_price': c.unit_price,
+										'cost_amount': c.cost_amount,
+										'rate_with_overheads': c.rate_with_overheads,
+										'amount_with_overheads': c.amount_with_overheads,
+										'amount': c.amount,
+										'estimated_cost': c.unit_price,
+										'estimated_amount': c.amount
+									})
+								})
+								frm.refresh_field('bolts_accessories')
 
-						frm.clear_table("heavy_equipments")
+								frm.clear_table("installation")
+								$.each(r.message.installation, function (i, c) {
+									frm.add_child('installation', {
+										'msow': c.msow,
+										'ssow': c.ssow,
+										'item_group': c.item_group,
+										'item': c.item,
+										'item_name': c.item_name,
+										'description': c.description,
+										'unit': c.unit,
+										'qty': c.qty,
+										'cost': c.cost,
+										'unit_price': c.unit_price,
+										'cost_amount': c.cost_amount,
+										'rate_with_overheads': c.rate_with_overheads,
+										'amount_with_overheads': c.amount_with_overheads,
+										'amount': c.amount,
+										'estimated_cost': c.unit_price,
+										'estimated_amount': c.amount
+									})
+								})
+								frm.refresh_field('installation')
 
-						$.each(r.message.heavy_equipments, function (i, c) {
-							frm.add_child('heavy_equipments', {
-								'msow': c.msow,
-								'ssow': c.ssow,
-								'item_group': c.item_group,
-								'item': c.item,
-								'item_name': c.item_name,
-								'description': c.description,
-								'unit': c.unit,
-								'qty': c.qty,
-								'cost': c.cost,
-								'unit_price': c.unit_price,
-								'cost_amount': c.cost_amount,
-								'rate_with_overheads': c.rate_with_overheads,
-								'amount_with_overheads': c.amount_with_overheads,
-								'amount': c.amount,
-								'estimated_cost': c.unit_price,
-								'estimated_amount': c.amount
-							})
-						})
-						frm.refresh_field('heavy_equipments')
+								frm.clear_table("manpower")
+								$.each(r.message.manpower, function (i, c) {
+									frm.add_child('manpower', {
+										'msow': c.msow,
+										'ssow': c.ssow,
+										'rate': c.rate,
+										'worker': c.worker,
+										'total_workers': c.total_workers,
+										'unit_price': c.unit_price,
+										'working_hours': c.working_hours,
+										'days': c.days,
+										'cost': c.cost,
+										'cost_amount': c.cost_amount,
+										'rate_with_overheads': c.rate_with_overheads,
+										'amount_with_overheads': c.amount_with_overheads,
+										'amount': c.amount,
+										'estimated_cost': c.unit_price,
+										'estimated_amount': c.amount
+									})
+								})
+								frm.refresh_field('manpower')
 
-						frm.clear_table("others")
-						$.each(r.message.others, function (i, c) {
-							frm.add_child('others', {
-								'msow': c.msow,
-								'ssow': c.ssow,
-								'item_group': c.item_group,
-								'item': c.item,
-								'item_name': c.item_name,
-								'description': c.description,
-								'unit': c.unit,
-								'qty': c.qty,
-								'cost': c.cost,
-								'unit_price': c.unit_price,
-								'cost_amount': c.cost_amount,
-								'rate_with_overheads': c.rate_with_overheads,
-								'amount_with_overheads': c.amount_with_overheads,
-								'amount': c.amount,
-								'estimated_cost': c.unit_price,
-								'estimated_amount': c.amount
-							})
-						})
-						frm.refresh_field('others')
+								frm.clear_table("heavy_equipments")
 
-						frm.clear_table("finished_goods")
-						$.each(r.message.finished_goods, function (i, c) {
-							frm.add_child('finished_goods', {
-								'msow': c.msow,
-								'ssow': c.ssow,
-								'item_group': c.item_group,
-								'item': c.item,
-								'bom': c.bom,
-								'item_name': c.item_name,
-								'description': c.description,
-								'unit': c.unit,
-								'qty': c.qty,
-								'cost': c.cost,
-								'unit_price': c.unit_price,
-								'cost_amount': c.cost_amount,
-								'rate_with_overheads': c.rate_with_overheads,
-								'amount_with_overheads': c.amount_with_overheads,
-								'amount': c.amount,
-								'estimated_cost': c.unit_price,
-								'estimated_amount': c.amount
-							})
-						})
-						frm.refresh_field('finished_goods')
+								$.each(r.message.heavy_equipments, function (i, c) {
+									frm.add_child('heavy_equipments', {
+										'msow': c.msow,
+										'ssow': c.ssow,
+										'item_group': c.item_group,
+										'item': c.item,
+										'item_name': c.item_name,
+										'description': c.description,
+										'unit': c.unit,
+										'qty': c.qty,
+										'cost': c.cost,
+										'unit_price': c.unit_price,
+										'cost_amount': c.cost_amount,
+										'rate_with_overheads': c.rate_with_overheads,
+										'amount_with_overheads': c.amount_with_overheads,
+										'amount': c.amount,
+										'estimated_cost': c.unit_price,
+										'estimated_amount': c.amount
+									})
+								})
+								frm.refresh_field('heavy_equipments')
 
-					}
+								frm.clear_table("others")
+								console.log(r.message.others)
+								$.each(r.message.others, function (i, c) {
+									frm.add_child('others', {
+										'msow': c.msow,
+										'ssow': c.ssow,
+										'item_group': c.item_group,
+										'item': c.item,
+										'item_name': c.item_name,
+										'description': c.description,
+										'unit': c.unit,
+										'qty': c.qty,
+										'cost': c.cost,
+										'unit_price': c.unit_price,
+										'cost_amount': c.cost_amount,
+										'rate_with_overheads': c.rate_with_overheads,
+										'amount_with_overheads': c.amount_with_overheads,
+										'amount': c.amount,
+										'estimated_cost': c.unit_price,
+										'estimated_amount': c.amount
+									})
+								})
+								frm.refresh_field('others')
+
+								frm.clear_table("finished_goods")
+								$.each(r.message.finished_goods, function (i, c) {
+									frm.add_child('finished_goods', {
+										'msow': c.msow,
+										'ssow': c.ssow,
+										'item_group': c.item_group,
+										'item': c.item,
+										'bom': c.bom,
+										'item_name': c.item_name,
+										'description': c.description,
+										'unit': c.unit,
+										'qty': c.qty,
+										'cost': c.cost,
+										'unit_price': c.unit_price,
+										'cost_amount': c.cost_amount,
+										'rate_with_overheads': c.rate_with_overheads,
+										'amount_with_overheads': c.amount_with_overheads,
+										'amount': c.amount,
+										'estimated_cost': c.unit_price,
+										'estimated_amount': c.amount
+									})
+								})
+								frm.refresh_field('finished_goods')
+
+							}
+						}
+					});
 				}
-			});
+			})
 		}
 		frappe.call({
 			'method': 'frappe.client.get_value',
@@ -518,7 +728,7 @@ frappe.ui.form.on('PB SOW', {
 			},
 			callback: function (data) {
 				if (data.message.docstatus) {
-					frm.disable_save()
+					// frm.disable_save()
 				}
 			}
 
@@ -577,6 +787,13 @@ frappe.ui.form.on('PB SOW', {
 			frm.get_field("materials_html").$wrapper.html(table);
 		}
 
+		var profit_amount = Math.round(frm.doc.raw_materials_amount_with_overheads - frm.doc.raw_materials_amount)
+		var profit_percent = Math.round((profit_amount / frm.doc.raw_materials_amount_with_overheads) * 100)
+		var table = `<table border='1' style="width:30%">
+						<tr><th style="background-color:grey;color:white">Est.Cost Amount</th><th  style="background-color:grey;color:white">Selling Price Amount</th><th  style="background-color:grey;color:white">Profit Amount</th><th  style="background-color:grey;color:white">Profit %</th></tr>
+						<tr><td style="text-align:center"> QR ${Math.round(frm.doc.raw_materials_amount)}</td><td style="text-align:center">QR ${Math.round(frm.doc.raw_materials_amount_with_overheads)}</td><td style="text-align:center">QR ${Math.round(profit_amount)}</td><td style="text-align:center">${Math.round(profit_percent)} %</td></tr>
+						</table>`
+		frm.get_field("raw_materials_html").$wrapper.html(table);
 		// Finishing Work
 		// if (frm.doc.company == 'MEP DIVISION - ELECTRA') {
 		// 	var profit_amount = frm.doc.finishing_work_amount_with_overheads - frm.doc.finishing_work_cost
@@ -697,7 +914,79 @@ frappe.ui.form.on('PB SOW', {
 
 
 	validate: function (frm) {
-
+		$.each(frm.doc.design, function (i, d) {
+			if(d.qty<d.delivered_qty){
+				frappe.validated =false
+				frappe.throw("Qty of the item: <b>"+d.item+"</b> in the Row #"+d.idx+" is less than the already Delivered Qty, So it cannot be changed")	
+			}
+		})
+		$.each(frm.doc.materials, function (i, d) {
+			if(d.qty<d.delivered_qty){
+				frappe.validated =false
+				frappe.throw("Qty of the item: <b>"+d.item+"</b> in the Row #"+d.idx+" is less than the already Delivered Qty, So it cannot be changed")
+			}
+		})
+		$.each(frm.doc.raw_materials, function (i, d) {
+			if(d.qty<d.delivered_qty){
+				frappe.validated =false
+				frappe.throw("Qty of the item: <b>"+d.item+"</b> in the Row #"+d.idx+" is less than the already Delivered Qty, So it cannot be changed")
+			}
+		})
+		$.each(frm.doc.finishing_work, function (i, d) {
+			if(d.qty<d.delivered_qty){
+				frappe.validated =false
+				frappe.throw("Qty of the item: <b>"+d.item+"</b> in the Row #"+d.idx+" is less than the already Delivered Qty, So it cannot be changed")	
+			}
+		})
+		$.each(frm.doc.bolts_accessories, function (i, d) {
+			if(d.qty<d.delivered_qty){
+				frappe.validated =false
+				frappe.throw("Qty of the item: <b>"+d.item+"</b> in the Row #"+d.idx+" is less than the already Delivered Qty, So it cannot be changed")
+				
+				
+			}
+		})
+		$.each(frm.doc.installation, function (i, d) {
+			if(d.qty<d.delivered_qty){
+				frappe.validated =false
+				frappe.throw("Qty of the item: <b>"+d.item+"</b> in the Row #"+d.idx+" is less than the already Delivered Qty, So it cannot be changed")
+				
+				
+			}
+		})
+		$.each(frm.doc.heavy_equipments, function (i, d) {
+			if(d.qty<d.delivered_qty){
+				frappe.validated =false
+				frappe.throw("Qty of the item: <b>"+d.item+"</b> in the Row #"+d.idx+" is less than the already Delivered Qty, So it cannot be changed")
+				
+				
+			}
+		})
+		$.each(frm.doc.others, function (i, d) {
+			if(d.qty<d.delivered_qty){
+				frappe.validated =false
+				frappe.throw("Qty of the item: <b>"+d.item+"</b> in the Row #"+d.idx+" is less than the already Delivered Qty, So it cannot be changed")
+				
+				
+			}
+		})
+		$.each(frm.doc.finished_goods, function (i, d) {
+			if(d.qty<d.delivered_qty){
+				frappe.validated =false
+				frappe.throw("Qty of the item: <b>"+d.item+"</b> in the Row #"+d.idx+" is less than the already Delivered Qty, So it cannot be changed")
+				
+				
+			}
+		})
+		$.each(frm.doc.mep_materials, function (i, d) {
+			if(d.qty<d.delivered_qty){
+				frappe.validated =false
+				frappe.throw("Qty of the item: <b>"+d.item+"</b> in the Row #"+d.idx+" is less than the already Delivered Qty, So it cannot be changed")
+				
+				
+			}
+		})
+		frm.trigger("validate_mandatory")
 		var budgeted_bidding_amount_difference = frm.doc.lpo_amount - frm.doc.pb_bidding_amount
 		frm.set_value("budgeted_bidding_amount_difference", budgeted_bidding_amount_difference)
 		if (frm.doc.company == 'MEP DIVISION - ELECTRA') {
@@ -788,6 +1077,21 @@ frappe.ui.form.on('PB SOW', {
 			frm.set_value("materials_cost", cost_amount)
 
 		}
+
+		var amount = 0
+		var cost_amount = 0
+		var amount_with_overheads = 0
+		$.each(frm.doc.raw_materials, function (i, d) {
+			amount += d.amount
+			cost_amount += d.cost_amount
+			amount_with_overheads += d.amount_with_overheads
+		})
+		var profit = amount_with_overheads - amount
+		frm.set_value("raw_materials_profit", profit)
+		frm.set_value("raw_materials_amount", amount)
+		frm.set_value("raw_materials_amount_with_overheads", amount_with_overheads)
+		frm.set_value("raw_materials_cost", cost_amount)
+
 
 		var amount = 0
 		var cost_amount = 0
@@ -910,7 +1214,7 @@ frappe.ui.form.on('PB SOW', {
 		// 	var total_cost = frm.doc.design_cost + frm.doc.materials_cost + frm.doc.finishing_work_cost + frm.doc.accessories_cost + frm.doc.installation_amount + frm.doc.manpower_cost + frm.doc.heavy_equipments_cost + frm.doc.others_cost
 		// }
 		// else {
-		var total_cost = frm.doc.design_amount + frm.doc.materials_amount + frm.doc.finishing_work_amount + frm.doc.accessories_amount + frm.doc.installation_amount + frm.doc.manpower_amount + frm.doc.heavy_equipments_amount + frm.doc.others_amount + frm.doc.finished_goods_amount
+		var total_cost = frm.doc.design_amount + frm.doc.raw_materials_amount + frm.doc.materials_amount + frm.doc.finishing_work_amount + frm.doc.accessories_amount + frm.doc.installation_amount + frm.doc.manpower_amount + frm.doc.heavy_equipments_amount + frm.doc.others_amount + frm.doc.finished_goods_amount
 		// var total_cost = frm.doc.design_cost + frm.doc.materials_cost + frm.doc.finishing_work_cost + frm.doc.accessories_cost + frm.doc.installation_amount + frm.doc.manpower_cost + frm.doc.heavy_equipments_cost + frm.doc.others_cost
 
 		// }
@@ -928,7 +1232,7 @@ frappe.ui.form.on('PB SOW', {
 		var engineering_overhead_percent = (frm.doc.pb_engineering_overhead_amount / total_cost) * 100
 
 
-		var total_overheads = frm.doc.pb_overhead_amount + frm.doc.pb_engineering_overhead_amount + frm.doc.pb_business_promotion_amount + frm.doc.pb_contigency_amount
+		var total_overheads = frm.doc.pb_overhead_amount + frm.doc.pb_engineering_overhead_amount  + frm.doc.pb_contigency_amount
 		if (frm.doc.company == "MEP DIVISION - ELECTRA") {
 			var total_overheads = frm.doc.pb_overhead_amount + frm.doc.pb_engineering_overhead_amount + frm.doc.pb_contigency_amount
 		}
@@ -937,7 +1241,7 @@ frappe.ui.form.on('PB SOW', {
 		var pb_net_profit_percent = (frm.doc.pb_net_profit_amount / total_cost) * 100
 		var pb_net_profit_amount = total_cost * (frm.doc.pb_net_profit_percent / 100)
 
-		var gross_profit_amount = frm.doc.design_profit + frm.doc.materials_profit + frm.doc.finishing_work_profit + frm.doc.accessories_profit + frm.doc.installation_profit + frm.doc.manpower_profit + frm.doc.heavy_equipments_profit + frm.doc.others_profit + frm.doc.discount
+		var gross_profit_amount = frm.doc.design_profit + frm.doc.raw_materials_profit + frm.doc.materials_profit + frm.doc.finishing_work_profit + frm.doc.accessories_profit + frm.doc.installation_profit + frm.doc.manpower_profit + frm.doc.heavy_equipments_profit + frm.doc.others_profit + frm.doc.discount
 
 		if (frm.doc.company == "MEP DIVISION - ELECTRA") {
 			var total_bidding_price = total_cost + pb_mep_net_profit_amount
@@ -960,11 +1264,11 @@ frappe.ui.form.on('PB SOW', {
 		frm.set_value("pb_total_overheads", total_overheads)
 
 		if (frm.doc.company == "MEP DIVISION - ELECTRA") {
-			var bidding_amount = (frm.doc.pb_total_cost + frm.doc.pb_total_overheads + frm.doc.pb_mep_net_profit_amount)
+			var bidding_amount = (frm.doc.pb_total_cost + frm.doc.pb_total_overheads + frm.doc.pb_mep_net_profit_amount + frm.doc.discount)
 			frm.set_value("pb_bidding_amount", bidding_amount)
 		}
 		else {
-			var bidding_amount = frm.doc.pb_total_cost + frm.doc.pb_total_overheads + frm.doc.pb_net_profit_amount
+			var bidding_amount = frm.doc.pb_total_cost + frm.doc.pb_total_overheads + frm.doc.pb_net_profit_amount + frm.doc.discount
 			frm.set_value("pb_bidding_amount", bidding_amount)
 		}
 
@@ -1015,6 +1319,9 @@ frappe.ui.form.on('PB FG Items', {
 	},
 	item: function (frm, cdt, cdn) {
 		var row = locals[cdt][cdn];
+		if(!row.delivered_qty){
+			row.delivered_qty =0
+		}
 		if (row.item) {
 			frappe.call({
 				'method': 'frappe.client.get_value',
@@ -1041,12 +1348,7 @@ frappe.ui.form.on('PB FG Items', {
 					'source_company':frm.doc.company
 				},
 				callback: function (r) {
-					$.each(r.message, function (i, d) {
-						if (d) {
-							frappe.model.set_value(cdt, cdn, 'cost', d);
-						}
-
-					})
+					frappe.model.set_value(cdt, cdn, 'cost', r.message);
 				}
 			});
 		}
@@ -1083,6 +1385,7 @@ frappe.ui.form.on('PB Items', {
 		row.ssow = frm.doc.ssow;
 		frm.refresh_field('design')
 		frm.refresh_field('materials')
+		frm.refresh_field('raw_materials')
 		frm.refresh_field('finishing_work')
 		frm.refresh_field('bolts_accessories')
 		frm.refresh_field('installation')
@@ -1091,6 +1394,9 @@ frappe.ui.form.on('PB Items', {
 	},
 	item: function (frm, cdt, cdn) {
 		var row = locals[cdt][cdn];
+		if(!row.delivered_qty){
+			row.delivered_qty =0
+		}
 		if (row.item) {
 			frappe.call({
 				'method': 'frappe.client.get_value',
@@ -1117,22 +1423,22 @@ frappe.ui.form.on('PB Items', {
 					'source_company':frm.doc.company
 				},
 				callback: function (r) {
-					$.each(r.message, function (i, d) {
-						if (d) {
-							frappe.model.set_value(cdt, cdn, 'cost', d);
-						}
-
-					})
+					frappe.model.set_value(cdt, cdn, 'cost', r.message);
 				}
 			});
 		}
 	},
 	qty: function (frm, cdt, cdn) {
 		var row = locals[cdt][cdn];
+		if (row.qty < row.delivered_qty){
+			frappe.throw("Qty of the item: <b>"+row.item+"</b> in the Row #"+row.idx+" is less than the already Delivered Qty, So it cannot be changed")
+			
+		}
 		row.amount = row.qty * row.unit_price
 		row.cost_amount = row.cost * row.qty
 		frm.refresh_field('design')
 		frm.refresh_field('materials')
+		frm.refresh_field('raw_materials')
 		frm.refresh_field('finishing_work')
 		frm.refresh_field('bolts_accessories')
 		frm.refresh_field('installation')
@@ -1147,6 +1453,7 @@ frappe.ui.form.on('PB Items', {
 		// cur_frm.set_value('materials_cost',row.amount)
 		frm.refresh_field('design')
 		frm.refresh_field('materials')
+		frm.refresh_field('raw_materials')
 		frm.refresh_field('finishing_work')
 		frm.refresh_field('bolts_accessories')
 		frm.refresh_field('installation')
@@ -1161,6 +1468,7 @@ frappe.ui.form.on('PB Items', {
 		// cur_frm.set_value('materials_cost',row.amount)
 		frm.refresh_field('design')
 		frm.refresh_field('materials')
+		frm.refresh_field('raw_materials')
 		frm.refresh_field('finishing_work')
 		frm.refresh_field('bolts_accessories')
 		frm.refresh_field('installation')
@@ -1178,6 +1486,9 @@ frappe.ui.form.on('PB MEP Materials', {
 	},
 	item: function (frm, cdt, cdn) {
 		var row = locals[cdt][cdn];
+		if(!row.delivered_qty){
+			row.delivered_qty =0
+		}
 		frappe.call({
 			'method': 'frappe.client.get_value',
 			args: {
@@ -1201,7 +1512,12 @@ frappe.ui.form.on('PB MEP Materials', {
 					'item_group': row.item_group,
 				},
 				callback: function (r) {
-					row.vr_with_tr_percent = r.message
+					if(r.message){
+						row.vr_with_tr_percent = r.message
+					}
+					else{
+						row.vr_with_tr_percent = 0
+					}
 					frm.refresh_field("mep_materials");
 				}
 			});
@@ -1215,9 +1531,8 @@ frappe.ui.form.on('PB MEP Materials', {
 					'source_company':frm.doc.company
 				},
 				callback: function (r) {
-					$.each(r.message, function (i, d) {
-						frappe.model.set_value(cdt, cdn, 'vr', d);
-					})
+					frappe.model.set_value(cdt, cdn, 'vr', r.message);
+
 				}
 			});
 		}
@@ -1231,6 +1546,8 @@ frappe.ui.form.on('PB MEP Materials', {
 		row.cost_with_transfer_percent = row.vr * row.qty
 		row.transfer_cost_amount = row.qty * row.cost
 		row.amount = row.qty * row.unit_price
+		row.rate_with_overheads = row.unit_price
+		row.amount_with_overheads = row.qty * row.unit_price
 		frm.refresh_field('mep_materials')
 
 	},
@@ -1244,6 +1561,7 @@ frappe.ui.form.on('PB MEP Materials', {
 		row.transfer_cost_amount = row.qty * row.cost
 		row.unit_price = row.rate_with_overheads
 		row.amount = row.qty * row.unit_price
+		row.amount_with_overheads = row.qty * row.unit_price
 		frm.refresh_field('mep_materials')
 	},
 	qty: function (frm, cdt, cdn) {
@@ -1255,6 +1573,8 @@ frappe.ui.form.on('PB MEP Materials', {
 		row.cost_with_transfer_percent = row.vr * row.qty
 		row.transfer_cost_amount = row.qty * row.cost
 		row.amount = row.qty * row.unit_price
+		row.rate_with_overheads = row.unit_price
+		row.amount_with_overheads = row.qty * row.unit_price
 		frm.refresh_field('mep_materials')
 
 	},
@@ -1267,6 +1587,8 @@ frappe.ui.form.on('PB MEP Materials', {
 		row.cost_with_transfer_percent = row.vr * row.qty
 		row.transfer_cost_amount = row.qty * row.cost
 		row.amount = row.qty * row.unit_price
+		row.rate_with_overheads = row.unit_price
+		row.amount_with_overheads = row.qty * row.unit_price
 		// cur_frm.set_value('materials_cost',row.amount)
 		frm.refresh_field('mep_materials')
 	},
@@ -1358,6 +1680,7 @@ frappe.ui.form.on('PB Items', {
 		row.ssow = frm.doc.ssow;
 		frm.refresh_field('design')
 		frm.refresh_field('materials')
+		frm.refresh_field('raw_materials')
 		frm.refresh_field('finishing_work')
 		frm.refresh_field('bolts_accessories')
 		frm.refresh_field('installation')
@@ -1366,6 +1689,9 @@ frappe.ui.form.on('PB Items', {
 	},
 	item: function (frm, cdt, cdn) {
 		var row = locals[cdt][cdn];
+		if(!row.delivered_qty){
+			row.delivered_qty =0
+		}
 		frm.refresh_field('design')
 		frappe.call({
 			method: 'electra.custom.stock_popup',
@@ -1395,6 +1721,13 @@ frappe.ui.form.on('PB Items', {
 	}
 })
 frappe.ui.form.on('PB FG Items', {
+	qty(frm,cdt,cdn){
+		let row = locals[cdt][cdn];
+		if (row.qty < row.delivered_qty){
+			frappe.throw("Qty of the item: <b>"+row.item+"</b> in the Row #"+row.idx+" is less than the already Delivered Qty, So it cannot be changed")
+			
+		}
+	},
 	items_add(frm, cdt, cdn) {
 		let row = locals[cdt][cdn];
 		row.msow = frm.doc.msow;
@@ -1403,6 +1736,9 @@ frappe.ui.form.on('PB FG Items', {
 	},
 	item: function (frm, cdt, cdn) {
 		var row = locals[cdt][cdn];
+		if(!row.delivered_qty){
+			row.delivered_qty =0
+		}
 		frappe.call({
 		method: 'electra.custom.stock_popup',
 		args: {
@@ -1431,6 +1767,13 @@ frappe.ui.form.on('PB FG Items', {
 }
 })
 frappe.ui.form.on('PB MEP Materials', {
+	qty(frm,cdt,cdn){
+		let row = locals[cdt][cdn];
+		if (row.qty < row.delivered_qty){
+			frappe.throw("Qty of the item: <b>"+row.item+"</b> in the Row #"+row.idx+" is less than the already Delivered Qty, So it cannot be changed")
+			
+		}
+	},
 	mep_materials_add(frm, cdt, cdn) {
 		let row = locals[cdt][cdn];
 		row.msow = frm.doc.msow;
@@ -1438,6 +1781,9 @@ frappe.ui.form.on('PB MEP Materials', {
 		frm.refresh_field("mep_materials");
 	},
 	item: function (frm, cdt, cdn) {
+		if(!row.delivered_qty){
+			row.delivered_qty =0
+		}
 		var row = locals[cdt][cdn];
 		if (row.item) {
 			frappe.call({

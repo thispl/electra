@@ -10,14 +10,41 @@ frappe.query_reports["Monthly Salary Register Print"] = {
 			"fieldtype": "Date",
 			"default":frappe.datetime.month_start(),
 			"reqd": 1,
+			on_change: function () {
+				var from_date = frappe.query_report.get_filter_value('from_date')
+				frappe.call({
+					method: "electra.electra.report.monthly_salary_register_print.monthly_salary_register_print.get_to_date",
+					args: {
+						from_date: from_date
+					},
+					callback(r) {
+						frappe.query_report.set_filter_value('to_date', r.message);
+						frappe.query_report.refresh();
+					}
+				})
+			},
 			"width": "100px"
 		},
 		{
 			"fieldname":"to_date",
 			"label": __("To"),
 			"fieldtype": "Date",
-			"default":frappe.datetime.month_end(),
 			"reqd": 1,
+			on_change: function () {
+				var from_date = frappe.query_report.get_filter_value('from_date')
+				var to_date = frappe.query_report.get_filter_value('to_date')
+				frappe.call({
+					method: "electra.electra.report.monthly_salary_register_print.monthly_salary_register_print.get_diff_date",
+					args: {
+						from_date: from_date,
+						to_date:to_date
+					},
+					callback(r) {
+						frappe.query_report.set_filter_value('total_no_of_working_days', r.message);
+						frappe.query_report.refresh();
+					}
+				})
+			},
 			"width": "100px"
 		},
 		{
@@ -48,8 +75,16 @@ frappe.query_reports["Monthly Salary Register Print"] = {
 			"label":__("Document Status"),
 			"fieldtype":"Select",
 			"options":["Draft", "Submitted", "Cancelled"],
-			"default": "Draft",
+			"default": "Submitted",
+			"width": "100px"
+		},
+		{
+			"fieldname":"total_no_of_working_days",
+			"label":__("Total No of Working Days"),
+			"fieldtype":"Data",
 			"width": "100px"
 		}
 	],
+
 };
+

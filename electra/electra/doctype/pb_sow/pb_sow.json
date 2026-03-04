@@ -23,6 +23,7 @@
   "sub_scope_of_work",
   "applicable_sections",
   "a_design",
+  "j_raw",
   "b_materials",
   "c_finishing_work",
   "d_accessories",
@@ -31,7 +32,6 @@
   "f_manpower",
   "g_tools__equipment__transport",
   "h_others",
-  "budgeted_profit_section",
   "discount_tab",
   "lpo_amount",
   "bidding_amount_difference",
@@ -60,7 +60,6 @@
   "column_break_29",
   "contigency_amount",
   "contigency_percent",
-  "column_break_32",
   "engineering_overhead_amount",
   "engineering_overhead_percent",
   "section_break_4",
@@ -85,6 +84,13 @@
   "materials_amount",
   "materials_amount_with_overheads",
   "materials_profit",
+  "raw_materials_tab",
+  "raw_materials",
+  "raw_materials_html",
+  "raw_materials_cost",
+  "raw_materials_amount",
+  "raw_materials_amount_with_overheads",
+  "raw_materials_profit",
   "finishing_work_section",
   "finishing_work",
   "finishing_work_html",
@@ -210,7 +216,6 @@
   {
    "fieldname": "applicable_sections",
    "fieldtype": "Section Break",
-   "hidden": 1,
    "label": "Applicable Sections"
   },
   {
@@ -348,6 +353,7 @@
    "label": "Transfer Cost Amount"
   },
   {
+   "allow_on_submit": 1,
    "default": "0",
    "fieldname": "selling_amount",
    "fieldtype": "Currency",
@@ -737,10 +743,6 @@
    "label": "Contigency Amount"
   },
   {
-   "fieldname": "column_break_32",
-   "fieldtype": "Column Break"
-  },
-  {
    "depends_on": "eval:doc.company !=\"MEP DIVISION - ELECTRA\"",
    "fieldname": "engineering_overhead_percent",
    "fieldtype": "Percent",
@@ -831,6 +833,7 @@
   {
    "fieldname": "sales_order",
    "fieldtype": "Link",
+   "in_standard_filter": 1,
    "label": "Sales Order",
    "options": "Sales Order"
   },
@@ -876,11 +879,6 @@
    "fieldtype": "Check",
    "hidden": 1,
    "label": "Amount Disbursed"
-  },
-  {
-   "fieldname": "budgeted_profit_section",
-   "fieldtype": "Section Break",
-   "label": "Budgeted Profit"
   },
   {
    "depends_on": "eval:doc.company == \"ENGINEERING DIVISION - ELECTRA\"",
@@ -944,12 +942,63 @@
    "label": "Revision",
    "options": "\nPB - Revision\nSO - Revision",
    "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "j_raw",
+   "fieldtype": "Check",
+   "label": "RAW MATERIALS"
+  },
+  {
+   "depends_on": "eval:doc.company == \"ENGINEERING DIVISION - ELECTRA\"",
+   "fieldname": "raw_materials_tab",
+   "fieldtype": "Tab Break",
+   "label": "Raw Materials"
+  },
+  {
+   "fieldname": "raw_materials",
+   "fieldtype": "Table",
+   "label": "RAW MATERIALS",
+   "options": "PB Items"
+  },
+  {
+   "depends_on": "raw_materials",
+   "fieldname": "raw_materials_html",
+   "fieldtype": "HTML"
+  },
+  {
+   "depends_on": "raw_materials",
+   "fieldname": "raw_materials_cost",
+   "fieldtype": "Float",
+   "label": "Raw Materials Cost",
+   "read_only": 1
+  },
+  {
+   "depends_on": "raw_materials",
+   "fieldname": "raw_materials_amount",
+   "fieldtype": "Currency",
+   "label": "Raw Materials Amount",
+   "read_only": 1
+  },
+  {
+   "depends_on": "raw_materials",
+   "fieldname": "raw_materials_amount_with_overheads",
+   "fieldtype": "Currency",
+   "label": "Raw Materials Amount with overheads",
+   "read_only": 1
+  },
+  {
+   "depends_on": "raw_materials",
+   "fieldname": "raw_materials_profit",
+   "fieldtype": "Currency",
+   "label": "Raw Materials Profit",
+   "read_only": 1
   }
  ],
  "hide_toolbar": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-11-15 07:27:46.942899",
+ "modified": "2025-10-01 12:22:07.332768",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "PB SOW",
@@ -970,5 +1019,6 @@
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],
- "track_changes": 1
+ "track_changes": 1,
+ "track_seen": 1
 }

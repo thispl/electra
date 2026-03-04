@@ -1,8 +1,30 @@
 frappe.ui.form.on('Cost Estimation', {
+	on_submit(frm){
+		frm.trigger("validate_mandatory")
+	},
+	validate_mandatory(frm){
+		if(frm.doc.materials){
+			$.each(frm.doc.materials,function(i,j){
+				if(j.rate_with_overheads == 0){
+					frappe.msgprint("Selling Price should not be Zero")
+					frappe.validated =false
+				}
+			})
+		}
+	},
 	discount_tolerance(frm){
-		var discount_percentage = (frm.doc.discount_tolerance/100)*frm.doc.total_bidding_price
-		var calc = frm.doc.total_bidding_price - discount_percentage
-		frm.set_value("discount_tolerance_amount",discount_percentage)
+		if (frm.doc.discount_tolerance && frm.doc.total_bidding_price) {	
+			var discount_percentage = (frm.doc.discount_tolerance/100)*frm.doc.total_bidding_price
+			var calc = frm.doc.total_bidding_price - discount_percentage
+			frm.set_value("discount_tolerance_amount",discount_percentage)
+			frm.set_value("discount_upto",calc)
+		}
+	},
+	discount_tolerance_amount(frm){
+		if (frm.doc.discount_tolerance_amount && frm.doc.total_bidding_price)
+		var discount_percent = ((frm.doc.discount_tolerance_amount/frm.doc.total_bidding_price)*100)
+		var calc = frm.doc.total_bidding_price - frm.doc.discount_tolerance_amount
+		frm.set_value("discount_tolerance",discount_percent)
 		frm.set_value("discount_upto",calc)
 	},
 	add_sub(frm) {
@@ -108,6 +130,7 @@ frappe.ui.form.on('Cost Estimation', {
 	get_ce_sow(frm) {
 		frm.clear_table('design_calculation')
 		frm.clear_table('materials')
+		frm.clear_table('raw_materials')
 		frm.clear_table('finishing_work')
 		frm.clear_table('bolts_accessories')
 		frm.clear_table('installation')
@@ -177,7 +200,24 @@ frappe.ui.form.on('Cost Estimation', {
 							})
 							frm.refresh_field('finished_goods')
 
-							
+							$.each(r.message.raw_materials, function (i, c) {
+								frm.add_child('raw_materials', {
+									'msow': r.message.msow,
+									'ssow': r.message.ssow,
+									'item_group': c.item_group,
+									'item': c.item,
+									'item_name': c.item_name,
+									'description': c.description,
+									'unit': c.unit,
+									'qty': c.qty,
+									'unit_price': c.unit_price,
+									'rate_with_overheads': c.rate_with_overheads,
+									'amount_with_overheads': c.amount_with_overheads,
+									'amount': c.amount
+								})
+							})
+							frm.refresh_field('raw_materials')
+
 							$.each(r.message.materials, function (i, c) {
 								frm.add_child('materials', {
 									'msow': r.message.msow,
@@ -206,10 +246,10 @@ frappe.ui.form.on('Cost Estimation', {
 									'description': c.description,
 									'unit': c.unit,
 									'qty': c.qty,
-									'unit_price': c.unit_price,
+									'unit_price': c.cost,
 									'rate_with_overheads': c.rate_with_overheads,
-									'amount_with_overheads': c.amount,
-									'amount': c.amount
+									'amount_with_overheads': c.amount_with_overheads,
+									'amount': c.transfer_cost_amount
 								})
 							})
 							frm.refresh_field('materials')
@@ -600,6 +640,18 @@ frappe.ui.form.on('Cost Estimation', {
 		frm.trigger('total_calculation')
 	},
 	validate(frm) {
+		if (frm.doc.master_scope_of_work) {
+			let msowSet = new Set();
+			let duplicateFound = false;
+		
+			$.each(frm.doc.master_scope_of_work, function (i, d) {
+				if (msowSet.has(d.msow)) {
+					frappe.msgprint(__('Same MSOW is in found in another row: ' + d.msow));
+					frappe.validated= false; // Break loop on first duplicate
+				}
+				msowSet.add(d.msow);
+			});
+		}
 		frm.trigger("discount_tolerance")
 		// frm.trigger("total_design_calculation")
 		// frm.trigger("total_material_calculation")
@@ -679,6 +731,7 @@ frappe.ui.form.on('Cost Estimation', {
 			frm.set_value("total_business_promotion", total_business_promotion)
 			frm.set_value("total_bidding_price", total_bidding_price)
 		}
+		// frm.trigger("validate_mandatory")
 	},
 	total_design_calculation: function (frm) {
 		var amount = 0
@@ -698,13 +751,24 @@ frappe.ui.form.on('Cost Estimation', {
 			amount += d.amount
 		})
 		if (!isNaN(amount)) {
-			frm.set_value("total_material_calculation", amount)
+			frm.set_value("materials_amount", amount)
 		}
 		else {
-			frm.set_value("total_material_calculation", 0)
+			frm.set_value("materials_amount", 0)
 		}
 	},
-
+	total_raw_material_calculation: function (frm) {
+		var amount = 0
+		$.each(frm.doc.raw_materials, function (i, d) {
+			amount += d.amount
+		})
+		if (!isNaN(amount)) {
+			frm.set_value("raw_materials_amount", amount)
+		}
+		else {
+			frm.set_value("raw_materials_amount", 0)
+		}
+	},
 	total_finishing_work_calculation: function (frm) {
 		var amount = 0
 		$.each(frm.doc.finishing_work, function (i, d) {
@@ -877,15 +941,20 @@ frappe.ui.form.on('CE MATERIALS', {
 		row.amount = row.qty * row.unit_price
 		frm.refresh_field('materials')
 		frm.trigger("total_material_calculation")
+		frm.refresh_field('raw_materials')
+		frm.trigger("total_raw_material_calculation")
 	},
 	unit_price: function (frm, cdt, cdn) {
 		var row = locals[cdt][cdn];
 		row.amount = row.qty * row.unit_price
 		frm.refresh_field('materials')
 		frm.trigger("total_material_calculation")
+		frm.refresh_field('raw_materials')
+		frm.trigger("total_raw_material_calculation")
 	},
 	materials_remove(frm, cdt, cdn) {
 		frm.trigger('total_material_calculation')
+		frm.trigger("total_raw_material_calculation")
 	},
 })
 

@@ -1,5 +1,6 @@
 {
  "actions": [],
+ "allow_rename": 1,
  "autoname": "naming_series:",
  "creation": "2022-02-02 19:01:31.452263",
  "doctype": "DocType",
@@ -63,6 +64,7 @@
   "g_others",
   "section_break_44",
   "item_table",
+  "download",
   "section_break_56",
   "remark_table",
   "design_calculation_section",
@@ -70,6 +72,10 @@
   "design_qty_total",
   "design_cost_price",
   "design_selling_price",
+  "raw_materials",
+  "raw_material_qty_total_",
+  "raw_material_cost_price_",
+  "raw_material_selling_price_",
   "materials",
   "material_qty_total_",
   "material_cost_price_",
@@ -107,6 +113,7 @@
   "project_budget_work_title_item",
   "section_break_65",
   "items",
+  "docname_updated_in_dn",
   "section_break_69",
   "total_estimated_amount",
   "column_break_71",
@@ -122,7 +129,7 @@
    "label": "Project Details"
   },
   {
-   "fetch_from": "cost_estimation.lead_customer_name",
+   "fetch_from": "customer.customer_name",
    "fieldname": "lead_customer_name",
    "fieldtype": "Read Only",
    "in_list_view": 1,
@@ -154,6 +161,7 @@
    "label": "Scope of Work (SoW)"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "master_scope_of_work",
    "fieldtype": "Table",
    "label": "Scope of Work",
@@ -224,10 +232,10 @@
    "fieldtype": "Column Break"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "total_bidding_price",
    "fieldtype": "Currency",
-   "label": "LPO Amount",
-   "read_only": 1
+   "label": "LPO Amount"
   },
   {
    "depends_on": "eval:doc.__islocal != 1",
@@ -302,6 +310,7 @@
    "options": "PB Items"
   },
   {
+   "allow_on_submit": 1,
    "depends_on": "finishing_work",
    "fieldname": "finishing_work",
    "fieldtype": "Table",
@@ -309,6 +318,7 @@
    "options": "PB Items"
   },
   {
+   "allow_on_submit": 1,
    "depends_on": "bolts_accessories",
    "fieldname": "bolts_accessories",
    "fieldtype": "Table",
@@ -316,6 +326,7 @@
    "options": "PB Items"
   },
   {
+   "allow_on_submit": 1,
    "depends_on": "heavy_equipments",
    "fieldname": "heavy_equipments",
    "fieldtype": "Table",
@@ -374,6 +385,7 @@
    "label": "Work Titles"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "project_budget_work_title_item",
    "fieldtype": "Table",
    "options": "Project Budget Work Title Item"
@@ -400,6 +412,7 @@
    "read_only": 1
   },
   {
+   "allow_on_submit": 1,
    "depends_on": "design",
    "fieldname": "design",
    "fieldtype": "Table",
@@ -414,6 +427,7 @@
    "read_only": 1
   },
   {
+   "allow_on_submit": 1,
    "depends_on": "installation",
    "fieldname": "installation",
    "fieldtype": "Table",
@@ -421,6 +435,7 @@
    "options": "PB Items"
   },
   {
+   "allow_on_submit": 1,
    "depends_on": "others",
    "fieldname": "others",
    "fieldtype": "Table",
@@ -428,6 +443,7 @@
    "options": "PB Items"
   },
   {
+   "allow_on_submit": 1,
    "depends_on": "manpower",
    "fieldname": "manpower",
    "fieldtype": "Table",
@@ -435,6 +451,7 @@
    "options": "PB Items Manpower"
   },
   {
+   "fetch_from": "cost_estimation.customer",
    "fieldname": "customer",
    "fieldtype": "Link",
    "label": "Customer",
@@ -442,21 +459,25 @@
    "read_only": 1
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "gross_profit_percent",
    "fieldtype": "Percent",
    "label": "GROSS PROFIT %"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "net_profit_percent",
    "fieldtype": "Percent",
    "label": "NET PROFIT %"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "gross_profit_amount",
    "fieldtype": "Currency",
    "label": "GROSS PROFIT AMOUNT"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "net_profit_amount",
    "fieldtype": "Currency",
    "label": "NET PROFIT AMOUNT"
@@ -510,12 +531,14 @@
    "label": "Accessories Cost Price"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "accessories_selling_price",
    "fieldtype": "Int",
    "hidden": 1,
    "label": "Accessories Selling Price"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "installation_qty_total",
    "fieldtype": "Int",
    "hidden": 1,
@@ -528,6 +551,7 @@
    "label": "Installation Cost Price"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "installation_selling_price",
    "fieldtype": "Int",
    "hidden": 1,
@@ -546,6 +570,7 @@
    "label": "Manpower Cost Price"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "manpower_selling_price",
    "fieldtype": "Int",
    "hidden": 1,
@@ -564,6 +589,7 @@
    "label": "Heavy Equipments Cost Price"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "material_qty_total_",
    "fieldtype": "Int",
    "hidden": 1,
@@ -576,6 +602,7 @@
    "label": "Material Cost Price"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "material_selling_price_",
    "fieldtype": "Int",
    "hidden": 1,
@@ -614,6 +641,7 @@
    "print_hide": 1
   },
   {
+   "allow_on_submit": 1,
    "depends_on": "finished_goods",
    "fieldname": "finished_goods",
    "fieldtype": "Table",
@@ -660,9 +688,10 @@
    "fieldtype": "Section Break"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "item_table",
    "fieldtype": "Table",
-   "options": "PB Items"
+   "options": "Project Budget Items"
   },
   {
    "allow_on_submit": 1,
@@ -712,6 +741,7 @@
    "read_only": 1
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "total_business_promotion",
    "fieldtype": "Currency",
    "label": "Business Promotion",
@@ -726,6 +756,7 @@
    "fieldtype": "Section Break"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "remark_table",
    "fieldtype": "Table",
    "label": "Remarks",
@@ -757,6 +788,44 @@
    "fieldtype": "Table",
    "label": "Work Title Summary",
    "options": "Quotation Work Title Item"
+  },
+  {
+   "description": "Click Download to get Items as Excel\n",
+   "fieldname": "download",
+   "fieldtype": "Button",
+   "label": "Download"
+  },
+  {
+   "depends_on": "raw_materials",
+   "fieldname": "raw_materials",
+   "fieldtype": "Table",
+   "label": "Raw Materials",
+   "options": "PB Items"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "raw_material_qty_total_",
+   "fieldtype": "Int",
+   "label": "Raw Material Qty Total"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "raw_material_cost_price_",
+   "fieldtype": "Int",
+   "label": "Raw Material Cost Price"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "raw_material_selling_price_",
+   "fieldtype": "Int",
+   "label": "Raw Material Selling Price"
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "0",
+   "fieldname": "docname_updated_in_dn",
+   "fieldtype": "Check",
+   "label": "Docname Updated in DN"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -777,7 +846,7 @@
    "link_fieldname": "project_budget"
   }
  ],
- "modified": "2023-12-13 15:27:25.508037",
+ "modified": "2026-01-20 18:25:15.745358",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Project Budget",
@@ -787,6 +856,7 @@
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],
+ "title_field": "sales_order",
  "track_changes": 1,
  "track_seen": 1,
  "track_views": 1

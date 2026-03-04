@@ -79,7 +79,7 @@
    "read_only": 1
   },
   {
-   "fetch_from": "employee.grade",
+   "fetch_from": "employee.custom_employee_grade",
    "fieldname": "employee_grade",
    "fieldtype": "Link",
    "label": "Employee Grade",
@@ -139,8 +139,7 @@
    "depends_on": "employee",
    "fieldname": "reason",
    "fieldtype": "Small Text",
-   "label": "Reason",
-   "reqd": 1
+   "label": "Reason"
   },
   {
    "fieldname": "amended_from",
@@ -195,7 +194,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-07-27 16:32:04.294591",
+ "modified": "2024-12-09 17:31:32.016699",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Leave Extension",

@@ -47,7 +47,7 @@ def get_data(filters):
 	count = 0
 	conditions, filters = get_conditions(filters)
 	sa = []
-	sa = frappe.db.sql(""" select * from `tabSales Invoice` where docstatus = 1 %s order by sales_person_user asc"""%conditions, filters,as_dict=True)
+	sa = frappe.db.sql(""" select * from `tabSales Invoice` where docstatus = 1 %s AND stock_transfer != 'Stock Transfer' order by sales_person_user asc"""%conditions, filters,as_dict=True)
 	for i in sa:
 		
 		sb = frappe.get_doc('Sales Invoice', i.name)
@@ -56,17 +56,17 @@ def get_data(filters):
 		for j in sb.items:
 			add += j.qty * j.valuation_rate
 		total_add += add
-		calc = i.grand_total - add
+		calc = i.base_grand_total - add
 		total_calc += calc
-		grand_total += i.grand_total
-		if i.grand_total > 0:
-			prof = (calc / i.grand_total) * 100
-		row = [i.name,i.customer,i.posting_date,i.invoice_type,i.grand_total,add,calc,round(prof,2)]
+		grand_total += i.base_grand_total
+		if i.base_grand_total > 0:
+			prof = (calc / i.base_grand_total) * 100
+		row = [i.name,i.customer,i.posting_date,i.invoice_type,round(i.base_grand_total,2),round(add,2),round(calc,2),round(prof,2)]
 		count +=1
 		total_percentage +=prof
 		data.append(row)
-	prc = total_percentage/count
-	to = ["TOTAL","","","",grand_total,total_add,total_calc,round(prc,2)]
+	prc = (total_calc/grand_total)*100
+	to = ["TOTAL","","","",round(grand_total,2),round(total_add,2),round(total_calc,2),round(prc,2)]
 	data.append(to)
 	return data
 

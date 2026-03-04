@@ -22,6 +22,12 @@ frappe.query_reports["Sales Invoice Report"] = {
 			"options": "Customer",
 		},
 		{
+			"fieldname":"sales_person_user",
+			"label": __("Sales Person"),
+			"fieldtype": "Link",
+			"options": "Sales Person",
+		},
+		{
 			"fieldname":"from_date",
 			"label": __("From Date"),
 			"fieldtype": "Date",
@@ -41,13 +47,28 @@ frappe.query_reports["Sales Invoice Report"] = {
 			"width": "100px",
 		},
 		{
+			"fieldname":"order_type",
+			"label": __("Order Type"),
+			"fieldtype": "Select",
+			"options": ["","Sales","Maintenance","Shopping Cart","Project"],
+			"width": "100px",
+		},
+		{
 			"fieldname":"status",
 			"label":__("Status"),
 			"fieldtype":"Select",
-			"options":["","Return","Credit Note Issued","Submitted","Paid","Partly Paid","Unpaid","Unpaid and Discounted","Partly Paid and Discounted","Overdue and Discounted","Overdue","Internal Transfer"],
+			"options":["","Draft","Return","Credit Note Issued","Submitted","Paid","Partly Paid","Unpaid","Unpaid and Discounted","Partly Paid and Discounted","Overdue and Discounted","Overdue","Internal Transfer"],
 			// "default": "Draft",
 			"width": "100px"
 		},
 
-	]
+	],
+	// onload: function(report) {
+    //     setTimeout(() => {
+    //         const button = document.querySelector('[data-label="Add%20Column"]');
+    //         if (button) {
+    //             button.style.display = 'none';
+    //         }
+    //     }, 500);
+    // }
 };

@@ -35,6 +35,17 @@ frappe.query_reports["Report Sales Order"] = {
 			"options": "Customer",
 		},
 		{
+			"fieldname":"lpo",
+			"label": __("LPO Number"),
+			"fieldtype": "Data",
+		},
+		{
+			"fieldname":"sales_person",
+			"label": __("Sales Person"),
+			"fieldtype": "Link",
+			"options": "Sales Person",
+		},
+		{
 			"fieldname":"docstatus",
 			"label":__("Document Status"),
 			"fieldtype":"Select",

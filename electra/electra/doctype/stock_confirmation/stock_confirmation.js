@@ -20,7 +20,7 @@ frappe.ui.form.on('Stock Confirmation', {
 	},
 	target_company(frm){
 	    if (frm.doc.target_company == "MARAZEEM SECURITY SERVICES" || frm.doc.target_company == "MARAZEEM SECURITY SERVICES - SHOWROOM" || frm.doc.target_company == "MARAZEEM SECURITY SERVICES - HO") {
-			frm.set_value('letter_head', "MARAZEEM SECURITY SERVICES")
+			frm.set_value('letter_head', "Marazeem with Footer Text")
 		}
 		if (frm.doc.target_company == "KINGFISHER TRADING AND CONTRACTING COMPANY" || frm.doc.target_company == "KINGFISHER - TRANSPORTATION" || frm.doc.target_company == "KINGFISHER - SHOWROOM") {
 			frm.set_value('letter_head', "KINGFISHER TRADING AND CONTRACTING COMPANY")

@@ -1,0 +1,95 @@
+{% extends "templates/web.html" %}
+{% block title %} Task Timeline {% endblock %}
+{% block head_include %}
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+  <title>Apex Timeline Chart</title>
+  <style>
+    body {
+      font-family: Roboto, sans-serif;
+    }
+    #chart{
+        margin: auto;
+        width: 50%;
+        min-height: 700px;
+        padding: 10px;
+    }
+    h1 {
+        font-size: 20px;
+        text-align: center;
+    }
+  </style>
+{% endblock %}
+{%- block content -%}
+  <h1>Task Timeline</h1>
+  <div id="chart"></div>
+  {% endblock %}
+  {% block script %}
+  <script>
+
+    
+    frappe.call({
+        method: 'electra.custom.task'
+    })
+    
+
+    var options = {
+      chart: {
+        height: 350,
+        type: 'rangeBar', // Using rangeBar to represent time intervals
+      },
+      series: [
+        {
+            name: 'Project Phase',
+            data: [
+            {% for i in range(1, 6) %}
+            {
+                x: 'Analysis {{ i }}', // Example dynamic naming
+                y: [
+                new Date('2023-01-{{ i }}').getTime(),
+                new Date('2023-01-{{ i + 7}}').getTime()
+                ],
+                fillColor: '{{ ["#008FFB", "#00E396", "#775DD0", "#FEB019", "#FF4560"][(i-1) % 5] }}'
+            }{% if not loop.last %},{% endif %}
+            {% endfor %}
+            ]
+        }
+        ],
+
+      plotOptions: {
+        bar: {
+          horizontal: true,
+          distributed: true
+        }
+      },
+      dataLabels: {
+        enabled: true,
+        style: {
+          colors: ['#fff']
+        },
+        formatter: function(val, opts) {
+          var a = new Date(val[0]);
+          var b = new Date(val[1]);
+          var diff = (b - a) / (1000 * 3600 * 24); // Calculate the difference in days
+          return opts.w.globals.labels[opts.dataPointIndex] + ': ' + diff + ' days';
+        }
+      },
+      xaxis: {
+        type: 'datetime', // x-axis as datetime to show the timeline
+      },
+      yaxis: {
+        show: false
+      },
+      grid: {
+        row: {
+          colors: ['#f3f4f5', '#fff'], // Row colors
+          opacity: 0.5
+        }
+      }
+    };
+
+    var chart = new ApexCharts(document.querySelector("#chart"), options);
+    chart.render();
+  </script>
+  {% endblock %}
+
+

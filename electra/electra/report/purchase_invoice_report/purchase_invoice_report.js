@@ -1,6 +1,5 @@
-// Copyright (c) 2023, Abdulla and contributors
+// Copyright (c) 2024, Frappe Technologies Pvt. Ltd. and contributors
 // For license information, please see license.txt
-/* eslint-disable */
 
 frappe.query_reports["Purchase Invoice Report"] = {
 	"filters": [
@@ -23,6 +22,15 @@ frappe.query_reports["Purchase Invoice Report"] = {
 			"fieldname":"to_date",
 			"label": __("To Date"),
 			"fieldtype": "Date",
+			"width": "200px",
+		},
+		{
+			"fieldname":"group_by",
+			"label": __("Group By"),
+			"fieldtype": "Autocomplete",
+			"options": ["Invoice", "Item"],
+			// "default": "Invoice",
+			"reqd": 1,
 			"width": "200px",
 		},
 	]

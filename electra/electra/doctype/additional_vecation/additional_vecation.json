@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "ADV-.#####",
+ "autoname": "AV-.#####",
  "creation": "2023-06-26 07:45:01.530053",
  "default_view": "List",
  "doctype": "DocType",
@@ -69,7 +69,7 @@
    "read_only": 1
   },
   {
-   "fetch_from": "employee.grade",
+   "fetch_from": "employee.custom_employee_grade",
    "fieldname": "employee_grade",
    "fieldtype": "Link",
    "label": "Employee Grade",
@@ -143,7 +143,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-06-27 11:34:45.081206",
+ "modified": "2024-01-25 12:08:31.141767",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Additional Vecation",

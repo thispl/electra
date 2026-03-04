@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "VPS.#####",
+ "autoname": "prompt",
  "creation": "2021-08-19 14:09:23.912892",
  "doctype": "DocType",
  "editable_grid": 1,
@@ -138,9 +138,9 @@
    "options": "Vehicle"
   },
   {
-   "fetch_from": "plate_no2.last_odometer",
+   "fetch_from": ".last_odometer",
    "fieldname": "odometer_reading2",
-   "fieldtype": "Read Only",
+   "fieldtype": "Data",
    "label": "Odometer Reading"
   },
   {
@@ -242,12 +242,11 @@
    "read_only": 1
   },
   {
-   "fetch_from": "plate.last_odometer",
+   "fetch_from": ".last_odometer",
    "fetch_if_empty": 1,
    "fieldname": "reading",
    "fieldtype": "Float",
-   "label": "Odometer Reading",
-   "read_only": 1
+   "label": "Odometer Reading"
   },
   {
    "fetch_from": "emp_no.date_of_joining",
@@ -264,11 +263,11 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-02-23 16:34:34.955298",
+ "modified": "2024-01-07 15:01:57.638419",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Vehicle Possession and Surrender Form",
- "naming_rule": "Expression (old style)",
+ "naming_rule": "Set by user",
  "owner": "Administrator",
  "permissions": [
   {

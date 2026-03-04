@@ -14,6 +14,7 @@
   "ls",
   "sd",
   "section_break_4",
+  "salary_request",
   "employee_number",
   "employee_name",
   "grade",
@@ -26,26 +27,37 @@
   "section_break_8",
   "type",
   "section_break_18",
+  "last_leave_salary_taken_day",
   "joining_or_last_rejoining_date",
+  "leave_salary_days",
   "data_27",
   "date_of_service",
+  "total_leave",
+  "leave_salary_days_salary",
   "column_break_28",
-  "leave_salary_days",
+  "service",
+  "leave_service",
   "section_break_24",
   "basic",
-  "hra",
+  "ticket_allowance",
+  "not_hour",
+  "not_amount",
+  "hot_hour",
+  "hot_amount",
   "column_break_16",
-  "allowance",
+  "gratuity",
   "salary_payable_days",
+  "hra",
+  "allowance",
+  "other_benefits",
+  "gross",
   "section_break_21",
   "ticket_required",
   "column_break_24",
   "oneway_or_twoway",
   "amount",
-  "section_break_25",
   "salary_and_befefits_section",
   "salary",
-  "gratuity",
   "total_earnings",
   "column_break_23",
   "leave_salary",
@@ -56,9 +68,10 @@
   "visa",
   "total_deduction",
   "column_break_32",
-  "others",
   "immigration_cost",
   "air_ticket_expense",
+  "mess_expense",
+  "others",
   "section_break_35",
   "vacation_start_date",
   "vacation_end_date",
@@ -66,16 +79,15 @@
   "column_break_48",
   "vacation_days",
   "rejoining_date",
-  "extra_days",
-  "section_break_54"
+  "extra_days"
  ],
  "fields": [
   {
-   "default": "Annual Leave",
+   "default": "Annual Vacation",
    "fieldname": "type",
    "fieldtype": "Select",
    "label": "Type",
-   "options": "\nAnnual Leave\nLeave Salary Encashment",
+   "options": "\nAnnual Vacation\nLeave Salary Encashment\nEnd of Service",
    "read_only": 1,
    "reqd": 1
   },
@@ -99,7 +111,7 @@
    "read_only": 1
   },
   {
-   "fetch_from": "employee_number.grade",
+   "fetch_from": "employee_number.custom_employee_grade",
    "fieldname": "grade",
    "fieldtype": "Data",
    "label": "Grade",
@@ -136,47 +148,38 @@
   },
   {
    "depends_on": "eval:doc.eligible_or_not_eligible != \"Not Eligible\"",
-   "fetch_from": "employee_number.basic",
-   "fetch_if_empty": 1,
+   "fetch_from": ".basic",
    "fieldname": "basic",
    "fieldtype": "Currency",
-   "label": "Basic ",
-   "read_only": 1
+   "label": "Basic "
   },
   {
    "depends_on": "eval:doc.eligible_or_not_eligible != \"Not Eligible\"",
-   "fetch_from": "employee_number.hra",
-   "fetch_if_empty": 1,
+   "fetch_from": ".hra",
    "fieldname": "hra",
    "fieldtype": "Currency",
-   "label": "HRA",
-   "read_only": 1
+   "label": "HRA"
   },
   {
    "fieldname": "column_break_16",
    "fieldtype": "Column Break"
   },
   {
-   "depends_on": "eval:doc.eligible_or_not_eligible != \"Not Eligible\"",
-   "fetch_from": "employee_number._other_allowance",
-   "fetch_if_empty": 1,
+   "fetch_from": "._other_allowance",
    "fieldname": "allowance",
    "fieldtype": "Currency",
-   "label": "Allowance",
-   "read_only": 1
+   "label": "Allowance"
   },
   {
    "depends_on": "eval:doc.eligible_or_not_eligible != \"Not Eligible\"",
    "fieldname": "salary_and_befefits_section",
-   "fieldtype": "Section Break",
-   "label": "Earnings"
+   "fieldtype": "Section Break"
   },
   {
-   "depends_on": "eval:doc.eligible_or_not_eligible != \"Not Eligible\"",
+   "depends_on": "eval:doc.type==\"End of Service\"",
    "fieldname": "salary",
    "fieldtype": "Currency",
-   "label": "Salary",
-   "read_only": 1
+   "label": "Salary"
   },
   {
    "depends_on": "eval:doc.eligible_or_not_eligible != \"Not Eligible\"",
@@ -187,26 +190,22 @@
    "depends_on": "eval:doc.eligible_or_not_eligible != \"Not Eligible\"",
    "fieldname": "leave_salary",
    "fieldtype": "Currency",
-   "label": "Leave Salary",
-   "read_only": 1
+   "label": "Leave Salary"
   },
   {
-   "depends_on": "// eval:doc.type== \"Final Exit\"",
+   "depends_on": "eval:doc.type==\"End of Service\"",
    "fieldname": "gratuity",
    "fieldtype": "Currency",
    "label": "Gratuity"
   },
   {
-   "depends_on": "eval:doc.eligible_or_not_eligible != \"Not Eligible\"",
    "fieldname": "deductions_section",
    "fieldtype": "Section Break",
-   "hidden": 1,
    "label": "Deductions"
   },
   {
    "fieldname": "air_ticket_expense",
    "fieldtype": "Currency",
-   "hidden": 1,
    "label": "Air Ticket Expense"
   },
   {
@@ -216,7 +215,6 @@
   {
    "fieldname": "others",
    "fieldtype": "Currency",
-   "hidden": 1,
    "label": "Others"
   },
   {
@@ -227,8 +225,7 @@
    "depends_on": "eval:doc.eligible_or_not_eligible != \"Not Eligible\"",
    "fieldname": "net_pay",
    "fieldtype": "Currency",
-   "label": "Net Pay",
-   "read_only": 1
+   "label": "Net Pay"
   },
   {
    "fetch_from": "employee_number.company",
@@ -245,7 +242,6 @@
    "read_only": 1
   },
   {
-   "depends_on": "eval:doc.eligible_or_not_eligible != \"Not Eligible\"",
    "fieldname": "salary_payable_days",
    "fieldtype": "Int",
    "label": "Salary Payable Days",
@@ -259,6 +255,7 @@
    "depends_on": "eval:doc.eligible_or_not_eligible != \"Not Eligible\" && doc.type != \"Leave Salary Encashment\"",
    "fieldname": "ticket_required",
    "fieldtype": "Select",
+   "hidden": 1,
    "label": "Ticket Required",
    "mandatory_depends_on": "eval:doc.type == \"Annual Leave\" && doc.type == \"Final Exit\"",
    "options": "\nCompany Provided\nSelf Provided"
@@ -267,6 +264,7 @@
    "depends_on": "ticket_required ",
    "fieldname": "amount",
    "fieldtype": "Currency",
+   "hidden": 1,
    "label": "Ticket Amount",
    "read_only": 1
   },
@@ -275,75 +273,70 @@
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "section_break_25",
-   "fieldtype": "Section Break"
-  },
-  {
    "fieldname": "data_27",
    "fieldtype": "Column Break"
   },
   {
    "fieldname": "date_of_service",
    "fieldtype": "Date",
-   "label": "Service End Date"
+   "label": "Service End Date",
+   "reqd": 1
   },
   {
    "fieldname": "joining_or_last_rejoining_date",
    "fieldtype": "Date",
-   "label": "Service Start Date"
+   "label": "Service Start Date",
+   "reqd": 1
   },
   {
    "fieldname": "leave_salary_days",
    "fieldtype": "Data",
-   "label": "Service Days"
+   "label": "Gratuity Days"
   },
   {
    "depends_on": "eval:doc.eligible_or_not_eligible != \"Not Eligible\"",
    "fieldname": "total_earnings",
    "fieldtype": "Currency",
-   "label": "Total Earnings",
-   "read_only": 1
+   "label": "Total Earnings"
   },
   {
    "fieldname": "loan",
    "fieldtype": "Currency",
-   "hidden": 1,
    "label": "Loan"
   },
   {
    "fieldname": "advance",
    "fieldtype": "Currency",
-   "hidden": 1,
    "label": "Advance"
   },
   {
    "fieldname": "visa",
    "fieldtype": "Currency",
-   "hidden": 1,
    "label": "Visa"
   },
   {
    "fieldname": "immigration_cost",
    "fieldtype": "Currency",
-   "hidden": 1,
    "label": "Immigration Cost"
   },
   {
    "fieldname": "total_deduction",
    "fieldtype": "Currency",
-   "hidden": 1,
    "label": "Total Deduction"
   },
   {
    "depends_on": "eval:doc.type== \"Annual Leave\"",
    "fieldname": "vacation_start_date",
    "fieldtype": "Date",
+   "hidden": 1,
    "label": "Vacation Start Date"
   },
   {
-   "depends_on": "eval:doc.type== \"Annual Leave\"",
+   "depends_on": "eval:doc.type== \"Annual Vacation\"",
+   "fetch_from": "salary_request.leave_days",
    "fieldname": "vacation_days",
    "fieldtype": "Int",
+   "hidden": 1,
    "label": "Vacation Days"
   },
   {
@@ -361,14 +354,17 @@
   },
   {
    "depends_on": "eval:doc.type== \"Annual Leave\"",
+   "fetch_from": ".end",
    "fieldname": "vacation_end_date",
    "fieldtype": "Date",
+   "hidden": 1,
    "label": "Vacation End Date"
   },
   {
    "depends_on": "eval:doc.type== \"Annual Leave\" || \"leave Salary Encashment\"",
    "fieldname": "rejoining_date",
    "fieldtype": "Date",
+   "hidden": 1,
    "label": "Rejoining Date"
   },
   {
@@ -377,10 +373,6 @@
    "fieldtype": "Int",
    "hidden": 1,
    "label": "Extra Days"
-  },
-  {
-   "fieldname": "section_break_54",
-   "fieldtype": "Section Break"
   },
   {
    "fieldname": "ls",
@@ -399,6 +391,7 @@
    "depends_on": "eval:doc.ticket_required == \"Company Provided\"",
    "fieldname": "oneway_or_twoway",
    "fieldtype": "Select",
+   "hidden": 1,
    "label": "Oneway or Twoway",
    "options": "\nOneway\nTwo Way"
   },
@@ -412,12 +405,10 @@
    "fieldtype": "Column Break"
   },
   {
-   "depends_on": "date_of_service",
    "fieldname": "eligible_or_not_eligible",
    "fieldtype": "Select",
    "label": "Eligible or Not Eligible",
-   "options": "Eligible\nNot Eligible",
-   "read_only": 1
+   "options": "Eligible\nNot Eligible"
   },
   {
    "fieldname": "section_break_18",
@@ -425,12 +416,88 @@
   },
   {
    "fieldname": "section_break_24",
-   "fieldtype": "Section Break"
+   "fieldtype": "Section Break",
+   "label": "Earnings"
+  },
+  {
+   "fieldname": "salary_request",
+   "fieldtype": "Link",
+   "label": "Leave Salary Request",
+   "options": "Leave Salary  and Final Exit Request"
+  },
+  {
+   "depends_on": "eval:doc.type==\"End of Service\"",
+   "fieldname": "not_hour",
+   "fieldtype": "Float",
+   "label": "NOT Hour"
+  },
+  {
+   "depends_on": "eval:doc.type==\"End of Service\"",
+   "fieldname": "not_amount",
+   "fieldtype": "Currency",
+   "label": "NOT Amount"
+  },
+  {
+   "fieldname": "other_benefits",
+   "fieldtype": "Currency",
+   "label": "Other Benefits"
+  },
+  {
+   "fieldname": "mess_expense",
+   "fieldtype": "Currency",
+   "label": "Mess Expense"
+  },
+  {
+   "fieldname": "service",
+   "fieldtype": "Data",
+   "label": "Total Period of Service"
+  },
+  {
+   "fieldname": "total_leave",
+   "fieldtype": "Data",
+   "label": "Total Leave Taken for Previous Cycle"
+  },
+  {
+   "fetch_from": "employee_number.gross_salary",
+   "fetch_if_empty": 1,
+   "fieldname": "gross",
+   "fieldtype": "Currency",
+   "label": "Gross"
+  },
+  {
+   "fieldname": "leave_service",
+   "fieldtype": "Data",
+   "label": "Total Leave Taken for During Service"
+  },
+  {
+   "fieldname": "ticket_allowance",
+   "fieldtype": "Currency",
+   "label": "Ticket Allowance"
+  },
+  {
+   "fieldname": "hot_hour",
+   "fieldtype": "Float",
+   "label": "HOT Hour"
+  },
+  {
+   "fieldname": "hot_amount",
+   "fieldtype": "Currency",
+   "label": "HOT Amount"
+  },
+  {
+   "fieldname": "last_leave_salary_taken_day",
+   "fieldtype": "Date",
+   "label": "Last Leave Salary Taken Day"
+  },
+  {
+   "fieldname": "leave_salary_days_salary",
+   "fieldtype": "Int",
+   "label": "Leave Salary Days"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-12-01 08:33:07.952807",
+ "modified": "2025-01-17 07:28:43.841970",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Leave Salary",
@@ -452,5 +519,7 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": []
+ "states": [],
+ "track_changes": 1,
+ "track_seen": 1
 }

@@ -22,6 +22,10 @@ frappe.ui.form.on('Project Budget', {
 			qty += d.qty
 			amount += d.amount_with_overheads
 		})
+		$.each(frm.doc.raw_materials, function (i, d) {
+			qty += d.qty
+			amount += d.amount_with_overheads
+		})
 		if (qty > 0) {
 			frm.add_child("work_title_summary", {
 				'item_name': 'SUPPLY MATERIALS',
@@ -153,37 +157,70 @@ frappe.ui.form.on('Project Budget', {
 			},
 		});
 	},
+	
 	before_workflow_action: async (frm) => {
-		if(frm.doc.workflow_state == "Draft"){
+		if (frm.doc.workflow_state == "Draft") {
 			let promise = new Promise((resolve, reject) => {
 				if (frm.selected_workflow_action == "Approve") {
 					frappe.run_serially([
-						() => {frm.trigger("get_pb_sow")},
-						() => frm.save(),						
-						() => {frm.trigger("work_title")},
+						() => { frm.trigger("get_pb_sow") },
 						() => frm.save(),
-						() => {frm.trigger("msow_update")},
-						// () => frm.save(),
-						() => {frm.trigger("combine_tables")},
-						// () => frm.save(),
-						() => {frm.trigger("update_name")},
+						() => { frm.trigger("work_title") },
 						() => frm.save(),
-						() => resolve()
-					])
+						() => { frm.trigger("msow_update") },
+						() => { frm.trigger("combine_tables") },
+						() => frm.save(),
+						() => {
+							if (frm.doc.item_table.length > 0) {
+								resolve();
+							} else {
+								reject("Please save each PBSOW and submit the Project Budget");
+							}
+						},
+						() => frappe.call({
+							method: 'electra.electra.doctype.project_budget.project_budget.create_item_for_sow',
+							args: {
+								'project_budget': frm.doc.name,
+							}
+						}).then(() => resolve())
+					]).catch(err => reject(err));
 				}
 			});
-			await promise.catch(() => frappe.throw());
+			await promise.catch((error) => frappe.throw(error));
 		}
 		if(frm.doc.workflow_state == "In Review"){
 			let promise = new Promise((resolve, reject) => {
 				if (frm.selected_workflow_action == "Approve") {
-					frm.trigger("update_so")
+		// 			frappe.call({
+        //                 method:"electra.utils.update_project_budget",
+        //                 args:{
+        //                     so:frm.doc.sales_order,
+		// 					name:frm.doc.name,
+		// 					amount:frm.doc.total_bidding_price,
+        //                 },
+        //                 callback(r){
+		// 					console.log("Hii")
+        //                 }
+
+        //             })
+				frappe.dom.freeze();
+				frappe.run_serially([
+					() => frm.trigger("update_so"),
+					() => new Promise(resolve => setTimeout(resolve, 5000)),
+					() => frm.trigger("update_items"),
+					() => new Promise(resolve => setTimeout(resolve, 5000)),
+					() => frm.trigger("create_task"),
+					() => frappe.dom.unfreeze()
+				]);
+					// frm.trigger("update_so")
 				}
 				resolve();
 			});
 			await promise.catch(() => frappe.throw());
 		}
 	},
+
+
 	revision(frm){
 		$.each(frm.doc.master_scope_of_work,function(i,j){
 			j.revision = frm.doc.revision
@@ -239,23 +276,48 @@ frappe.ui.form.on('Project Budget', {
 		// // frm.trigger('workflow_state')
 		frm.add_custom_button(__('Combine'),
 		function () {
-			frappe.run_serially([
-				() => {frm.trigger("get_pb_sow")},
-				() => frm.save(),						
-				() => {frm.trigger("work_title")},
-				() => frm.save(),
-				() => {frm.trigger("msow_update")},
+			// frm.save();
+			// frappe.call({
+			// 	method:"electra.utils.update_project_budget",
+			// 	args:{
+			// 		so:frm.doc.sales_order,
+			// 		name:frm.doc.name,
+			// 		amount:frm.doc.total_bidding_price,
+			// 	},
+			// 	callback(r){
+			// 		console.log("Hii")
+			// 	}
+
+			// })
+			// frm.trigger("update_so")
+
+			// frappe.run_serially([
+			// 	() => {frm.trigger("get_pb_sow")},
+				// () => frm.save(),						
+				// () => {frm.trigger("work_title")},
 				// () => frm.save(),
-				() => {frm.trigger("combine_tables")},
-				() => frm.save(),
-				() => {frm.trigger("update_name")},
-				() => frm.save(),
-			])
-			// frm.trigger("update_msow")
-			// frm.trigger("work_title")
+				// () => {frm.trigger("msow_update")},
+				// () => frm.save(),
+				// () => {frm.trigger("combine_tables")},
+				// () => frm.save(),
+			// ])
+			// frappe.run_serially([
+			// () => {frm.trigger("update_msow")},
+			// 	() => frm.save(),			
+			// () => {frm.trigger("update_items")},
+			// 	() => frm.save(),
+			// ])
+			// // frm.trigger("work_title")
 			// frm.trigger("combine_tables")
 			// frm.trigger("update_items")
-			// frm.trigger('update_name')
+			frappe.run_serially([
+				() => {frm.trigger("update_so")},
+				() => frm.save(),						
+				() => {frm.trigger("update_items")},
+				() => frm.save(),
+				
+			])
+			
 		});
 		if (frm.doc.company) {
 			frm.trigger("set_series")
@@ -264,31 +326,17 @@ frappe.ui.form.on('Project Budget', {
 	},
 	setup(frm){
 		frm.get_docfield('item_table').allow_bulk_edit = 1
-	},
-	update_name(frm){
-		$.each(frm.doc.item_table,function(i,k){
-		frappe.call({
-			method:"electra.custom.get_name_pb",
-			args:{
-				'so':frm.doc.sales_order,
-			},
-			callback(r){
-				if(r){
-					$.each(r.message,function(i,d){
-						if(k.item == d.item_code){
-							k.docname = d.name
-						}
-					})
-				}
-			}
-		})
-		// frm.save()
-	})
+		frm.set_indicator_formatter('item',function(doc) {return (doc.docstatus==1 && doc.delivered_qty==doc.qty) ? "green" : "orange"})
 	},
 	combine_tables(frm){
 		frm.clear_table('item_table')		
 		$.each(frm.doc.design,function(i,d){
 			frm.add_child('item_table',{
+				'docname':d.docname,
+				'pb_doctype':d.pb_doctype,
+				'delivered_qty':d.delivered_qty,
+				'billed_qty':d.billed_qty,
+				'work_title':d.work_title,
 				'item':d.item,
 				'msow':d.msow,
 				'item_name':d.item_name,
@@ -306,9 +354,15 @@ frappe.ui.form.on('Project Budget', {
 			})
 			frm.refresh_field('item_table')
 		})
+	
 		$.each(frm.doc.materials,function(i,d){
 			frm.add_child('item_table',{
 				'item':d.item,
+				'docname':d.docname,
+				'pb_doctype':d.pb_doctype,
+				'delivered_qty':d.delivered_qty,
+				'billed_qty':d.billed_qty,
+				'work_title':d.work_title,
 				'msow':d.msow,
 				'item_name':d.item_name,
 				'surface_area':d.surface_area,
@@ -328,6 +382,11 @@ frappe.ui.form.on('Project Budget', {
 		$.each(frm.doc.finishing_work,function(i,d){
 			frm.add_child('item_table',{
 				'item':d.item,
+				'docname':d.docname,
+				'pb_doctype':d.pb_doctype,
+				'delivered_qty':d.delivered_qty,
+				'billed_qty':d.billed_qty,
+				'work_title':d.work_title,
 				'msow':d.msow,
 				'item_name':d.item_name,
 				'surface_area':d.surface_area,
@@ -347,6 +406,11 @@ frappe.ui.form.on('Project Budget', {
 		$.each(frm.doc.bolts_accessories,function(i,d){
 			frm.add_child('item_table',{
 				'item':d.item,
+				'docname':d.docname,
+				'pb_doctype':d.pb_doctype,
+				'delivered_qty':d.delivered_qty,
+				'billed_qty':d.billed_qty,
+				'work_title':d.work_title,
 				'msow':d.msow,
 				'item_name':d.item_name,
 				'surface_area':d.surface_area,
@@ -366,6 +430,11 @@ frappe.ui.form.on('Project Budget', {
 		$.each(frm.doc.installation,function(i,d){
 			frm.add_child('item_table',{
 				'item':d.item,
+				'docname':d.docname,
+				'pb_doctype':d.pb_doctype,
+				'delivered_qty':d.delivered_qty,
+				'billed_qty':d.billed_qty,
+				'work_title':d.work_title,
 				'msow':d.msow,
 				'item_name':d.item_name,
 				'surface_area':d.surface_area,
@@ -385,6 +454,11 @@ frappe.ui.form.on('Project Budget', {
 		$.each(frm.doc.heavy_equipments,function(i,d){
 			frm.add_child('item_table',{
 				'item':d.item,
+				'docname':d.docname,
+				'pb_doctype':d.pb_doctype,
+				'delivered_qty':d.delivered_qty,
+				'billed_qty':d.billed_qty,
+				'work_title':d.work_title,
 				'msow':d.msow,
 				'item_name':d.item_name,
 				'surface_area':d.surface_area,
@@ -404,6 +478,11 @@ frappe.ui.form.on('Project Budget', {
 		$.each(frm.doc.others,function(i,d){
 			frm.add_child('item_table',{
 				'item':d.item,
+				'docname':d.docname,
+				'pb_doctype':d.pb_doctype,
+				'delivered_qty':d.delivered_qty,
+				'billed_qty':d.billed_qty,
+				'work_title':d.work_title,
 				'msow':d.msow,
 				'item_name':d.item_name,
 				'surface_area':d.surface_area,
@@ -423,6 +502,11 @@ frappe.ui.form.on('Project Budget', {
 		$.each(frm.doc.finished_goods,function(i,d){
 			frm.add_child('item_table',{
 				'item':d.item,
+				'docname':d.docname,
+				'pb_doctype':d.pb_doctype,
+				'delivered_qty':d.delivered_qty,
+				'billed_qty':d.billed_qty,
+				'work_title':d.work_title,
 				'msow':d.msow,
 				'item_name':d.item_name,
 				'surface_area':d.surface_area,
@@ -442,6 +526,11 @@ frappe.ui.form.on('Project Budget', {
 		$.each(frm.doc.manpower,function(i,d){
 			frm.add_child('item_table',{
 				"item": d.worker,
+				'docname':d.docname,
+				'pb_doctype':d.pb_doctype,
+				'delivered_qty':d.delivered_qty,
+				'billed_qty':d.billed_qty,
+				'work_title':d.work_title,
 				'msow':d.msow,
 				"item_name": d.worker,
 				"qty": d.total_workers,
@@ -660,6 +749,7 @@ frappe.ui.form.on('Project Budget', {
 	get_pb_sow(frm) {
 		frm.clear_table('design')
 		frm.clear_table('materials')
+		frm.clear_table('raw_materials')
 		frm.clear_table('finishing_work')
 		frm.clear_table('bolts_accessories')
 		frm.clear_table('installation')
@@ -694,6 +784,11 @@ frappe.ui.form.on('Project Budget', {
 							// frm.clear_table('design')
 							$.each(r.message.design, function (i, c) {
 								frm.add_child('design', {
+									"work_title": "DESIGN",
+									'docname': c.name,
+									'pb_doctype': c.doctype,
+									'delivered_qty':c.delivered_qty,
+									'billed_qty':c.billed_qty,
 									'msow': r.message.msow,
 									'ssow': r.message.ssow,
 									'item_group': c.item_group,
@@ -714,10 +809,43 @@ frappe.ui.form.on('Project Budget', {
 								})
 							})
 							frm.refresh_field('design')
-
+							
+							$.each(r.message.raw_materials, function (i, c) {
+								frm.add_child('raw_materials', {
+									"work_title": "RAW MATERIALS",
+									'docname': c.name,
+									'docstatus': 1,
+									'pb_doctype': c.doctype,
+									'delivered_qty':c.delivered_qty,
+									'billed_qty':c.billed_qty,
+									'msow': r.message.msow,
+									'ssow': r.message.ssow,
+									'item_group': c.item_group,
+									'item': c.item,
+									'item_name': c.item_name,
+									'description': c.description,
+									'unit': c.unit,
+									'qty': c.qty,
+									'unit_price': c.unit_price,
+									'rate_with_overheads': c.rate_with_overheads,
+									'amount_with_overheads': c.amount_with_overheads,
+									'amount': c.amount,
+									'cost': c.cost,
+									'cost_amount': c.cost_amount,
+									'estimated_cost':c.estimated_cost,
+									'estimated_amount':c.estimated_amount
+								})
+							})
+							frm.refresh_field('raw_materials')
 							// frm.clear_table('materials')
 							$.each(r.message.materials, function (i, c) {
 								frm.add_child('materials', {
+									"work_title": "SUPPLY MATERIALS",
+									'docname': c.name,
+									'docstatus': 1,
+									'pb_doctype': c.doctype,
+									'delivered_qty':c.delivered_qty,
+									'billed_qty':c.billed_qty,
 									'msow': r.message.msow,
 									'ssow': r.message.ssow,
 									'item_group': c.item_group,
@@ -740,6 +868,12 @@ frappe.ui.form.on('Project Budget', {
 							// frm.clear_table('mep_materials')
 							$.each(r.message.mep_materials, function (i, c) {
 								frm.add_child('materials', {
+									"work_title": "SUPPLY MATERIALS",
+									'docname': c.name,
+									'docstatus': 1,
+									'pb_doctype': c.doctype,
+									'delivered_qty':c.delivered_qty,
+									'billed_qty':c.billed_qty,
 									'msow': r.message.msow,
 									'ssow': r.message.ssow,
 									'item_group': c.item_group,
@@ -762,6 +896,11 @@ frappe.ui.form.on('Project Budget', {
 							// frm.clear_table('finishing_work')
 							$.each(r.message.finishing_work, function (i, c) {
 								frm.add_child('finishing_work', {
+									"work_title": "FINISHING WORK",
+									'docname': c.name,
+									'pb_doctype': c.doctype,
+									'delivered_qty':c.delivered_qty,
+									'billed_qty':c.billed_qty,
 									'msow': r.message.msow,
 									'ssow': r.message.ssow,
 									'item_group': c.item_group,
@@ -784,6 +923,11 @@ frappe.ui.form.on('Project Budget', {
 							// frm.clear_table('bolts_accessories')
 							$.each(r.message.bolts_accessories, function (i, c) {
 								frm.add_child('bolts_accessories', {
+									"work_title": "ACCESSORIES",
+									'docname': c.name,
+									'pb_doctype': c.doctype,
+									'delivered_qty':c.delivered_qty,
+									'billed_qty':c.billed_qty,
 									'msow': r.message.msow,
 									'ssow': r.message.ssow,
 									'item_group': c.item_group,
@@ -807,6 +951,11 @@ frappe.ui.form.on('Project Budget', {
 							// frm.clear_table('installation')
 							$.each(r.message.installation, function (i, c) {
 								frm.add_child('installation', {
+									"work_title": "INSTALLATION",
+									'docname': c.name,
+									'pb_doctype': c.doctype,
+									'delivered_qty':c.delivered_qty,
+									'billed_qty':c.billed_qty,
 									'msow': r.message.msow,
 									'ssow': r.message.ssow,
 									'item_group': c.item_group,
@@ -830,7 +979,13 @@ frappe.ui.form.on('Project Budget', {
 							// frm.clear_table('manpower')
 							$.each(r.message.manpower, function (i, c) {
 								frm.add_child('manpower', {
+									"work_title": "MANPOWER",
+									'docname': c.name,
+									'pb_doctype': c.doctype,
+									'delivered_qty':c.delivered_qty,
+									'billed_qty':c.billed_qty,
 									'msow': r.message.msow,
+									'docstatus': 1,
 									'ssow': r.message.ssow,
 									'worker': c.worker,
 									'rate':c.rate,
@@ -852,6 +1007,11 @@ frappe.ui.form.on('Project Budget', {
 							// frm.clear_table('others')
 							$.each(r.message.others, function (i, c) {
 								frm.add_child('others', {
+									"work_title": "SUBCONTRACT",
+									'docname': c.name,
+									'pb_doctype': c.doctype,
+									'delivered_qty':c.delivered_qty,
+									'billed_qty':c.billed_qty,
 									'msow': r.message.msow,
 									'ssow': r.message.ssow,
 									'item_group': c.item_group,
@@ -875,6 +1035,11 @@ frappe.ui.form.on('Project Budget', {
 							// frm.clear_table('finished_goods')
 							$.each(r.message.finished_goods, function (i, c) {
 								frm.add_child('finished_goods', {
+									"work_title": "FINISHED GOODS",
+									'docname': c.name,
+									'pb_doctype': c.doctype,
+									'delivered_qty':c.delivered_qty,
+									'billed_qty':c.billed_qty,
 									'msow': r.message.msow,
 									'ssow': r.message.ssow,
 									'item_group': c.item_group,
@@ -899,6 +1064,12 @@ frappe.ui.form.on('Project Budget', {
 							// frm.clear_table('heavy_equipments')
 							$.each(r.message.heavy_equipments, function (i, c) {
 								frm.add_child('heavy_equipments', {
+									"work_title": "TOOLS/EQUIPMENTS/TRANSPORT/OTHERS",
+									'docname': c.name,
+									'pb_doctype': c.doctype,
+									'delivered_qty':c.delivered_qty,
+									'docstatus': 1,
+									'billed_qty':c.billed_qty,
 									'msow': r.message.msow,
 									'ssow': r.message.ssow,
 									'item_group': c.item_group,
@@ -946,66 +1117,235 @@ frappe.ui.form.on('Project Budget', {
 			}
 		})
 	},
-	update_items(frm){		
+	update_items_new(frm){	
+		if (frm.doc.company == "INTERIOR DIVISION - ELECTRA"){
+			warehouse = "Electra Interior Warehouse - INE"}
+		if (frm.doc.company == "ENGINEERING DIVISION - ELECTRA"){
+			warehouse = "Electra Engineering Warehouse - EED"}
+		if (frm.doc.company == "MEP DIVISION - ELECTRA"){
+			warehouse = "Electra MEP Warehouse - MEP"}	
 		frappe.db.get_value('Sales Order',frm.doc.sales_order,'delivery_date')
         .then(r => {
             var value = r.message.delivery_date
 			frm.set_value('delivery_date',value)
 		})
 		var data = []
-		frappe.db.get_value('Warehouse',{'company':frm.doc.company,'default_for_stock_transfer':1},'name')
+		// frappe.db.get_value('Warehouse',{'company':frm.doc.company,'default_for_stock_transfer':1},'name')
+        // .then(r => {
+        //     var value = r.message.name
+		// 	frm.set_value('warehouse',value)
+		// 	console.log(value)
+		// })
+		frappe.db.get_value('Sales Order',frm.doc.sales_order,'custom_sow_item_table')
         .then(r => {
-            var value = r.message.name
-			frm.set_value('warehouse',value)
-		})		
-		frm.doc.item_table.forEach(d => {
-			data.push({
-				"msow":d.msow,
-				"docname":d.docname,
-				"name": d.name,
-				"item_code": d.item,
-				"delivery_date": frm.doc.delivery_date,
-				"conversion_factor": d.conversion_factor,
-				"qty": d.qty,
-				"rate": d.rate_with_overheads,
-				"uom": d.uom,
-				"warehouse" : frm.doc.warehouse,
+            var value = r.message.custom_sow_item_table
+			if (value==1){
+				frm.doc.master_scope_of_work.forEach(d => {
+					data.push({
+						"msow":d.msow,
+						"docname":d.docname,
+						"work_title":d.work_title,
+						"name": d.name,
+						"item_code": d.msow,
+						"delivery_date": frm.doc.delivery_date,
+						"conversion_factor": 1,
+						"qty": d.qty,
+						"custom_so_qty": d.qty,
+						"rate": d.unit_price,
+						"amount": d.total_bidding_price,
+						"uom": d.unit,
+						"warehouse" : warehouse,
+					});
+				})
+			}
+			else{	
+				frm.doc.item_table.forEach(d => {
+					data.push({
+						"msow":d.msow,
+						"docname":d.docname,
+						"work_title":d.work_title,
+						"name": d.name,
+						"item_code": d.item,
+						
+						"delivery_date": frm.doc.delivery_date,
+						"conversion_factor": 1,
+						"qty": d.qty,
+						"custom_so_qty": d.qty,
+						"rate": d.rate_with_overheads,
+						"uom": d.unit,
+						"warehouse" : warehouse,
+						
+					});
+				})
+			}
+			
+			const item_table = frm.doc.item_table;
+			frappe.call({
+				// method: 'erpnext.controllers.accounts_controller.update_child_qty_rate',
+				method: 'electra.electra.doctype.project_budget.project_budget.update_child_qty_rate',
+				
+				freeze: true,
+				args: {
+					'parent_doctype': "Sales Order",
+					'trans_items': data,
+					'parent_doctype_name': frm.doc.sales_order,
+				},
+				callback: function() {
+					frm.reload_doc();
+				}
 			});
 		})
-		console.log(data)
-		const item_table = frm.doc.item_table;
-		frappe.call({
-			method: 'erpnext.controllers.accounts_controller.update_child_qty_rate',
-			freeze: true,
-			args: {
-				'parent_doctype': "Sales Order",
-				'trans_items': data,
-				'parent_doctype_name': frm.doc.sales_order,
-			},
-			callback: function() {
-				frm.reload_doc();
-			}
-		});
 	},
-	update_so(frm){
-		frappe.db.get_value('Sales Order',frm.doc.sales_order,'docstatus')
-		.then(r => {
-			var value = r.message.docstatus
-			if(frm.doc.amended_from){
-				if(value == 1){
-					frappe.call({
-						method:'electra.electra.doctype.project_budget.project_budget.update_msows',
-						args:{
-							document:frm.doc.name,
-							sales_order:frm.doc.sales_order
-						},
-						callback(r){
-							frm.trigger("update_items")
-						}
+	update_items(frm){	
+		if (frm.doc.company == "INTERIOR DIVISION - ELECTRA"){
+			warehouse = "Electra Interior Warehouse - INE"}
+		if (frm.doc.company == "ENGINEERING DIVISION - ELECTRA"){
+			warehouse = "Electra Engineering Warehouse - EED"}
+		if (frm.doc.company == "MEP DIVISION - ELECTRA"){
+			warehouse = "Electra MEP Warehouse - MEP"}	
+		frappe.db.get_value('Sales Order',frm.doc.sales_order,'delivery_date')
+        .then(r => {
+            var value = r.message.delivery_date
+			frm.set_value('delivery_date',value)
+		})
+		var data = []
+		// frappe.db.get_value('Warehouse',{'company':frm.doc.company,'default_for_stock_transfer':1},'name')
+        // .then(r => {
+        //     var value = r.message.name
+		// 	frm.set_value('warehouse',value)
+		// 	console.log(value)
+		// })
+		frappe.db.get_value('Sales Order',frm.doc.sales_order,'custom_sow_item_table')
+        .then(r => {
+            var value = r.message.custom_sow_item_table
+			if (value==1){
+				frm.doc.master_scope_of_work.forEach(d => {
+					data.push({
+						"msow":d.msow,
+						"docname":d.docname,
+						"work_title":d.work_title,
+						"name": d.name,
+						"item_code": d.msow,
+						"delivery_date": frm.doc.delivery_date,
+						"conversion_factor": 1,
+						"qty": d.qty,
+						"custom_so_qty": d.qty,
+						"rate": d.unit_price,
+						"amount": d.total_bidding_price,
+						"uom": d.unit,
+						"warehouse" : warehouse,
 					});
-				}			
-			}				
-		})	
+				})
+			}
+			// else{	
+			// 	frm.doc.item_table.forEach(d => {
+			// 		data.push({
+			// 			"msow":d.msow,
+			// 			"docname":d.docname,
+			// 			"work_title":d.work_title,
+			// 			"name": d.name,
+			// 			"item_code": d.item,
+			// 			"item_name":d.item_name,
+			// 			"delivery_date": frm.doc.delivery_date,
+			// 			"conversion_factor": 1,
+			// 			"qty": d.qty,
+			// 			"custom_so_qty": d.qty,
+			// 			"rate": d.rate_with_overheads,
+			// 			"uom": d.unit,
+			// 			"warehouse" : warehouse,
+			// 			"fg_item_qty":d.qty
+			// 		});
+			// 	})
+			// }
+			
+			const item_table = frm.doc.item_table;
+			frappe.call({
+				// method: 'erpnext.controllers.accounts_controller.update_child_qty_rate',
+				method: 'electra.electra.doctype.project_budget.project_budget.update_child_qty_rate',
+				
+				freeze: true,
+				args: {
+					'parent_doctype': "Sales Order",
+					'trans_items': data,
+					'parent_doctype_name': frm.doc.sales_order,
+				},
+				callback: function() {
+					frm.reload_doc();
+				}
+			});
+		})
+	},		
+	// 	frm.doc.item_table.forEach(d => {
+	// 		data.push({
+	// 			"msow":d.msow,
+	// 			"docname":d.docname,
+	// 			"work_title":d.work_title,
+	// 			"name": d.name,
+	// 			"item_code": d.item,
+	// 			"delivery_date": frm.doc.delivery_date,
+	// 			"conversion_factor": d.conversion_factor,
+	// 			"qty": d.qty,
+	// 			"custom_so_qty": d.qty,
+	// 			"rate": d.rate_with_overheads,
+	// 			"uom": d.uom,
+	// 			"warehouse" : frm.doc.warehouse,
+	// 		});
+	// 	})
+	// 	console.log(data)
+	// 	const item_table = frm.doc.item_table;
+	// 	frappe.call({
+	// 		method: 'erpnext.controllers.accounts_controller.update_child_qty_rate',
+	// 		freeze: true,
+	// 		args: {
+	// 			'parent_doctype': "Sales Order",
+	// 			'trans_items': data,
+	// 			'parent_doctype_name': frm.doc.sales_order,
+	// 		},
+	// 		callback: function() {
+	// 			frm.reload_doc();
+	// 		}
+	// 	});
+	// },
+	update_so(frm){
+		if(frm.doc.amended_from){
+			frappe.call({
+				method:'electra.electra.doctype.project_budget.project_budget.update_msows',
+				args:{
+					document:frm.doc.name,
+					sales_order:frm.doc.sales_order
+				},
+				callback(r){
+					
+				}
+			});
+		}			
+	},
+	update_so_new(frm){
+		if(frm.doc.amended_from){
+			frappe.call({
+				method:'electra.electra.doctype.project_budget.project_budget.update_msows_new',
+				args:{
+					document:frm.doc.name,
+					sales_order:frm.doc.sales_order
+				},
+				callback(r){
+					
+				}
+			});
+		}			
+	},
+	create_task(frm){
+		if(frm.doc.amended_from){
+			frappe.call({
+				method:'electra.electra.doctype.project_budget.project_budget.create_tasks',
+				args:{
+					sales_order:frm.doc.sales_order
+				},
+				callback(r){
+					
+				}
+			});
+		}			
 	},
 	// update_while_submission(frm){
 	// 	frappe.db.get_value('Sales Order',frm.doc.sales_order,'docstatus')
@@ -1047,11 +1387,18 @@ frappe.ui.form.on('Project Budget', {
 						d.total_overheads = k.total_amount_as_overhead + k.total_amount_of_profit + k.contigency + k.total_amount_as_engineering_overhead
 						d.total_profit_amount = k.total_profit_amount
 						d.total_profit_percent = k.total_profit_percent
-						d.total_business_promotion = k.business_promotion
-						d.total_cost = k.total_cost
+						d.total_business_promotion = k.pb_business_promotion_amount
+						d.total_cost = k.pb_total_cost
 						d.total_bidding_price = k.pb_bidding_amount
 						d.unit_price = k.pb_bidding_unit_rate
-						
+						if(frm.doc.company == "MEP DIVISION - ELECTRA"){
+							d.net_profit_percent = k.pb_mep_net_profit_percent
+							d.net_profit_amount = k.pb_mep_net_profit_amount
+						}
+						else{
+							d.net_profit_percent = k.pb_net_profit_percent
+							d.net_profit_amount = k.pb_net_profit_amount
+						}
 					})
 
 				}
@@ -1113,8 +1460,6 @@ frappe.ui.form.on('Project Budget', {
 			frm.set_value("total_cost_of_the_project", total_cost)
 			frm.set_value("total_bidding_price", total_bidding_price)
 		}
-		// frm.trigger("msow_update")
-
 		$.each(frm.doc.master_scope_of_work, function (i, d) {
 			frappe.call({
 				method: "frappe.client.get_list",
@@ -1142,10 +1487,18 @@ frappe.ui.form.on('Project Budget', {
 						d.total_overheads = k.total_amount_as_overhead + k.total_amount_of_profit + k.contigency + k.total_amount_as_engineering_overhead
 						d.total_profit_amount = k.total_profit_amount
 						d.total_profit_percent = k.total_profit_percent
-						d.total_business_promotion = k.business_promotion
-						d.total_cost = k.total_cost
+						d.total_business_promotion = k.pb_business_promotion_amount
+						d.total_cost = k.pb_total_cost
 						d.total_bidding_price = k.pb_bidding_amount
 						d.unit_price = k.pb_bidding_unit_rate
+						if(frm.doc.company == "MEP DIVISION - ELECTRA"){
+							d.net_profit_percent = k.pb_mep_net_profit_percent
+							d.net_profit_amount = k.pb_mep_net_profit_amount
+						}
+						else{
+							d.net_profit_percent = k.pb_net_profit_percent
+							d.net_profit_amount = k.pb_net_profit_amount
+						}
 						
 					})
 

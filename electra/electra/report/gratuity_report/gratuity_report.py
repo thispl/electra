@@ -7,7 +7,7 @@ from frappe.utils import date_diff,today,cstr
 from dateutil.relativedelta import relativedelta
 import datetime
 from datetime import date,timedelta
-
+from frappe.utils import date_diff, add_months,today,add_days,add_years,nowdate,flt
 
 
 def execute(filters=None):
@@ -47,7 +47,7 @@ def calculate_gratuity(filters):
 		# frappe.errprint(yos)
 
 			basic_salary = frappe.db.get_value('Employee',emp.name,'basic')
-
+			total_gratuity = frappe.db.get_value('Employee',emp.name,'gratuity')
 			# frappe.errprint(basic_salary)
 			# per_day_basic = basic_salary / 30
 			
@@ -65,8 +65,6 @@ def calculate_gratuity(filters):
 			
 			# total_gratuity = earned_gpy + earned_gpm + earned_gpd
 
-			per_day_basic = (basic_salary / 30 * 21) /365
-			total_gratuity = per_day_basic * total_days
 			
 			row = [emp.name,emp.employee_name,emp.date_of_joining,yos,total_gratuity]
 			if diff.years > 1:
@@ -118,8 +116,8 @@ def calculate_gratuity(filters):
 
 			# total = p_total_gratuity + total_gratuity
 			per_day_basi = (basic_salary / 30 * 21) /365
-			total_gratuit = per_day_basi * total_days
-			
+			# total_gratuit = per_day_basi * total_days
+			total_gratuit = frappe.db.get_value('Employee',emp.name,'gratuity')
 			row = [emp.name,emp.employee_name,emp.date_of_joining,yos,total_gratuit]
 			if diff.years > 1:
 				data.append(row)
