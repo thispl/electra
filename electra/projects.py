@@ -72,6 +72,7 @@ def make_delivery_note_wip(source_name, target_doc=None, kwargs=None):
 		target.run_method("set_po_nos")
 		target.run_method("calculate_taxes_and_totals")
 		target.update({"project_budget":source.name})
+		sales_order = frappe.get_value("Sales Order",{'project_budget':source.name},'name')
 		project = frappe.get_value("Sales Order",{'project_budget':source.name},['project'])
 		customer = frappe.get_value("Sales Order",{'project_budget':source.name},['customer'])
 		title_of_project=frappe.get_value("Sales Order",{'project_budget':source.name},['title_of_project'])
@@ -82,6 +83,8 @@ def make_delivery_note_wip(source_name, target_doc=None, kwargs=None):
 		sales_person_designation=frappe.get_value("Sales Order",{'project_budget':source.name},['sales_person_designation'])
 		sales_person_mobile=frappe.get_value("Sales Order",{'project_budget':source.name},['sales_person_mobile'])
 		
+		if sales_order:
+			target.update({"sales_order": sales_order})
 		if project:
 			target.update({"project": project})
 		if customer:

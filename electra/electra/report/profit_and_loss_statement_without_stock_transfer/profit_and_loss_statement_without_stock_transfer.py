@@ -33,12 +33,15 @@ def execute(filters=None):
         ignore_accumulated_values_for_fy=True,
     )
     
-    exclude_account = "Sales - Stock Transfer"
+    exclude_accounts = (
+        "Sales - Stock Transfer",
+        "Sales - Stock Tansfer",
+    )
 
-    income = [
-        row for row in income
-        if not row.get("account_name", "").startswith(exclude_account)
-    ]
+    # income = [
+    #     row for row in income
+    #     if not row.get("account_name", "").startswith(exclude_accounts)
+    # ]
 
     expense = get_data(
         filters.company,

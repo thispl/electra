@@ -34,41 +34,72 @@ def execute(filters=None):
 		if filters.get("show_warehouse_wise_stock"):
 			row.append(details.warehouse)
 		valuation_rate = 0
-		source_warehouse = frappe.db.get_value('Warehouse', {'default_for_stock_transfer': 1, 'company': filters.get("company") }, ["name"])
-		latest_vr = frappe.db.sql("""
-			SELECT valuation_rate as vr
-			FROM `tabStock Ledger Entry`
-			WHERE 
-				/* Added by Nandini */ 
-				warehouse NOT IN ('Work In Progress - EED','Work In Progress - INE','Work In Progress - MEP') 
-				AND item_code = %s AND warehouse = %s AND is_cancelled != 1 
-		""", (details.name, source_warehouse), as_dict=True)
+		# source_warehouse = frappe.db.get_value('Warehouse', {'default_for_stock_transfer': 1, 'company': filters.get("company") }, ["name"])
+		# latest_vr = frappe.db.sql("""
+		# 	SELECT valuation_rate as vr
+		# 	FROM `tabStock Ledger Entry`
+		# 	WHERE 
+		# 		/* Added by Nandini */ 
+		# 		warehouse NOT IN ('Work In Progress - EED','Work In Progress - INE','Work In Progress - MEP') 
+		# 		AND item_code = %s AND is_cancelled != 1  AND posting_date <= %s AND company = %s
+		# """, (details.name, to_date,filters.get("company") ), as_dict=True)
 
-		if len(latest_vr) > 0:
-			valuation_rate = latest_vr[0]["vr"]
-		else:
-			val_rate = set()
-			l_vr = frappe.db.sql("""
-				SELECT valuation_rate as vr
-				FROM `tabStock Ledger Entry`
-				WHERE 
-					/* Added by Nandini */ 
-					warehouse NOT IN ('Work In Progress - EED','Work In Progress - INE','Work In Progress - MEP')
-					AND item_code = %s AND is_cancelled != 1
-			""", (details.name,), as_dict=True)
+		# if len(latest_vr) > 0:
+		# 	valuation_rate = latest_vr[0]["vr"]
+		qty = flt(item_dict.get("total_qty"))
+		tot = flt(item_dict.get("total_value"))
 
-			for item in l_vr:
-				val_rate.add(item["vr"])
+		valuation_rate = tot / qty if qty else 0
+		if qty == 0.0:
+			continue
+		# else:
+		# 	val_rate = set()
+		# 	l_vr = frappe.db.sql("""
+		# 		SELECT valuation_rate as vr
+		# 		FROM `tabStock Ledger Entry`
+		# 		WHERE 
+		# 			/* Added by Nandini */ 
+		# 			warehouse NOT IN ('Work In Progress - EED','Work In Progress - INE','Work In Progress - MEP')
+		# 			AND item_code = %s AND is_cancelled != 1 AND posting_date <= %s
+		# 	""", (details.name,to_date), as_dict=True)
 
-			if val_rate:
-				valuation_rate = max(val_rate)
+		# 	for item in l_vr:
+		# 		val_rate.add(item["vr"])
 
-		frappe.errprint(valuation_rate)
+		# 	if val_rate:
+		# 		valuation_rate = max(val_rate)
+
+
 
 		tot = item_dict.get("total_qty")*valuation_rate
-		t1 = range1*valuation_rate
-		t3 = valuation_rate*range3
-		row.extend([valuation_rate,average_age,item_dict.get("total_qty"),tot,range1,t1, range2, range2*valuation_rate,range3, t3,range4,range4*valuation_rate,range5,range5*valuation_rate, range6, range6*valuation_rate,above_range6,above_range6*valuation_rate,earliest_age, latest_age, details.stock_uom])
+		# t1 = range1*valuation_rate
+		# t3 = valuation_rate*range3
+		t1 = range1 * valuation_rate
+		t2 = range2 * valuation_rate
+		t3 = range3 * valuation_rate
+		t4 = range4 * valuation_rate
+		t5 = range5 * valuation_rate
+		t6 = range6 * valuation_rate
+		t7 = above_range6 * valuation_rate
+		row.extend([
+			valuation_rate,
+			average_age,
+			qty,
+			tot,
+
+			range1, t1,
+			range2, t2,
+			range3, t3,
+			range4, t4,
+			range5, t5,
+			range6, t6,
+			above_range6, t7,
+
+			earliest_age,
+			latest_age,
+			details.stock_uom
+		])
+		# row.extend([valuation_rate,average_age,item_dict.get("total_qty"),tot,range1,t1, range2, range2*valuation_rate,range3, t3,range4,range4*valuation_rate,range5,range5*valuation_rate, range6, range6*valuation_rate,above_range6,above_range6*valuation_rate,earliest_age, latest_age, details.stock_uom])
 		data.append(row)
 
 	chart_data = get_chart_data(data, filters)
@@ -267,17 +298,25 @@ def get_fifo_queue(filters, sle=None):
 
 		item_details[key]["qty_after_transaction"] = d.qty_after_transaction
 
+		# if "total_qty" not in item_details[key]:
+		# 	item_details[key]["total_qty"] = d.actual_qty
+		# else:
+		# 	item_details[key]["total_qty"] += d.actual_qty
 		if "total_qty" not in item_details[key]:
-			item_details[key]["total_qty"] = d.actual_qty
-		else:
-			item_details[key]["total_qty"] += d.actual_qty
+			item_details[key]["total_qty"] = 0
+
+		if "total_value" not in item_details[key]:
+			item_details[key]["total_value"] = 0
+
+		item_details[key]["total_qty"] += flt(d.actual_qty)
+		item_details[key]["total_value"] += flt(d.stock_value_difference)
 
 	return item_details
 
 def get_stock_ledger_entries(filters):
 	return frappe.db.sql("""select
 			item.name, item.item_name, item_group, brand, description, item.stock_uom, item.valuation_rate,
-			actual_qty, posting_date, voucher_type, voucher_no, serial_no, batch_no, qty_after_transaction, warehouse
+			actual_qty, posting_date, voucher_type, voucher_no, serial_no, batch_no, qty_after_transaction, warehouse, stock_value_difference
 		from `tabStock Ledger Entry` sle,
 			(select name, item_name, description, stock_uom, brand, item_group, valuation_rate
 				from `tabItem` {item_conditions}) item
@@ -287,7 +326,7 @@ def get_stock_ledger_entries(filters):
 			item_code = item.name and
 			company = %(company)s and
 			posting_date <= %(to_date)s and
-			is_cancelled != 1
+			is_cancelled = 0
 			{sle_conditions}
 			order by posting_date, posting_time, sle.creation, actual_qty""" #nosec
 		.format(item_conditions=get_item_conditions(filters),

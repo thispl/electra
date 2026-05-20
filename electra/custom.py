@@ -30,7 +30,7 @@ from frappe.utils import formatdate
 
 
 from erpnext.setup.utils import get_exchange_rate
-from frappe import throw,_, db, get_doc, throw, whitelist
+from frappe import throw,_, db, get_doc, throw, whitelist, bold
 
 
 from frappe.utils import (
@@ -6765,6 +6765,36 @@ def cancel_sales_invoice(doc,method):
 	# data += "</table>"
 	# return data
 
+def test_check():
+	names = [
+		"MAT-STE-2026-00279",
+		"MAT-STE-2026-00232",
+		"MAT-STE-2026-00233",
+		"MAT-STE-2026-00262",
+		"MAT-STE-2026-00263",
+		"MAT-STE-2026-00258",
+		"MAT-STE-2026-00316",
+		"MAT-STE-2026-00318",
+		"MAT-STE-2026-00319",
+		"MAT-STE-2026-00320",
+		"MAT-STE-2026-00261",
+		"MAT-STE-2026-00282",
+		"MAT-STE-2026-00315",
+		"MAT-STE-2026-00317",
+		"MAT-STE-2026-00300",
+		"MAT-STE-2026-00298",
+		"MAT-STE-2026-00299",
+		"MAT-STE-2026-00363",
+	]
+	amount = 0
+	for name in names:
+		doc = frappe.get_doc("Stock Entry", name)
+		for row in doc.items:
+			# if frappe.db.exists("Item", {"name": row.item_code, "is_stock_item": 1}):
+				amount += row.valuation_rate * row.qty
+				print(row.valuation_rate * row.qty)
+	print(amount)
+
 #Update the stock value return of the sales invoice submission
 @frappe.whitelist()
 def update_stock_after_return(doc,method):
@@ -6804,7 +6834,7 @@ def update_stock_after_return(doc,method):
 							print("hi")
 							# frappe.throw(_("Return quantity for item {0} exceeds the original quantity. And already {1} qty have been returned against the DN: {2}").format(i.item_code,(total_return_qty-(-i.qty)),s.strip().lstrip("'").rstrip("'")))
 						else:
-							
+							rate = frappe.db.get_value("Delivery Note Item", i.dn_detail, "rate")
 							dn.append("items", {
 								"item_code": i.item_code,
 								"item_name": i.item_name,
@@ -6812,21 +6842,22 @@ def update_stock_after_return(doc,method):
 								"qty": i.qty,
 								"uom": i.uom,
 								"stock_uom": i.uom,
-								"rate": i.rate,
+								"rate": rate,
 								"conversion_factor": 1,
 								"base_rate": i.base_rate,
 								"amount": i.amount,
 								"warehouse": i.warehouse,
 								"base_amount": i.base_amount,
 								'dn_detail':i.dn_detail,
-								# "against_sales_order":i.sales_order,
-								# "so_detail":i.so_detail
+								"against_sales_order":i.sales_order or "",
+								"so_detail":i.so_detail or ""
 							})
 							
 					if dn.items:
 						dn.save(ignore_permissions = True)
 						dn.submit()
 						frappe.db.set_value("Sales Invoice",doc.name,'custom_delivery_note_return',dn.name)
+						frappe.errprint("DN Created")
 					sn.reload()
 					for i in doc.items:
 						for si in sn.items:
@@ -7655,10 +7686,7 @@ def update_per_delivered_in_so(doc,method):
 		per_delivered = (del_qty / tot_qty) * 100 if tot_qty else 0
 		print(per_delivered)
 		frappe.db.set_value("Sales Order",doc.sales_order,'per_delivered',per_delivered)
-
-def test_check():
-	doc = frappe.get_doc("Sales Invoice", "ENG-CRD-2025-00275")
-	update_stock_on_si_new(doc,None)
+ 
 @frappe.whitelist()
 def update_stock_on_si_new(doc,method):
 
@@ -7700,7 +7728,6 @@ def update_stock_on_si_new(doc,method):
 								(i.item, doc.so_no,doc.posting_date,posting_time),
 								as_dict=True
 							)
-							print([dn_wip_qty, dn_qty])
 							billable_qty = dn_wip_qty[0].billable_qty if dn_wip_qty and dn_wip_qty[0].billable_qty else 0
 							billable_qty_dn = dn_qty[0].billable_qty if dn_qty and dn_qty[0].billable_qty else 0
 							tot_bill_qty += (billable_qty + billable_qty_dn)
@@ -7909,6 +7936,13 @@ def return_total_amt1(from_date, to_date, account):
 @frappe.whitelist()
 def validation_on_submission(doc, methods):
 	if doc.order_type == "Project":
+		# If no active Project Budget
+		if doc.so_no:
+			if not frappe.db.exists("Project Budget", {"sales_order": doc.so_no, "docstatus": 1}):
+				msg = f"For the Sales Order {bold(doc.so_no)}, there is no active Project Budget"
+				frappe.throw(msg, title=_("No Active Project Budget"))
+    
+		# Role Permission
 		current_user = frappe.session.user
 		user_roles = frappe.get_roles(current_user)
 		if "Accounts User" not in user_roles:

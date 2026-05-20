@@ -4,6 +4,27 @@
 frappe.ui.form.on("Receipt Report", {
 	refresh(frm){
 		frm.disable_save()
+		frm.add_custom_button(__("Summary"), function() {
+			if (frm.doc.from_date && frm.doc.to_date) {
+				if (frm.doc.report == 'Receipt Report') {
+					var path = "electra.electra.doctype.receipt_report.receipt_report.get_receipts_summary"
+					var args = 'from_date=%(from_date)s&to_date=%(to_date)s&company=%(company)s'
+				}
+				if (path) {
+					window.location.href = repl(frappe.request.url +
+						'?cmd=%(cmd)s&%(args)s', {
+						cmd: path,
+						args: args,
+						from_date : frm.doc.from_date,
+						to_date : frm.doc.to_date,	
+						company : "MEP DIVISION - ELECTRA",
+					});
+				}
+			}
+			else {
+				frappe.msgprint("Please enter the From Date and To Date to proceed")
+			}
+		});
 	},
 	print:function(frm){
 			let dialog = new frappe.ui.Dialog({

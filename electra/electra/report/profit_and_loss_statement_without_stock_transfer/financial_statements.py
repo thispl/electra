@@ -617,6 +617,12 @@ def apply_additional_conditions(doctype, query, from_date, ignore_closing_entrie
 			(~gl_entry.account.isin(cost_of_goods_accounts))
 			| (~gl_entry.voucher_no.like("%STI%"))
 		)
+  
+	query = query.where(
+		(~gl_entry.account.like("%Sales - Stock Transfer%")) &
+		(~gl_entry.account.like("%Sales - Stock Tansfer%"))
+	)
+ 
 	return query
 
 

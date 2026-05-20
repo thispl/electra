@@ -7,16 +7,36 @@ frappe.ui.form.on('Stock Confirmation', {
 	// }
 	refresh(frm){
 		frm.trigger('print')
+		if (frm.doc.docstatus == 1) {
+			frm.add_custom_button(__("Create Purchase Invoice"), function () {
+				
+				frm.call({
+					method: "electra.electra.doctype.stock_confirmation.stock_confirmation.create_purchase_invoice",
+					args: {
+						stock_confirmation: frm.doc.name,
+						confirmed_date: frm.doc.confirmed_date
+					},
+					freeze: true,
+					freeze_message: "Creating Purchase Invoice...",
+					callback(r) {
+						if (r.message) {
+							frappe.set_route("Form", "Purchase Invoice", r.message);
+						}
+					}
+				});
+			});
+		}
 	},
 	onload(frm){
 		if(frm.doc.docstatus != 1){
-		frm.trigger('print')
-		frm.set_value('confirmed_by',frappe.session.user)
+			frm.trigger('print')
+			frm.set_value('confirmed_by',frappe.session.user)
 		}
-		frappe.db.get_value('Stock Transfer', {'name':frm.doc.ic_material_transfer_confirmation}, ["transferred_date"], function(value) {
-			console.log(value)
-			frm.set_value("transferred_date",value.transferred_date);
-		});
+		if (frm.doc.__islocal) {
+			frappe.db.get_value('Stock Transfer', {'name':frm.doc.ic_material_transfer_confirmation}, ["transferred_date"], function(value) {
+				frm.set_value("transferred_date",value.transferred_date);
+			});
+		}
 	},
 	target_company(frm){
 	    if (frm.doc.target_company == "MARAZEEM SECURITY SERVICES" || frm.doc.target_company == "MARAZEEM SECURITY SERVICES - SHOWROOM" || frm.doc.target_company == "MARAZEEM SECURITY SERVICES - HO") {

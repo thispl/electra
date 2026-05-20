@@ -231,7 +231,11 @@ doc_events = {
     "Purchase Order":{
         "validate":"electra.custom.check_approved_supplier"
 	},
+    "Purchase Invoice": {
+		"validate": "electra.electra.doctype.stock_confirmation.stock_confirmation.update_purchase_invoice_date",	
+	},
 	"Sales Invoice":{
+		"after_rename": "electra.electra.teampro_py.sales_invoice.update_return_document_in_sales_invoice_before_rename",
 		"on_submit":[
 			"electra.custom.validation_on_submission",
 		# 	"electra.custom.create_payment_entry",
@@ -246,7 +250,7 @@ doc_events = {
 		# "before_submit": "electra.custom.update_ret_out",
 		"on_update":["electra.custom.update_ret_out","electra.utils.set_income_account"],
 		"before_cancel":"electra.custom.cancel_ret_je",
-		"validate":["electra.utils.set_income_account","electra.utils.restrict_general_item_si","electra.utils.update_credit_limit"],
+		"validate":["electra.utils.set_income_account","electra.utils.restrict_general_item_si","electra.utils.update_credit_limit", "electra.electra.teampro_py.sales_invoice.validate_on_save"],
 		"after_save":"electra.custom.sales_invoice_remarks",
 		"on_cancel":[
 			"electra.custom.validation_on_cancellation",
@@ -428,6 +432,7 @@ jinja = {
 		"electra.electra.doctype.report_dashboard.report_dashboard_print.statement_of_account_project",
 		"electra.utils.project_profit_report_new",
         "electra.utils.project_profit_report_new1",
+        "electra.electra.doctype.receipt_report.receipt_report.get_receipts_summary",
 	]
 }
 

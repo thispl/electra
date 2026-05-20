@@ -1404,7 +1404,9 @@ def get_norden_item(item):
 	# params = {"limit_start": 0,"limit_page_length": 20000}
 
 	response = requests.request('GET',url,headers=headers)
+	frappe.errprint(response)
 	res = json.loads(response.text)
+	
 	return res
 #Get norden items details and show to product search
 @frappe.whitelist(allow_guest=True)
@@ -1412,9 +1414,11 @@ def get_norden_item_without_cost(item):
 	url = "https://erp.nordencommunication.com/api/method/norden.custom.get_electra_details_without_cost?item=%s" % (item)
 	headers = { 'Content-Type': 'application/json','Authorization': 'token 28a1f5da5dffd46:812f4d4d2671af2'}
 	# params = {"limit_start": 0,"limit_page_length": 20000}
-
+	
 	response = requests.request('GET',url,headers=headers)
+	frappe.errprint(response)
 	res = json.loads(response.text)
+	
 	return res
 
 #Get the below value while enter the item code in qn
@@ -6085,3 +6089,6 @@ def create_leave_allocation(employee, allocation_date, leave_type, leave_count):
 			})
 			leave_allocation.insert(ignore_permissions=True)
 			leave_allocation.submit()
+   
+def get_receipts_summary(doc):
+    return "hi"

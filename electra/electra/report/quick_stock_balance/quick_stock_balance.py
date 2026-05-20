@@ -274,13 +274,13 @@ def get_columns(filters: StockBalanceFilter):
 			# 	"width": 80,
 			# 	"convertible": "qty",
 			# },
-			# {
-			# 	"label": _("Company"),
-			# 	"fieldname": "company",
-			# 	"fieldtype": "Link",
-			# 	"options": "Company",
-			# 	"width": 100,
-			# },
+			{
+				"label": _("Company"),
+				"fieldname": "company",
+				"fieldtype": "Link",
+				"options": "Company",
+				"width": 100,
+			},
 		]
 	)
 
@@ -403,7 +403,7 @@ def get_item_warehouse_map(filters: StockBalanceFilter, sle: List[SLEntry]):
 		for field in inventory_dimensions:
 			qty_dict[field] = d.get(field)
 
-		if d.voucher_type == "Stock Reconciliation" and not d.batch_no:
+		if d.voucher_type == "Stock Reconciliation":
 			qty_diff = flt(d.qty_after_transaction) - flt(qty_dict.bal_qty)
 		else:
 			qty_diff = flt(d.actual_qty)
@@ -435,7 +435,7 @@ def get_item_warehouse_map(filters: StockBalanceFilter, sle: List[SLEntry]):
 		# qty_dict.bal_qty += qty_diff
 		# qty_dict.bal_val = qty_dict.bal_qty * qty_dict.val_rate
 	
-	iwb_map = filter_items_with_no_transactions(iwb_map, float_precision, inventory_dimensions)
+	# iwb_map = filter_items_with_no_transactions(iwb_map, float_precision, inventory_dimensions)
 
 	return iwb_map
 

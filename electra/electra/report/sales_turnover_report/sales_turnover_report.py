@@ -98,7 +98,8 @@ def get_income_amount(from_date, to_date, company ,year):
 	total_income = 0.0
 	stock_transfer = 0.0
 	other_income = 0.0
-
+	stock_tansfer = 0.0
+ 
 	for row in income:
 		if row.get("account_name") == "Total Income (Credit)":
 			total_income = row.get("total", 0.0)
@@ -110,11 +111,16 @@ def get_income_amount(from_date, to_date, company ,year):
 			break
 	
 	for row in income:
+		if row.get("account_name") == "Sales - Stock Tansfer":
+			stock_tansfer = row.get("total", 0.0)
+			break
+	
+	for row in income:
 		if row.get("account_name") == "Other Income":
 			other_income = row.get("total", 0.0)
 			break
 
-	return total_income - stock_transfer - other_income or 0
+	return total_income - stock_transfer - stock_tansfer - other_income or 0
 
 @frappe.whitelist()
 def test_check():
