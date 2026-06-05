@@ -20,89 +20,45 @@ def execute(filters=None):
 
 		fifo_queue = sorted(filter(_func, item_dict["fifo_queue"]), key=_func)
 		details = item_dict["details"]
+		if item_dict.get("total_qty", 0) == 0:
+			continue
 
 		if not fifo_queue: continue
 
 		average_age = get_average_age(fifo_queue, to_date)
 		earliest_age = date_diff(to_date, fifo_queue[0][1])
 		latest_age = date_diff(to_date, fifo_queue[-1][1])
-		range1, range2, range3, range4, range5, range6, above_range6 = get_range_age(filters, fifo_queue, to_date)
+		buckets = get_range_age(filters, fifo_queue, to_date)
 
-		row = [details.name, details.item_name,
+		row = [details.company, details.name, details.item_name,
 			details.description, details.item_group, details.brand]
 
 		if filters.get("show_warehouse_wise_stock"):
 			row.append(details.warehouse)
 		valuation_rate = 0
-		# source_warehouse = frappe.db.get_value('Warehouse', {'default_for_stock_transfer': 1, 'company': filters.get("company") }, ["name"])
-		# latest_vr = frappe.db.sql("""
-		# 	SELECT valuation_rate as vr
-		# 	FROM `tabStock Ledger Entry`
-		# 	WHERE 
-		# 		/* Added by Nandini */ 
-		# 		warehouse NOT IN ('Work In Progress - EED','Work In Progress - INE','Work In Progress - MEP') 
-		# 		AND item_code = %s AND is_cancelled != 1  AND posting_date <= %s AND company = %s
-		# """, (details.name, to_date,filters.get("company") ), as_dict=True)
-
-		# if len(latest_vr) > 0:
-		# 	valuation_rate = latest_vr[0]["vr"]
 		qty = flt(item_dict.get("total_qty"))
 		tot = flt(item_dict.get("total_value"))
 
 		valuation_rate = tot / qty if qty else 0
-		if qty == 0.0:
-			continue
-		# else:
-		# 	val_rate = set()
-		# 	l_vr = frappe.db.sql("""
-		# 		SELECT valuation_rate as vr
-		# 		FROM `tabStock Ledger Entry`
-		# 		WHERE 
-		# 			/* Added by Nandini */ 
-		# 			warehouse NOT IN ('Work In Progress - EED','Work In Progress - INE','Work In Progress - MEP')
-		# 			AND item_code = %s AND is_cancelled != 1 AND posting_date <= %s
-		# 	""", (details.name,to_date), as_dict=True)
-
-		# 	for item in l_vr:
-		# 		val_rate.add(item["vr"])
-
-		# 	if val_rate:
-		# 		valuation_rate = max(val_rate)
-
-
-
-		tot = item_dict.get("total_qty")*valuation_rate
-		# t1 = range1*valuation_rate
-		# t3 = valuation_rate*range3
-		t1 = range1 * valuation_rate
-		t2 = range2 * valuation_rate
-		t3 = range3 * valuation_rate
-		t4 = range4 * valuation_rate
-		t5 = range5 * valuation_rate
-		t6 = range6 * valuation_rate
-		t7 = above_range6 * valuation_rate
+		
 		row.extend([
 			valuation_rate,
 			average_age,
 			qty,
-			tot,
+			tot
+		])
 
-			range1, t1,
-			range2, t2,
-			range3, t3,
-			range4, t4,
-			range5, t5,
-			range6, t6,
-			above_range6, t7,
+		for qty_val in buckets:
+			row.extend([qty_val, qty_val * valuation_rate])
 
+		row.extend([
 			earliest_age,
 			latest_age,
 			details.stock_uom
 		])
-		# row.extend([valuation_rate,average_age,item_dict.get("total_qty"),tot,range1,t1, range2, range2*valuation_rate,range3, t3,range4,range4*valuation_rate,range5,range5*valuation_rate, range6, range6*valuation_rate,above_range6,above_range6*valuation_rate,earliest_age, latest_age, details.stock_uom])
 		data.append(row)
 
-	chart_data = get_chart_data(data, filters)
+	chart_data = get_chart_data(data, filters, columns)
 
 	return columns, data, None, chart_data
 
@@ -121,31 +77,43 @@ def get_average_age(fifo_queue, to_date):
 	return flt(age_qty / total_qty, 2) if total_qty else 0.0
 
 def get_range_age(filters, fifo_queue, to_date):
-	range1 = range2 = range3 = range4 = range5 = range6 = above_range6 = 0.0
+	limits = [
+		cint(filters.get("range1")),
+		cint(filters.get("range2")),
+		cint(filters.get("range3")),
+		cint(filters.get("range4"))
+	]
+	if filters.get("range5"):
+		limits.append(cint(filters.get("range5")))
+		if filters.get("range6"):
+			limits.append(cint(filters.get("range6")))
+
+	buckets = [0.0] * (len(limits) + 1)
 	for item in fifo_queue:
 		age = date_diff(to_date, item[1])
 
-		if age <= filters.range1:
-			range1 += flt(item[0])
-		elif age <= filters.range2:
-			range2 += flt(item[0])
-		elif age <= filters.range3:
-			range3 += flt(item[0])
-		elif age <= filters.range4:
-			range4 += flt(item[0])
-		elif age <= filters.range5:
-			range5 += flt(item[0])
-		elif age <= filters.range6:
-			range6 += flt(item[0])
-		else:
-			above_range6 += flt(item[0])
+		placed = False
+		for idx, limit in enumerate(limits):
+			if age <= limit:
+				buckets[idx] += flt(item[0])
+				placed = True
+				break
+		if not placed:
+			buckets[-1] += flt(item[0])
 
-	return range1, range2, range3, range4, range5, range6, above_range6
+	return buckets
 
 def get_columns(filters):
 	range_columns = []
 	setup_ageing_columns(filters, range_columns)
 	columns = [
+		{
+			"label": _("Company"),
+			"fieldname": "company",
+			"fieldtype": "Link",
+			"options": "Company",
+			"width": 100
+		},
 		{
 			"label": _("Item Code"),
 			"fieldname": "item_code",
@@ -249,11 +217,11 @@ def get_fifo_queue(filters, sle=None):
 		sle = get_stock_ledger_entries(filters)
 
 	for d in sle:
-		key = (d.name, d.warehouse) if filters.get('show_warehouse_wise_stock') else d.name
+		key = (d.name, d.company, d.warehouse) if filters.get('show_warehouse_wise_stock') else (d.name, d.company)
 		item_details.setdefault(key, {"details": d, "fifo_queue": []})
 		fifo_queue = item_details[key]["fifo_queue"]
 
-		transferred_item_key = (d.voucher_no, d.name, d.warehouse)
+		transferred_item_key = (d.voucher_no, d.name, d.company, d.warehouse) if filters.get('show_warehouse_wise_stock') else (d.voucher_no, d.name, d.company)
 		transferred_item_details.setdefault(transferred_item_key, [])
 
 		if d.voucher_type == "Stock Reconciliation":
@@ -314,9 +282,11 @@ def get_fifo_queue(filters, sle=None):
 	return item_details
 
 def get_stock_ledger_entries(filters):
+	company_condition = "and sle.company = %(company)s" if filters.get("company") else ""
 	return frappe.db.sql("""select
 			item.name, item.item_name, item_group, brand, description, item.stock_uom, item.valuation_rate,
-			actual_qty, posting_date, voucher_type, voucher_no, serial_no, batch_no, qty_after_transaction, warehouse, stock_value_difference
+			actual_qty, posting_date, voucher_type, voucher_no, serial_no, batch_no, qty_after_transaction, warehouse, stock_value_difference,
+			sle.company
 		from `tabStock Ledger Entry` sle,
 			(select name, item_name, description, stock_uom, brand, item_group, valuation_rate
 				from `tabItem` {item_conditions}) item
@@ -324,12 +294,14 @@ def get_stock_ledger_entries(filters):
 			/* Added by Nandini */ 
 			warehouse not in ('Work In Progress - EED','Work In Progress - INE','Work In Progress - MEP') and
 			item_code = item.name and
-			company = %(company)s and
 			posting_date <= %(to_date)s and
-			is_cancelled = 0
+			is_cancelled = 0 and 
+			docstatus < 2
+			{company_condition}
 			{sle_conditions}
-			order by posting_date, posting_time, sle.creation, actual_qty""" #nosec
+			order by sle.posting_date, sle.posting_time, sle.creation, sle.actual_qty""" #nosec
 		.format(item_conditions=get_item_conditions(filters),
+			company_condition=company_condition,
 			sle_conditions=get_sle_conditions(filters)), filters, as_dict=True)
 
 def get_item_conditions(filters):
@@ -352,7 +324,7 @@ def get_sle_conditions(filters):
 
 	return "and {}".format(" and ".join(conditions)) if conditions else ""
 
-def get_chart_data(data, filters):
+def get_chart_data(data, filters, columns):
 	if not data:
 		return []
 
@@ -361,14 +333,22 @@ def get_chart_data(data, filters):
 	if filters.get("show_warehouse_wise_stock"):
 		return {}
 
-	data.sort(key = lambda row: row[6], reverse=True)
+	average_age_idx = -1
+	for idx, col in enumerate(columns):
+		if col.get("fieldname") == "average_age":
+			average_age_idx = idx
+			break
+	if average_age_idx == -1:
+		average_age_idx = 7
+
+	data.sort(key = lambda row: row[average_age_idx], reverse=True)
 
 	if len(data) > 10:
 		data = data[:10]
 
 	for row in data:
 		labels.append(row[0])
-		datapoints.append(row[6])
+		datapoints.append(row[average_age_idx])
 
 	return {
 		"data" : {
@@ -384,15 +364,29 @@ def get_chart_data(data, filters):
 	}
 
 def setup_ageing_columns(filters, range_columns):
-	for i, label in enumerate(["0-{range1}".format(range1=filters["range1"]),
-		"{range1}-{range2}".format(range1=cint(filters["range1"])+ 1, range2=filters["range2"]),
-		"{range2}-{range3}".format(range2=cint(filters["range2"])+ 1, range3=filters["range3"]),
-		"{range3}-{range4}".format(range3=cint(filters["range3"])+ 1, range4=filters["range4"]),
-		"{range4}-{range5}".format(range4=cint(filters["range4"])+ 1, range5=filters["range5"]),
-		"{range5}-{range6}".format(range5=cint(filters["range5"])+ 1, range6=filters["range6"]),
-		"{range6}-{above}".format(range6=cint(filters["range6"])+ 1, above=_("Above"))]):
-			add_column(range_columns, label="Age ("+ label +")", fieldname='range' + str(i+1))
-			add_column(range_columns, label="Amount", fieldname='t' + str(i+1))
+	limits = [
+		cint(filters.get("range1")),
+		cint(filters.get("range2")),
+		cint(filters.get("range3")),
+		cint(filters.get("range4"))
+	]
+	if filters.get("range5"):
+		limits.append(cint(filters.get("range5")))
+		if filters.get("range6"):
+			limits.append(cint(filters.get("range6")))
+
+	labels = []
+	for i in range(len(limits)):
+		if i == 0:
+			labels.append("0-{0}".format(limits[i]))
+		else:
+			labels.append("{0}-{1}".format(limits[i-1] + 1, limits[i]))
+	
+	labels.append("{0}-{1}".format(limits[-1] + 1, _("Above")))
+
+	for i, label in enumerate(labels):
+		add_column(range_columns, label="Age ("+ label +")", fieldname='range' + str(i+1))
+		add_column(range_columns, label="Amount", fieldname='t' + str(i+1))
 def add_column(range_columns, label, fieldname, fieldtype='Float', width=140):
 	range_columns.append(dict(
 		label=label,
