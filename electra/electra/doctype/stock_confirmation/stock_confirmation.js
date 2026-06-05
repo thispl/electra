@@ -7,25 +7,25 @@ frappe.ui.form.on('Stock Confirmation', {
 	// }
 	refresh(frm){
 		frm.trigger('print')
-		if (frm.doc.docstatus == 1) {
-			frm.add_custom_button(__("Create Purchase Invoice"), function () {
+		// if (frm.doc.docstatus == 1) {
+		// 	frm.add_custom_button(__("Create Purchase Invoice"), function () {
 				
-				frm.call({
-					method: "electra.electra.doctype.stock_confirmation.stock_confirmation.create_purchase_invoice",
-					args: {
-						stock_confirmation: frm.doc.name,
-						confirmed_date: frm.doc.confirmed_date
-					},
-					freeze: true,
-					freeze_message: "Creating Purchase Invoice...",
-					callback(r) {
-						if (r.message) {
-							frappe.set_route("Form", "Purchase Invoice", r.message);
-						}
-					}
-				});
-			});
-		}
+		// 		frm.call({
+		// 			method: "electra.electra.doctype.stock_confirmation.stock_confirmation.create_purchase_invoice",
+		// 			args: {
+		// 				stock_confirmation: frm.doc.name,
+		// 				confirmed_date: frm.doc.confirmed_date
+		// 			},
+		// 			freeze: true,
+		// 			freeze_message: "Creating Purchase Invoice...",
+		// 			callback(r) {
+		// 				if (r.message) {
+		// 					frappe.set_route("Form", "Purchase Invoice", r.message);
+		// 				}
+		// 			}
+		// 		});
+		// 	});
+		// }
 	},
 	onload(frm){
 		if(frm.doc.docstatus != 1){
