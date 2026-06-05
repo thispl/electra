@@ -64,6 +64,10 @@ class ProjectBudget(Document):
 		for dn in dn_wip:
 			frappe.db.sql("update `tabDelivery Note WIP` set project_budget=%s where name=%s",(self.name,dn.name))
 
+		# revise project budget in retention invoices
+		if self.amended_from and frappe.db.exists("Retention Invoice", {"project_budget": self.amended_from, "docstatus": 0}):
+			frappe.db.set_value("Retention Invoice", {"project_budget": self.amended_from, "docstatus": 0}, "project_budget", self.name)
+
 	# def before_submit(self):
 	# 	so = frappe.get_doc('Sales Order',self.sales_order)
 	# 	if self.amended_from:
