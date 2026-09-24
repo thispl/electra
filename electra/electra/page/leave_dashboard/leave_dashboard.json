@@ -1,0 +1,22 @@
+{
+ "content": null,
+ "docstatus": 0,
+ "doctype": "Page",
+ "idx": 0,
+ "modified": "2026-07-28 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "leave-dashboard",
+ "owner": "Administrator",
+ "page_name": "leave-dashboard",
+ "roles": [
+  {"role": "HR Manager"},
+  {"role": "HR User"},
+  {"role": "Leave Approver"},
+  {"role": "System Manager"}
+ ],
+ "script": null,
+ "standard": "Yes",
+ "style": null,
+ "system_page": 0
+}

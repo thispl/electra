@@ -43,7 +43,7 @@ class ProjectBudget(Document):
 		custom_sow_item_table=frappe.db.get_value("Sales Order",{'name':self.sales_order},['custom_sow_item_table'])
 		if not custom_sow_item_table:
 			frappe.sendmail(
-				recipients=['gifty.p@groupteampro.com','abdulla.pi@groupteampro.com','amar.p@groupteampro.com'],
+				recipients=['abdulla.pi@groupteampro.com','amar.p@groupteampro.com'],
 				subject='Project Budget is revised',
 				message="""
 				<b>Dear Sir/Mam,</b><br><br>
@@ -354,6 +354,62 @@ class ProjectBudget(Document):
 				})
 			so.total_bidding_price = total_bidding_price
 			so.net_bidding_price = total_bidding_price - so.project_discount_amt
+			so.save(ignore_permissions=True)
+
+		# Update SO items table unit rate from PB when order_type is Project
+		if so.order_type == "Project":
+			self.update_so_items_rate_from_pb(so)
+
+	def update_so_items_rate_from_pb(self, so):
+		"""Update SO items table unit rate from Project Budget."""
+		if not so or not self.sales_order:
+			return
+
+		so.reload()
+
+		# Build lookup from PB master_scope_of_work by msow
+		msow_map = {msow.msow: msow for msow in self.master_scope_of_work}
+
+		# Build lookup from PB item_table by (msow, item) and by item
+		item_map = {}
+		for itm in self.item_table:
+			item_map[(itm.msow, itm.item)] = itm
+			if itm.item and itm.item not in item_map:
+				item_map[itm.item] = itm
+
+		for so_item in so.items:
+			pb_rate = None
+
+			if so.custom_sow_item_table == 1:
+				match_key = so_item.get("msow") or so_item.item_code
+				msow_row = msow_map.get(match_key)
+				if msow_row:
+					pb_rate = flt(msow_row.unit_price)
+			else:
+				key = (so_item.get("msow"), so_item.item_code)
+				pb_row = item_map.get(key) or item_map.get(so_item.item_code)
+				if pb_row:
+					pb_rate = flt(pb_row.rate_with_overheads)
+
+			if pb_rate is None:
+				continue
+
+			current_rate = flt(so_item.rate)
+			if abs(current_rate - pb_rate) < 1e-9:
+				continue
+
+			rate_precision = so_item.precision("rate")
+			amount_precision = so_item.precision("amount")
+			new_rate = flt(pb_rate, rate_precision)
+			new_amount = flt(pb_rate * so_item.qty, amount_precision)
+
+			if so.docstatus == 0:
+				so_item.rate = new_rate
+				so_item.net_rate = new_rate
+				so_item.amount = new_amount
+				so_item.net_amount = new_amount
+
+		if so.docstatus == 0:
 			so.save(ignore_permissions=True)
 
 
@@ -792,7 +848,7 @@ def update_msows(document,sales_order):
 						"item_name": itm.msow_desc,
 						"msow": itm.msow,
 						"qty": itm.qty,
-						"uom": itm.unit_price,
+						"uom": itm.unit,
 						"custom_so_qty": itm.qty,
 						"rate": itm.unit_price,
 						"amount": itm.total_bidding_price,

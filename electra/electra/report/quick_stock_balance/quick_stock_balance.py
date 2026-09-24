@@ -138,7 +138,9 @@ def execute(filters: Optional[StockBalanceFilter] = None):
 			'stock_uom': data['stock_uom'],
 			'bal_qty': data['total_bal_qty'],
 			'bal_val': data['total_bal_val'],
+			# 'val_rate': data['total_bal_val'] / data['total_bal_qty']
 			'val_rate': data['total_bal_val'] / data['total_bal_qty']
+                    if data['total_bal_qty'] else 0
 		}
 		for (company, item_code), data in consolidated_data.items()
 	]

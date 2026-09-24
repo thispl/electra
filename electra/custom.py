@@ -333,6 +333,15 @@ def create_lcv_je(doc,method):
 			jv.bill_no = tn.bill_no
 			jv.bill_date = tn.invoice_date
 			jv.custom_description = tn.description
+			if doc.company == "MARAZEEM SECURITY SERVICES" or doc.company == "MARAZEEM SECURITY SERVICES - SHOWROOM" or doc.company == "MARAZEEM SECURITY SERVICES - HO":
+				jv.letter_head = "Marazeem with Footer Text"
+			
+			if doc.company == "KINGFISHER TRADING AND CONTRACTING COMPANY" or doc.company == "KINGFISHER - TRANSPORTATION" or doc.company == "KINGFISHER - SHOWROOM":
+				jv.letter_head = "KINGFISHER TRADING AND CONTRACTING COMPANY"
+			
+			if doc.company == "Al - Shaghairi Trading and Contracting Company W.L.L (ELECTRA)" or doc.company == "ELECTRA - BARWA SHOWROOM"or doc.company == "ELECTRA - ALKHOR SHOWROOM" or doc.company == "ELECTRA - BINOMRAN SHOWROOM" or doc.company == "ELECTRA  - NAJMA SHOWROOM" or doc.company == "ELECTRICAL DIVISION - ELECTRA" or doc.company == "MEP DIVISION - ELECTRA" or doc.company == "STEEL DIVISION - ELECTRA" or doc.company == "TRADING DIVISION - ELECTRA" or doc.company == "INTERIOR DIVISION - ELECTRA" or doc.company == "ENGINEERING DIVISION - ELECTRA" or doc.company == "INDUSTRIAL TOOLS DIVISION":
+				jv.letter_head = "Electra"
+			
 			# jv.custom_purchase_invoice = doc.custom_purchase_invoice
 			jv.append("accounts", {
 				"account": tn.expense_account,
@@ -3584,8 +3593,10 @@ def on_cancel_dn(doc,method):
 		se = frappe.db.get_value("Stock Entry",{"reference_number":doc.name},['name'])
 		if se:
 			se_cancel = frappe.get_doc("Stock Entry",se)
+			
 			se_cancel.cancel()
 			se_cancel.delete()
+			
 
 @frappe.whitelist()
 def get_company():
@@ -4183,6 +4194,14 @@ def create_journal_for_retention(doc,method):
 		jv.voucher_type = "Journal Entry"
 		jv.company = doc.company
 		jv.posting_date = nowdate()
+		if doc.company == "MARAZEEM SECURITY SERVICES" or doc.company == "MARAZEEM SECURITY SERVICES - SHOWROOM" or doc.company == "MARAZEEM SECURITY SERVICES - HO":
+			jv.letter_head = "Marazeem with Footer Text"
+		
+		if doc.company == "KINGFISHER TRADING AND CONTRACTING COMPANY" or doc.company == "KINGFISHER - TRANSPORTATION" or doc.company == "KINGFISHER - SHOWROOM":
+			jv.letter_head = "KINGFISHER TRADING AND CONTRACTING COMPANY"
+		
+		if doc.company == "Al - Shaghairi Trading and Contracting Company W.L.L (ELECTRA)" or doc.company == "ELECTRA - BARWA SHOWROOM"or doc.company == "ELECTRA - ALKHOR SHOWROOM" or doc.company == "ELECTRA - BINOMRAN SHOWROOM" or doc.company == "ELECTRA  - NAJMA SHOWROOM" or doc.company == "ELECTRICAL DIVISION - ELECTRA" or doc.company == "MEP DIVISION - ELECTRA" or doc.company == "STEEL DIVISION - ELECTRA" or doc.company == "TRADING DIVISION - ELECTRA" or doc.company == "INTERIOR DIVISION - ELECTRA" or doc.company == "ENGINEERING DIVISION - ELECTRA" or doc.company == "INDUSTRIAL TOOLS DIVISION":
+			jv.letter_head = "Electra"
 		jv.append("accounts", {
 			"account": frappe.db.get_value("Account",filters={'name': ['like', '%Retention -%'],'company':doc.company}),
 			"party_type": "Customer",
@@ -5128,6 +5147,14 @@ def create_ret_je(doc,method):
 		jv.posting_date = nowdate()
 		# jv.bill_no = tn.bill_no
 		jv.bill_date = nowdate()
+		if doc.company == "MARAZEEM SECURITY SERVICES" or doc.company == "MARAZEEM SECURITY SERVICES - SHOWROOM" or doc.company == "MARAZEEM SECURITY SERVICES - HO":
+			jv.letter_head = "Marazeem with Footer Text"
+		
+		if doc.company == "KINGFISHER TRADING AND CONTRACTING COMPANY" or doc.company == "KINGFISHER - TRANSPORTATION" or doc.company == "KINGFISHER - SHOWROOM":
+			jv.letter_head = "KINGFISHER TRADING AND CONTRACTING COMPANY"
+		
+		if doc.company == "Al - Shaghairi Trading and Contracting Company W.L.L (ELECTRA)" or doc.company == "ELECTRA - BARWA SHOWROOM"or doc.company == "ELECTRA - ALKHOR SHOWROOM" or doc.company == "ELECTRA - BINOMRAN SHOWROOM" or doc.company == "ELECTRA  - NAJMA SHOWROOM" or doc.company == "ELECTRICAL DIVISION - ELECTRA" or doc.company == "MEP DIVISION - ELECTRA" or doc.company == "STEEL DIVISION - ELECTRA" or doc.company == "TRADING DIVISION - ELECTRA" or doc.company == "INTERIOR DIVISION - ELECTRA" or doc.company == "ENGINEERING DIVISION - ELECTRA" or doc.company == "INDUSTRIAL TOOLS DIVISION":
+			jv.letter_head = "Electra"
 		acc = frappe.db.get_value("Account",{"account_type":"Receivable","account_number":"1310","company":doc.company})
 		jv.append("accounts", {
 			"account": acc,
@@ -5827,25 +5854,34 @@ def project_delivery(doc,method):
 				se.company = doc.company
 				se.reference_number = doc.name
 				se.custom_reference_type = "Delivery Note WIP"
-				for i in doc.items:
+				for i in doc.return_item:
 					for s in so.item_table:
 						if s.docname == i.custom_against_pbsow:
 							if s.delivered_qty > 0:
-								s.delivered_qty -=i.qty
+								s.delivered_qty +=(i.qty)
 							else:
 								frappe.throw("Row " + i.idx +' : Item '+i.item_code+' already returned fully')	
 					se.append("items",{
 						's_warehouse':i.warehouse,
 						't_warehouse':i.target_warehouse,
 						'item_code':i.item_code,
-						'qty':i.qty,
+						'qty':-(i.qty),
 						'basic_rate':i.rate,
 						'project':project
-					})			
-				for i in doc.items:
+					})
+							
+				for i in doc.return_item:
 					do = frappe.get_doc(i.custom_against_pbsow_doctype,i.custom_against_pbsow)
-					do.delivered_qty -= i.qty
-					do.save(ignore_permissions=True)	
+					do.delivered_qty += i.qty
+					do.save(ignore_permissions=True)
+				for i in doc.return_item:
+					dn_original = frappe.get_doc("Delivery Note WIP", doc.return_against)
+					for item in dn_original.items:
+						if item.item_code == i.item_code and item.custom_against_pbsow == i.custom_against_pbsow:
+							frappe.db.set_value("Delivery Note Item",item.name,'returned_qty',(abs(i.qty)+item.returned_qty))
+							
+					
+
 
 				# total_qty = sum(i.delivered_qty for i in so.items)
 				# so.per_delivered = (total_qty / so.total_qty)*100
@@ -5874,22 +5910,27 @@ def project_delivery(doc,method):
 					se.company = doc.company
 					se.reference_number = doc.name
 					se.custom_reference_type = "Delivery Note WIP"
-					for i in doc.items:
+					for i in doc.return_item:
 						for s in so.item_table:
 							if s.docname == i.custom_against_pbsow:
-								s.delivered_qty -=i.qty	
+								s.delivered_qty +=(i.qty)	
 						se.append("items",{
 							's_warehouse':i.warehouse,
 							't_warehouse':i.target_warehouse,
 							'item_code':i.item_code,
-							'qty':i.qty,
+							'qty':-(i.qty),
 							'basic_rate':i.rate,
 							'project':project
 						})			
-					for i in doc.items:
+					for i in doc.return_item:
 						do = frappe.get_doc(i.custom_against_pbsow_doctype,i.custom_against_pbsow)
-						do.delivered_qty -= i.qty
-						do.save(ignore_permissions=True)	
+						do.delivered_qty += i.qty
+						do.save(ignore_permissions=True)
+					for i in doc.return_item:
+						dn_original = frappe.get_doc("Delivery Note WIP", doc.return_against)
+						for item in dn_original.items:
+							if item.item_code == i.item_code and item.custom_against_pbsow == i.custom_against_pbsow:
+								frappe.db.set_value("Delivery Note Item",item.name,'returned_qty',(abs(i.qty)+item.returned_qty))	
 
 					# total_qty = sum(i.delivered_qty for i in so.items)
 					# so.per_delivered = (total_qty / so.total_qty)*100
@@ -6024,6 +6065,11 @@ def on_cancel_dn(doc,method):
 			se_cancel = frappe.get_doc("Stock Entry",se)
 			if se_cancel.docstatus == 1:
 				se_cancel.cancel()
+				for i in doc.return_item:
+					dn_original = frappe.get_doc("Delivery Note WIP", doc.return_against)
+					for item in dn_original.items:
+						if item.item_code == i.item_code and item.custom_against_pbsow == i.custom_against_pbsow:
+							frappe.db.set_value("Delivery Note Item",item.name,'returned_qty',(item.returned_qty - abs(i.qty)))
 
 #Revert the below process while cancel of sales invoice
 @frappe.whitelist()
@@ -6090,6 +6136,14 @@ def create_new_journal_entry(doc,method):
 	jv.cheque_no = doc.name
 	jv.custom_advance_invoice=doc.name
 	jv.cheque_date = document.transaction_date
+	if doc.company == "MARAZEEM SECURITY SERVICES" or doc.company == "MARAZEEM SECURITY SERVICES - SHOWROOM" or doc.company == "MARAZEEM SECURITY SERVICES - HO":
+		jv.letter_head = "Marazeem with Footer Text"
+	
+	if doc.company == "KINGFISHER TRADING AND CONTRACTING COMPANY" or doc.company == "KINGFISHER - TRANSPORTATION" or doc.company == "KINGFISHER - SHOWROOM":
+		jv.letter_head = "KINGFISHER TRADING AND CONTRACTING COMPANY"
+	
+	if doc.company == "Al - Shaghairi Trading and Contracting Company W.L.L (ELECTRA)" or doc.company == "ELECTRA - BARWA SHOWROOM"or doc.company == "ELECTRA - ALKHOR SHOWROOM" or doc.company == "ELECTRA - BINOMRAN SHOWROOM" or doc.company == "ELECTRA  - NAJMA SHOWROOM" or doc.company == "ELECTRICAL DIVISION - ELECTRA" or doc.company == "MEP DIVISION - ELECTRA" or doc.company == "STEEL DIVISION - ELECTRA" or doc.company == "TRADING DIVISION - ELECTRA" or doc.company == "INTERIOR DIVISION - ELECTRA" or doc.company == "ENGINEERING DIVISION - ELECTRA" or doc.company == "INDUSTRIAL TOOLS DIVISION":
+		jv.letter_head = "Electra"
 	advance_account = frappe.db.get_value("Company", {"name": document.company}, "custom_default_advance_account")
 	receivable_account = frappe.db.get_value("Company", {"name": document.company}, "default_receivable_account")
 	accounts = [
@@ -6139,6 +6193,14 @@ def create_new_journal_entry_retention(doc,method):
 	jv.cheque_no = doc.name
 	jv.custom_advance_invoice=doc.name
 	jv.cheque_date = document.transaction_date
+	if doc.company == "MARAZEEM SECURITY SERVICES" or doc.company == "MARAZEEM SECURITY SERVICES - SHOWROOM" or doc.company == "MARAZEEM SECURITY SERVICES - HO":
+		jv.letter_head = "Marazeem with Footer Text"
+	
+	if doc.company == "KINGFISHER TRADING AND CONTRACTING COMPANY" or doc.company == "KINGFISHER - TRANSPORTATION" or doc.company == "KINGFISHER - SHOWROOM":
+		jv.letter_head = "KINGFISHER TRADING AND CONTRACTING COMPANY"
+	
+	if doc.company == "Al - Shaghairi Trading and Contracting Company W.L.L (ELECTRA)" or doc.company == "ELECTRA - BARWA SHOWROOM"or doc.company == "ELECTRA - ALKHOR SHOWROOM" or doc.company == "ELECTRA - BINOMRAN SHOWROOM" or doc.company == "ELECTRA  - NAJMA SHOWROOM" or doc.company == "ELECTRICAL DIVISION - ELECTRA" or doc.company == "MEP DIVISION - ELECTRA" or doc.company == "STEEL DIVISION - ELECTRA" or doc.company == "TRADING DIVISION - ELECTRA" or doc.company == "INTERIOR DIVISION - ELECTRA" or doc.company == "ENGINEERING DIVISION - ELECTRA" or doc.company == "INDUSTRIAL TOOLS DIVISION":
+		jv.letter_head = "Electra"
 	advance_account = frappe.db.get_value("Company", {"name": document.company}, "custom_default_retention_account")
 	receivable_account = frappe.db.get_value("Company", {"name": document.company}, "default_receivable_account")
 	accounts = [
@@ -7592,7 +7654,7 @@ def cron_failed_method():
 
 	for job_type in unique_job_types:
 		frappe.sendmail(
-			recipients = ["erp@groupteampro.com","jenisha.p@groupteampro.com","pavithra.s@groupteampro.com","gifty.p@groupteampro.com"],
+			recipients = ["erp@groupteampro.com","pavithra.s@groupteampro.com"],
 			subject = 'Failed Cron List - Electra',
 			message = 'Dear Sir / Mam <br> Kindly find the below failed Scheduled Job  %s'%(job_type)
 		)
@@ -7941,7 +8003,7 @@ def validation_on_submission(doc, methods):
 			if not frappe.db.exists("Project Budget", {"sales_order": doc.so_no, "docstatus": 1}):
 				msg = f"For the Sales Order {bold(doc.so_no)}, there is no active Project Budget"
 				frappe.throw(msg, title=_("No Active Project Budget"))
-    
+	
 		# Role Permission
 		current_user = frappe.session.user
 		user_roles = frappe.get_roles(current_user)
@@ -8699,3 +8761,118 @@ def set_sales_order():
 
 #     return "Ok"
 
+@frappe.whitelist()
+def update_child_return_qty():
+	dn_original = frappe.get_doc("Delivery Note WIP", "ELV-PDN-2026-00024")
+	for item in dn_original.items:
+		if item.item_code == '1323-428113BK':
+			frappe.db.set_value("Delivery Note Item",item.name,'returned_qty',1)
+
+@frappe.whitelist()
+def update_jv_letterhead_based_on_company(doc,method):
+	if doc.company == "MARAZEEM SECURITY SERVICES" or doc.company == "MARAZEEM SECURITY SERVICES - SHOWROOM" or doc.company == "MARAZEEM SECURITY SERVICES - HO":
+		doc.letter_head = "Marazeem with Footer Text"
+
+	if doc.company == "KINGFISHER TRADING AND CONTRACTING COMPANY" or doc.company == "KINGFISHER - TRANSPORTATION" or doc.company == "KINGFISHER - SHOWROOM":
+		doc.letter_head = "KINGFISHER TRADING AND CONTRACTING COMPANY"
+
+	if doc.company == "Al - Shaghairi Trading and Contracting Company W.L.L (ELECTRA)" or doc.company == "ELECTRA - BARWA SHOWROOM"or doc.company == "ELECTRA - ALKHOR SHOWROOM" or doc.company == "ELECTRA - BINOMRAN SHOWROOM" or doc.company == "ELECTRA  - NAJMA SHOWROOM" or doc.company == "ELECTRICAL DIVISION - ELECTRA" or doc.company == "MEP DIVISION - ELECTRA" or doc.company == "STEEL DIVISION - ELECTRA" or doc.company == "TRADING DIVISION - ELECTRA" or doc.company == "INTERIOR DIVISION - ELECTRA" or doc.company == "ENGINEERING DIVISION - ELECTRA" or doc.company == "INDUSTRIAL TOOLS DIVISION":
+		doc.letter_head = "Electra"
+
+@frappe.whitelist()
+def update_si_letterhead_based_on_company(doc, method):
+	# Force letter_head to match the parent company's default_letter_head
+	# (or the company's own default if it has no parent) so that manual
+	# overrides (e.g. selecting "Datasheet") cannot break PDF rendering.
+	if doc.company:
+		default_letter_head = frappe.db.get_value("Company", doc.company, "default_letter_head")
+		if default_letter_head:
+			doc.letter_head = default_letter_head
+
+@frappe.whitelist()
+def create_annual_leave_allocation_test():
+	current_date = datetime.now().date()
+	employee_grades = frappe.db.get_all('Employee Grade',{'custom_monthly_annual_leave_allocation': ['!=', 0],'custom_completed_months_of_service': ['!=', 0]},['name', 'custom_completed_months_of_service', 'custom_monthly_annual_leave_allocation', 'custom_new_leaves'])
+	
+	for employee_grade in employee_grades:
+		employees = frappe.get_all('Employee',{'status': 'Active','custom_employee_grade': employee_grade.name},['name', 'company', 'date_of_joining'],order_by ='name')
+		for emp in employees:
+			if (emp.name != '716' or emp.name != '543'):
+				if not emp.date_of_joining:
+					continue
+				eligibility_date = emp.date_of_joining
+				if getdate(current_date) >= eligibility_date:
+					# expire_date = add_years(eligibility_date, 100)
+					if frappe.get_all("Leave Allocation",filters={"docstatus":1,"employee": emp.name, "leave_type": "Annual Leave"},fields=["to_date"],order_by="to_date desc",limit=1): 
+						# to_date = frappe.get_all("Leave Allocation",filters={"docstatus":1,"employee": emp.name, "leave_type": "Annual Leave"},fields=["to_date"],order_by="to_date desc",limit=1)[0].to_date
+						leave_allocation_name = frappe.db.get_all("Leave Allocation",filters={"docstatus":1,"employee": emp.name, "leave_type": "Annual Leave"},fields=["name"],order_by="to_date desc",limit=1)[0].name
+					else:
+						# to_date = None
+						leave_allocation_name = None
+					# if to_date and to_date < current_date:
+					#     eligibility_date =add_days(to_date,1)
+					# if to_date and to_date > current_date:
+					#     if to_date.year == current_date.year and to_date.month >= current_date.month and to_date.day >= current_date.day:
+					#         eligibility_date =add_days(to_date,1)
+					#         continue
+					# leave_allocation_name = frappe.db.get_value("Leave Allocation",{"docstatus":1,"employee": emp.name,"leave_type": "Annual Leave","from_date": [">=",eligibility_date],"to_date": ["<=",expire_date]},"name")
+					# if not leave_allocation_name:
+					#     if employee_grade.name =='NON STAFF':
+					#         today = date.today()
+					#         join_date = emp.date_of_joining
+					#         months_diff = (today.year - join_date.year) * 12 + (today.month - join_date.month)
+					#         if months_diff == 24:
+					#             leaves = employee_grade.custom_new_leaves
+					#         elif months_diff < 23:
+					#             leaves = 2.5 * months_diff   
+					#         else:
+					#             months = today.month
+					#             leaves = 2.5 * months  
+					#     elif employee_grade.name =='STAFF':
+					#         join_date = emp.date_of_joining
+					#         today = date.today()
+					#         months_diff = (today.year - join_date.year) * 12 + (today.month - join_date.month)
+					#         if  months_diff == 11:
+					#             leaves = employee_grade.custom_new_leaves
+					#         elif  months_diff < 11:
+					#             leaves = 2.73 * months_diff       
+					#         else:
+					#             months = today.month
+					#             leaves = 2.73 * months 
+						# allocation = frappe.new_doc("Leave Allocation")
+						# allocation.employee = emp.name
+						# allocation.leave_type = "Annual Leave"
+						# allocation.new_leaves_allocated = leaves
+						# allocation.total_leaves_allocated = leaves
+						# allocation.from_date = eligibility_date
+						# allocation.to_date = expire_date
+						# allocation.company = emp.company
+						# allocation.save(ignore_permissions=True)
+						# allocation.submit()
+						# frappe.db.commit()
+					if leave_allocation_name:
+						# print('Existing Allocation')
+						
+
+						# Convert your string to a date object
+						target_date = getdate('2026-06-01')
+						leave_doc = frappe.get_doc("Leave Allocation", leave_allocation_name)
+						if leave_doc.from_date <= target_date:
+							leave_doc.new_leaves_allocated += employee_grade.custom_monthly_annual_leave_allocation
+							leave_doc.total_leaves_allocated += employee_grade.custom_monthly_annual_leave_allocation
+							leave_doc.save(ignore_permissions=True)
+							frappe.db.commit()
+
+def enable_product_visibility():
+	products = frappe.get_all('Item', filters={'mep': 1}, fields=["name"])
+	for i, product in enumerate(products, start=1):
+		frappe.errprint(f"{i}/{len(products)} - {product['name']}")
+		frappe.db.set_value('Item', product.name, {"ups": 1, "faapa": 1})
+
+
+# @frappe.whitelist()
+# def check_item_vr():
+# 	vr=frappe.db.sql("""SELECT SUM(base_net_amount) / SUM(qty * conversion_factor) 
+# 	FROM `tabPurchase Invoice Item` 
+# 	WHERE docstatus = 1 AND item_code = 'INST-MS';""")
+# 	print(vr)

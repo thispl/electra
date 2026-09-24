@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bank Reconciliation - User Manual | TEAMPRO</title>
+<style>
+	* { margin: 0; padding: 0; box-sizing: border-box; }
+	body {
+		font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+		color: #333;
+		line-height: 1.7;
+		background: #f5f5f5;
+	}
+	.br-manual-wrapper {
+		max-width: 900px;
+		margin: 0 auto;
+		background: #fff;
+		padding: 0;
+	}
+	.cover {
+		background: #ffffff;
+		color: #333;
+		padding: 20px 40px;
+		border-radius: 0;
+		text-align: center;
+		border-bottom: 3px solid #1a237e;
+	}
+	.cover img {
+		max-height: 80px;
+		margin-bottom: 20px;
+	}
+	.cover h1 {
+		font-size: 32px;
+		font-weight: 700;
+		margin-bottom: 10px;
+	}
+	.cover p {
+		font-size: 16px;
+		opacity: 1;
+		color: #555;
+	}
+	.cover .meta {
+		margin-top: 20px;
+		font-size: 13px;
+		color: #777;
+	}
+	.container {
+		max-width: 100%;
+		padding: 40px;
+	}
+	.toc {
+		background: #f0f4ff;
+		border: 1px solid #d0d8f0;
+		border-radius: 8px;
+		padding: 25px 30px;
+		margin-bottom: 40px;
+	}
+	.toc h3 {
+		color: #1a237e;
+		font-size: 18px;
+		margin-bottom: 15px;
+		border-bottom: 2px solid #c5cae9;
+		padding-bottom: 8px;
+	}
+	.toc ol {
+		padding-left: 20px;
+	}
+	.toc li {
+		margin-bottom: 6px;
+	}
+	.section {
+		margin-bottom: 35px;
+	}
+	.section h2 {
+		color: #1a237e;
+		font-size: 24px;
+		margin-bottom: 15px;
+		padding-bottom: 8px;
+		border-bottom: 2px solid #e8eaf6;
+	}
+	.section h3 {
+		color: #283593;
+		font-size: 18px;
+		margin-top: 20px;
+		margin-bottom: 10px;
+	}
+	.section p {
+		margin-bottom: 12px;
+		font-size: 15px;
+	}
+	.section ul, .section ol {
+		padding-left: 25px;
+		margin-bottom: 15px;
+	}
+	.section li {
+		margin-bottom: 8px;
+		font-size: 15px;
+	}
+	.section .step-number {
+		display: inline-block;
+		width: 28px;
+		height: 28px;
+		line-height: 28px;
+		text-align: center;
+		background: #1a237e;
+		color: #fff;
+		border-radius: 50%;
+		font-size: 13px;
+		font-weight: 700;
+		margin-right: 10px;
+	}
+	.section .step-item {
+		display: flex;
+		align-items: flex-start;
+		margin-bottom: 15px;
+	}
+	.section .step-item .step-content {
+		flex: 1;
+	}
+	.note-box {
+		background: #fff8e1;
+		border-left: 4px solid #ffc107;
+		padding: 15px 20px;
+		margin: 20px 0;
+		border-radius: 4px;
+	}
+	.note-box strong {
+		color: #f57f17;
+	}
+	.warning-box {
+		background: #ffebee;
+		border-left: 4px solid #f44336;
+		padding: 15px 20px;
+		margin: 20px 0;
+		border-radius: 4px;
+	}
+	.warning-box strong {
+		color: #c62828;
+	}
+	.tip-box {
+		background: #e8f5e9;
+		border-left: 4px solid #4caf50;
+		padding: 15px 20px;
+		margin: 20px 0;
+		border-radius: 4px;
+	}
+	.tip-box strong {
+		color: #2e7d32;
+	}
+	.info-table {
+		width: 100%;
+		border-collapse: collapse;
+		margin: 20px 0;
+	}
+	.info-table th {
+		background: #1a237e;
+		color: #fff;
+		padding: 12px 15px;
+		text-align: left;
+		font-size: 14px;
+	}
+	.info-table td {
+		padding: 12px 15px;
+		border-bottom: 1px solid #e0e0e0;
+		font-size: 14px;
+	}
+	.info-table tr:nth-child(even) {
+		background: #f5f5f5;
+	}
+	.footer {
+		background: #1a237e;
+		color: #fff;
+		text-align: center;
+		padding: 25px;
+		font-size: 13px;
+	}
+	.footer a {
+		color: #90caf9;
+		text-decoration: none;
+	}
+	@media print {
+		.cover { background: #ffffff !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+		.toc { page-break-after: always; }
+		.section { page-break-inside: avoid; }
+	}
+</style>
+</head>
+<body>
+
+<!-- Cover -->
+<div class="cover">
+	<img src="/files/db863f761fTEAMPRO New.png" alt="TEAMPRO Logo" />
+	<h1>Bank Reconciliation</h1>
+	<p>User Manual &amp; Training Guide</p>
+	<div class="meta">
+		Prepared by TEAMPRO<br>
+		for Electra Qatar
+	</div>
+</div>
+
+<div class="container">
+
+	<!-- Table of Contents -->
+	<div class="toc">
+		<h3>Table of Contents</h3>
+		<ol>
+			<li>What is Bank Reconciliation?</li>
+			<li>Types of Reconciliation Tools in ERPNext</li>
+			<li>Manual Bank Reconciliation (Bank Clearance)</li>
+			<li>Bank Reconciliation Statement Report</li>
+			<li>Semi-Automatic Bank Reconciliation Tool</li>
+			<li>Importing Bank Statements</li>
+			<li>Reconciling Bank Transactions</li>
+			<li>Creating New Vouchers from Bank Transactions</li>
+			<li>Matching Bank Transactions to Existing Vouchers</li>
+			<li>Updating Bank Transactions</li>
+			<li>Bank Transaction Doctype</li>
+			<li>Important Reminders</li>
+			<li>Video Tutorial</li>
+		</ol>
+	</div>
+
+	<!-- Section 1: What is Bank Reconciliation -->
+	<div class="section" id="overview">
+		<h2>1. What is Bank Reconciliation?</h2>
+		<p>A Bank Reconciliation entry is used to match ERPNext account statements with your bank account statements. At the end of a financial period, you may have mailed a cheque to a Supplier that has not yet been cleared by the bank. Or, a customer may have deposited money into your account, which is not yet reflected in your ERPNext system.</p>
+		<p>In ERPNext, you can synchronise your bank statements and your Journal Entries using the transaction dates. The <strong>Bank Reconciliation Report</strong> provides the difference between the bank balance shown in your bank statement (as provided by the bank) and the amount shown in your company's Chart of Accounts.</p>
+		<p>In the report, check whether the field <strong>"Balance as per bank"</strong> matches the Bank Account Statement. If it matches, the Clearance Date is correctly updated for all bank entries. If there is a mismatch, it means some bank entries do not yet have a Clearance Date updated.</p>
+	</div>
+
+	<!-- Section 2: Types of Reconciliation Tools -->
+	<div class="section" id="tools">
+		<h2>2. Types of Reconciliation Tools in ERPNext</h2>
+		<p>ERPNext provides two reconciliation tools:</p>
+		<table class="info-table">
+			<thead>
+				<tr>
+					<th>Tool</th>
+					<th>Description</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><strong>Manual Reconciliation</strong></td>
+					<td>Allows you to set clearance dates against payment entries, sales invoice payments, or journal entries.</td>
+				</tr>
+				<tr>
+					<td><strong>Semi-Automatic Reconciliation</strong></td>
+					<td>Allows you to clear bank transactions against payment entries, sales and purchase invoice payments, journal entries, or expense claims.</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<!-- Section 3: Manual Bank Reconciliation -->
+	<div class="section" id="manual">
+		<h2>3. Manual Bank Reconciliation (Bank Clearance)</h2>
+		<p>The manual reconciliation tool allows you to update clearance dates on existing payment entries and journal entries to match them with your bank statement.</p>
+		<p>To access the manual reconciliation tool, go to:</p>
+		<p><strong>Home &gt; Accounting &gt; Bank Statement &gt; Bank Clearance</strong></p>
+		<div class="step-item">
+			<span class="step-number">1</span>
+			<div class="step-content">Go to <strong>Bank Clearance</strong>.</div>
+		</div>
+		<div class="step-item">
+			<span class="step-number">2</span>
+			<div class="step-content">Select your <strong>Bank Account</strong>.</div>
+		</div>
+		<div class="step-item">
+			<span class="step-number">3</span>
+			<div class="step-content">Select a <strong>From Date</strong> and <strong>To Date</strong>.</div>
+		</div>
+		<div class="step-item">
+			<span class="step-number">4</span>
+			<div class="step-content">You can choose to include reconciled entries and POS transactions.</div>
+		</div>
+		<div class="step-item">
+			<span class="step-number">5</span>
+			<div class="step-content">Click on the <strong>"Get Payment Entries"</strong> button. All "Bank Voucher" type entries will be displayed.</div>
+		</div>
+		<div class="step-item">
+			<span class="step-number">6</span>
+			<div class="step-content">In each of the entries, on the rightmost column, update the <strong>"Clearance Date"</strong> field.</div>
+		</div>
+		<div class="step-item">
+			<span class="step-number">7</span>
+			<div class="step-content">Click on the <strong>"Update Clearance Date"</strong> button to save. This syncs your bank statements with the entries in the system.</div>
+		</div>
+	</div>
+
+	<!-- Section 4: Bank Reconciliation Statement Report -->
+	<div class="section" id="statement-report">
+		<h2>4. Bank Reconciliation Statement Report</h2>
+		<p>To view the Bank Reconciliation Statement report, go to:</p>
+		<p><strong>Accounts &gt; Bank Statement &gt; Bank Reconciliation Statement</strong></p>
+		<p>In the report, check whether the field <strong>"Balance as per bank"</strong> matches the Bank Account Statement:</p>
+		<ul>
+			<li>If it matches, the Clearance Date is correctly updated for all bank entries.</li>
+			<li>If there is a mismatch, some bank entries do not yet have a Clearance Date updated.</li>
+		</ul>
+		<div class="tip-box">
+			<strong>Tip:</strong> Use this report at the end of each month to verify that your ERPNext bank balance matches your actual bank statement balance.
+		</div>
+	</div>
+
+	<!-- Section 5: Semi-Automatic Bank Reconciliation Tool -->
+	<div class="section" id="semi-automatic">
+		<h2>5. Semi-Automatic Bank Reconciliation Tool</h2>
+		<p>The semi-automatic reconciliation tool is a two-step process:</p>
+		<div class="step-item">
+			<span class="step-number">1</span>
+			<div class="step-content"><strong>Add Bank Transactions</strong> into ERPNext via Bank Statement Import or Bank Account Synchronization.</div>
+		</div>
+		<div class="step-item">
+			<span class="step-number">2</span>
+			<div class="step-content"><strong>Reconcile the Bank Statement</strong> using the Bank Reconciliation Tool.</div>
+		</div>
+		<p>To access the Bank Reconciliation Tool, go to:</p>
+		<p><strong>Accounting &gt; Bank Statement &gt; Bank Reconciliation Tool</strong></p>
+		<p>Or simply search for <strong>"Bank Reconciliation Tool"</strong> in the awesome bar.</p>
+	</div>
+
+	<!-- Section 6: Importing Bank Statements -->
+	<div class="section" id="importing">
+		<h2>6. Importing Bank Statements</h2>
+		<p>You can upload a Bank Statement in CSV or XLSX format into ERPNext using the Bank Statement Import tool.</p>
+		<div class="step-item">
+			<span class="step-number">1</span>
+			<div class="step-content">Go to <strong>Accounting &gt; Bank Statement &gt; Bank Statement Import</strong> or search for "Bank Statement Import" in the awesome bar.</div>
+		</div>
+		<div class="step-item">
+			<span class="step-number">2</span>
+			<div class="step-content">Select your <strong>Bank Account</strong>.</div>
+		</div>
+		<div class="step-item">
+			<span class="step-number">3</span>
+			<div class="step-content">Upload your bank statement file (CSV or XLSX).</div>
+		</div>
+		<div class="step-item">
+			<span class="step-number">4</span>
+			<div class="step-content">ERPNext will read the file and map the columns to the corresponding fields in the <strong>Bank Transaction</strong> DocType.</div>
+		</div>
+		<div class="step-item">
+			<span class="step-number">5</span>
+			<div class="step-content">The mapping is stored in the <strong>Bank</strong> document linked to the corresponding Bank Account. On the next upload, the mapping is taken from here, but you can change it if needed.</div>
+		</div>
+		<div class="step-item">
+			<span class="step-number">6</span>
+			<div class="step-content">The Bank Transactions will be imported via a background job. The progress will be shown on the screen.</div>
+		</div>
+		<div class="note-box">
+			<strong>Note:</strong> Ensure your bank accounts are properly configured in ERPNext with the correct account numbers and GL links before importing transactions.
+		</div>
+	</div>
+
+	<!-- Section 7: Reconciling Bank Transactions -->
+	<div class="section" id="reconciling">
+		<h2>7. Reconciling Bank Transactions</h2>
+		<p>Once all your bank transactions are imported into ERPNext, you can reconcile them with your existing vouchers using the Bank Reconciliation Tool.</p>
+		<div class="step-item">
+			<span class="step-number">1</span>
+			<div class="step-content">Go to <strong>Accounting &gt; Bank Statement &gt; Bank Reconciliation Tool</strong> or search for "Bank Reconciliation Tool" in the awesome bar.</div>
+		</div>
+		<div class="step-item">
+			<span class="step-number">2</span>
+			<div class="step-content">Select your <strong>Company</strong>, <strong>Bank Account</strong>, <strong>Bank Statement Start Date</strong>, and <strong>End Date</strong>.</div>
+		</div>
+		<div class="step-item">
+			<span class="step-number">3</span>
+			<div class="step-content">Make sure that the opening balance from ERPNext matches the opening balance of your Bank Statement.</div>
+		</div>
+		<div class="step-item">
+			<span class="step-number">4</span>
+			<div class="step-content">Enter the <strong>Closing Balance</strong> of the Bank Statement.</div>
+		</div>
+		<div class="step-item">
+			<span class="step-number">5</span>
+			<div class="step-content">Saving the document will show the matching bank transactions.</div>
+		</div>
+		<div class="step-item">
+			<span class="step-number">6</span>
+			<div class="step-content">The final goal of Bank Reconciliation is to make the <strong>difference amount zero (green)</strong> by either matching to an existing voucher or creating a new voucher.</div>
+		</div>
+		<div class="step-item">
+			<span class="step-number">7</span>
+			<div class="step-content">For all bank transactions that do not have a clearance date, click on the <strong>Actions Button</strong> to Match or Create Vouchers.</div>
+		</div>
+	</div>
+
+	<!-- Section 8: Creating New Vouchers -->
+	<div class="section" id="create-voucher">
+		<h2>8. Creating New Vouchers from Bank Transactions</h2>
+		<p>If a bank transaction does not match any existing voucher, you can create a new voucher directly from the Bank Reconciliation Tool:</p>
+		<div class="step-item">
+			<span class="step-number">1</span>
+			<div class="step-content">Select the bank transaction and click on the <strong>Actions</strong> button.</div>
+		</div>
+		<div class="step-item">
+			<span class="step-number">2</span>
+			<div class="step-content">Choose <strong>"Create Voucher"</strong> in the Action dropdown.</div>
+		</div>
+		<div class="step-item">
+			<span class="step-number">3</span>
+			<div class="step-content">Select the document type (Payment Entry, Journal Entry, etc.).</div>
+		</div>
+		<div class="step-item">
+			<span class="step-number">4</span>
+			<div class="step-content">Fill in the details that were not available in the Bank Transaction.</div>
+		</div>
+		<div class="step-item">
+			<span class="step-number">5</span>
+			<div class="step-content">Click on <strong>"Submit"</strong> to create the corresponding voucher and update its clearance date.</div>
+		</div>
+	</div>
+
+	<!-- Section 9: Matching to Existing Vouchers -->
+	<div class="section" id="matching">
+		<h2>9. Matching Bank Transactions to Existing Vouchers</h2>
+		<p>To match a bank transaction against an existing voucher in the system:</p>
+		<div class="step-item">
+			<span class="step-number">1</span>
+			<div class="step-content">Select the bank transaction and click on the <strong>Actions</strong> button.</div>
+		</div>
+		<div class="step-item">
+			<span class="step-number">2</span>
+			<div class="step-content">Choose <strong>"Match Against Voucher"</strong> in the Action dropdown.</div>
+		</div>
+		<div class="step-item">
+			<span class="step-number">3</span>
+			<div class="step-content">The vouchers related to this transaction will be displayed. They will be ranked based on the maximum number of fields matched.</div>
+		</div>
+		<div class="step-item">
+			<span class="step-number">4</span>
+			<div class="step-content">You can match one or multiple vouchers against the same Bank Transaction using the checkboxes.</div>
+		</div>
+		<div class="step-item">
+			<span class="step-number">5</span>
+			<div class="step-content">Click <strong>"Reconcile"</strong> to confirm the match. The clearance date will be updated automatically.</div>
+		</div>
+	</div>
+
+	<!-- Section 10: Updating Bank Transactions -->
+	<div class="section" id="update-transaction">
+		<h2>10. Updating Bank Transactions</h2>
+		<p>Updating a Bank Transaction can help ERPNext find better matches during reconciliation:</p>
+		<div class="step-item">
+			<span class="step-number">1</span>
+			<div class="step-content">Select the bank transaction and click on the <strong>Actions</strong> button.</div>
+		</div>
+		<div class="step-item">
+			<span class="step-number">2</span>
+			<div class="step-content">Choose <strong>"Update Bank Transaction"</strong> in the Action dropdown.</div>
+		</div>
+		<div class="step-item">
+			<span class="step-number">3</span>
+			<div class="step-content">Fill in the required details (e.g., party, reference number, description).</div>
+		</div>
+		<div class="step-item">
+			<span class="step-number">4</span>
+			<div class="step-content">Click on <strong>"Submit"</strong> to save the updated Bank Transaction.</div>
+		</div>
+		<div class="tip-box">
+			<strong>Tip:</strong> Adding party information and reference numbers to bank transactions significantly improves the quality of automatic match suggestions.
+		</div>
+	</div>
+
+	<!-- Section 11: Bank Transaction Doctype -->
+	<div class="section" id="bank-transaction">
+		<h2>11. Bank Transaction Doctype</h2>
+		<p>The <strong>Bank Transaction</strong> form shows bank transactions imported into ERPNext, typically from bank statements or integrations. A Bank Transaction is typically not created manually. It can be imported or created using:</p>
+		<ul>
+			<li><strong>Bank Statement Import</strong> &mdash; import from CSV or XLSX files</li>
+			<li><strong>Data Import</strong> &mdash; standard ERPNext data import tool</li>
+			<li><strong>Bank integration apps</strong> &mdash; e.g., Plaid or other third-party integrations</li>
+		</ul>
+		<p>Once imported, Bank Transactions can be reconciled with vouchers using the Bank Reconciliation Tool. The <strong>Payment Entries</strong> table within a Bank Transaction links it to vouchers in ERPNext for reconciliation.</p>
+		<p>Each Bank Transaction shows:</p>
+		<ul>
+			<li><strong>Date:</strong> The transaction date as per the bank statement</li>
+			<li><strong>Description:</strong> The narrative/description from the bank statement</li>
+			<li><strong>Type:</strong> Whether it is a Debit (withdrawal) or Credit (deposit)</li>
+			<li><strong>Amount:</strong> The transaction amount</li>
+			<li><strong>Status:</strong> Whether the transaction is unreconciled or reconciled</li>
+			<li><strong>Party:</strong> The matched customer or supplier (if identified)</li>
+		</ul>
+	</div>
+
+	<!-- Section 12: Reminders -->
+	<div class="section" id="reminders">
+		<h2>12. Important Reminders</h2>
+		<ul>
+			<li>Always verify that the <strong>Bank Account</strong> is correctly linked to the appropriate GL account in ERPNext before starting reconciliation.</li>
+			<li>Check that the <strong>opening balance</strong> in ERPNext matches the opening balance on your bank statement before reconciling.</li>
+			<li>The goal of bank reconciliation is to make the <strong>difference amount zero</strong>. If the difference is not zero, some transactions are missing or incorrectly matched.</li>
+			<li>After reconciliation, always check the <strong>Bank Reconciliation Statement</strong> report to confirm the "Balance as per bank" matches your bank statement.</li>
+			<li>Use the <strong>Update Bank Transaction</strong> action to add party and reference information to improve automatic matching.</li>
+			<li>For the manual reconciliation tool, always update the <strong>Clearance Date</strong> on payment entries to match the date the transaction cleared the bank.</li>
+			<li>Regularly import bank statements to keep the unreconciled transaction list up to date.</li>
+			<li>Bank transactions that are not matched to any voucher will remain unreconciled and will cause a difference in the Bank Reconciliation Statement.</li>
+		</ul>
+	</div>
+
+	<!-- Section 13: Video Tutorial -->
+	<div class="section video-section" id="video">
+		<h2>13. Video Tutorial</h2>
+		<p>Watch the step-by-step video tutorial below to see the Bank Reconciliation process in action:</p>
+		<p><a href="/files/bank_recon.mp4" target="_blank" style="display: inline-block; padding: 12px 30px; background: #1a237e; color: #fff; text-decoration: none; border-radius: 6px; font-size: 15px; font-weight: 600; transition: background 0.2s;" onmouseover="this.style.background='#3949ab'" onmouseout="this.style.background='#1a237e'">&#9658; Click here to watch the video tutorial</a></p>
+	</div>
+
+</div>
+
+<!-- Footer -->
+<div class="footer">
+	<p>&copy; 2026 TEAMPRO. All rights reserved.</p>
+	<p>This user manual was prepared by TEAMPRO for Electra Qatar.</p>
+</div>
+
+</body>
+</html>

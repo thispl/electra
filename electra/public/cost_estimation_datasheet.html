@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cost Estimation - Calculation Reference Datasheet</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 40px;
+            background: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 50px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            border-bottom: 3px solid #e35310;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            color: #e35310;
+            margin: 0;
+            font-size: 28px;
+        }
+        .header p {
+            color: #666;
+            margin: 5px 0 0 0;
+            font-size: 14px;
+        }
+        .section {
+            margin-bottom: 35px;
+        }
+        .section h2 {
+            color: #e35310;
+            font-size: 20px;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 8px;
+            margin-bottom: 15px;
+        }
+        .section h3 {
+            color: #333;
+            font-size: 16px;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 13px;
+        }
+        table th {
+            background: #e35310;
+            color: #fff;
+            padding: 10px 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        table td {
+            padding: 10px 12px;
+            border: 1px solid #ddd;
+            vertical-align: top;
+        }
+        table tr:nth-child(even) {
+            background: #fafafa;
+        }
+        .formula {
+            background: #f9f9f9;
+            border-left: 4px solid #e35310;
+            padding: 12px 18px;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            overflow-x: auto;
+        }
+        .note {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 4px;
+            padding: 12px 18px;
+            margin: 15px 0;
+            font-size: 13px;
+        }
+        .note strong {
+            color: #856404;
+        }
+        .mep-note {
+            background: #d1ecf1;
+            border: 1px solid #bee5eb;
+            border-radius: 4px;
+            padding: 12px 18px;
+            margin: 15px 0;
+            font-size: 13px;
+        }
+        .mep-note strong {
+            color: #0c5460;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            color: #999;
+            font-size: 12px;
+        }
+        .badge {
+            display: inline-block;
+            background: #e35310;
+            color: #fff;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: bold;
+        }
+        .badge-mep {
+            background: #17a2b8;
+        }
+        .badge-general {
+            background: #28a745;
+        }
+        .toc {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 6px;
+            padding: 20px 25px;
+            margin-bottom: 30px;
+        }
+        .toc h3 {
+            margin-top: 0;
+            color: #333;
+        }
+        .toc ol {
+            margin: 0;
+            padding-left: 20px;
+        }
+        .toc li {
+            margin-bottom: 5px;
+        }
+        .toc a {
+            text-decoration: none;
+            color: #e35310;
+        }
+        .toc a:hover {
+            text-decoration: underline;
+        }
+        @media print {
+            body { background: #fff; padding: 0; }
+            .container { box-shadow: none; padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <div class="header">
+        <h1>Cost Estimation &mdash; Calculation Reference Datasheet</h1>
+        <p>Electra ERP System &nbsp;|&nbsp; How each financial field is computed &nbsp;|&nbsp; All amounts in QAR</p>
+    </div>
+
+    <div class="toc">
+        <h3>Table of Contents</h3>
+        <ol>
+            <li><a href="#overview">System Overview &amp; Document Hierarchy</a></li>
+            <li><a href="#line-items">Line Item Level Calculations</a></li>
+            <li><a href="#section-totals">Section-Level Totals (Cost, Selling Price, Profit)</a></li>
+            <li><a href="#selling-price">Selling Price Distribution (Overhead Apportionment)</a></li>
+            <li><a href="#total-cost">Total Cost of the Project</a></li>
+            <li><a href="#overheads">Overhead Calculations</a></li>
+            <li><a href="#gross-profit">Gross Profit</a></li>
+            <li><a href="#net-profit">Net Profit</a></li>
+            <li><a href="#discount">Discount Tolerance</a></li>
+            <li><a href="#business-promotion">Business Promotion</a></li>
+            <li><a href="#total-bidding">Total Bidding Price</a></li>
+            <li><a href="#unit-price">Unit Price</a></li>
+            <li><a href="#mep">MEP Division &mdash; Special Calculations</a></li>
+            <li><a href="#cost-estimation-rollup">Cost Estimation (Parent) &mdash; Roll-up Aggregation</a></li>
+            <li><a href="#summary-table">Quick Reference Summary Table</a></li>
+        </ol>
+    </div>
+
+    <!-- 1. Overview -->
+    <div class="section" id="overview">
+        <h2>1. System Overview &amp; Document Hierarchy</h2>
+        <p>The Cost Estimation module operates through a two-level document hierarchy:</p>
+        <table>
+            <tr>
+                <th style="width: 25%;">Document</th>
+                <th style="width: 15%;">Level</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td><strong>Cost Estimation</strong></td>
+                <td>Parent</td>
+                <td>The main document that aggregates all Scope of Work (SoW) lines, computes overall totals, and links to Quotation / Sales Order.</td>
+            </tr>
+            <tr>
+                <td><strong>CE SOW</strong> (Cost Estimation &mdash; Scope of Work)</td>
+                <td>Child</td>
+                <td>One per Master Scope of Work (MSOW) row. Contains all line items (Design, Materials, Installation, Manpower, etc.) and performs the actual cost &amp; profit calculations.</td>
+            </tr>
+        </table>
+        <p>The typical flow is:</p>
+        <div class="formula">Cost Estimation (Parent) &rarr; CE SOW (Child, per MSOW) &rarr; Line Items (Design, Materials, Finishing, Accessories, Installation, Manpower, Heavy Equipments, Subcontract, Finished Goods, Raw Materials)</div>
+        <p>Calculations happen bottom-up: line items &rarr; section sub-totals &rarr; CE SOW totals &rarr; Cost Estimation roll-up.</p>
+    </div>
+
+    <!-- 2. Line Item Level -->
+    <div class="section" id="line-items">
+        <h2>2. Line Item Level Calculations</h2>
+        <p>Each row within a section (Design, Materials, Installation, etc.) has the following computed fields:</p>
+        <table>
+            <tr>
+                <th style="width: 25%;">Field</th>
+                <th style="width: 35%;">Formula</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td><strong>Amount</strong> (Cost Amount)</td>
+                <td><code>Amount = Qty &times; Unit Price</code></td>
+                <td>The base estimated cost for that line item at the cost/valuation rate.</td>
+            </tr>
+            <tr>
+                <td><strong>Cost Amount</strong></td>
+                <td><code>Cost Amount = Qty &times; Cost Rate</code></td>
+                <td>Cost rate is fetched from the last valuation rate of the item in the selected company.</td>
+            </tr>
+            <tr>
+                <td><strong>Amount with Overheads</strong> (Selling Amount)</td>
+                <td><code>Amount with Overheads = Qty &times; Rate with Overheads</code></td>
+                <td>The selling price amount after overhead &amp; profit distribution (see Section 3).</td>
+            </tr>
+            <tr>
+                <td><strong>Rate with Overheads</strong> (Selling Rate)</td>
+                <td><code>Rate with Overheads = (Amount + Proportionate Overhead) / Qty</code></td>
+                <td>Selling price per unit after overhead apportionment (see Section 3).</td>
+            </tr>
+        </table>
+        <h3>Manpower Line Items (Special Case)</h3>
+        <p>For manpower rows, the calculation uses worker count, working hours, and days:</p>
+        <div class="formula">Rate = Unit Price &times; Working Hours &times; Days<br>Amount = Total Workers &times; Rate<br>Cost Amount = Total Workers &times; Cost Rate &times; Working Hours &times; Days</div>
+    </div>
+
+    <!-- 3. Section Totals -->
+    <div class="section" id="section-totals">
+        <h2>3. Section-Level Totals (Cost, Selling Price, Profit)</h2>
+        <p>Each section (Design, Materials, Raw Materials, Finishing Work, Accessories, Installation, Manpower, Heavy Equipments, Subcontract, Finished Goods) computes three sub-totals:</p>
+        <table>
+            <tr>
+                <th style="width: 25%;">Field</th>
+                <th style="width: 40%;">Formula</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td><strong>Section Amount</strong><br>(e.g., <code>materials_amount</code>)</td>
+                <td><code>&Sigma;(line item Amount)</code></td>
+                <td>Sum of all <code>Amount</code> values (Qty &times; Unit Price) in that section.</td>
+            </tr>
+            <tr>
+                <td><strong>Section Amount with Overheads</strong><br>(e.g., <code>materials_amount_with_overheads</code>)</td>
+                <td><code>&Sigma;(line item Amount with Overheads)</code></td>
+                <td>Sum of all selling price amounts in that section.</td>
+            </tr>
+            <tr>
+                <td><strong>Section Profit</strong><br>(e.g., <code>materials_profit</code>)</td>
+                <td><code>Section Amount with Overheads &minus; Section Amount</code></td>
+                <td>The profit earned in that specific section.</td>
+            </tr>
+            <tr>
+                <td><strong>Section Profit %</strong></td>
+                <td><code>(Section Profit / Section Amount with Overheads) &times; 100</code></td>
+                <td>Profit percentage for that section (shown in the HTML view on each CE SOW).</td>
+            </tr>
+        </table>
+        <div class="note">
+            <strong>Note:</strong> The same pattern applies to all 10 sections: Design, Raw Materials, Supply Materials, Finishing Work, Accessories, Installation, Manpower, Heavy Equipments, Subcontract (Others), and Finished Goods.
+        </div>
+    </div>
+
+    <!-- 4. Selling Price Distribution -->
+    <div class="section" id="selling-price">
+        <h2>4. Selling Price Distribution (Overhead Apportionment)</h2>
+        <p>The system distributes total overheads and net profit proportionally across all line items based on each item's share of the total estimated cost.</p>
+        <h3>Step-by-Step Process</h3>
+        <div class="formula">
+Step 1: Total SPA (Selling Price Amount) = &Sigma;(all line item Amounts across all sections)<br><br>
+Step 2: SP Distribution % = (Item Amount / Total SPA)<br><br>
+Step 3: Total Additions = Total Overheads + Net Profit Amount<br><br>
+Step 4: Proportionate Overhead = SP Distribution % &times; Total Additions<br><br>
+Step 5: SPA with Overhead = Item Amount + Proportionate Overhead<br><br>
+Step 6: Rate with Overheads (Selling Rate) = SPA with Overhead / Qty<br><br>
+Step 7: Amount with Overheads (Selling Amount) = Qty &times; Rate with Overheads
+        </div>
+        <div class="note">
+            <strong>Key Principle:</strong> Items with higher cost amounts receive a proportionally higher share of overheads and profit. This ensures the selling price of each item reflects its true share of the total project cost structure.
+        </div>
+    </div>
+
+    <!-- 5. Total Cost -->
+    <div class="section" id="total-cost">
+        <h2>5. Total Cost of the Project</h2>
+        <p>The total cost is the sum of all section-level estimated cost amounts:</p>
+        <div class="formula">
+Total Cost = Design Amount<br>
+&nbsp;&nbsp;+ Raw Materials Amount<br>
+&nbsp;&nbsp;+ Materials Amount<br>
+&nbsp;&nbsp;+ Finishing Work Amount<br>
+&nbsp;&nbsp;+ Accessories Amount<br>
+&nbsp;&nbsp;+ Installation Amount<br>
+&nbsp;&nbsp;+ Manpower Amount<br>
+&nbsp;&nbsp;+ Heavy Equipments Amount<br>
+&nbsp;&nbsp;+ Subcontract (Others) Amount<br>
+&nbsp;&nbsp;+ Finished Goods Amount
+        </div>
+        <p>This is the base cost before any overheads, profit, or business promotion are added.</p>
+    </div>
+
+    <!-- 6. Overheads -->
+    <div class="section" id="overheads">
+        <h2>6. Overhead Calculations</h2>
+        <p>Three types of overheads are calculated as percentages of the Total Cost:</p>
+        <table>
+            <tr>
+                <th style="width: 25%;">Field</th>
+                <th style="width: 40%;">Formula</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td><strong>Overhead Amount</strong><br>(<code>total_amount_as_overhead</code>)</td>
+                <td><code>Total Cost &times; (Overhead % / 100)</code></td>
+                <td>General overheads (admin, facilities, etc.) as a percentage of total cost.</td>
+            </tr>
+            <tr>
+                <td><strong>Engineering Overhead Amount</strong><br>(<code>total_amount_as_engineering_overhead</code>)</td>
+                <td><code>Total Cost &times; (Engineering Overhead % / 100)</code></td>
+                <td>Engineering-specific overheads as a percentage of total cost.</td>
+            </tr>
+            <tr>
+                <td><strong>Contingency Amount</strong><br>(<code>contigency</code>)</td>
+                <td><code>Total Cost &times; (Contingency % / 100)</code></td>
+                <td>Contingency buffer as a percentage of total cost.</td>
+            </tr>
+            <tr>
+                <td><strong>Total Overheads</strong><br>(<code>total_overheads</code>)</td>
+                <td><code>Overhead Amount + Engineering Overhead Amount + Contingency Amount</code></td>
+                <td>The combined overhead to be added to the total cost.</td>
+            </tr>
+        </table>
+        <div class="note">
+            <strong>Reverse Calculation:</strong> If the amount is entered instead of the percentage, the system reverse-calculates: <code>Overhead % = (Overhead Amount / Total Cost) &times; 100</code>
+        </div>
+    </div>
+
+    <!-- 7. Gross Profit -->
+    <div class="section" id="gross-profit">
+        <h2>7. Gross Profit <span class="badge badge-general">All Divisions</span></h2>
+        <p>Gross Profit represents the total profit from all sections before deducting overheads and discounts.</p>
+        <h3>Gross Profit Amount</h3>
+        <div class="formula">
+Gross Profit Amount = Design Profit<br>
+&nbsp;&nbsp;+ Raw Materials Profit<br>
+&nbsp;&nbsp;+ Materials Profit<br>
+&nbsp;&nbsp;+ Finishing Work Profit<br>
+&nbsp;&nbsp;+ Accessories Profit<br>
+&nbsp;&nbsp;+ Installation Profit<br>
+&nbsp;&nbsp;+ Manpower Profit<br>
+&nbsp;&nbsp;+ Heavy Equipments Profit<br>
+&nbsp;&nbsp;+ Subcontract (Others) Profit<br>
+&nbsp;&nbsp;+ Finished Goods Profit<br>
+&nbsp;&nbsp;&minus; Discount Tolerance Amount
+        </div>
+        <p>Where each section's profit = <code>Section Amount with Overheads &minus; Section Amount</code></p>
+        <h3>Gross Profit %</h3>
+        <div class="formula">Gross Profit % = (Gross Profit Amount / Total Bidding Price) &times; 100</div>
+    </div>
+
+    <!-- 8. Net Profit -->
+    <div class="section" id="net-profit">
+        <h2>8. Net Profit <span class="badge badge-general">All Divisions</span></h2>
+        <p>Net Profit is the user-defined profit margin applied on top of the total cost. It can be entered as either an amount or a percentage &mdash; the system auto-calculates the other.</p>
+        <table>
+            <tr>
+                <th style="width: 30%;">If entering&hellip;</th>
+                <th style="width: 40%;">Formula</th>
+                <th>Result</th>
+            </tr>
+            <tr>
+                <td><strong>Net Profit Amount</strong></td>
+                <td><code>Net Profit % = (Net Profit Amount / Total Cost) &times; 100</code></td>
+                <td>Percentage is auto-calculated</td>
+            </tr>
+            <tr>
+                <td><strong>Net Profit %</strong></td>
+                <td><code>Net Profit Amount = Total Cost &times; (Net Profit % / 100)</code></td>
+                <td>Amount is auto-calculated</td>
+            </tr>
+        </table>
+        <h3>Net Profit after Discount (displayed in Total Cost popup)</h3>
+        <div class="formula">Net Profit Amount (after discount) = Gross Profit Amount &minus; Discount Tolerance Amount<br>Net Profit % (after discount) = Gross Profit % &minus; Discount Tolerance %</div>
+        <h3>Net Profit % (Non-MEP, from Total Cost popup)</h3>
+        <div class="formula">Net Profit % = (Net Profit Amount / (Total Cost + Gross Profit Amount)) &times; 100</div>
+    </div>
+
+    <!-- 9. Discount -->
+    <div class="section" id="discount">
+        <h2>9. Discount Tolerance</h2>
+        <p>Discount Tolerance represents the maximum discount that can be offered to the client while maintaining profitability.</p>
+        <table>
+            <tr>
+                <th style="width: 30%;">Field</th>
+                <th style="width: 45%;">Formula</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td><strong>Discount Tolerance Amount</strong></td>
+                <td><code>Total Bidding Price &times; (Discount Tolerance % / 100)</code></td>
+                <td>The monetary value of the discount.</td>
+            </tr>
+            <tr>
+                <td><strong>Discount Tolerance %</strong></td>
+                <td><code>(Discount Tolerance Amount / Total Bidding Price) &times; 100</code></td>
+                <td>Reverse calculation if amount is entered.</td>
+            </tr>
+            <tr>
+                <td><strong>Discount Upto</strong></td>
+                <td><code>Total Bidding Price &minus; Discount Tolerance Amount</code></td>
+                <td>The minimum price after discount is applied.</td>
+            </tr>
+        </table>
+        <div class="note">
+            <strong>Note:</strong> At the Cost Estimation (parent) level, SoW-level discount tolerances are aggregated: <code>SoW Discount Tolerance %</code> and <code>SoW Discount Tolerance Amount</code> are the sums of all MSOW rows' discount values.
+        </div>
+    </div>
+
+    <!-- 10. Business Promotion -->
+    <div class="section" id="business-promotion">
+        <h2>10. Business Promotion</h2>
+        <p>Business Promotion is an additional amount for marketing/business development activities, calculated as a percentage of total cost.</p>
+        <table>
+            <tr>
+                <th style="width: 30%;">If entering&hellip;</th>
+                <th style="width: 45%;">Formula</th>
+                <th>Result</th>
+            </tr>
+            <tr>
+                <td><strong>Business Promotion Amount</strong></td>
+                <td><code>Business Promotion % = (Business Promotion Amount / Total Cost) &times; 100</code></td>
+                <td>Percentage is auto-calculated</td>
+            </tr>
+            <tr>
+                <td><strong>Business Promotion %</strong></td>
+                <td><code>Business Promotion Amount = Total Cost &times; (Business Promotion % / 100)</code></td>
+                <td>Amount is auto-calculated</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- 11. Total Bidding Price -->
+    <div class="section" id="total-bidding">
+        <h2>11. Total Bidding Price</h2>
+        <p>The Total Bidding Price is the final quoted price submitted to the client. The calculation differs by division:</p>
+
+        <h3>Non-MEP Divisions <span class="badge badge-general">General</span></h3>
+        <div class="formula">
+Total Bidding Price = Total Cost<br>
+&nbsp;&nbsp;+ Total Overheads (Overhead + Engineering Overhead + Contingency)<br>
+&nbsp;&nbsp;+ Net Profit Amount<br>
+&nbsp;&nbsp;+ Discount Tolerance Amount
+        </div>
+
+        <h3>MEP Division <span class="badge badge-mep">MEP Only</span></h3>
+        <div class="formula">
+Total Bidding Price = Total Cost<br>
+&nbsp;&nbsp;+ MEP Net Profit Amount<br>
+&nbsp;&nbsp;+ Discount Tolerance Amount
+        </div>
+        <p>Where for MEP:</p>
+        <div class="formula">
+MEP Net Profit Amount = Gross Profit Amount &minus; (Overhead Amount + Contingency Amount + Engineering Overhead Amount)<br><br>
+MEP Net Profit % = (MEP Net Profit Amount / Total Bidding Price) &times; 100
+        </div>
+
+        <h3>Total Cost Popup Display (Both Divisions)</h3>
+        <p>When the "Total Cost" button is clicked on a submitted Cost Estimation, the system displays a summary table with the following breakdown:</p>
+        <div class="formula">
+Total Bidding Price = Total Cost of the Project<br>
+&nbsp;&nbsp;+ Net Profit (after discount) [= Gross Profit Amount &minus; Discount Tolerance Amount]<br>
+&nbsp;&nbsp;+ Total Overheads [= Overhead + Engineering Overhead + Contingency]<br>
+&nbsp;&nbsp;+ Total Business Promotion
+        </div>
+    </div>
+
+    <!-- 12. Unit Price -->
+    <div class="section" id="unit-price">
+        <h2>12. Unit Price (Per MSOW)</h2>
+        <p>The unit price for each Master Scope of Work line is derived from the total bidding price:</p>
+        <div class="formula">Unit Price = Total Bidding Price / Qty (of the MSOW)</div>
+    </div>
+
+    <!-- 13. MEP Special -->
+    <div class="section" id="mep">
+        <h2>13. MEP Division &mdash; Special Calculations <span class="badge badge-mep">MEP Only</span></h2>
+        <p>The MEP Division uses a different cost model for materials. MEP materials involve transfer charges between companies.</p>
+        <h3>MEP Material Line Item Calculations</h3>
+        <table>
+            <tr>
+                <th style="width: 30%;">Field</th>
+                <th style="width: 45%;">Formula</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td><strong>Transfer Charges</strong></td>
+                <td><code>Valuation Rate &times; (Transfer % / 100)</code></td>
+                <td>Transfer charge per unit based on the item group's transfer percentage.</td>
+            </tr>
+            <tr>
+                <td><strong>Transfer Amount</strong></td>
+                <td><code>Qty &times; Transfer Charges</code></td>
+                <td>Total transfer charges for the line item.</td>
+            </tr>
+            <tr>
+                <td><strong>Cost (with Transfer)</strong></td>
+                <td><code>Valuation Rate &times; (1 + Transfer % / 100)</code></td>
+                <td>Cost per unit including transfer charges.</td>
+            </tr>
+            <tr>
+                <td><strong>Transfer Cost Amount</strong></td>
+                <td><code>Qty &times; Cost (with Transfer)</code></td>
+                <td>Total cost amount including transfer charges.</td>
+            </tr>
+            <tr>
+                <td><strong>Selling Amount</strong></td>
+                <td><code>Qty &times; Unit Price</code></td>
+                <td>Selling amount (Unit Price is the selling price).</td>
+            </tr>
+            <tr>
+                <td><strong>Profit Amount</strong></td>
+                <td><code>Selling Amount &minus; Transfer Cost Amount</code></td>
+                <td>Profit for the MEP material line.</td>
+            </tr>
+            <tr>
+                <td><strong>Profit %</strong></td>
+                <td><code>(Profit Amount / Selling Amount) &times; 100</code></td>
+                <td>Profit percentage for the MEP material line.</td>
+            </tr>
+        </table>
+        <div class="mep-note">
+            <strong>MEP Key Difference:</strong> In MEP, the "materials_amount" field is set to the <code>Transfer Cost Amount</code> (not the raw cost), and "materials_amount_with_overheads" is set to the <code>Selling Amount</code>. Total Overheads is set to 0 for MEP &mdash; overheads are embedded within the Gross Profit calculation instead.
+        </div>
+    </div>
+
+    <!-- 14. Cost Estimation Roll-up -->
+    <div class="section" id="cost-estimation-rollup">
+        <h2>14. Cost Estimation (Parent) &mdash; Roll-up Aggregation</h2>
+        <p>When the Cost Estimation document is validated/saved, it aggregates values from all non-optional MSOW rows in the Master Scope of Work table:</p>
+        <table>
+            <tr>
+                <th style="width: 35%;">Parent Field</th>
+                <th style="width: 40%;">Formula</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td><strong>Total Cost of the Project</strong></td>
+                <td><code>&Sigma;(MSOW Total Cost)</code></td>
+                <td>Sum of total cost across all non-optional MSOW rows.</td>
+            </tr>
+            <tr>
+                <td><strong>Total Bidding Price</strong></td>
+                <td><code>&Sigma;(MSOW Total Bidding Price)</code></td>
+                <td>Sum of bidding prices across all non-optional MSOW rows.</td>
+            </tr>
+            <tr>
+                <td><strong>Total Amount as Overhead</strong></td>
+                <td><code>&Sigma;(MSOW Overhead Amount)</code></td>
+                <td>Aggregated overhead amount.</td>
+            </tr>
+            <tr>
+                <td><strong>Total Amount as Engineering Overhead</strong></td>
+                <td><code>&Sigma;(MSOW Engineering Overhead Amount)</code></td>
+                <td>Aggregated engineering overhead amount.</td>
+            </tr>
+            <tr>
+                <td><strong>Contingency</strong></td>
+                <td><code>&Sigma;(MSOW Contingency Amount)</code></td>
+                <td>Aggregated contingency amount.</td>
+            </tr>
+            <tr>
+                <td><strong>Overhead %</strong></td>
+                <td><code>(Total Amount as Overhead / Total Cost) &times; 100</code></td>
+                <td>Overall overhead percentage.</td>
+            </tr>
+            <tr>
+                <td><strong>Engineering Overhead %</strong></td>
+                <td><code>(Total Amount as Engineering Overhead / Total Cost) &times; 100</code></td>
+                <td>Overall engineering overhead percentage.</td>
+            </tr>
+            <tr>
+                <td><strong>Contingency %</strong></td>
+                <td><code>(Contingency / Total Cost) &times; 100</code></td>
+                <td>Overall contingency percentage.</td>
+            </tr>
+            <tr>
+                <td><strong>Gross Profit Amount</strong></td>
+                <td><code>&Sigma;(MSOW Gross Profit Amount)</code></td>
+                <td>Aggregated gross profit.</td>
+            </tr>
+            <tr>
+                <td><strong>Gross Profit %</strong></td>
+                <td><code>&Sigma;(MSOW Gross Profit %)</code></td>
+                <td>Aggregated gross profit percentage.</td>
+            </tr>
+            <tr>
+                <td><strong>Net Profit Amount</strong></td>
+                <td><code>&Sigma;(MSOW Net Profit Amount)</code></td>
+                <td>Aggregated net profit amount.</td>
+            </tr>
+            <tr>
+                <td><strong>Net Profit %</strong></td>
+                <td><code>&Sigma;(MSOW Net Profit %)</code></td>
+                <td>Aggregated net profit percentage.</td>
+            </tr>
+            <tr>
+                <td><strong>Total Business Promotion</strong></td>
+                <td><code>&Sigma;(MSOW Business Promotion Amount)</code></td>
+                <td>Aggregated business promotion.</td>
+            </tr>
+            <tr>
+                <td><strong>SoW Discount Tolerance %</strong></td>
+                <td><code>&Sigma;(MSOW Discount Tolerance %)</code></td>
+                <td>Aggregated discount tolerance percentage.</td>
+            </tr>
+            <tr>
+                <td><strong>SoW Discount Tolerance Amount</strong></td>
+                <td><code>&Sigma;(MSOW Discount Tolerance Amount)</code></td>
+                <td>Aggregated discount tolerance amount.</td>
+            </tr>
+        </table>
+        <div class="note">
+            <strong>Note:</strong> Only MSOW rows where <code>Optional = 0</code> (not marked as optional) are included in the aggregation.
+        </div>
+    </div>
+
+    <!-- 15. Summary Table -->
+    <div class="section" id="summary-table">
+        <h2>15. Quick Reference Summary Table</h2>
+        <table>
+            <tr>
+                <th style="width: 20%;">Field</th>
+                <th style="width: 10%;">Level</th>
+                <th style="width: 45%;">Formula</th>
+                <th style="width: 25%;">Notes</th>
+            </tr>
+            <tr>
+                <td><strong>Line Item Amount</strong></td>
+                <td>Line Item</td>
+                <td><code>Qty &times; Unit Price</code></td>
+                <td>Base cost per line</td>
+            </tr>
+            <tr>
+                <td><strong>Section Amount</strong></td>
+                <td>Section</td>
+                <td><code>&Sigma;(Line Item Amounts)</code></td>
+                <td>Per section sub-total</td>
+            </tr>
+            <tr>
+                <td><strong>Section Profit</strong></td>
+                <td>Section</td>
+                <td><code>Section Amount w/ Overheads &minus; Section Amount</code></td>
+                <td>Profit per section</td>
+            </tr>
+            <tr>
+                <td><strong>Total Cost</strong></td>
+                <td>CE SOW</td>
+                <td><code>&Sigma;(All Section Amounts)</code></td>
+                <td>Base project cost</td>
+            </tr>
+            <tr>
+                <td><strong>Overhead Amount</strong></td>
+                <td>CE SOW</td>
+                <td><code>Total Cost &times; (Overhead % / 100)</code></td>
+                <td>General overhead</td>
+            </tr>
+            <tr>
+                <td><strong>Engineering Overhead Amount</strong></td>
+                <td>CE SOW</td>
+                <td><code>Total Cost &times; (Eng. Overhead % / 100)</code></td>
+                <td>Engineering overhead</td>
+            </tr>
+            <tr>
+                <td><strong>Contingency Amount</strong></td>
+                <td>CE SOW</td>
+                <td><code>Total Cost &times; (Contingency % / 100)</code></td>
+                <td>Contingency buffer</td>
+            </tr>
+            <tr>
+                <td><strong>Total Overheads</strong></td>
+                <td>CE SOW</td>
+                <td><code>Overhead + Eng. Overhead + Contingency</code></td>
+                <td>Combined overheads</td>
+            </tr>
+            <tr>
+                <td><strong>Gross Profit Amount</strong></td>
+                <td>CE SOW</td>
+                <td><code>&Sigma;(Section Profits) &minus; Discount Tolerance Amount</code></td>
+                <td>Before overhead deduction</td>
+            </tr>
+            <tr>
+                <td><strong>Gross Profit %</strong></td>
+                <td>CE SOW</td>
+                <td><code>(Gross Profit Amount / Total Bidding Price) &times; 100</code></td>
+                <td>Of bidding price</td>
+            </tr>
+            <tr>
+                <td><strong>Net Profit Amount</strong></td>
+                <td>CE SOW</td>
+                <td><code>Total Cost &times; (Net Profit % / 100)</code></td>
+                <td>User-entered % or amount</td>
+            </tr>
+            <tr>
+                <td><strong>Net Profit %</strong></td>
+                <td>CE SOW</td>
+                <td><code>(Net Profit Amount / Total Cost) &times; 100</code></td>
+                <td>Auto-calculated from amount</td>
+            </tr>
+            <tr>
+                <td><strong>Discount Tolerance Amount</strong></td>
+                <td>CE SOW / CE</td>
+                <td><code>Total Bidding Price &times; (Discount % / 100)</code></td>
+                <td>Max discount allowed</td>
+            </tr>
+            <tr>
+                <td><strong>Discount Upto</strong></td>
+                <td>CE SOW / CE</td>
+                <td><code>Total Bidding Price &minus; Discount Tolerance Amount</code></td>
+                <td>Minimum acceptable price</td>
+            </tr>
+            <tr>
+                <td><strong>Business Promotion Amount</strong></td>
+                <td>CE SOW</td>
+                <td><code>Total Cost &times; (Business Promotion % / 100)</code></td>
+                <td>Marketing/business dev.</td>
+            </tr>
+            <tr>
+                <td><strong>Total Bidding Price</strong><br>(Non-MEP)</td>
+                <td>CE SOW</td>
+                <td><code>Total Cost + Total Overheads + Net Profit Amount + Discount Tolerance Amount</code></td>
+                <td>Final quoted price</td>
+            </tr>
+            <tr>
+                <td><strong>Total Bidding Price</strong><br>(MEP)</td>
+                <td>CE SOW</td>
+                <td><code>Total Cost + MEP Net Profit Amount + Discount Tolerance Amount</code></td>
+                <td>Overheads embedded in profit</td>
+            </tr>
+            <tr>
+                <td><strong>Unit Price (per MSOW)</strong></td>
+                <td>CE SOW</td>
+                <td><code>Total Bidding Price / Qty</code></td>
+                <td>Per-unit selling price</td>
+            </tr>
+            <tr>
+                <td><strong>Total Cost of the Project</strong></td>
+                <td>Cost Estimation</td>
+                <td><code>&Sigma;(All MSOW Total Cost)</code></td>
+                <td>Parent-level aggregation</td>
+            </tr>
+            <tr>
+                <td><strong>Total Bidding Price</strong></td>
+                <td>Cost Estimation</td>
+                <td><code>&Sigma;(All MSOW Total Bidding Price)</code></td>
+                <td>Parent-level aggregation</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="footer">
+        <p>Electra ERP System &mdash; Cost Estimation Module &mdash; Calculation Reference Datasheet</p>
+        <p>Generated from system source code analysis &nbsp;|&nbsp; All amounts in QAR (Qatari Riyal)</p>
+    </div>
+
+</div>
+</body>
+</html>

@@ -293,19 +293,26 @@ class DeliveryNoteWIP(Document):
 						if self.name and self.name==dn.name:
 							print("Hi")
 						else:
+							
 							dn_ret = frappe.get_doc("Delivery Note WIP", dn.name)
+							
 							for dn_r in dn_ret.return_item:
-								if dn_r.item_code == i.item_code:
+								if dn_r.item_code == i.item_code and i.custom_against_pbsow == dn_r.custom_against_pbsow:
+									
 									total_return_qty += -(dn_r.qty)
-					frappe.errprint(total_return_qty)
+									
+
 					dn_original = frappe.get_doc("Delivery Note WIP", self.return_against)
 					original_qty = 0
+					returned_qty = 0
 					for item in dn_original.items:
-						if item.item_code == i.item_code:
+						if item.item_code == i.item_code and item.custom_against_pbsow == i.custom_against_pbsow:
 							original_qty = item.qty
+							returned_qty = item.returned_qty
 							break
 					
-					if total_return_qty > original_qty:
+					if float(total_return_qty) > (original_qty):
+
 						frappe.throw(_("Return quantity for item {0} exceeds the original quantity").format(i.item_code))
 
 	def check_credit_limit(self):
@@ -629,7 +636,7 @@ def make_sales_invoice(source_name, target_doc=None):
 			else:
 				pending_qty -= returned_qty
 				returned_qty = 0
-
+		
 		to_make_invoice_qty_map[item_row.name] = pending_qty
 
 		return pending_qty
@@ -871,6 +878,7 @@ def make_shipment(source_name, target_doc=None):
 @frappe.whitelist()
 def make_sales_return(source_name, target_doc=None):
 	from erpnext.controllers.sales_and_purchase_return import make_return_doc
+
 
 	return make_return_doc("Delivery Note WIP", source_name, target_doc)
 

@@ -13,7 +13,7 @@ app_license = "MIT"
 # ------------------
 
 # include js, css files in header of desk.html
-app_include_css = "/assets/electra/css/electra.css"
+app_include_css = ["/assets/electra/css/electra.css", "/assets/electra/css/leave_dashboard.css"]
 # app_include_js = "/assets/electra/js/electra.js"
 app_include_js = [
             "/assets/electra/js/linkselector.js",
@@ -96,6 +96,9 @@ doctype_list_js = {"Lead" : "public/js/lead_list.js"}
 # Hook on document methods and events
 
 doc_events = {
+    "Journal Entry":{
+        "validate":'electra.custom.update_jv_letterhead_based_on_company'
+	},
 	"Employee": {
 		# "on_update":"electra.custom.employee_number",
 		"on_trash": ["electra.utils.manpower_avg_cost_calculation","electra.custom.delete_employee_leave_allocation"],
@@ -250,7 +253,7 @@ doc_events = {
 		# "before_submit": "electra.custom.update_ret_out",
 		"on_update":["electra.custom.update_ret_out","electra.utils.set_income_account"],
 		"before_cancel":"electra.custom.cancel_ret_je",
-		"validate":["electra.utils.set_income_account","electra.utils.restrict_general_item_si","electra.utils.update_credit_limit", "electra.electra.teampro_py.sales_invoice.validate_on_save"],
+		"validate":["electra.utils.set_income_account","electra.utils.restrict_general_item_si","electra.utils.update_credit_limit", "electra.electra.teampro_py.sales_invoice.validate_on_save", "electra.custom.update_si_letterhead_based_on_company"],
 		"after_save":"electra.custom.sales_invoice_remarks",
 		"on_cancel":[
 			"electra.custom.validation_on_cancellation",
@@ -329,7 +332,8 @@ scheduler_events = {
 			"electra.custom.reservation_entrylist"
 		],
         "0 0 1 * *": [
-			"electra.custom.update_per_hour_cost"
+			"electra.custom.update_per_hour_cost",
+            "electra.custom.create_annual_leave_allocation"
 		],
         
 	},

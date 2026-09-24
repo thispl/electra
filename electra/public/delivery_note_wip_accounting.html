@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Delivery Note - Accounting Entries | TEAMPRO</title>
+<style>
+	* { margin: 0; padding: 0; box-sizing: border-box; }
+	body {
+		font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+		color: #333;
+		line-height: 1.7;
+		background: #f5f5f5;
+	}
+	.dn-manual-wrapper {
+		max-width: 900px;
+		margin: 0 auto;
+		background: #fff;
+		padding: 0;
+	}
+	.cover {
+		background: #ffffff;
+		color: #333;
+		padding: 20px 40px;
+		border-radius: 0;
+		text-align: center;
+		border-bottom: 3px solid #1a237e;
+	}
+	.cover img {
+		max-height: 80px;
+		margin-bottom: 20px;
+	}
+	.cover h1 {
+		font-size: 32px;
+		font-weight: 700;
+		margin-bottom: 10px;
+	}
+	.cover p {
+		font-size: 16px;
+		opacity: 1;
+		color: #555;
+	}
+	.cover .meta {
+		margin-top: 20px;
+		font-size: 13px;
+		color: #777;
+	}
+	.container {
+		max-width: 100%;
+		padding: 40px;
+	}
+	.toc {
+		background: #f0f4ff;
+		border: 1px solid #d0d8f0;
+		border-radius: 8px;
+		padding: 25px 30px;
+		margin-bottom: 40px;
+	}
+	.toc h3 {
+		color: #1a237e;
+		font-size: 18px;
+		margin-bottom: 15px;
+		border-bottom: 2px solid #c5cae9;
+		padding-bottom: 8px;
+	}
+	.toc ol {
+		padding-left: 20px;
+	}
+	.toc li {
+		margin-bottom: 6px;
+	}
+	.section {
+		margin-bottom: 35px;
+	}
+	.section h2 {
+		color: #1a237e;
+		font-size: 24px;
+		margin-bottom: 15px;
+		padding-bottom: 8px;
+		border-bottom: 2px solid #e8eaf6;
+	}
+	.section h3 {
+		color: #283593;
+		font-size: 18px;
+		margin-top: 20px;
+		margin-bottom: 10px;
+	}
+	.section p {
+		margin-bottom: 12px;
+		font-size: 15px;
+	}
+	.section ul, .section ol {
+		padding-left: 25px;
+		margin-bottom: 15px;
+	}
+	.section li {
+		margin-bottom: 8px;
+		font-size: 15px;
+	}
+	.section .step-number {
+		display: inline-block;
+		width: 28px;
+		height: 28px;
+		line-height: 28px;
+		text-align: center;
+		background: #1a237e;
+		color: #fff;
+		border-radius: 50%;
+		font-size: 13px;
+		font-weight: 700;
+		margin-right: 10px;
+	}
+	.section .step-item {
+		display: flex;
+		align-items: flex-start;
+		margin-bottom: 15px;
+	}
+	.section .step-item .step-content {
+		flex: 1;
+	}
+	.note-box {
+		background: #fff8e1;
+		border-left: 4px solid #ffc107;
+		padding: 15px 20px;
+		margin: 20px 0;
+		border-radius: 4px;
+	}
+	.note-box strong {
+		color: #f57f17;
+	}
+	.warning-box {
+		background: #ffebee;
+		border-left: 4px solid #f44336;
+		padding: 15px 20px;
+		margin: 20px 0;
+		border-radius: 4px;
+	}
+	.warning-box strong {
+		color: #c62828;
+	}
+	.tip-box {
+		background: #e8f5e9;
+		border-left: 4px solid #4caf50;
+		padding: 15px 20px;
+		margin: 20px 0;
+		border-radius: 4px;
+	}
+	.tip-box strong {
+		color: #2e7d32;
+	}
+	.info-table {
+		width: 100%;
+		border-collapse: collapse;
+		margin: 20px 0;
+	}
+	.info-table th {
+		background: #1a237e;
+		color: #fff;
+		padding: 12px 15px;
+		text-align: left;
+		font-size: 14px;
+	}
+	.info-table td {
+		padding: 12px 15px;
+		border-bottom: 1px solid #e0e0e0;
+		font-size: 14px;
+	}
+	.info-table tr:nth-child(even) {
+		background: #f5f5f5;
+	}
+	.gl-table {
+		width: 100%;
+		border-collapse: collapse;
+		margin: 15px 0;
+	}
+	.gl-table th {
+		background: #283593;
+		color: #fff;
+		padding: 10px 15px;
+		text-align: left;
+		font-size: 14px;
+	}
+	.gl-table td {
+		padding: 10px 15px;
+		border: 1px solid #e0e0e0;
+		font-size: 14px;
+	}
+	.gl-table .dr { color: #c62828; font-weight: 600; }
+	.gl-table .cr { color: #2e7d32; font-weight: 600; }
+	.gl-table tr:nth-child(even) { background: #f5f5f5; }
+	/* Two-flow cards */
+	.flow-cards {
+		display: flex;
+		gap: 15px;
+		margin: 20px 0;
+	}
+	.flow-card {
+		flex: 1;
+		border-radius: 8px;
+		padding: 15px 20px;
+		border: 2px solid;
+	}
+	.flow-card.sales {
+		background: #e8f5e9;
+		border-color: #4caf50;
+	}
+	.flow-card.project {
+		background: #e3f2fd;
+		border-color: #1976d2;
+	}
+	.flow-card .flow-label {
+		font-size: 14px;
+		font-weight: 700;
+		text-transform: uppercase;
+		margin-bottom: 8px;
+	}
+	.flow-card.sales .flow-label { color: #2e7d32; }
+	.flow-card.project .flow-label { color: #1565c0; }
+	.flow-card .flow-diagram {
+		font-family: 'Courier New', monospace;
+		font-size: 13px;
+		line-height: 1.8;
+		color: #333;
+	}
+	.flow-card .flow-note {
+		font-size: 13px;
+		color: #555;
+		margin-top: 8px;
+		font-style: italic;
+	}
+	.footer {
+		background: #1a237e;
+		color: #fff;
+		text-align: center;
+		padding: 25px;
+		font-size: 13px;
+	}
+	.footer a {
+		color: #90caf9;
+		text-decoration: none;
+	}
+	@media print {
+		.cover { background: #ffffff !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+		.toc { page-break-after: always; }
+		.section { page-break-inside: avoid; }
+	}
+</style>
+</head>
+<body>
+
+<!-- Cover -->
+<div class="cover">
+	<img src="/files/db863f761fTEAMPRO New.png" alt="TEAMPRO Logo" />
+	<h1>Delivery Note</h1>
+	<p>Accounting Entries &mdash; User Manual</p>
+	<div class="meta">
+		Prepared by TEAMPRO<br>
+		for Electra Qatar
+	</div>
+</div>
+
+<div class="container">
+
+	<!-- Table of Contents -->
+	<div class="toc">
+		<h3>Table of Contents</h3>
+		<ol>
+			<li>Purpose</li>
+			<li>Posting vs Non-posting Documents</li>
+			<li>Two Business Flows in Electra ERP</li>
+			<li>Delivery Note WIP (Project Flow) &mdash; What Happens on Submit</li>
+			<li>Material Transfer (Auto-created from DN WIP) &mdash; Accounting Entries</li>
+			<li>Material Issue from Stock In Hand WIP &mdash; Accounting Entries</li>
+			<li>Delivery Note (Sales Flow) &mdash; Accounting Entries</li>
+			<li>When Does the Delivery Note Create Accounting Entries?</li>
+			<li>Where is the Revenue / Customer Entry Booked?</li>
+			<li>Returns &amp; Cancellations</li>
+			<li>Complete Flow &mdash; From Sales Order to Accounting</li>
+			<li>Important Reminders</li>
+		</ol>
+	</div>
+
+	<!-- Section 1: Purpose -->
+	<div class="section" id="purpose">
+		<h2>1. Purpose</h2>
+		<p>This document explains, in simple terms, how accounting (ledger) entries are created when goods are delivered to a customer using a <strong>Delivery Note</strong> in the Electra ERP system.</p>
+		<p>It covers the two delivery documents used in the system:</p>
+		<ul>
+			<li><strong>Delivery Note</strong> &mdash; the main posting document used to issue goods to a customer (Sales flow).</li>
+			<li><strong>Delivery Note WIP</strong> &mdash; a working / tracking document used to record deliveries that are still in progress (Project flow).</li>
+		</ul>
+		<p>The document also covers the <strong>Material Transfer</strong> Stock Entry that is auto-created when a DN WIP is submitted, and the <strong>Material Issue</strong> Stock Entry that is created from the Stock In Hand WIP report after invoicing &mdash; including their corresponding accounting entries.</p>
+	</div>
+
+	<!-- Section 2: Posting vs Non-posting -->
+	<div class="section" id="posting-concept">
+		<h2>2. Posting vs Non-posting Documents</h2>
+		<table class="info-table">
+			<thead>
+				<tr>
+					<th>Type</th>
+					<th>Meaning</th>
+					<th>Creates Accounting Entries?</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><strong>Posting document</strong></td>
+					<td>A document that affects the books of accounts (General Ledger) and stock registers.</td>
+					<td>Yes</td>
+				</tr>
+				<tr>
+					<td><strong>Non-posting document</strong></td>
+					<td>A document used only to record or track activity. It does not affect the books.</td>
+					<td>No</td>
+				</tr>
+			</tbody>
+		</table>
+		<p>In the Electra system:</p>
+		<ul>
+			<li><strong>Delivery Note</strong> is a <strong>posting</strong> document &mdash; it creates Stock Ledger Entries and GL entries directly.</li>
+			<li><strong>Delivery Note WIP</strong> is a <strong>non-posting</strong> document &mdash; it does not create SLE or GL entries directly, but it <strong>auto-creates a Material Transfer Stock Entry</strong> on submission which does.</li>
+		</ul>
+		<div class="note-box">
+			<strong>Key point:</strong> The DN WIP itself does not post to the ledger. However, submitting a DN WIP triggers the system to automatically create and submit a <strong>Material Transfer Stock Entry</strong>, which <em>does</em> create stock and accounting entries.
+		</div>
+	</div>
+
+	<!-- Section 3: Two Business Flows -->
+	<div class="section" id="two-flows">
+		<h2>3. Two Business Flows in Electra ERP</h2>
+		<p>Electra ERP handles two distinct types of sales transactions, each with a different document flow and different timing for stock movement and accounting entries:</p>
+
+		<div class="flow-cards">
+			<div class="flow-card sales">
+				<div class="flow-label">Sales Flow</div>
+				<div class="flow-diagram">
+					Sales Order &rarr; <b>Delivery Note</b> &rarr; Sales Invoice<br>
+					&nbsp;&nbsp;&uarr; stock out + COGS<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&uarr; revenue booked
+				</div>
+				<div class="flow-note">Stock and COGS booked at delivery time. Used for regular trading sales.</div>
+			</div>
+			<div class="flow-card project">
+				<div class="flow-label">Project Flow</div>
+				<div class="flow-diagram">
+					Sales Order &rarr; <b>DN WIP</b> &rarr; Sales Invoice &rarr; Material Issue<br>
+					&nbsp;&nbsp;&uarr; auto Material Transfer (stock &rarr; WIP)<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&uarr; revenue + COGS (WIP &rarr; out)
+				</div>
+				<div class="flow-note">Stock moves to WIP at delivery, COGS booked at invoice time. Used for progress / milestone billing.</div>
+			</div>
+		</div>
+
+		<table class="info-table">
+			<thead>
+				<tr>
+					<th>Aspect</th>
+					<th>Sales Flow</th>
+					<th>Project Flow</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><strong>Delivery document</strong></td>
+					<td>Delivery Note (standard)</td>
+					<td>Delivery Note WIP</td>
+				</tr>
+				<tr>
+					<td><strong>Billing model</strong></td>
+					<td>Per delivery</td>
+					<td>Progress / milestone based</td>
+				</tr>
+				<tr>
+					<td><strong>Stock movement on delivery</strong></td>
+					<td>Stock goes out of warehouse (SLE created by DN)</td>
+					<td>Stock transfers to WIP warehouse (SLE created by auto Material Transfer)</td>
+				</tr>
+				<tr>
+					<td><strong>COGS entry</strong></td>
+					<td>At Delivery Note (Dr COGS / Cr Stock)</td>
+					<td>At Material Issue after invoice (Dr COGS / Cr Stock WIP)</td>
+				</tr>
+				<tr>
+					<td><strong>Revenue / Tax entry</strong></td>
+					<td>At Sales Invoice</td>
+					<td>At Sales Invoice</td>
+				</tr>
+				<tr>
+					<td><strong>Warehouse</strong></td>
+					<td>Finished Goods / Source warehouse</td>
+					<td>Work In Progress (WIP) warehouse</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<!-- Section 4: DN WIP -->
+	<div class="section" id="dn-wip">
+		<h2>4. Delivery Note WIP (Project Flow) &mdash; What Happens on Submit</h2>
+		<h3>What it is</h3>
+		<p>Delivery Note WIP is used to record deliveries that are still being processed &mdash; for example, goods handed over to the site team but not yet finalized for invoicing.</p>
+
+		<h3>What the DN WIP document itself does</h3>
+		<ul>
+			<li>Records the items, quantity, and warehouse being delivered.</li>
+			<li>Updates the linked <strong>Sales Order</strong> / <strong>Project Budget</strong> to show how much quantity has been delivered.</li>
+			<li>Tracks the billing status (how much has been invoiced).</li>
+		</ul>
+
+		<h3>What the DN WIP document itself does NOT do</h3>
+		<ul>
+			<li>It does <strong>not</strong> create any Stock Ledger Entry directly.</li>
+			<li>It does <strong>not</strong> create any accounting (GL) entry directly.</li>
+			<li>It does <strong>not</strong> reduce the stock balance in the books directly.</li>
+		</ul>
+
+		<div class="note-box">
+			<strong>But &mdash; the DN WIP auto-creates a Stock Entry:</strong> When a DN WIP is submitted, the system automatically creates and submits a <strong>Stock Entry of type "Material Transfer"</strong> in the background. This Stock Entry moves the goods from the source warehouse to the target (WIP) warehouse. It is this Stock Entry &mdash; not the DN WIP itself &mdash; that creates the Stock Ledger Entries and GL entries.
+		</div>
+
+		<h3>What happens step by step when a DN WIP is submitted</h3>
+		<div class="step-item">
+			<span class="step-number">1</span>
+			<div class="step-content"><strong>Updates the Project Budget</strong> &mdash; marks the delivered quantity against each Project Budget item.</div>
+		</div>
+		<div class="step-item">
+			<span class="step-number">2</span>
+			<div class="step-content"><strong>Updates the Sales Order</strong> &mdash; updates the per_delivered percentage.</div>
+		</div>
+		<div class="step-item">
+			<span class="step-number">3</span>
+			<div class="step-content"><strong>Auto-creates a Material Transfer Stock Entry</strong> &mdash; moves stock from the source warehouse to the target (WIP) warehouse, valued at the item's rate.</div>
+		</div>
+		<div class="step-item">
+			<span class="step-number">4</span>
+			<div class="step-content"><strong>Auto-submits the Stock Entry</strong> &mdash; the Stock Entry is submitted immediately, which creates the Stock Ledger Entries and (if perpetual inventory is enabled) the GL entries.</div>
+		</div>
+
+		<h3>What happens when a DN WIP is cancelled</h3>
+		<div class="step-item">
+			<span class="step-number">1</span>
+			<div class="step-content"><strong>Cancels the auto-created Stock Entry</strong> &mdash; the system finds the Material Transfer Stock Entry linked to this DN WIP and cancels it, which reverses the stock movement and GL entries.</div>
+		</div>
+		<div class="step-item">
+			<span class="step-number">2</span>
+			<div class="step-content"><strong>Reverts the Project Budget delivered quantities</strong> &mdash; reduces the delivered_qty back to what it was before the DN WIP was submitted.</div>
+		</div>
+	</div>
+
+	<!-- Section 5: Material Transfer from DN WIP -->
+	<div class="section" id="material-transfer">
+		<h2>5. Material Transfer (Auto-created from DN WIP) &mdash; Accounting Entries</h2>
+
+		<h3>What it is</h3>
+		<p>When a DN WIP is submitted, the system automatically creates a <strong>Stock Entry</strong> with the type <strong>"Material Transfer"</strong>. This Stock Entry moves the delivered items from the <strong>source warehouse</strong> (e.g. Finished Goods) to the <strong>target warehouse</strong> (Work In Progress &mdash; WIP).</p>
+
+		<h3>Stock movement</h3>
+		<table class="info-table">
+			<thead>
+				<tr>
+					<th>Field</th>
+					<th>Value</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><strong>Stock Entry Type</strong></td>
+					<td>Material Transfer</td>
+				</tr>
+				<tr>
+					<td><strong>Source Warehouse (s_warehouse)</strong></td>
+					<td>The warehouse from the DN WIP item (e.g. Finished Goods)</td>
+				</tr>
+				<tr>
+					<td><strong>Target Warehouse (t_warehouse)</strong></td>
+					<td>The target warehouse from the DN WIP item (WIP warehouse)</td>
+				</tr>
+				<tr>
+					<td><strong>Valuation Rate</strong></td>
+					<td>The item's rate from the DN WIP</td>
+				</tr>
+				<tr>
+					<td><strong>Reference</strong></td>
+					<td>DN WIP name (reference_number), custom_reference_type = "Delivery Note WIP"</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<h3>Accounting entry on submission (normal delivery)</h3>
+		<p>The Material Transfer Stock Entry creates the following GL entry <strong>only if perpetual inventory is enabled</strong> for the company. The entry is valued at the <strong>stock (cost) value</strong> of the goods being transferred:</p>
+
+		<table class="gl-table">
+			<thead>
+				<tr>
+					<th>Account</th>
+					<th>Debit</th>
+					<th>Credit</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><span class="dr">Dr</span> Stock / Inventory (target &mdash; WIP warehouse account)</td>
+					<td>Stock value of items transferred</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>&nbsp;&nbsp;&nbsp;<span class="cr">Cr</span> Stock / Inventory (source warehouse account)</td>
+					<td></td>
+					<td>Stock value of items transferred</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<div class="tip-box">
+			<strong>In simple words:</strong> Stock is debited in the WIP warehouse and credited from the source warehouse. The total stock value does not change &mdash; it just moves from one warehouse account to another.
+		</div>
+
+		<h3>Accounting entry on a DN WIP return</h3>
+		<p>When the DN WIP is a <strong>return</strong>, the system auto-creates a Material Transfer Stock Entry with <strong>negative quantity</strong>, which reverses the stock movement:</p>
+
+		<table class="gl-table">
+			<thead>
+				<tr>
+					<th>Account</th>
+					<th>Debit</th>
+					<th>Credit</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><span class="dr">Dr</span> Stock / Inventory (source warehouse account)</td>
+					<td>Stock value of items returned</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>&nbsp;&nbsp;&nbsp;<span class="cr">Cr</span> Stock / Inventory (target &mdash; WIP warehouse account)</td>
+					<td></td>
+					<td>Stock value of items returned</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<h3>What happens when the DN WIP is cancelled</h3>
+		<p>The auto-created Material Transfer Stock Entry is <strong>cancelled</strong>, which reverses both the Stock Ledger Entries and the GL entries. Stock moves back from the WIP warehouse to the source warehouse.</p>
+
+		<div class="warning-box">
+			<strong>Important:</strong> If the auto-created Stock Entry has already been invoiced (a Material Issue has been created from the Stock In Hand WIP report), cancelling the DN WIP may fail or leave inconsistencies. Always check that no Sales Invoice has been raised against the delivered items before cancelling a DN WIP.
+		</div>
+	</div>
+
+	<!-- Section 6: Material Issue from Stock In Hand WIP -->
+	<div class="section" id="material-issue">
+		<h2>6. Material Issue from Stock In Hand WIP &mdash; Accounting Entries</h2>
+
+		<h3>What it is</h3>
+		<p>After a <strong>Sales Invoice</strong> is created and submitted for a Project-type order, the system automatically creates a <strong>Stock Entry of type "Material Issue"</strong> to move the delivered-and-now-invoiced items <strong>out of the WIP warehouse</strong>. This is the step where the <strong>Cost of Goods Sold (COGS)</strong> is finally booked in the Project flow.</p>
+		<p>This can be triggered in two ways:</p>
+		<ul>
+			<li><strong>Automatically</strong> &mdash; when a Project-type Sales Invoice is submitted (via the <code>update_stock_on_si</code> hook).</li>
+			<li><strong>Manually</strong> &mdash; from the <strong>Stock In Hand WIP</strong> report, by clicking the "Process Stock Issue" button (via the <code>process_stock_issue</code> function).</li>
+		</ul>
+
+		<h3>Stock movement</h3>
+		<table class="info-table">
+			<thead>
+				<tr>
+					<th>Field</th>
+					<th>Value</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><strong>Stock Entry Type</strong></td>
+					<td>Material Issue</td>
+				</tr>
+				<tr>
+					<td><strong>Source Warehouse (s_warehouse)</strong></td>
+					<td>Work In Progress (WIP) warehouse</td>
+				</tr>
+				<tr>
+					<td><strong>Target Warehouse</strong></td>
+					<td>None &mdash; stock goes out (consumed)</td>
+				</tr>
+				<tr>
+					<td><strong>Quantity</strong></td>
+					<td>Delivered qty &minus; Billed qty (only the quantity that has been invoiced)</td>
+				</tr>
+				<tr>
+					<td><strong>Valuation Rate</strong></td>
+					<td>Rate with overheads from the Project Budget</td>
+				</tr>
+				<tr>
+					<td><strong>Reference</strong></td>
+					<td>Sales Invoice name (reference_number), custom_reference_type = "Sales Invoice"</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<h3>Accounting entry on Material Issue (normal invoice)</h3>
+		<p>The Material Issue Stock Entry creates the following GL entry <strong>only if perpetual inventory is enabled</strong> for the company. This is the COGS entry for the Project flow:</p>
+
+		<table class="gl-table">
+			<thead>
+				<tr>
+					<th>Account</th>
+					<th>Debit</th>
+					<th>Credit</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><span class="dr">Dr</span> Cost of Goods Sold</td>
+					<td>Stock value of items issued</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>&nbsp;&nbsp;&nbsp;<span class="cr">Cr</span> Stock / Inventory (WIP warehouse account)</td>
+					<td></td>
+					<td>Stock value of items issued</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<div class="tip-box">
+			<strong>In simple words:</strong> Cost of Goods Sold is debited, and the WIP warehouse stock account is credited. This is the point where the cost of the goods is finally recognized in the Project flow &mdash; at invoice time, not at delivery time.
+		</div>
+
+		<h3>Accounting entry on a Sales Invoice return (Credit Note)</h3>
+		<p>When a Project-type <strong>Sales Invoice return (Credit Note)</strong> is submitted, the system auto-creates a <strong>Material Receipt Stock Entry</strong> to move the returned items <strong>back into the WIP warehouse</strong>, reversing the COGS:</p>
+
+		<table class="gl-table">
+			<thead>
+				<tr>
+					<th>Account</th>
+					<th>Debit</th>
+					<th>Credit</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><span class="dr">Dr</span> Stock / Inventory (WIP warehouse account)</td>
+					<td>Stock value of items returned</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>&nbsp;&nbsp;&nbsp;<span class="cr">Cr</span> Cost of Goods Sold</td>
+					<td></td>
+					<td>Stock value of items returned</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<h3>What happens when the Sales Invoice is cancelled</h3>
+		<p>The auto-created Material Issue Stock Entry is <strong>cancelled</strong>, which reverses both the Stock Ledger Entries and the GL entries. Stock is added back to the WIP warehouse, and the COGS / Inventory entries are reversed. The billed quantities in the Project Budget are also reverted.</p>
+	</div>
+
+	<!-- Section 7: Delivery Note (Sales Flow) -->
+	<div class="section" id="dn-standard">
+		<h2>7. Delivery Note (Sales Flow) &mdash; Accounting Entries</h2>
+		<h3>What it is</h3>
+		<p>The Delivery Note is the standard document used to issue goods out of the warehouse to a customer. It reduces the physical stock and &mdash; when the company's settings allow it &mdash; creates the related accounting entries.</p>
+
+		<h3>What happens when a Delivery Note is submitted</h3>
+		<div class="step-item">
+			<span class="step-number">1</span>
+			<div class="step-content"><strong>Updates the Sales Order</strong> &mdash; marks the delivered quantity.</div>
+		</div>
+		<div class="step-item">
+			<span class="step-number">2</span>
+			<div class="step-content"><strong>Updates the billing status</strong> &mdash; tracks how much has been invoiced.</div>
+		</div>
+		<div class="step-item">
+			<span class="step-number">3</span>
+			<div class="step-content"><strong>Updates the Stock Ledger</strong> &mdash; records the outgoing stock movement for each item. This reduces the stock quantity in the warehouse.</div>
+		</div>
+		<div class="step-item">
+			<span class="step-number">4</span>
+			<div class="step-content"><strong>Creates Accounting Entries (GL)</strong> &mdash; but only if the company is set up for <strong>perpetual inventory</strong> (see section 8).</div>
+		</div>
+
+		<h3>Accounting entry created on a normal Delivery Note</h3>
+		<p>For each item delivered, the system posts the following entry, valued at the <strong>stock (cost) value</strong> of the goods &mdash; not at the selling price:</p>
+
+		<table class="gl-table">
+			<thead>
+				<tr>
+					<th>Account</th>
+					<th>Debit</th>
+					<th>Credit</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><span class="dr">Dr</span> Cost of Goods Sold</td>
+					<td>Stock value of items delivered</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>&nbsp;&nbsp;&nbsp;<span class="cr">Cr</span> Stock / Inventory (warehouse account)</td>
+					<td></td>
+					<td>Stock value of items delivered</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<div class="tip-box">
+			<strong>In simple words:</strong> Cost of Goods Sold is debited, and the Stock (Inventory) account of the warehouse is credited &mdash; for the cost value of the goods going out.
+		</div>
+
+		<h3>Accounting entry on a Delivery Note Return</h3>
+		<p>When the Delivery Note is a <strong>return</strong> (goods coming back from the customer), the same entry is reversed:</p>
+
+		<table class="gl-table">
+			<thead>
+				<tr>
+					<th>Account</th>
+					<th>Debit</th>
+					<th>Credit</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><span class="dr">Dr</span> Stock / Inventory (warehouse account)</td>
+					<td>Stock value of items returned</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>&nbsp;&nbsp;&nbsp;<span class="cr">Cr</span> Cost of Goods Sold</td>
+					<td></td>
+					<td>Stock value of items returned</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<h3>What happens when a Delivery Note is cancelled</h3>
+		<p>When a Delivery Note is cancelled, the system reverses the original stock movement and the original accounting entries. The stock is added back to the warehouse, and the Cost of Goods Sold / Inventory entries are reversed.</p>
+	</div>
+
+	<!-- Section 8: Perpetual Inventory -->
+	<div class="section" id="perpetual-inventory">
+		<h2>8. When Does the Delivery Note Create Accounting Entries?</h2>
+		<p>The Delivery Note (and the auto-created Stock Entries from DN WIP / Sales Invoice) create accounting entries <strong>only when</strong> at least one of the following is enabled for the company:</p>
+
+		<table class="info-table">
+			<thead>
+				<tr>
+					<th>Setting</th>
+					<th>Where it is set</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><strong>Perpetual Inventory</strong> enabled</td>
+					<td>Company settings</td>
+				</tr>
+				<tr>
+					<td><strong>Provisional accounting for non-stock items</strong> enabled</td>
+					<td>Company settings</td>
+				</tr>
+				<tr>
+					<td>The document contains a <strong>fixed asset</strong> item</td>
+					<td>Item master</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<p>If <strong>none</strong> of these are enabled, the Delivery Note / Stock Entry will:</p>
+		<ul>
+			<li>Still create the <strong>Stock Ledger Entry</strong> (stock quantity will move), but</li>
+			<li><strong>Not</strong> create any <strong>accounting (GL) entry</strong>.</li>
+		</ul>
+
+		<div class="warning-box">
+			<strong>Troubleshooting:</strong> This is the most common reason a Delivery Note or Stock Entry shows a stock movement but no accounting voucher. If accounting entries are expected but not appearing, please check with the system administrator whether <strong>Perpetual Inventory</strong> is enabled for the company.
+		</div>
+	</div>
+
+	<!-- Section 9: Revenue / Customer entry -->
+	<div class="section" id="revenue-entry">
+		<h2>9. Where is the Revenue / Customer Entry Booked?</h2>
+		<p>Neither the Delivery Note, the DN WIP, nor the auto-created Stock Entries book the sale revenue, the customer (debtor), or the taxes.</p>
+		<p>Those are booked when the <strong>Sales Invoice</strong> is created &mdash; either:</p>
+		<ul>
+			<li>Directly, or</li>
+			<li>From the Delivery Note (using the "Create &rarr; Sales Invoice" button), or</li>
+			<li>From the Delivery Note WIP (using the "Create &rarr; Sales Invoice" button).</li>
+		</ul>
+		<p>The Sales Invoice creates entries of the form:</p>
+
+		<table class="gl-table">
+			<thead>
+				<tr>
+					<th>Account</th>
+					<th>Debit</th>
+					<th>Credit</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><span class="dr">Dr</span> Customer (Debtor)</td>
+					<td>Invoice value (incl. tax)</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>&nbsp;&nbsp;&nbsp;<span class="cr">Cr</span> Sales Income</td>
+					<td></td>
+					<td>Net value</td>
+				</tr>
+				<tr>
+					<td>&nbsp;&nbsp;&nbsp;<span class="cr">Cr</span> Tax Payable (VAT / etc.)</td>
+					<td></td>
+					<td>Tax amount</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<div class="note-box">
+			<strong>Note:</strong> In the Project flow, submitting the Sales Invoice also triggers the auto-creation of the <strong>Material Issue Stock Entry</strong> (see section 6), which books the COGS entry. So in the Project flow, both revenue and COGS are booked at invoice time.
+		</div>
+	</div>
+
+	<!-- Section 10: Returns & Cancellations -->
+	<div class="section" id="returns-cancellations">
+		<h2>10. Returns &amp; Cancellations</h2>
+
+		<h3>Sales Flow &mdash; Returns</h3>
+		<table class="info-table">
+			<thead>
+				<tr>
+					<th>Action</th>
+					<th>What happens</th>
+					<th>Accounting impact</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><strong>DN Return submitted</strong></td>
+					<td>Stock moves back into warehouse (SLE reversed)</td>
+					<td><span class="dr">Dr</span> Stock / <span class="cr">Cr</span> COGS (reversal)</td>
+				</tr>
+				<tr>
+					<td><strong>DN cancelled</strong></td>
+					<td>Stock moves back, SLE &amp; GL reversed</td>
+					<td>All entries reversed</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<h3>Project Flow &mdash; Returns</h3>
+		<table class="info-table">
+			<thead>
+				<tr>
+					<th>Action</th>
+					<th>What happens</th>
+					<th>Accounting impact</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><strong>DN WIP Return submitted</strong></td>
+					<td>Auto-creates Material Transfer SE with negative qty &mdash; stock moves back from WIP to source</td>
+					<td><span class="dr">Dr</span> Stock (source) / <span class="cr">Cr</span> Stock (WIP) (reversal)</td>
+				</tr>
+				<tr>
+					<td><strong>DN WIP cancelled</strong></td>
+					<td>Auto-created Material Transfer SE is cancelled &mdash; stock &amp; GL reversed</td>
+					<td>All entries reversed</td>
+				</tr>
+				<tr>
+					<td><strong>Sales Invoice return (Credit Note) submitted</strong></td>
+					<td>Auto-creates Material Receipt SE &mdash; stock moves back into WIP warehouse</td>
+					<td><span class="dr">Dr</span> Stock (WIP) / <span class="cr">Cr</span> COGS (reversal) + revenue/tax reversal</td>
+				</tr>
+				<tr>
+					<td><strong>Sales Invoice cancelled</strong></td>
+					<td>Auto-created Material Issue SE is cancelled &mdash; stock &amp; GL reversed</td>
+					<td>All entries reversed (revenue, tax, COGS, stock)</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<!-- Section 11: Complete flow -->
+	<div class="section" id="complete-flow">
+		<h2>11. Complete Flow &mdash; From Sales Order to Accounting</h2>
+
+		<h3>Sales Flow</h3>
+		<table class="info-table">
+			<thead>
+				<tr>
+					<th>Step</th>
+					<th>Document</th>
+					<th>Stock Movement</th>
+					<th>Accounting Entry</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><strong>1</strong></td>
+					<td><strong>Sales Order</strong></td>
+					<td>None</td>
+					<td>None</td>
+				</tr>
+				<tr>
+					<td><strong>2</strong></td>
+					<td><strong>Delivery Note</strong></td>
+					<td>Yes &mdash; stock goes out of warehouse</td>
+					<td><span class="dr">Dr</span> COGS / <span class="cr">Cr</span> Stock Inventory <em>(if perpetual inventory)</em></td>
+				</tr>
+				<tr>
+					<td><strong>3</strong></td>
+					<td><strong>Sales Invoice</strong></td>
+					<td>Only if "Update Stock" enabled</td>
+					<td><span class="dr">Dr</span> Customer / <span class="cr">Cr</span> Sales Income + <span class="cr">Cr</span> Tax <em>(+ COGS/Stock if Update Stock)</em></td>
+				</tr>
+			</tbody>
+		</table>
+
+		<h3>Project Flow</h3>
+		<table class="info-table">
+			<thead>
+				<tr>
+					<th>Step</th>
+					<th>Document</th>
+					<th>Stock Movement</th>
+					<th>Accounting Entry</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><strong>1</strong></td>
+					<td><strong>Sales Order</strong></td>
+					<td>None</td>
+					<td>None</td>
+				</tr>
+				<tr>
+					<td><strong>2</strong></td>
+					<td><strong>DN WIP submitted</strong></td>
+					<td>None directly &mdash; only updates Project Budget delivery status</td>
+					<td>None directly</td>
+				</tr>
+				<tr>
+					<td><strong>2a</strong></td>
+					<td><strong>Material Transfer SE</strong> (auto-created from DN WIP)</td>
+					<td>Yes &mdash; stock moves from source warehouse to WIP warehouse</td>
+					<td><span class="dr">Dr</span> Stock (WIP) / <span class="cr">Cr</span> Stock (source) <em>(if perpetual inventory)</em></td>
+				</tr>
+				<tr>
+					<td><strong>3</strong></td>
+					<td><strong>Sales Invoice</strong></td>
+					<td>None directly</td>
+					<td><span class="dr">Dr</span> Customer / <span class="cr">Cr</span> Sales Income + <span class="cr">Cr</span> Tax</td>
+				</tr>
+				<tr>
+					<td><strong>3a</strong></td>
+					<td><strong>Material Issue SE</strong> (auto-created from Sales Invoice / Stock In Hand WIP)</td>
+					<td>Yes &mdash; stock goes out of WIP warehouse (consumed)</td>
+					<td><span class="dr">Dr</span> COGS / <span class="cr">Cr</span> Stock (WIP) <em>(if perpetual inventory)</em></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<!-- Section 12: Reminders -->
+	<div class="section" id="reminders">
+		<h2>12. Important Reminders</h2>
+		<ul>
+			<li><strong>DN WIP is a non-posting document, but it auto-creates a Material Transfer Stock Entry.</strong> The DN WIP itself does not create SLE or GL entries. However, submitting a DN WIP triggers the system to create and submit a Material Transfer Stock Entry, which moves stock from the source warehouse to the WIP warehouse and creates SLE and GL entries (if perpetual inventory is enabled).</li>
+			<li><strong>Delivery Note is a posting document.</strong> On submission it always reduces stock, and it creates accounting entries <strong>only if</strong> perpetual inventory (or provisional accounting, or an asset item) is enabled for the company.</li>
+			<li><strong>Material Transfer (from DN WIP):</strong> Moves stock from source warehouse to WIP warehouse. GL entry: <span class="dr">Dr</span> Stock (WIP) / <span class="cr">Cr</span> Stock (source). No COGS is booked at this stage &mdash; the stock just changes location.</li>
+			<li><strong>Material Issue (from Stock In Hand WIP / Sales Invoice):</strong> Moves stock out of the WIP warehouse. GL entry: <span class="dr">Dr</span> COGS / <span class="cr">Cr</span> Stock (WIP). This is where the cost of goods sold is recognized in the Project flow.</li>
+			<li><strong>Material Receipt (from Credit Note return):</strong> Moves stock back into the WIP warehouse. GL entry: <span class="dr">Dr</span> Stock (WIP) / <span class="cr">Cr</span> COGS (reversal).</li>
+			<li><strong>The accounting entry on a Delivery Note is a stock-vs-cost entry</strong>, valued at the cost of the goods &mdash; not the selling price:
+				<ul>
+					<li><span class="dr">Dr</span> Cost of Goods Sold / <span class="cr">Cr</span> Stock Inventory for a normal delivery.</li>
+					<li><strong>Reversed</strong> for a return.</li>
+					<li><strong>Reversed again</strong> when the Delivery Note is cancelled.</li>
+				</ul>
+			</li>
+			<li><strong>Revenue, customer, and tax entries are always booked by the Sales Invoice</strong>, never by the Delivery Note, DN WIP, or Stock Entries.</li>
+			<li><strong>In the Project flow, COGS is booked at invoice time</strong> &mdash; via the Material Issue Stock Entry auto-created from the Sales Invoice or triggered from the Stock In Hand WIP report, not at delivery time.</li>
+			<li><strong>Cancelling a DN WIP cancels the auto-created Material Transfer Stock Entry</strong>, which reverses the stock and GL entries. Always ensure no Sales Invoice has been raised before cancelling.</li>
+			<li><strong>Cancelling a Sales Invoice cancels the auto-created Material Issue Stock Entry</strong>, which reverses the COGS and stock entries. The billed quantities in the Project Budget are also reverted.</li>
+			<li>If a document shows stock movement but no accounting entry, check whether <strong>Perpetual Inventory</strong> is enabled for the company.</li>
+		</ul>
+
+		<div class="tip-box">
+			<strong>Tip:</strong> Always create the Delivery Note / Delivery Note WIP from the Sales Order to ensure the delivered quantity is tracked correctly and the billing flow works properly. In the Project flow, always run the Stock In Hand WIP report after invoicing to ensure the Material Issue Stock Entries are created and COGS is booked.
+		</div>
+	</div>
+
+</div>
+
+<!-- Footer -->
+<div class="footer">
+	<p>&copy; 2026 TEAMPRO. All rights reserved.</p>
+	<p>This user manual was prepared by TEAMPRO for Electra Qatar.</p>
+</div>
+
+</body>
+</html>

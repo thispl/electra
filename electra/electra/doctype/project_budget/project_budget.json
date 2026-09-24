@@ -706,12 +706,12 @@
    "label": "Delivery Date"
   },
   {
-   "depends_on": "revision",
+   "allow_on_submit": 1,
+   "depends_on": "// revision",
    "fieldname": "revision",
    "fieldtype": "Select",
    "label": "Revision",
-   "options": "\nPB - Revision\nSO - Revision",
-   "read_only": 1
+   "options": "\nPB - Revision\nSO - Revision"
   },
   {
    "fieldname": "pb_revision",
@@ -846,7 +846,7 @@
    "link_fieldname": "project_budget"
   }
  ],
- "modified": "2026-01-20 18:25:15.745358",
+ "modified": "2026-07-30 07:21:10.800902",
  "modified_by": "Administrator",
  "module": "Electra",
  "name": "Project Budget",

@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stock Reconciliation - User Manual | TEAMPRO</title>
+<style>
+	* { margin: 0; padding: 0; box-sizing: border-box; }
+	body {
+		font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+		color: #333;
+		line-height: 1.7;
+		background: #f5f5f5;
+	}
+	.sr-manual-wrapper {
+		max-width: 900px;
+		margin: 0 auto;
+		background: #fff;
+		padding: 0;
+	}
+	.cover {
+		background: #ffffff;
+		color: #333;
+		padding: 20px 40px;
+		border-radius: 0;
+		text-align: center;
+		border-bottom: 3px solid #1a237e;
+	}
+	.cover img {
+		max-height: 80px;
+		margin-bottom: 20px;
+	}
+	.cover h1 {
+		font-size: 32px;
+		font-weight: 700;
+		margin-bottom: 10px;
+	}
+	.cover p {
+		font-size: 16px;
+		opacity: 1;
+		color: #555;
+	}
+	.cover .meta {
+		margin-top: 20px;
+		font-size: 13px;
+		color: #777;
+	}
+	.container {
+		max-width: 100%;
+		padding: 40px;
+	}
+	.toc {
+		background: #f0f4ff;
+		border: 1px solid #d0d8f0;
+		border-radius: 8px;
+		padding: 25px 30px;
+		margin-bottom: 40px;
+	}
+	.toc h3 {
+		color: #1a237e;
+		font-size: 18px;
+		margin-bottom: 15px;
+		border-bottom: 2px solid #c5cae9;
+		padding-bottom: 8px;
+	}
+	.toc ol {
+		padding-left: 20px;
+	}
+	.toc li {
+		margin-bottom: 6px;
+	}
+	.toc a {
+		color: #1a237e;
+		text-decoration: none;
+		transition: color 0.2s;
+	}
+	.toc a:hover {
+		color: #3949ab;
+		text-decoration: underline;
+	}
+	.section {
+		margin-bottom: 35px;
+	}
+	.section h2 {
+		color: #1a237e;
+		font-size: 24px;
+		margin-bottom: 15px;
+		padding-bottom: 8px;
+		border-bottom: 2px solid #e8eaf6;
+	}
+	.section h3 {
+		color: #283593;
+		font-size: 18px;
+		margin-top: 20px;
+		margin-bottom: 10px;
+	}
+	.section p {
+		margin-bottom: 12px;
+		font-size: 15px;
+	}
+	.section ul, .section ol {
+		padding-left: 25px;
+		margin-bottom: 15px;
+	}
+	.section li {
+		margin-bottom: 8px;
+		font-size: 15px;
+	}
+	.section .step-number {
+		display: inline-block;
+		width: 28px;
+		height: 28px;
+		line-height: 28px;
+		text-align: center;
+		background: #1a237e;
+		color: #fff;
+		border-radius: 50%;
+		font-size: 13px;
+		font-weight: 700;
+		margin-right: 10px;
+	}
+	.section .step-item {
+		display: flex;
+		align-items: flex-start;
+		margin-bottom: 15px;
+	}
+	.section .step-item .step-content {
+		flex: 1;
+	}
+	.note-box {
+		background: #fff8e1;
+		border-left: 4px solid #ffc107;
+		padding: 15px 20px;
+		margin: 20px 0;
+		border-radius: 4px;
+	}
+	.note-box strong {
+		color: #f57f17;
+	}
+	.warning-box {
+		background: #ffebee;
+		border-left: 4px solid #f44336;
+		padding: 15px 20px;
+		margin: 20px 0;
+		border-radius: 4px;
+	}
+	.warning-box strong {
+		color: #c62828;
+	}
+	.tip-box {
+		background: #e8f5e9;
+		border-left: 4px solid #4caf50;
+		padding: 15px 20px;
+		margin: 20px 0;
+		border-radius: 4px;
+	}
+	.tip-box strong {
+		color: #2e7d32;
+	}
+	.video-section {
+		margin: 40px 0;
+	}
+	.video-section h2 {
+		color: #1a237e;
+		font-size: 24px;
+		margin-bottom: 15px;
+		padding-bottom: 8px;
+		border-bottom: 2px solid #e8eaf6;
+	}
+	.video-container {
+		position: relative;
+		width: 100%;
+		background: #000;
+		border-radius: 8px;
+		overflow: hidden;
+		box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+	}
+	.video-container video {
+		width: 100%;
+		display: block;
+	}
+	.error-table {
+		width: 100%;
+		border-collapse: collapse;
+		margin: 20px 0;
+	}
+	.error-table th {
+		background: #1a237e;
+		color: #fff;
+		padding: 12px 15px;
+		text-align: left;
+		font-size: 14px;
+	}
+	.error-table td {
+		padding: 12px 15px;
+		border-bottom: 1px solid #e0e0e0;
+		font-size: 14px;
+	}
+	.error-table tr:nth-child(even) {
+		background: #f5f5f5;
+	}
+	.footer {
+		background: #1a237e;
+		color: #fff;
+		text-align: center;
+		padding: 25px;
+		font-size: 13px;
+	}
+	.footer a {
+		color: #90caf9;
+		text-decoration: none;
+	}
+	@media print {
+		.cover { background: #ffffff !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+		.video-container { display: none; }
+		.toc { page-break-after: always; }
+		.section { page-break-inside: avoid; }
+	}
+</style>
+</head>
+<body>
+
+<!-- Cover -->
+<div class="cover">
+	<img src="/files/db863f761fTEAMPRO New.png" alt="TEAMPRO Logo" />
+	<h1>Stock Reconciliation</h1>
+	<p>User Manual &amp; Training Guide</p>
+	<div class="meta">
+		Prepared by TEAMPRO<br>
+		for Electra Qatar
+	</div>
+</div>
+
+<div class="container">
+
+	<!-- Table of Contents -->
+	<div class="toc">
+		<h3>Table of Contents</h3>
+		<ol>
+			<li>Overview</li>
+			<li>Accessing Stock Reconciliation</li>
+			<li>Creating a New Stock Reconciliation</li>
+			<li>Adding Items Manually</li>
+			<li>Uploading Items via CSV File</li>
+			<li>Saving &amp; Submitting</li>
+			<li>Important Reminders</li>
+			<li>Common Errors &amp; Troubleshooting</li>
+			<li>Video Tutorial</li>
+		</ol>
+	</div>
+
+	<!-- Section 1: Overview -->
+	<div class="section" id="overview">
+		<h2>1. Overview</h2>
+		<p>Stock Reconciliation is the process of counting and evaluating material/products, periodically and at year-end, in order to:</p>
+		<ul>
+			<li>Keep the actual physical stock count and book stock count in sync</li>
+			<li>Value the stock for the preparation of accounting statements</li>
+			<li>Post opening stock into the system</li>
+			<li>Identify discrepancies such as inventory theft or data entry errors</li>
+		</ul>
+		<p>The Stock Reconciliation feature in ERPNext is used to reconcile the stock balance and value with actuals. This ensures accuracy in financial reporting and helps maintain correct inventory levels.</p>
+	</div>
+
+	<!-- Section 2: Accessing -->
+	<div class="section" id="accessing">
+		<h2>2. Accessing Stock Reconciliation</h2>
+		<div class="step-item">
+			<span class="step-number">1</span>
+			<div class="step-content"><strong>Log into</strong> your ERPNext account.</div>
+		</div>
+		<div class="step-item">
+			<span class="step-number">2</span>
+			<div class="step-content"><strong>Click on</strong> the <strong>Stock</strong> module in the sidebar.</div>
+		</div>
+		<div class="step-item">
+			<span class="step-number">3</span>
+			<div class="step-content">Navigate to <strong>Tools &gt; Stock Reconciliation</strong>.</div>
+		</div>
+		<div class="tip-box">
+			<strong>Tip:</strong> You can also search for "Stock Reconciliation" directly in the awesome bar (search bar) at the top of the screen.
+		</div>
+	</div>
+
+	<!-- Section 3: Creating -->
+	<div class="section" id="creating">
+		<h2>3. Creating a New Stock Reconciliation</h2>
+		<div class="step-item">
+			<span class="step-number">1</span>
+			<div class="step-content">Click on <strong>'New'</strong> on the upper right-hand area of the screen.</div>
+		</div>
+		<div class="step-item">
+			<span class="step-number">2</span>
+			<div class="step-content">
+				Specify the <strong>Posting Date/Time</strong> the balance will be effective for. Tick the <strong>"Edit Posting Date"</strong> box and change the Date and Time as needed.
+			</div>
+		</div>
+		<div class="note-box">
+			<strong>Note:</strong> The posting date determines when the stock balance will reflect in reports. You can make back-dated stock reconciliations as well.
+		</div>
+	</div>
+
+	<!-- Section 4: Adding Items Manually -->
+	<div class="section" id="adding-items">
+		<h2>4. Adding Items Manually</h2>
+		<p>On the Items section, click the <strong>"Add Row"</strong> button to enter each item you need to update the balance. You need to specify the following information:</p>
+		<ul>
+			<li><strong>Item Code</strong> — Must match the Item Code configured in ERP</li>
+			<li><strong>Warehouse</strong> — Must match the Warehouse name configured in ERP</li>
+			<li><strong>Quantity</strong> — The actual physical count for that item in the specified warehouse</li>
+			<li><strong>Valuation Rate</strong> — The valuation rate for the item (optional; leave blank to keep existing rate)</li>
+		</ul>
+		<div class="tip-box">
+			<strong>Tip:</strong> Use the <strong>Items</strong> button to fetch the current stock balance and valuation as of a specific date and time from a selected Warehouse. You can then update the Quantity and Valuation Rate as needed.
+		</div>
+	</div>
+
+	<!-- Section 5: CSV Upload -->
+	<div class="section" id="csv-upload">
+		<h2>5. Uploading Items via CSV File</h2>
+		<p>If there are multiple items, doing a file upload is a more efficient option.</p>
+		<div class="step-item">
+			<span class="step-number">1</span>
+			<div class="step-content">
+				To generate the template file, click the <strong>"Download"</strong> button. A CSV file will be saved to your computer.
+			</div>
+		</div>
+		<div class="step-item">
+			<span class="step-number">2</span>
+			<div class="step-content">
+				Open the CSV file and enter the required data: <strong>Item Code</strong>, <strong>Warehouse</strong>, <strong>Quantity</strong>, and <strong>Valuation Rate</strong>. You can copy-paste from a reference document but make sure you are copying the correct information.
+			</div>
+		</div>
+		<div class="step-item">
+			<span class="step-number">3</span>
+			<div class="step-content">
+				Click the <strong>"Upload"</strong> button and select the CSV file you edited to add the items in your Stock Reconciliation.
+			</div>
+		</div>
+		<div class="warning-box">
+			<strong>Important:</strong> Item Code and Warehouse should match exactly with what was configured on ERP. If there is a mismatch, an error will appear when saving the Stock Reconciliation document. Do not edit the headers in the CSV template — they are case-sensitive.
+		</div>
+	</div>
+
+	<!-- Section 6: Saving & Submitting -->
+	<div class="section" id="saving-submitting">
+		<h2>6. Saving &amp; Submitting the Document</h2>
+		<div class="step-item">
+			<span class="step-number">1</span>
+			<div class="step-content">Click on <strong>"Save"</strong> to save the Stock Reconciliation document.</div>
+		</div>
+		<div class="step-item">
+			<span class="step-number">2</span>
+			<div class="step-content">
+				If there is no error, the document will be saved as <strong>Draft</strong>. From here, you can click <strong>Submit</strong> to post the new balance.
+			</div>
+		</div>
+		<div class="note-box">
+			<strong>Note:</strong> After submission, the stock balance will be updated in the system. The Difference Account will be set to 'Stock Adjustment' by default, and the Cost Centre will default to 'Main' — change if needed.
+		</div>
+	</div>
+
+	<!-- Section 7: Reminders -->
+	<div class="section" id="reminders">
+		<h2>7. Important Reminders</h2>
+		<ul>
+			<li>To perform an efficient Stock Reconciliation, use the <strong>Stock Balance Report</strong> first to compare that your "Manual Count" matches with the balance. If there are differences with the manual count, a Stock Reconciliation may be needed.</li>
+			<li>When doing comparison between ERP Count and Manual Stock Count, make sure that you are using the <strong>Item Name / Code</strong> that are encoded in ERP. This way, unnecessary confusion with "typo", name differences can be avoided.</li>
+			<li>After successfully posting a Stock Reconciliation, always generate a new <strong>Stock Balance Report</strong> and check if desired changes were applied.</li>
+			<li>Make sure that items that will be zeroed or decreased in quantity are not used in an existing Material Issue transaction from a date after your Stock Reconciliation posting date. If the item's balance in your Stock Reconciliation will be less than the Material Issue quantity, Stock Reconciliation for that item will not be allowed — unless negative inventory is allowed in the organization.</li>
+		</ul>
+	</div>
+
+	<!-- Section 8: Common Errors -->
+	<div class="section" id="common-errors">
+		<h2>8. Common Errors &amp; Troubleshooting</h2>
+		<table class="error-table">
+			<thead>
+				<tr>
+					<th>Error</th>
+					<th>Cause &amp; Solution</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><strong>Could not find Item "X"</strong></td>
+					<td>Missing Item Code. Usually caused by an error in encoding the Item Code. Verify the exact Item Code from the Item Master.</td>
+				</tr>
+				<tr>
+					<td><strong>Could not find Warehouse "X"</strong></td>
+					<td>Missing Warehouse Name. Usually caused by an error in encoding the Warehouse Name. Verify the exact Warehouse name from the Warehouse list.</td>
+				</tr>
+				<tr>
+					<td><strong>Item "X" is not a Stock</strong></td>
+					<td>All items in the inventory must be a Stock Item. The checkbox "Maintain Stock" under Item Master must be ticked before you can add inventory to the item. If this error appears, the item is not configured as a Stock Item.</td>
+				</tr>
+				<tr>
+					<td><strong>Duplicate Items</strong></td>
+					<td>If there are duplicate Item Codes with the same warehouse on your file upload, this error will appear. Check your CSV template and remove the duplicate entry.</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<!-- Section 9: Video Tutorial -->
+	<div class="section video-section" id="video">
+		<h2>9. Video Tutorial</h2>
+		<p>Watch the step-by-step video tutorial below to see the Stock Reconciliation process in action:</p>
+		<p><a href="/files/Screen Recording 2026-07-30 125723.mp4" target="_blank" style="display: inline-block; padding: 12px 30px; background: #1a237e; color: #fff; text-decoration: none; border-radius: 6px; font-size: 15px; font-weight: 600; transition: background 0.2s;" onmouseover="this.style.background='#3949ab'" onmouseout="this.style.background='#1a237e'">&#9658; Click here to watch the video tutorial</a></p>
+	</div>
+
+</div>
+
+<!-- Footer -->
+<div class="footer">
+	<p>&copy; 2026 TEAMPRO. All rights reserved.</p>
+	<p>This user manual was prepared by TEAMPRO for Electra Qatar.</p>
+</div>
+
+</body>
+</html>

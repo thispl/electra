@@ -64,6 +64,7 @@ class SalaryRevision(Document):
 				emp.per_hour_cost = self.per_hour_cost
 				emp.append('history',{
 					"date":self.effective_date,
+					"custom_salary_revision": self.name,
 					"basic":self.basic,
 					"hra":self.hra,
 					"other_allowance":self.other_allowance,
@@ -110,5 +111,17 @@ class SalaryRevision(Document):
 				emp.per_hour_cost = self.per_hour_cost2
 				emp.save(ignore_permissions=True)
 				frappe.db.commit()
+
+	def on_cancel(self):
+		emp = frappe.get_doc("Employee", {"employee": self.employee, "status": "Active"})
+		removed = False
+		for row in emp.history:
+			if row.custom_salary_revision == self.name:
+				emp.remove(row)
+				removed = True
+				break
+		if removed:
+			emp.save(ignore_permissions=True)
+			frappe.db.commit()
 
 

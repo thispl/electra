@@ -1,0 +1,27 @@
+{
+ "content": null,
+ "docstatus": 0,
+ "doctype": "Page",
+ "idx": 0,
+ "modified": "2026-08-01 16:30:00.000000",
+ "modified_by": "Administrator",
+ "module": "Electra",
+ "name": "delivery-note-wip-accounting",
+ "owner": "Administrator",
+ "page_name": "delivery-note-wip-accounting",
+ "roles": [
+  {"role": "System Manager"},
+  {"role": "Accounts Manager"},
+  {"role": "Accounts User"},
+  {"role": "Sales Manager"},
+  {"role": "Sales User"},
+  {"role": "Stock Manager"},
+  {"role": "Stock User"},
+  {"role": "Projects Manager"},
+  {"role": "Projects User"}
+ ],
+ "script": null,
+ "standard": "Yes",
+ "style": null,
+ "system_page": 0
+}

@@ -1,0 +1,2613 @@
+{
+ "buckets": [
+  {
+   "bucket": "Cash in Hand",
+   "account_head": "Cash",
+   "tb_group": "ASSET",
+   "sort_order": 10,
+   "accounts": [
+    {
+     "account_number": "1101",
+     "account_name": "PETTY CASH",
+     "company": ""
+    },
+    {
+     "account_number": "1101",
+     "account_name": "Petty Cash",
+     "company": ""
+    },
+    {
+     "account_number": "1102",
+     "account_name": "CASH FROM SALES",
+     "company": ""
+    },
+    {
+     "account_number": "1102",
+     "account_name": "Cash From Sales",
+     "company": ""
+    },
+    {
+     "account_number": "1103",
+     "account_name": "CASH SALE -CONTROL A/C",
+     "company": ""
+    },
+    {
+     "account_number": "1120",
+     "account_name": "Cash Sale - Control A/c",
+     "company": ""
+    },
+    {
+     "account_number": "1110",
+     "account_name": "MAIN CASH",
+     "company": ""
+    },
+    {
+     "account_number": "1110",
+     "account_name": "Main Cash",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Bank - QNB Marazeem",
+   "account_head": "Bank",
+   "tb_group": "ASSET",
+   "sort_order": 20,
+   "accounts": [
+    {
+     "account_number": "1205",
+     "account_name": "QNB BANK - MARAZEEM A/C",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Bank - Doha Marazem 0222-02940180-001",
+   "account_head": "Bank",
+   "tb_group": "ASSET",
+   "sort_order": 30,
+   "accounts": [
+    {
+     "account_number": "1232",
+     "account_name": "DOHA BANK - MARAZEEM A/c",
+     "company": ""
+    },
+    {
+     "account_number": "1231",
+     "account_name": "DOHA BANK - MARAZEEM A/c",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Bank - CBQ King Fisher 4580",
+   "account_head": "Bank",
+   "tb_group": "ASSET",
+   "sort_order": 40,
+   "accounts": [
+    {
+     "account_number": "1213",
+     "account_name": "COMMERCIAL BANK QATAR - A/c 4580 KINGFISHER",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Bank - CBQ Electra 4020",
+   "account_head": "Bank",
+   "tb_group": "ASSET",
+   "sort_order": 50,
+   "accounts": [
+    {
+     "account_number": "1211",
+     "account_name": "COMMERCIAL BANK QATAR -4020 4361 81001",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Bank - CBQ Electra 4700",
+   "account_head": "Bank",
+   "tb_group": "ASSET",
+   "sort_order": 60,
+   "accounts": [
+    {
+     "account_number": "1212",
+     "account_name": "COMMERCIAL BANK QATAR - A/c 4700",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Bank - Dukhan 100000076002",
+   "account_head": "Bank",
+   "tb_group": "ASSET",
+   "sort_order": 70,
+   "accounts": [
+    {
+     "account_number": "1221",
+     "account_name": "DUKHAN BANK",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Bank - Doha Electra 0204-0196135-001",
+   "account_head": "Bank",
+   "tb_group": "ASSET",
+   "sort_order": 80,
+   "accounts": [
+    {
+     "account_number": "1231",
+     "account_name": "DOHA BANK - ELECTRA A/c",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Prepaid Card - Amex 0222-02940180-001",
+   "account_head": "Bank",
+   "tb_group": "ASSET",
+   "sort_order": 90,
+   "accounts": [
+    {
+     "account_number": "1231",
+     "account_name": "AMEX CARD - ELECTRA",
+     "company": ""
+    },
+    {
+     "account_number": "1251",
+     "account_name": "AMEX CARD - ELECTRA",
+     "company": ""
+    },
+    {
+     "account_number": "1240",
+     "account_name": "AMEX CARD - ELECTRA",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "QNB E-Cash Card",
+   "account_head": "Bank",
+   "tb_group": "ASSET",
+   "sort_order": 100,
+   "accounts": [
+    {
+     "account_number": "1271",
+     "account_name": "QNB E-CASH CARD # 0752",
+     "company": ""
+    },
+    {
+     "account_number": "1272",
+     "account_name": "QNB E-CASH CARD # 1157",
+     "company": ""
+    },
+    {
+     "account_number": "1273",
+     "account_name": "QNB E-CASH CARD # 2871",
+     "company": ""
+    },
+    {
+     "account_number": "1274",
+     "account_name": "QNB E-CASH CARD # 3002",
+     "company": ""
+    },
+    {
+     "account_number": "1275",
+     "account_name": "QNB E-CASH CARD # 4965",
+     "company": ""
+    },
+    {
+     "account_number": "1276",
+     "account_name": "QNB E-CASH CARD # 6870",
+     "company": ""
+    },
+    {
+     "account_number": "1278",
+     "account_name": "QNB E-CASH CARD # 9338",
+     "company": ""
+    },
+    {
+     "account_number": "1279",
+     "account_name": "QNB E-CASH CARD # 9126",
+     "company": ""
+    },
+    {
+     "account_number": "1280",
+     "account_name": "QNB E-CASH CARD # 9118",
+     "company": ""
+    },
+    {
+     "account_number": "1281",
+     "account_name": "QNB E-CASH CARD # 4352",
+     "company": ""
+    },
+    {
+     "account_number": "1282",
+     "account_name": "QNB E-CASH CARD # 4345",
+     "company": ""
+    },
+    {
+     "account_number": "1283",
+     "account_name": "QNB E-CASH CARD # 5111",
+     "company": ""
+    },
+    {
+     "account_number": "1284",
+     "account_name": "QNB E-CASH CARD # 4871",
+     "company": ""
+    },
+    {
+     "account_number": "1285",
+     "account_name": "QNB E-CASH CARD # 4257",
+     "company": ""
+    },
+    {
+     "account_number": "1286",
+     "account_name": "QNB E-CASH CARD # 4265",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Accounts Receivable",
+   "account_head": "Accounts Receivable",
+   "tb_group": "ASSET",
+   "sort_order": 110,
+   "accounts": [
+    {
+     "account_number": "1310",
+     "account_name": "Debtors",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Debtors",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Retention Receivables",
+   "account_head": "Accounts Receivable",
+   "tb_group": "ASSET",
+   "sort_order": 120,
+   "accounts": [
+    {
+     "account_number": "",
+     "account_name": "RETENTION RECEIVABLES",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Inventory in Warehouse",
+   "account_head": "Inventory",
+   "tb_group": "ASSET",
+   "sort_order": 130,
+   "accounts": [
+    {
+     "account_number": "1410",
+     "account_name": "Stock In Hand",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Stock In Hand",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Work in Progress",
+   "account_head": "WIP",
+   "tb_group": "ASSET",
+   "sort_order": 140,
+   "accounts": [
+    {
+     "account_number": "1411",
+     "account_name": "Stock in Hand - WIP",
+     "company": ""
+    },
+    {
+     "account_number": "2210",
+     "account_name": "Stock Received But Not Billed",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Opening balance difference",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Staff Advances",
+   "account_head": "Advance & deposits",
+   "tb_group": "ASSET",
+   "sort_order": 150,
+   "accounts": [
+    {
+     "account_number": "1601",
+     "account_name": "Staff Loan",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Abhishek -Legal charges",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "SUBAIR M LOAN A/C",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Shahul Hameed - Loan A/c",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "AFSAL P ABDUL AZEEZ LOAN A/C",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Jihas Jaber - Loan A/c",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "KAMEES SULAIMAN LEBBE LOAN A/C",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "KULATHUNGA KUMARA LOAN A/C",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "MAYURAN MUTHURETNAM LOAN A/C",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Puvirasa Kandasamy -Loan A/c",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "SUNEESH LOAN A/C",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "ZIYAD P SAYED LOAN A/C",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "VEHICLE LOAN (HASHIM)",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "VEHICLE LOAN(BINU)",
+     "company": ""
+    },
+    {
+     "account_number": "1610",
+     "account_name": "Employee Advances",
+     "company": ""
+    },
+    {
+     "account_number": "1630",
+     "account_name": "MESS ADVANCE - NEW",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Rent & Electricity Water Deposits",
+   "account_head": "Advance & deposits",
+   "tb_group": "ASSET",
+   "sort_order": 160,
+   "accounts": [
+    {
+     "account_number": "",
+     "account_name": "Electricity & Water Deposits",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Rent Deposits",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Bank - CBQ 4020 Electra Credit card Margin A/c 802",
+   "account_head": "Advance & deposits",
+   "tb_group": "ASSET",
+   "sort_order": 170,
+   "accounts": [
+    {
+     "account_number": "1214",
+     "account_name": "CBQ-CREDIT CARD SECURITY DEPOSIT",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Bank - CBQ 4020 - Margin A/c 803,804,805,806,807",
+   "account_head": "Advance & deposits",
+   "tb_group": "ASSET",
+   "sort_order": 180,
+   "accounts": [
+    {
+     "account_number": "1222",
+     "account_name": "COMMERCIAL BANK CASH MARGIN A/C",
+     "company": ""
+    },
+    {
+     "account_number": "1214",
+     "account_name": "COMMERCIAL BANK CASH MARGIN A/C",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Control A/c",
+   "account_head": "Prepaid Expenses",
+   "tb_group": "ASSET",
+   "sort_order": 190,
+   "accounts": [
+    {
+     "account_number": "",
+     "account_name": "Control A/c - ELectra ECL Div.",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Control A/c - Electrical Div. Electra",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Control A/c - Electra Al Khor Showroom",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Control A/c - Electra Barwa Showroom",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Control A/c - Barwa Showroom Electra",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Control A/c - Electra ENG Div.",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Control A/c - Electra HO",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Control A/c - Electra INTR Div",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Control A/c - Electra INTR Div.",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Control A/c - Electra Ind. Tools Div.",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Control A/c - Electra MEP Div.",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Control A/c - Electra Najma Shworoom",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Control A/c - Electra Najma Showroom",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Control A/c - Electra Steel Div.",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Control A/c - Electra TRDG Div.",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Control A/c - TRDG Div.",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Control A/c - Electra Workshop & Garage Div.",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Control A/c - KF KTRA Div.",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Control A/c - KF Showroom",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Control A/c - Kingfisher Showroom",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Control A/c - MRZM HO",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Control A/c -Electra Bin Omran Showroom",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Control A/c - Electra Bin Omran Showroom",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Control A/c -MRZM Showroom",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "SUSPENSE",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Suspense",
+     "company": ""
+    },
+    {
+     "account_number": "1260",
+     "account_name": "Credit Card Sales",
+     "company": ""
+    },
+    {
+     "account_number": "1240",
+     "account_name": "Credit Card Sales",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Prepaid Expense - Rent & Legal Fee",
+   "account_head": "Prepaid Expenses",
+   "tb_group": "ASSET",
+   "sort_order": 200,
+   "accounts": [
+    {
+     "account_number": "",
+     "account_name": "Prepaid Rent",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Prepaid Legal Fee",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Long Term Loans - Staff & Others",
+   "account_head": "Long Term Loans",
+   "tb_group": "ASSET",
+   "sort_order": 210,
+   "accounts": [
+    {
+     "account_number": "",
+     "account_name": "ABDUL MANAF MUHAMMED LOAN A/C",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "HAKEEEM LOAN A/C",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "HASHIM MURICKELIL LOAN A/C",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "NOUSHAD LOAN A/C(AUDITOR)",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Rashid(Reshu) LOAN A/c",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "SHAJI ISO - LOAN A/C",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "SUBAIR-HO-LOAN A/C (FAIKHA RESTAURANT)",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "SUNEER - LOAN A/C",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "YAHIA LOAN-SEAFOOD A/C",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Electronics Equipments",
+   "account_head": "FIXED ASSETS",
+   "tb_group": "ASSET",
+   "sort_order": 220,
+   "accounts": [
+    {
+     "account_number": "1720",
+     "account_name": "Electronic Equipments",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Electronic Equipments",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Furnitures and Fixtures",
+   "account_head": "FIXED ASSETS",
+   "tb_group": "ASSET",
+   "sort_order": 230,
+   "accounts": [
+    {
+     "account_number": "1730",
+     "account_name": "Furnitures and Fixtures",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Furnitures and Fixtures",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Plant & Machineries",
+   "account_head": "FIXED ASSETS",
+   "tb_group": "ASSET",
+   "sort_order": 240,
+   "accounts": [
+    {
+     "account_number": "1750",
+     "account_name": "Plants and Machineries",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Computer & Softwares",
+   "account_head": "FIXED ASSETS",
+   "tb_group": "ASSET",
+   "sort_order": 250,
+   "accounts": [
+    {
+     "account_number": "1770",
+     "account_name": "Softwares",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Computer & Accessories",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Equipments & Tools",
+   "account_head": "FIXED ASSETS",
+   "tb_group": "ASSET",
+   "sort_order": 260,
+   "accounts": [
+    {
+     "account_number": "",
+     "account_name": "Equipments & Tools",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Vehicles",
+   "account_head": "FIXED ASSETS",
+   "tb_group": "ASSET",
+   "sort_order": 270,
+   "accounts": [
+    {
+     "account_number": "",
+     "account_name": "VEHICLES",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Vehicles",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Building",
+   "account_head": "FIXED ASSETS",
+   "tb_group": "ASSET",
+   "sort_order": 280,
+   "accounts": [
+    {
+     "account_number": "",
+     "account_name": "Labour Camp",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Store/Camp",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Accumulated Depreciation",
+   "account_head": "FIXED ASSETS",
+   "tb_group": "ASSET",
+   "sort_order": 290,
+   "accounts": [
+    {
+     "account_number": "",
+     "account_name": "COMPUTER EQUIP. & SOFTWARE-ACCUMULATED DEPRECIATION",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "EQUIPMENTS & TOOLS-ACCUMULATED DEPRECIATION",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "FURNITURE & FIX.-OFFICE -ACCUMULATED DEPRECIATION",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "LABOUR CAMP -ACCUM DEP.",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "MACHINERY & TOOLS-ACCUMULATED DEP.",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "STORE ASSET- ACCUM DEP.",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "VEHICLE ACCUMULATED DEPT.",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Investments",
+   "account_head": "INVESTMENTS",
+   "tb_group": "ASSET",
+   "sort_order": 300,
+   "accounts": [
+    {
+     "account_number": "1801",
+     "account_name": "INDUSTRIAL TOOLS A/C(NEW DIVISION)",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "A.T.S LLC DUBAI-INVESTMENT A/C",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "ALTAIR INVESTMENT A/C",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "ANH FURNITURE DUBAI",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "ELECTRA - FOOD TRADING DIV. A/C",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "ELECTRA - WORKSHOP & GARAGE DIV.",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "KANDY SUPPLY CHAIN INVESTMENT A/C",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "NORDEN INVESTMENT A/C",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "SEAFOOD TRADING(YAHIA)",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Accounts Payable",
+   "account_head": "Accounts Payable",
+   "tb_group": "Liability",
+   "sort_order": 310,
+   "accounts": [
+    {
+     "account_number": "2110",
+     "account_name": "Creditors",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Creditors",
+     "company": ""
+    },
+    {
+     "account_number": "2130",
+     "account_name": "Stock Transfer - Creditors",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Payroll Payable",
+   "account_head": "Accrued & Provisions",
+   "tb_group": "Liability",
+   "sort_order": 320,
+   "accounts": [
+    {
+     "account_number": "2120",
+     "account_name": "Payroll Payable",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Payroll Payable",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Business Promotion Payable",
+   "account_head": "Accrued & Provisions",
+   "tb_group": "Liability",
+   "sort_order": 330,
+   "accounts": [
+    {
+     "account_number": "",
+     "account_name": "Ashgal Charge Payable",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "BUSINESS PROMOITON PAYABLE A/C",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Interest Payable",
+   "account_head": "Accrued & Provisions",
+   "tb_group": "Liability",
+   "sort_order": 340,
+   "accounts": [
+    {
+     "account_number": "",
+     "account_name": "Interest Payable A/c",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Provisions for Sales Commission",
+   "account_head": "Accrued & Provisions",
+   "tb_group": "Liability",
+   "sort_order": 350,
+   "accounts": [
+    {
+     "account_number": "",
+     "account_name": "Sales Commission Payable",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Accrued Exp - Electricity & Water",
+   "account_head": "Accrued & Provisions",
+   "tb_group": "Liability",
+   "sort_order": 360,
+   "accounts": [
+    {
+     "account_number": "",
+     "account_name": "Provision for Electriciry & Water",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Accrued Others",
+   "account_head": "Accrued & Provisions",
+   "tb_group": "Liability",
+   "sort_order": 370,
+   "accounts": [
+    {
+     "account_number": "",
+     "account_name": "Provision for Expenses",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Provision for Staff Indemnity",
+   "account_head": "Accrued & Provisions",
+   "tb_group": "Liability",
+   "sort_order": 380,
+   "accounts": [
+    {
+     "account_number": "",
+     "account_name": "Provision for Gratuity",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Credit Card King Fisher CBQ Bank",
+   "account_head": "Short term Loans",
+   "tb_group": "Liability",
+   "sort_order": 390,
+   "accounts": [
+    {
+     "account_number": "2402",
+     "account_name": "CREDIT CARD (KF)",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Credit Card Electra CBQ Bank",
+   "account_head": "Short term Loans",
+   "tb_group": "Liability",
+   "sort_order": 400,
+   "accounts": [
+    {
+     "account_number": "",
+     "account_name": "CREDIT CARD (ELECTRA-HO)",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Bank - CBQ 4020 - LC Refinance A/c 303",
+   "account_head": "Short term Loans",
+   "tb_group": "Liability",
+   "sort_order": 410,
+   "accounts": [
+    {
+     "account_number": "1216",
+     "account_name": "COMMERCIAL BANK - 303",
+     "company": ""
+    },
+    {
+     "account_number": "1212",
+     "account_name": "COMMERCIAL BANK - 303",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Bank - CBQ 4020 - NON LC Refinance A/c 301",
+   "account_head": "Short term Loans",
+   "tb_group": "Liability",
+   "sort_order": 420,
+   "accounts": [
+    {
+     "account_number": "1223",
+     "account_name": "COMMERCIAL BANK-301",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Advance Received from Customers",
+   "account_head": "Loans & Advance",
+   "tb_group": "Liability",
+   "sort_order": 430,
+   "accounts": [
+    {
+     "account_number": "",
+     "account_name": "ADVANCE RECD. FROM CUSTOMERS",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Bank - CBQ 4011 - Vehicle Loan A/c 401",
+   "account_head": "Long Term Loans",
+   "tb_group": "Liability",
+   "sort_order": 440,
+   "accounts": [
+    {
+     "account_number": "1226",
+     "account_name": "COMMERCIAL BANK-401- VEHICLE LOAN",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Vehicle Loan - Haris Sir Personnel",
+   "account_head": "Long Term Loans",
+   "tb_group": "Liability",
+   "sort_order": 450,
+   "accounts": [
+    {
+     "account_number": "",
+     "account_name": "VEHICLE LOAN -RANGE ROVER(MR. HAREES)",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Bank - QDB NRGP Loan A/c 5980844",
+   "account_head": "Long Term Loans",
+   "tb_group": "Liability",
+   "sort_order": 460,
+   "accounts": [
+    {
+     "account_number": "1227",
+     "account_name": "COVID-19 NRGP LOAN",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Legal Reserve",
+   "account_head": "Reserves & Surplus",
+   "tb_group": "Liability",
+   "sort_order": 470,
+   "accounts": [
+    {
+     "account_number": "",
+     "account_name": "LEGAL RESERVES",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "LEGAL RESERVES - BR",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "LEGAL RESERVES - KF",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Retained Earnings",
+   "account_head": "Shareholders Equity",
+   "tb_group": "Equity",
+   "sort_order": 480,
+   "accounts": [
+    {
+     "account_number": "3400",
+     "account_name": "Retained Earnings",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Retained Earnings",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Shareholders Current A/c",
+   "account_head": "Shareholders Equity",
+   "tb_group": "Equity",
+   "sort_order": 490,
+   "accounts": [
+    {
+     "account_number": "",
+     "account_name": "MOHAMMED RASHID CURRENT A/C P/L",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "MR. HAREES CURRENT A/C P/L",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "MR. HAREES PERSONAL REFUND A/C",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Share Capital",
+   "account_head": "Shareholders Equity",
+   "tb_group": "Equity",
+   "sort_order": 500,
+   "accounts": [
+    {
+     "account_number": "",
+     "account_name": "SHARE CAPITAL",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "SHARED CAPITAL",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "SHARED CAPITAL - BR",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Sales",
+   "account_head": "Revenue",
+   "tb_group": "Income Statement",
+   "sort_order": 510,
+   "accounts": [
+    {
+     "account_number": "4110",
+     "account_name": "Sales",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Sales",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Sales - Cash",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Sales - Credit",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Discount Allowed for Sales",
+   "account_head": "Revenue",
+   "tb_group": "Income Statement",
+   "sort_order": 520,
+   "accounts": [
+    {
+     "account_number": "",
+     "account_name": "DISCOUNT ALLOWED",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Discount allowed",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Discount Allowed",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Business Promotion (Third Party Commission on Sales)",
+   "account_head": "Revenue",
+   "tb_group": "Income Statement",
+   "sort_order": 530,
+   "accounts": [
+    {
+     "account_number": "",
+     "account_name": "Business Promotion Expenses",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "BUSINESS PROMOTION EXPENSE",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Business Promotion",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Other Income",
+   "account_head": "Revenue",
+   "tb_group": "Income Statement",
+   "sort_order": 540,
+   "accounts": [
+    {
+     "account_number": "",
+     "account_name": "Miscellaneous Income",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Other Income - Profit on Sale of Assets",
+   "account_head": "Revenue",
+   "tb_group": "Income Statement",
+   "sort_order": 550,
+   "accounts": [
+    {
+     "account_number": "",
+     "account_name": "PROFIT ON SALE OF VEHICLES",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Profit on Sales of Fixed Assets",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Cost of Material",
+   "account_head": "COGS",
+   "tb_group": "Income Statement",
+   "sort_order": 560,
+   "accounts": [
+    {
+     "account_number": "5111",
+     "account_name": "Cost of Goods Sold",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Cost of Goods Sold",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Cost of Materials - Discount Received on Materials",
+   "account_head": "COGS",
+   "tb_group": "Income Statement",
+   "sort_order": 570,
+   "accounts": [
+    {
+     "account_number": "",
+     "account_name": "Discount Received",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Cost of Materials - Customs & Landed Cost",
+   "account_head": "COGS",
+   "tb_group": "Income Statement",
+   "sort_order": 580,
+   "accounts": [
+    {
+     "account_number": "",
+     "account_name": "Freight Expenses",
+     "company": ""
+    },
+    {
+     "account_number": "5205",
+     "account_name": "Freight and Forwarding Charges",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Freight and Forwarding Charges",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Inter Divisions Stock Transfers",
+   "account_head": "COGS",
+   "tb_group": "Income Statement",
+   "sort_order": 590,
+   "accounts": [
+    {
+     "account_number": "",
+     "account_name": "Sales - Stock Transfer",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Local Purchase for Site",
+   "account_head": "COGS",
+   "tb_group": "Income Statement",
+   "sort_order": 600,
+   "accounts": [
+    {
+     "account_number": "",
+     "account_name": "Local Purchase - Site",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Local Purchase",
+     "company": ""
+    },
+    {
+     "account_number": "5222",
+     "account_name": "LOCAL PURCHASE",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Sample Delivery",
+   "account_head": "COGS",
+   "tb_group": "Income Statement",
+   "sort_order": 610,
+   "accounts": [
+    {
+     "account_number": "",
+     "account_name": "Samples Delivery",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Stock Adjustment/ Counting Difference",
+   "account_head": "COGS",
+   "tb_group": "Income Statement",
+   "sort_order": 620,
+   "accounts": [
+    {
+     "account_number": "5119",
+     "account_name": "Stock Adjustment",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Stock Adjustment",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Labour Cost",
+   "account_head": "COGS",
+   "tb_group": "Income Statement",
+   "sort_order": 630,
+   "accounts": [
+    {
+     "account_number": "",
+     "account_name": "Wages",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "WAGES & SALARY-DRIVERS",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Wages & Salary - Drivers",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Subcontract & Installation charges",
+   "account_head": "COGS",
+   "tb_group": "Income Statement",
+   "sort_order": 640,
+   "accounts": [
+    {
+     "account_number": "",
+     "account_name": "Subcontract & Installation Expense",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Subcontract Expense - Manpower",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Direct Expenses - Water Expense",
+   "account_head": "COGS",
+   "tb_group": "Income Statement",
+   "sort_order": 650,
+   "accounts": [
+    {
+     "account_number": "",
+     "account_name": "Sewage Water Expense",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Skip Box Charges",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Skip Loader Expense",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Sweet Water Station Expense",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Sweet Water Supply Charge",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Direct Expenses - Diesel for Generator",
+   "account_head": "COGS",
+   "tb_group": "Income Statement",
+   "sort_order": 660,
+   "accounts": [
+    {
+     "account_number": "5239",
+     "account_name": "DIESEL FOR GENERATOR",
+     "company": "ENGINEERING DIVISION - ELECTRA"
+    }
+   ]
+  },
+  {
+   "bucket": "Direct Expenses - Vehicle Fuel Heavy Transport Vehicle",
+   "account_head": "COGS",
+   "tb_group": "Income Statement",
+   "sort_order": 670,
+   "accounts": [
+    {
+     "account_number": "",
+     "account_name": "Fuel Expense",
+     "company": "KINGFISHER - TRANSPORTATION"
+    }
+   ]
+  },
+  {
+   "bucket": "Direct Expenses - Factory Rent",
+   "account_head": "COGS",
+   "tb_group": "Income Statement",
+   "sort_order": 680,
+   "accounts": [
+    {
+     "account_number": "",
+     "account_name": "Rent - Factory / Warehouse",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Rent-INTR New Store Ind. Area.39",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Direct Expenses - Heavy Vehicle Maintenance Repair",
+   "account_head": "COGS",
+   "tb_group": "Income Statement",
+   "sort_order": 690,
+   "accounts": [
+    {
+     "account_number": "",
+     "account_name": "Vehicle Repair and Maintenance",
+     "company": "KINGFISHER - TRANSPORTATION"
+    }
+   ]
+  },
+  {
+   "bucket": "Audit & Legal Fee",
+   "account_head": "General & Admin Exp",
+   "tb_group": "Income Statement",
+   "sort_order": 700,
+   "accounts": [
+    {
+     "account_number": "5206",
+     "account_name": "Audit Fee & Legal Expenses",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Audit Fee & Legal Expenses",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Legal Expenses",
+     "company": ""
+    },
+    {
+     "account_number": "5206",
+     "account_name": "Legal Expenses",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Rent Expenses",
+   "account_head": "General & Admin Exp",
+   "tb_group": "Income Statement",
+   "sort_order": 710,
+   "accounts": [
+    {
+     "account_number": "5209",
+     "account_name": "Office & Showroom Rent",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Office & Showroom Rent",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Rent - Labour Camp",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Rent - Staff Accomadation",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Rent-ECL-Warehouse Birkath Al Awamer",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Rent - Economic Zone Manateq (Electra) - ASTCC Enabled",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Rent - Umsalal Labour Camp",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Print & Stationeries",
+   "account_head": "General & Admin Exp",
+   "tb_group": "Income Statement",
+   "sort_order": 720,
+   "accounts": [
+    {
+     "account_number": "5211",
+     "account_name": "Print and Stationery",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Print and Stationery",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Office Expense",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Office Stationary",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Stationary & Consumables",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Employee Salaries",
+   "account_head": "General & Admin Exp",
+   "tb_group": "Income Statement",
+   "sort_order": 730,
+   "accounts": [
+    {
+     "account_number": "5213",
+     "account_name": "Salary",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Salary",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Employee Salaries - Housing Rent Allowance",
+   "account_head": "General & Admin Exp",
+   "tb_group": "Income Statement",
+   "sort_order": 740,
+   "accounts": [
+    {
+     "account_number": "5232",
+     "account_name": "Housing Rent Allowance",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "House Rent Alowance",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "House Rent Allowance",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Employee Health Card Expenses",
+   "account_head": "General & Admin Exp",
+   "tb_group": "Income Statement",
+   "sort_order": 750,
+   "accounts": [
+    {
+     "account_number": "5235",
+     "account_name": "Health Card Charge",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Health Card Charge",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Health Card Expense",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Employee Driving License Exp",
+   "account_head": "General & Admin Exp",
+   "tb_group": "Income Statement",
+   "sort_order": 760,
+   "accounts": [
+    {
+     "account_number": "5236",
+     "account_name": "Driving License Expenses",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Expense for Driving License",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Employee Medical Exp",
+   "account_head": "General & Admin Exp",
+   "tb_group": "Income Statement",
+   "sort_order": 770,
+   "accounts": [
+    {
+     "account_number": "",
+     "account_name": "EMPLOYEES MEDICAL EXPNESES",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Employees Medical Expenses",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Employee Air ticket",
+   "account_head": "General & Admin Exp",
+   "tb_group": "Income Statement",
+   "sort_order": 780,
+   "accounts": [
+    {
+     "account_number": "",
+     "account_name": "Employee Flght Ticket Expense",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Employee Flight Ticket Expense",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Employee Life Insurance",
+   "account_head": "General & Admin Exp",
+   "tb_group": "Income Statement",
+   "sort_order": 790,
+   "accounts": [
+    {
+     "account_number": "",
+     "account_name": "Employee Life Insurance",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Workmen Compensation Insurance",
+   "account_head": "General & Admin Exp",
+   "tb_group": "Income Statement",
+   "sort_order": 800,
+   "accounts": [
+    {
+     "account_number": "",
+     "account_name": "Workmen's Compensation Insurance",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Employee Visa Expenses",
+   "account_head": "General & Admin Exp",
+   "tb_group": "Income Statement",
+   "sort_order": 810,
+   "accounts": [
+    {
+     "account_number": "",
+     "account_name": "Visa & Immigration Expense",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Staff Indemnity",
+   "account_head": "General & Admin Exp",
+   "tb_group": "Income Statement",
+   "sort_order": 820,
+   "accounts": [
+    {
+     "account_number": "",
+     "account_name": "Gratuity",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Staff Leave Salaries",
+   "account_head": "General & Admin Exp",
+   "tb_group": "Income Statement",
+   "sort_order": 830,
+   "accounts": [
+    {
+     "account_number": "",
+     "account_name": "Leave Salary",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Staff Training & Welfare",
+   "account_head": "General & Admin Exp",
+   "tb_group": "Income Statement",
+   "sort_order": 840,
+   "accounts": [
+    {
+     "account_number": "5237",
+     "account_name": "Staff Training & Welfare",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Utilities - Telephone Expenses",
+   "account_head": "General & Admin Exp",
+   "tb_group": "Income Statement",
+   "sort_order": 850,
+   "accounts": [
+    {
+     "account_number": "5215",
+     "account_name": "Office Telephone & Fax Charges",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Office Telephone & Fax Charges",
+     "company": ""
+    },
+    {
+     "account_number": "5215",
+     "account_name": "Telephone Expenses",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Mobile & Telephone Charges",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Utilities - Electricity & Water Expenses",
+   "account_head": "General & Admin Exp",
+   "tb_group": "Income Statement",
+   "sort_order": 860,
+   "accounts": [
+    {
+     "account_number": "5243",
+     "account_name": "Electricity & Water Charge",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Electricity & Water Expenses",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Electricity & Water",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Finance Charges",
+   "account_head": "General & Admin Exp",
+   "tb_group": "Income Statement",
+   "sort_order": 870,
+   "accounts": [
+    {
+     "account_number": "5212",
+     "account_name": "Round Off",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Round Off",
+     "company": ""
+    },
+    {
+     "account_number": "5118",
+     "account_name": "Expenses Included In Valuation",
+     "company": ""
+    },
+    {
+     "account_number": "5219",
+     "account_name": "Exchange Gain/Loss",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Exchange Gain/Loss",
+     "company": ""
+    },
+    {
+     "account_number": "5244",
+     "account_name": "Bank Charges",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Bank Charges",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Bank Interest",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Merchant Commission (Cr.Card)",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Repair & Maintenance",
+   "account_head": "General & Admin Exp",
+   "tb_group": "Income Statement",
+   "sort_order": 880,
+   "accounts": [
+    {
+     "account_number": "5226",
+     "account_name": "Repair & Maintenance",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Repair & Maintenance",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Repairs & Maintenance",
+     "company": ""
+    },
+    {
+     "account_number": "5229",
+     "account_name": "Repairs - Tools & Equipments",
+     "company": ""
+    },
+    {
+     "account_number": "5239",
+     "account_name": "Diesel for Generator",
+     "company": "Al - Shaghairi Trading and Contracting Company W.L.L (ELECTRA)"
+    },
+    {
+     "account_number": "",
+     "account_name": "Diesel for Generator",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Warehouse Expenses",
+   "account_head": "General & Admin Exp",
+   "tb_group": "Income Statement",
+   "sort_order": 890,
+   "accounts": [
+    {
+     "account_number": "5231",
+     "account_name": "Factory / Warehouse Expenses",
+     "company": ""
+    },
+    {
+     "account_number": "5231",
+     "account_name": "Warehouse Expenses",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Staff Accomodation Expenses",
+   "account_head": "General & Admin Exp",
+   "tb_group": "Income Statement",
+   "sort_order": 900,
+   "accounts": [
+    {
+     "account_number": "5233",
+     "account_name": "Accommodation Expenses",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Accomadation Expense",
+     "company": ""
+    },
+    {
+     "account_number": "5227",
+     "account_name": "Repair & Maintenance - Staff Accomadation",
+     "company": ""
+    },
+    {
+     "account_number": "5234",
+     "account_name": "Labour Camp Expenses",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Um Salal Camp Expenses",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Warehouse Expense - Birkath",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Warehouse Expense - Kharana Yard",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "WAREHOUSE EXPENSES",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Workshop & Garage Expenses",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Testing & Inspection Charges",
+   "account_head": "General & Admin Exp",
+   "tb_group": "Income Statement",
+   "sort_order": 910,
+   "accounts": [
+    {
+     "account_number": "5240",
+     "account_name": "Testing & Inspetion Charge",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Testing & Inspection Expenses",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Sponsors Fee",
+   "account_head": "General & Admin Exp",
+   "tb_group": "Income Statement",
+   "sort_order": 920,
+   "accounts": [
+    {
+     "account_number": "5242",
+     "account_name": "SPONSOR FEE",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Sponsor Fee",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Bad Debts",
+   "account_head": "General & Admin Exp",
+   "tb_group": "Income Statement",
+   "sort_order": 930,
+   "accounts": [
+    {
+     "account_number": "",
+     "account_name": "BAD DEBTS",
+     "company": ""
+    },
+    {
+     "account_number": "5218",
+     "account_name": "Write Off",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "IT Expenses",
+   "account_head": "General & Admin Exp",
+   "tb_group": "Income Statement",
+   "sort_order": 940,
+   "accounts": [
+    {
+     "account_number": "",
+     "account_name": "AMC & SEO Service Expense",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Consultancy Fee",
+   "account_head": "General & Admin Exp",
+   "tb_group": "Income Statement",
+   "sort_order": 950,
+   "accounts": [
+    {
+     "account_number": "",
+     "account_name": "Consultancy Fee",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Courier Charges",
+   "account_head": "General & Admin Exp",
+   "tb_group": "Income Statement",
+   "sort_order": 960,
+   "accounts": [
+    {
+     "account_number": "",
+     "account_name": "Contra Charges",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Clearing Charges (Miscl)",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Clearing Charge",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Clearing Expense",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Courier Charges",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Courier Charge",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Donation",
+   "account_head": "General & Admin Exp",
+   "tb_group": "Income Statement",
+   "sort_order": 970,
+   "accounts": [
+    {
+     "account_number": "",
+     "account_name": "Donation",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Equipment Rentals",
+   "account_head": "General & Admin Exp",
+   "tb_group": "Income Statement",
+   "sort_order": 980,
+   "accounts": [
+    {
+     "account_number": "",
+     "account_name": "Equipment Rental",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Fuel Expense",
+   "account_head": "General & Admin Exp",
+   "tb_group": "Income Statement",
+   "sort_order": 990,
+   "accounts": [
+    {
+     "account_number": "",
+     "account_name": "FUEL EXPENSE",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Fuel Expense",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Food & Refreshments",
+   "account_head": "General & Admin Exp",
+   "tb_group": "Income Statement",
+   "sort_order": 1000,
+   "accounts": [
+    {
+     "account_number": "",
+     "account_name": "Food & Refreshment Expenses",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Food & Refreshement Expes",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Income Tax Last Year",
+   "account_head": "General & Admin Exp",
+   "tb_group": "Income Statement",
+   "sort_order": 1010,
+   "accounts": [
+    {
+     "account_number": "",
+     "account_name": "Income Tax",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Membership & Subscriptions",
+   "account_head": "General & Admin Exp",
+   "tb_group": "Income Statement",
+   "sort_order": 1020,
+   "accounts": [
+    {
+     "account_number": "",
+     "account_name": "Membership & Registration Fee",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Newspaper & Periodicals",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Tender Fee",
+   "account_head": "General & Admin Exp",
+   "tb_group": "Income Statement",
+   "sort_order": 1030,
+   "accounts": [
+    {
+     "account_number": "",
+     "account_name": "Tender Fee",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Vehicle Insurance",
+   "account_head": "General & Admin Exp",
+   "tb_group": "Income Statement",
+   "sort_order": 1040,
+   "accounts": [
+    {
+     "account_number": "",
+     "account_name": "Vehicle Insurance",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Vehicle Rental Expenses",
+   "account_head": "General & Admin Exp",
+   "tb_group": "Income Statement",
+   "sort_order": 1050,
+   "accounts": [
+    {
+     "account_number": "",
+     "account_name": "Vehicle Rental",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Vehicle Repair & Maintenance",
+   "account_head": "General & Admin Exp",
+   "tb_group": "Income Statement",
+   "sort_order": 1060,
+   "accounts": [
+    {
+     "account_number": "",
+     "account_name": "Vehicle Repair and Maintenance",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Miscellaneous Exp",
+   "account_head": "General & Admin Exp",
+   "tb_group": "Income Statement",
+   "sort_order": 1070,
+   "accounts": [
+    {
+     "account_number": "",
+     "account_name": "Miscellaneous Expenses",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Depreciation Exp",
+   "account_head": "General & Admin Exp",
+   "tb_group": "Income Statement",
+   "sort_order": 1080,
+   "accounts": [
+    {
+     "account_number": "",
+     "account_name": "Depreciation Exp",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Gate Pass & Insurance",
+   "account_head": "Sales & Marketing",
+   "tb_group": "Income Statement",
+   "sort_order": 1090,
+   "accounts": [
+    {
+     "account_number": "",
+     "account_name": "Gatepass & Parking Fee",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "General & Marine Insurance",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Business Travel Expenses",
+   "account_head": "Sales & Marketing",
+   "tb_group": "Income Statement",
+   "sort_order": 1100,
+   "accounts": [
+    {
+     "account_number": "5216",
+     "account_name": "Travel Expenses",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Travel Expenses",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Advertisement",
+   "account_head": "Sales & Marketing",
+   "tb_group": "Income Statement",
+   "sort_order": 1110,
+   "accounts": [
+    {
+     "account_number": "5224",
+     "account_name": "Advertisement Expenses",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Advertisement Expenses",
+     "company": ""
+    },
+    {
+     "account_number": "5225",
+     "account_name": "Sales Promotion & Advertisement Expenses",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Research & Development Fee",
+   "account_head": "Sales & Marketing",
+   "tb_group": "Income Statement",
+   "sort_order": 1120,
+   "accounts": [
+    {
+     "account_number": "",
+     "account_name": "R&D Expenses",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Commission on Sales",
+   "account_head": "Sales & Marketing",
+   "tb_group": "Income Statement",
+   "sort_order": 1130,
+   "accounts": [
+    {
+     "account_number": "",
+     "account_name": "SALESMAN COMMISSION",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Salesman Commission",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Commission on Sales",
+     "company": ""
+    }
+   ]
+  },
+  {
+   "bucket": "Transportation Charges",
+   "account_head": "Sales & Marketing",
+   "tb_group": "Income Statement",
+   "sort_order": 1140,
+   "accounts": [
+    {
+     "account_number": "",
+     "account_name": "TRANSPORTATION CHARGE",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Transportation Charge",
+     "company": ""
+    },
+    {
+     "account_number": "",
+     "account_name": "Transportation charge",
+     "company": ""
+    }
+   ]
+  }
+ ],
+ "company_map": [
+  {
+   "company": "ENGINEERING DIVISION - ELECTRA",
+   "division": "Engineering",
+   "cr_group": "Main",
+   "sort_order": 10
+  },
+  {
+   "company": "INTERIOR DIVISION - ELECTRA",
+   "division": "Interior",
+   "cr_group": "Main",
+   "sort_order": 20
+  },
+  {
+   "company": "MEP DIVISION - ELECTRA",
+   "division": "MEP",
+   "cr_group": "Main",
+   "sort_order": 30
+  },
+  {
+   "company": "ELECTRICAL DIVISION - ELECTRA",
+   "division": "Electrical",
+   "cr_group": "Main",
+   "sort_order": 40
+  },
+  {
+   "company": "TRADING DIVISION - ELECTRA",
+   "division": "Trading Main",
+   "cr_group": "Main",
+   "sort_order": 50
+  },
+  {
+   "company": "ELECTRA - BARWA SHOWROOM",
+   "division": "Barwa",
+   "cr_group": "Main",
+   "sort_order": 60
+  },
+  {
+   "company": "Al - Shaghairi Trading and Contracting Company W.L.L (ELECTRA)",
+   "division": "HO",
+   "cr_group": "Main",
+   "sort_order": 70
+  },
+  {
+   "company": "ELECTRA - FIRE ALARM AND PUBLIC ADDRESS",
+   "division": "Fire Alarm",
+   "cr_group": "Main",
+   "sort_order": 75
+  },
+  {
+   "company": "ELECTRA - UPS DIVISION",
+   "division": "UPS",
+   "cr_group": "Main",
+   "sort_order": 76
+  },
+  {
+   "company": "INDUSTRIAL TOOLS DIVISION",
+   "division": "Tools",
+   "cr_group": "Main",
+   "sort_order": 80
+  },
+  {
+   "company": "STEEL DIVISION - ELECTRA",
+   "division": "Steel",
+   "cr_group": "Main",
+   "sort_order": 90
+  },
+  {
+   "company": "KINGFISHER - SHOWROOM",
+   "division": "KingFisher Showroom",
+   "cr_group": "KingFisher",
+   "sort_order": 100
+  },
+  {
+   "company": "KINGFISHER - TRANSPORTATION",
+   "division": "KingFisher Transport",
+   "cr_group": "KingFisher",
+   "sort_order": 110
+  },
+  {
+   "company": "KINGFISHER TRADING AND CONTRACTING COMPANY",
+   "division": "KingFisher Main",
+   "cr_group": "KingFisher",
+   "sort_order": 120
+  },
+  {
+   "company": "MARAZEEM SECURITY SERVICES - HO",
+   "division": "Marazem-HO",
+   "cr_group": "Marazem",
+   "sort_order": 130
+  },
+  {
+   "company": "MARAZEEM SECURITY SERVICES - SHOWROOM",
+   "division": "Marazem-Showroom",
+   "cr_group": "Marazem",
+   "sort_order": 140
+  },
+  {
+   "company": "MARAZEEM SECURITY SERVICES",
+   "division": "Marazem-Main",
+   "cr_group": "Marazem",
+   "sort_order": 150
+  },
+  {
+   "company": "ELECTRA  - NAJMA SHOWROOM",
+   "division": "Najma",
+   "cr_group": "Branch",
+   "sort_order": 160
+  },
+  {
+   "company": "ELECTRA - BINOMRAN SHOWROOM",
+   "division": "Bin Omran",
+   "cr_group": "Branch",
+   "sort_order": 170
+  },
+  {
+   "company": "ELECTRA - ALKHOR SHOWROOM",
+   "division": "Al Khor",
+   "cr_group": "Branch",
+   "sort_order": 180
+  }
+ ]
+}

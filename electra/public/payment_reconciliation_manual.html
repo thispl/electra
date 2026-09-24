@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payment Reconciliation - User Manual | TEAMPRO</title>
+<style>
+	* { margin: 0; padding: 0; box-sizing: border-box; }
+	body {
+		font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+		color: #333;
+		line-height: 1.7;
+		background: #f5f5f5;
+	}
+	.pr-manual-wrapper {
+		max-width: 900px;
+		margin: 0 auto;
+		background: #fff;
+		padding: 0;
+	}
+	.cover {
+		background: #ffffff;
+		color: #333;
+		padding: 20px 40px;
+		border-radius: 0;
+		text-align: center;
+		border-bottom: 3px solid #1a237e;
+	}
+	.cover img {
+		max-height: 80px;
+		margin-bottom: 20px;
+	}
+	.cover h1 {
+		font-size: 32px;
+		font-weight: 700;
+		margin-bottom: 10px;
+	}
+	.cover p {
+		font-size: 16px;
+		opacity: 1;
+		color: #555;
+	}
+	.cover .meta {
+		margin-top: 20px;
+		font-size: 13px;
+		color: #777;
+	}
+	.container {
+		max-width: 100%;
+		padding: 40px;
+	}
+	.toc {
+		background: #f0f4ff;
+		border: 1px solid #d0d8f0;
+		border-radius: 8px;
+		padding: 25px 30px;
+		margin-bottom: 40px;
+	}
+	.toc h3 {
+		color: #1a237e;
+		font-size: 18px;
+		margin-bottom: 15px;
+		border-bottom: 2px solid #c5cae9;
+		padding-bottom: 8px;
+	}
+	.toc ol {
+		padding-left: 20px;
+	}
+	.toc li {
+		margin-bottom: 6px;
+	}
+	.toc a {
+		color: #1a237e;
+		text-decoration: none;
+		transition: color 0.2s;
+	}
+	.toc a:hover {
+		color: #3949ab;
+		text-decoration: underline;
+	}
+	.section {
+		margin-bottom: 35px;
+	}
+	.section h2 {
+		color: #1a237e;
+		font-size: 24px;
+		margin-bottom: 15px;
+		padding-bottom: 8px;
+		border-bottom: 2px solid #e8eaf6;
+	}
+	.section h3 {
+		color: #283593;
+		font-size: 18px;
+		margin-top: 20px;
+		margin-bottom: 10px;
+	}
+	.section p {
+		margin-bottom: 12px;
+		font-size: 15px;
+	}
+	.section ul, .section ol {
+		padding-left: 25px;
+		margin-bottom: 15px;
+	}
+	.section li {
+		margin-bottom: 8px;
+		font-size: 15px;
+	}
+	.section .step-number {
+		display: inline-block;
+		width: 28px;
+		height: 28px;
+		line-height: 28px;
+		text-align: center;
+		background: #1a237e;
+		color: #fff;
+		border-radius: 50%;
+		font-size: 13px;
+		font-weight: 700;
+		margin-right: 10px;
+	}
+	.section .step-item {
+		display: flex;
+		align-items: flex-start;
+		margin-bottom: 15px;
+	}
+	.section .step-item .step-content {
+		flex: 1;
+	}
+	.note-box {
+		background: #fff8e1;
+		border-left: 4px solid #ffc107;
+		padding: 15px 20px;
+		margin: 20px 0;
+		border-radius: 4px;
+	}
+	.note-box strong {
+		color: #f57f17;
+	}
+	.warning-box {
+		background: #ffebee;
+		border-left: 4px solid #f44336;
+		padding: 15px 20px;
+		margin: 20px 0;
+		border-radius: 4px;
+	}
+	.warning-box strong {
+		color: #c62828;
+	}
+	.tip-box {
+		background: #e8f5e9;
+		border-left: 4px solid #4caf50;
+		padding: 15px 20px;
+		margin: 20px 0;
+		border-radius: 4px;
+	}
+	.tip-box strong {
+		color: #2e7d32;
+	}
+	.video-section {
+		margin: 40px 0;
+	}
+	.video-section h2 {
+		color: #1a237e;
+		font-size: 24px;
+		margin-bottom: 15px;
+		padding-bottom: 8px;
+		border-bottom: 2px solid #e8eaf6;
+	}
+	.info-table {
+		width: 100%;
+		border-collapse: collapse;
+		margin: 20px 0;
+	}
+	.info-table th {
+		background: #1a237e;
+		color: #fff;
+		padding: 12px 15px;
+		text-align: left;
+		font-size: 14px;
+	}
+	.info-table td {
+		padding: 12px 15px;
+		border-bottom: 1px solid #e0e0e0;
+		font-size: 14px;
+	}
+	.info-table tr:nth-child(even) {
+		background: #f5f5f5;
+	}
+	.footer {
+		background: #1a237e;
+		color: #fff;
+		text-align: center;
+		padding: 25px;
+		font-size: 13px;
+	}
+	.footer a {
+		color: #90caf9;
+		text-decoration: none;
+	}
+	@media print {
+		.cover { background: #ffffff !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+		.toc { page-break-after: always; }
+		.section { page-break-inside: avoid; }
+	}
+</style>
+</head>
+<body>
+
+<!-- Cover -->
+<div class="cover">
+	<img src="/files/db863f761fTEAMPRO New.png" alt="TEAMPRO Logo" />
+	<h1>Payment Reconciliation</h1>
+	<p>User Manual &amp; Training Guide</p>
+	<div class="meta">
+		Prepared by TEAMPRO<br>
+		for Electra Qatar
+	</div>
+</div>
+
+<div class="container">
+
+	<!-- Table of Contents -->
+	<div class="toc">
+		<h3>Table of Contents</h3>
+		<ol>
+			<li>Overview</li>
+			<li>Accessing Payment Reconciliation</li>
+			<li>Selecting Filters &amp; Getting Entries</li>
+			<li>Allocating Payments to Invoices</li>
+			<li>Reconciling the Entries</li>
+			<li>What Happens on Reconciliation</li>
+			<li>Important Reminders</li>
+			<li>Video Tutorial</li>
+		</ol>
+	</div>
+
+	<!-- Section 1: Overview -->
+	<div class="section" id="overview">
+		<h2>1. Overview</h2>
+		<p>Payment Reconciliation is the process of linking payments with their corresponding invoices. In many business scenarios, especially when customers send block payments or payments on a schedule that is not directly linked to individual invoices, there is no automatic link between payments and invoices.</p>
+		<p>In such cases, you can match Payments with Invoices using the Payment Reconciliation tool in ERPNext. This ensures that:</p>
+		<ul>
+			<li>Outstanding invoice amounts are accurately tracked</li>
+			<li>Advance payments are properly allocated against invoices</li>
+			<li>Ageing reports reflect the correct outstanding balances</li>
+			<li>Financial analysis and audits are accurate</li>
+		</ul>
+		<p>Payment Reconciliation is a separate process from Bank Reconciliation. While Bank Reconciliation matches ERP entries with bank statement transactions, Payment Reconciliation matches unallocated payments (advances, credit notes) with open invoices for a given party.</p>
+	</div>
+
+	<!-- Section 2: Accessing -->
+	<div class="section" id="accessing">
+		<h2>2. Accessing Payment Reconciliation</h2>
+		<div class="step-item">
+			<span class="step-number">1</span>
+			<div class="step-content"><strong>Log into</strong> your ERPNext account.</div>
+		</div>
+		<div class="step-item">
+			<span class="step-number">2</span>
+			<div class="step-content">Go to <strong>Accounting &gt; Accounts Receivable &gt; Payment Reconciliation</strong> (for customers) or <strong>Accounting &gt; Accounts Payable &gt; Payment Reconciliation</strong> (for suppliers).</div>
+		</div>
+		<div class="tip-box">
+			<strong>Tip:</strong> You can also search for "Payment Reconciliation" directly in the awesome bar (search bar) at the top of the screen.
+		</div>
+	</div>
+
+	<!-- Section 3: Selecting Filters -->
+	<div class="section" id="selecting-filters">
+		<h2>3. Selecting Filters &amp; Getting Entries</h2>
+		<p>Once you are on the Payment Reconciliation page, you need to set the following filters to fetch the unreconciled entries:</p>
+		<table class="info-table">
+			<thead>
+				<tr>
+					<th>Field</th>
+					<th>Description</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><strong>Company</strong></td>
+					<td>Select the company for which you want to perform reconciliation.</td>
+				</tr>
+				<tr>
+					<td><strong>Party Type</strong></td>
+					<td>Select either <strong>Customer</strong> (for Accounts Receivable) or <strong>Supplier</strong> (for Accounts Payable).</td>
+				</tr>
+				<tr>
+					<td><strong>Party</strong></td>
+					<td>Select the specific customer or supplier. The Receivable/Payable account will be selected automatically.</td>
+				</tr>
+				<tr>
+					<td><strong>Receivable / Payable Account</strong></td>
+					<td>This is auto-selected based on the party. Ensure it matches the account on the invoices.</td>
+				</tr>
+				<tr>
+					<td><strong>Bank / Cash Account</strong></td>
+					<td>Select the bank or cash account against which the payments need to be reconciled.</td>
+				</tr>
+				<tr>
+					<td><strong>Date Range</strong></td>
+					<td>Optionally, select a date range for the invoices and payment transactions to narrow down the results.</td>
+				</tr>
+				<tr>
+					<td><strong>Minimum / Maximum Amount</strong></td>
+					<td>Optionally, set minimum or maximum amount filters for invoices and payment transactions.</td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="step-item">
+			<span class="step-number">1</span>
+			<div class="step-content">After setting the filters, click on the <strong>"Get Unreconciled Entries"</strong> button.</div>
+		</div>
+		<div class="step-item">
+			<span class="step-number">2</span>
+			<div class="step-content">ERPNext will fetch all un-linked invoices and payment transactions from that party. Invoices will appear in the <strong>Invoices</strong> table and payments in the <strong>Payments</strong> table.</div>
+		</div>
+	</div>
+
+	<!-- Section 4: Allocating -->
+	<div class="section" id="allocating">
+		<h2>4. Allocating Payments to Invoices</h2>
+		<p>Once the unreconciled entries are fetched, you need to allocate payments against invoices:</p>
+		<div class="step-item">
+			<span class="step-number">1</span>
+			<div class="step-content">
+				You can either select specific entries to be allocated, or click the <strong>"Allocate"</strong> button without selecting anything to allocate all entries automatically.
+			</div>
+		</div>
+		<div class="step-item">
+			<span class="step-number">2</span>
+			<div class="step-content">
+				The allocation table will be populated based on <strong>FIFO (First In First Out)</strong> method or based on your manual selection.
+			</div>
+		</div>
+		<div class="step-item">
+			<span class="step-number">3</span>
+			<div class="step-content">
+				The <strong>Allocated Amount</strong> is the amount you want to allocate for the reconciliation. You can adjust this if partial allocation is needed.
+			</div>
+		</div>
+		<div class="note-box">
+			<strong>Note:</strong> Partial allocation is supported. A single payment can be split across multiple invoices, and multiple payments can be applied to one invoice.
+		</div>
+	</div>
+
+	<!-- Section 5: Reconciling -->
+	<div class="section" id="reconciling">
+		<h2>5. Reconciling the Entries</h2>
+		<div class="step-item">
+			<span class="step-number">1</span>
+			<div class="step-content">
+				After reviewing the allocations, click on the <strong>"Reconcile"</strong> button to reconcile the allocated entries.
+			</div>
+		</div>
+		<div class="step-item">
+			<span class="step-number">2</span>
+			<div class="step-content">
+				You will get a confirmation message that says <strong>"Successfully Reconciled"</strong>.
+			</div>
+		</div>
+		<div class="tip-box">
+			<strong>Tip:</strong> After reconciliation, verify the results by checking the invoice status — the outstanding amount should be updated, and the invoice should be marked as "Paid" if the full amount has been allocated.
+		</div>
+	</div>
+
+	<!-- Section 6: What Happens -->
+	<div class="section" id="what-happens">
+		<h2>6. What Happens on Payment Reconciliation</h2>
+		<ul>
+			<li><strong>Payment Entry vs. Invoice:</strong> Reconciliation against a Payment Entry does not automatically create a journal entry, because payment entries are already connected to transactions and the general ledger already reflects the effect.</li>
+			<li><strong>Credit/Debit Note vs. Invoice:</strong> When reconciling an invoice against a credit or debit note, a journal entry is generated. This is required because these notes lack direct transaction links.</li>
+			<li><strong>Invoice Outstanding:</strong> The outstanding amount on the invoice is updated. If the full amount is covered, the invoice is marked as "Paid". If partially allocated, the invoice shows the remaining due amount.</li>
+			<li><strong>Ageing Reports:</strong> After reconciliation, ageing reports will accurately reflect the outstanding balances for the party.</li>
+		</ul>
+	</div>
+
+	<!-- Section 7: Reminders -->
+	<div class="section" id="reminders">
+		<h2>7. Important Reminders</h2>
+		<ul>
+			<li>Always verify that the <strong>Receivable/Payable Account</strong> matches the account on the invoice. If accounts don't match, entries will not appear in the reconciliation.</li>
+			<li>Run Payment Reconciliation <strong>before chasing any customer balance</strong> — the outstanding may already be covered by an unallocated advance.</li>
+			<li>For high-volume environments where payments arrive in batches or as advances, the matching step is deferred. Make it a regular month-end activity to avoid backlogs.</li>
+			<li>After reconciliation, always check the <strong>General Ledger</strong> and <strong>Ageing Report</strong> to confirm the outstanding balances are correct.</li>
+			<li>If a payment was created directly against an invoice at the time of recording, ERPNext reconciles automatically on submit — no manual reconciliation is needed in that case.</li>
+		</ul>
+	</div>
+
+	<!-- Section 8: Video Tutorial -->
+	<div class="section video-section" id="video">
+		<h2>8. Video Tutorial</h2>
+		<p>Watch the step-by-step video tutorial below to see the Payment Reconciliation process in action:</p>
+		<p><a href="/files/Screen Recording 2026-07-30 131127.mp4" target="_blank" style="display: inline-block; padding: 12px 30px; background: #1a237e; color: #fff; text-decoration: none; border-radius: 6px; font-size: 15px; font-weight: 600; transition: background 0.2s;" onmouseover="this.style.background='#3949ab'" onmouseout="this.style.background='#1a237e'">&#9658; Click here to watch the video tutorial</a></p>
+	</div>
+
+</div>
+
+<!-- Footer -->
+<div class="footer">
+	<p>&copy; 2026 TEAMPRO. All rights reserved.</p>
+	<p>This user manual was prepared by TEAMPRO for Electra Qatar.</p>
+</div>
+
+</body>
+</html>

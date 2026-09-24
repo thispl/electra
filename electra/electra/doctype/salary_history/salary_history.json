@@ -6,6 +6,7 @@
  "engine": "InnoDB",
  "field_order": [
   "date",
+  "salary_revision",
   "basic",
   "hra",
   "other_allowance",
@@ -28,6 +29,13 @@
    "fieldtype": "Date",
    "in_list_view": 1,
    "label": "Increment Date"
+  },
+  {
+   "fieldname": "salary_revision",
+   "fieldtype": "Link",
+   "label": "Salary Revision",
+   "options": "Salary Revision",
+   "read_only": 1
   },
   {
    "fieldname": "remark",
